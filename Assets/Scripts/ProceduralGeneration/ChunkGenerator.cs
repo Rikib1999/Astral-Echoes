@@ -3,18 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public abstract class ChunkGenerator : MonoBehaviour
+public abstract class ChunkGenerator<T> : Singleton<ChunkGenerator<T>> where T : Chunk
 {
-    public float scale = 0.5F;
+    protected abstract int ChunkSize { get; set; }
+    protected abstract int MaxExistingChunks { get; set; }
+    protected abstract int VisibleCoordsDistance { get; set; }
 
-    protected const int chunkSize = 32;
-    protected const int maxExistingChunks = 64;
-    protected const int visibleCoordsDistance = 3;
+    protected int ChunkRadius => ChunkSize / 2;
 
-    protected int ChunkRadius => chunkSize / 2;
-
-    protected List<Chunk> chunkList;
-    protected Dictionary<Vector2Int, Chunk> chunksByCoords;
+    protected List<T> chunkList;
+    protected Dictionary<Vector2Int, T> chunksByCoords;
 
     protected Vector2Int playerCoords;
     protected bool playerCoordsChanged;
@@ -43,7 +41,7 @@ public abstract class ChunkGenerator : MonoBehaviour
         playerCoordsChanged = false;
 
         Vector2Int tmp = playerCoords;
-        playerCoords = new Vector2Int(Mathf.FloorToInt(player.position.x) / chunkSize, Mathf.FloorToInt(player.position.y) / chunkSize);
+        playerCoords = new Vector2Int(Mathf.FloorToInt(player.position.x) / ChunkSize, Mathf.FloorToInt(player.position.y) / ChunkSize);
 
         if (playerCoords.x != tmp.x || playerCoords.y != tmp.y) playerCoordsChanged = true;
     }
@@ -60,54 +58,52 @@ public abstract class ChunkGenerator : MonoBehaviour
     {
         foreach (var chunk in chunkList)
         {
-            chunk.coordsDistance = Vector2.Distance(playerCoords, chunk.coords);
+            chunk.CoordsDistance = Vector2.Distance(playerCoords, chunk.Coords);
         }
 
-        chunkList = chunkList.OrderBy(x => x.coordsDistance).ToList();
+        chunkList = chunkList.OrderBy(x => x.CoordsDistance).ToList();
     }
 
     private void DeleteChunks()
     {
-        while (chunkList.Count > maxExistingChunks)
+        while (chunkList.Count > MaxExistingChunks)
         {
-            Chunk chunk = chunkList[chunkList.Count - 1];
+            T chunk = chunkList[chunkList.Count - 1];
             chunkList.Remove(chunk);
-            chunksByCoords.Remove(chunk.coords);
-            DeleteChunk(chunk.coords);
+            chunksByCoords.Remove(chunk.Coords);
+            DeleteChunk(chunk);
         }
     }
 
-    protected abstract void DeleteChunk(Vector2Int coords);
+    protected abstract void DeleteChunk(T chunk);
 
     private void GenerateChunks()
     {
-        for (int xOffset = -visibleCoordsDistance; xOffset <= visibleCoordsDistance; xOffset++)
+        for (int xOffset = -VisibleCoordsDistance; xOffset <= VisibleCoordsDistance; xOffset++)
         {
-            for (int yOffset = -visibleCoordsDistance; yOffset <= visibleCoordsDistance; yOffset++)
+            for (int yOffset = -VisibleCoordsDistance; yOffset <= VisibleCoordsDistance; yOffset++)
             {
                 Vector2Int coords = new(playerCoords.x + xOffset, playerCoords.y + yOffset);
 
                 if (!chunksByCoords.ContainsKey(coords))
                 {
-                    Chunk chunk = new() { coords = coords };
+                    T chunk = GenerateChunk(coords);
 
                     chunksByCoords.Add(coords, chunk);
                     chunkList.Add(chunk);
-
-                    GenerateChunk(coords);
                 }
             }
         }
     }
 
-    protected abstract void GenerateChunk(Vector2Int coords);
+    protected abstract T GenerateChunk(Vector2Int coords);
 
     private void SetVisibility()
     {
         foreach (var chunk in chunkList)
         {
-            if (chunk.coordsDistance > visibleCoordsDistance) chunk.visible = false;
-            else chunk.visible = true;
+            if (chunk.CoordsDistance > VisibleCoordsDistance) chunk.Visible = false;
+            else chunk.Visible = true;
         }
     }
 

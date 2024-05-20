@@ -1,9 +1,16 @@
+using Assets.Scripts;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class PlanetGenerator : ChunkGenerator
+public class PlanetGenerator : ChunkGenerator<Chunk>
 {
+    private float scale = 0.5f;
+
+    protected override int ChunkSize { get; set; } = 32;
+    protected override int MaxExistingChunks { get; set; } = 64;
+    protected override int VisibleCoordsDistance { get; set; } = 3;
+
     [SerializeField] private Tilemap tilemap;
 
     //for now hardcoded, later in static MapManager based on current planet and seed
@@ -26,25 +33,25 @@ public class PlanetGenerator : ChunkGenerator
         };
     }
 
-    protected override void DeleteChunk(Vector2Int coords)
+    protected override void DeleteChunk(Chunk chunk)
     {
         for (int y = -ChunkRadius; y <= ChunkRadius; y++)
         {
             for (int x = -ChunkRadius; x <= ChunkRadius; x++)
             {
-                tilemap.SetTile(new Vector3Int((chunkSize * coords.x) + x, (chunkSize * coords.y) + y, 0), null);
+                tilemap.SetTile(new Vector3Int((ChunkSize * chunk.Coords.x) + x, (ChunkSize * chunk.Coords.y) + y, 0), null);
             }
         }
     }
 
-    protected override void GenerateChunk(Vector2Int coords)
+    protected override Chunk GenerateChunk(Vector2Int coords)
     {
         for (int y = -ChunkRadius; y <= ChunkRadius; y++)
         {
             for (int x = -ChunkRadius; x <= ChunkRadius; x++)
             {
-                float xCoord = ((chunkSize * coords.x) + x) / (chunkSize * scale);
-                float yCoord = ((chunkSize * coords.y) + y) / (chunkSize * scale);
+                float xCoord = ((ChunkSize * coords.x) + x) / (ChunkSize * scale);
+                float yCoord = ((ChunkSize * coords.y) + y) / (ChunkSize * scale);
 
                 double noiseValue = NoiseS3D.Noise(xCoord, yCoord);
                 Tile tile = null;
@@ -58,8 +65,10 @@ public class PlanetGenerator : ChunkGenerator
                     }
                 }
 
-                tilemap.SetTile(new Vector3Int((chunkSize * coords.x) + x, (chunkSize * coords.y) + y, 0), tile);
+                tilemap.SetTile(new Vector3Int((ChunkSize * coords.x) + x, (ChunkSize * coords.y) + y, 0), tile);
             }
         }
+
+        return new() { Coords = coords };
     }
 }

@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class CameraScrolling : MonoBehaviour
 {
-    private const float minCamSize = 3f;
-    private const float maxCamSize = 40f;
+    private const float minCamSize = 20f;
+    public const float maxCamSize = 400f;
 
     private Camera cam;
     private Vector3 dragOrigin;
     
-    [SerializeField] private float zoom = 20f;
+    [SerializeField] private float zoomSpeed = 40f;
 
     private void Start()
     {
@@ -28,7 +28,7 @@ public class CameraScrolling : MonoBehaviour
 
         if (Input.GetAxis("Mouse ScrollWheel") == 0) return;
 
-        cam.orthographicSize -= Input.GetAxis("Mouse ScrollWheel") * zoom;
+        cam.orthographicSize -= Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
         cam.orthographicSize = Mathf.Clamp(cam.orthographicSize, minCamSize, maxCamSize);
     }
 }

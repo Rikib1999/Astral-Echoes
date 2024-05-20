@@ -1,0 +1,184 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92f58b13d86e3b7408ca1394799ea767, type: 3}
+  m_Name: SpaceObjectsImageCollection
+  m_EditorClassIdentifier: 
+  blueStars:
+  - {fileID: 21300000, guid: eae1111a05a7f3d4ba2389c8d60c8cee, type: 3}
+  - {fileID: 21300000, guid: 3094071590141a144852d055c70044fc, type: 3}
+  - {fileID: 21300000, guid: daa8b86bb7e16824abbf3ab1e95c98f4, type: 3}
+  - {fileID: 21300000, guid: c58dcdbf89fb8d44f9b94e5bba860235, type: 3}
+  - {fileID: 21300000, guid: 5c5e95a86b22a24449ff6061f65aec93, type: 3}
+  redStars:
+  - {fileID: 21300000, guid: 3b28464fe2c2c7a4685d8fddfbd52ab8, type: 3}
+  - {fileID: 21300000, guid: 7551f6b80b4e2bf439932b45ee57bf4a, type: 3}
+  - {fileID: 21300000, guid: 6bdf3b2abf6bcf248a67d18b88a35a9e, type: 3}
+  - {fileID: 21300000, guid: 3f5513d616bc33f4984710a8ae6c8722, type: 3}
+  - {fileID: 21300000, guid: 65f66f609048d5c4e91dd01d9d24b37c, type: 3}
+  yellowStars:
+  - {fileID: 21300000, guid: f84d08b25c5b56a46b9254be8a638438, type: 3}
+  - {fileID: 21300000, guid: a23e27ecface0d0428a4eaec5c5893fd, type: 3}
+  - {fileID: 21300000, guid: 8e5c54f2e84bbbd4f9bc48f0fc95e339, type: 3}
+  - {fileID: 21300000, guid: a5dfbdac25332094e921ac88dbbc5116, type: 3}
+  - {fileID: 21300000, guid: 3d9c289bb5a3fdb43ae056f753e40cf9, type: 3}
+  blackHoles:
+  - {fileID: 21300000, guid: afaa0c14e524d2f489a2ddf021506f33, type: 3}
+  blueGiants:
+  - {fileID: 21300000, guid: 8df2c083c92d5574d821699ee5191f76, type: 3}
+  - {fileID: 21300000, guid: b72ce9903f1ff7e48bffc5041764cbaa, type: 3}
+  - {fileID: 21300000, guid: e2dd8b5efbe8e8543bb50732f1c1a249, type: 3}
+  - {fileID: 21300000, guid: 3ae2a5193bde3bf4f989a25e25835060, type: 3}
+  - {fileID: 21300000, guid: 8174898223b93674584dc00f59fbfaa6, type: 3}
+  greenGiants:
+  - {fileID: 21300000, guid: 376be569fdc610c448cfa4ea6fb98287, type: 3}
+  - {fileID: 21300000, guid: 63687a626b9601145a5f4c64a74daae9, type: 3}
+  - {fileID: 21300000, guid: 5a3613c49a21ce8468918d95b95de76f, type: 3}
+  - {fileID: 21300000, guid: 9df0a0d649ba99145989f49e56655e42, type: 3}
+  - {fileID: 21300000, guid: 8a43daa26c2fa9a4e85999238310f001, type: 3}
+  orangeGiants:
+  - {fileID: 21300000, guid: ecf8f270fcab2df43b922e870d839980, type: 3}
+  - {fileID: 21300000, guid: 1fa80b8201c20464bb304c48bf317854, type: 3}
+  - {fileID: 21300000, guid: 840023151b586ac46974512d0db94f81, type: 3}
+  - {fileID: 21300000, guid: 7f5858847424b624ba3c0c637f6b2e34, type: 3}
+  - {fileID: 21300000, guid: dc9e29dde0fc5dd4195728d964e07a6f, type: 3}
+  redGiants:
+  - {fileID: 21300000, guid: 0d47f82ed78d952419f2d95c3a3afa7e, type: 3}
+  - {fileID: 21300000, guid: 4ea9a4e989c452f408bb29176186d58d, type: 3}
+  - {fileID: 21300000, guid: d36ecf5556617db4eb9d23f58756420e, type: 3}
+  - {fileID: 21300000, guid: 77dbb23d57a6ec2459fe488b3a9140ce, type: 3}
+  - {fileID: 21300000, guid: a18ffadb5c1b98147815285a4d284ce0, type: 3}
+  yellowGiants:
+  - {fileID: 21300000, guid: 1312f7c10f0e2d5429e6ae93d0df9902, type: 3}
+  - {fileID: 21300000, guid: 2d7624602001895439f5089d34d0d14c, type: 3}
+  - {fileID: 21300000, guid: 0984d47fc56e3674397323cd2a1165de, type: 3}
+  - {fileID: 21300000, guid: eef9bcea2b2d44e4c8d53d56067fc729, type: 3}
+  - {fileID: 21300000, guid: fb7cadbf7f3197c4ab175de4c8a8be36, type: 3}
+  airlessPlanets:
+  - {fileID: 21300000, guid: ca2cedce9abae824088a73b4789e43fb, type: 3}
+  - {fileID: 21300000, guid: fe7ac254cf6637745a678b71002d7077, type: 3}
+  - {fileID: 21300000, guid: 478d81d801ae69545a25b5512475fee5, type: 3}
+  - {fileID: 21300000, guid: 635c935633615d440b2f9c6c7bb0fcaa, type: 3}
+  - {fileID: 21300000, guid: 693a84e41b941544fa0f0885d52cb6fc, type: 3}
+  aquamarinePlanets:
+  - {fileID: 21300000, guid: 0278c508057003c43bb919ea3c7b7bac, type: 3}
+  - {fileID: 21300000, guid: 3381dc30e1edc3f44afd997fbedb30c0, type: 3}
+  - {fileID: 21300000, guid: 9c7b4cf814523cb4f825a465eddf47c3, type: 3}
+  - {fileID: 21300000, guid: d2c5e384cddce79468ebb64919226e33, type: 3}
+  - {fileID: 21300000, guid: 24c1f767233ed8b4eb5572516e99f007, type: 3}
+  aridPlanets:
+  - {fileID: 21300000, guid: 8baa14f28a58c6a45848363e179d8e85, type: 3}
+  - {fileID: 21300000, guid: db9028a6de1a5914c84096d6719f2482, type: 3}
+  - {fileID: 21300000, guid: d735fcdee45822740a9fdcc29e45d811, type: 3}
+  - {fileID: 21300000, guid: e88a3ee53d07cbf4dbdbea07a060eab1, type: 3}
+  - {fileID: 21300000, guid: d5efd49800400974cbf3d78923b0b12b, type: 3}
+  barrenPlanets:
+  - {fileID: 21300000, guid: e56491209ad43824f82e7d0518c1baa8, type: 3}
+  - {fileID: 21300000, guid: 01a5a06371359f74d8b24d260e60c67f, type: 3}
+  - {fileID: 21300000, guid: 2a5518e3b39d62a44bd4211da55a0fd0, type: 3}
+  - {fileID: 21300000, guid: c93081d4f295909488fef4dc2dece146, type: 3}
+  - {fileID: 21300000, guid: 9c1f66fdb509db14ea5930c55141e4b6, type: 3}
+  cloudyPlanets:
+  - {fileID: 21300000, guid: fe987ac147133884b8713860988daedc, type: 3}
+  - {fileID: 21300000, guid: 9d46f93f25c07cd40b39ecc85bf86e96, type: 3}
+  - {fileID: 21300000, guid: 6e915f789f7250743a2d703eeb157c7a, type: 3}
+  - {fileID: 21300000, guid: 27a47b683fb54d34da28922cd98d2d11, type: 3}
+  - {fileID: 21300000, guid: a5bb0941173b06f4bbcd34357a2c0976, type: 3}
+  crateredPlanets:
+  - {fileID: 21300000, guid: ee008c0da00c5db49a755d1beb721479, type: 3}
+  - {fileID: 21300000, guid: ae4a4cda701b5f14e97ed56794da773d, type: 3}
+  - {fileID: 21300000, guid: cb809391c92a79a478fedc1e0c0c9a29, type: 3}
+  - {fileID: 21300000, guid: 1d973d0e04be11d41b970177bc5649c3, type: 3}
+  - {fileID: 21300000, guid: cbd6e0563f8b27249819ae12b9ae5cde, type: 3}
+  dryPlanets:
+  - {fileID: 21300000, guid: 2b8eeeac785d0f4458e7701ad8ae2004, type: 3}
+  - {fileID: 21300000, guid: 914bf63cb469ffa4aafd4c2f3809c780, type: 3}
+  - {fileID: 21300000, guid: d0a56e2a416cb4e4cab16c2ed5471435, type: 3}
+  - {fileID: 21300000, guid: b44e165a6b4293b44abd592d750b23eb, type: 3}
+  - {fileID: 21300000, guid: f838d5873d7b5674aa980ea38485dab5, type: 3}
+  frozenPlanets:
+  - {fileID: 21300000, guid: ea64d806d00a11b4383a3285bc207145, type: 3}
+  - {fileID: 21300000, guid: 40052a600f1c74642adebb16865a6d0c, type: 3}
+  - {fileID: 21300000, guid: cc9e4efaf3120c14fa0f934c50f3405d, type: 3}
+  - {fileID: 21300000, guid: 3b0116bbf9bccae4cad1fa934fb89242, type: 3}
+  - {fileID: 21300000, guid: 4c57b30e348acc8459379b72961e2990, type: 3}
+  glacialPlanets:
+  - {fileID: 21300000, guid: 0b06e79171d39f84b9916e18bfb31128, type: 3}
+  - {fileID: 21300000, guid: 89518327246a7d545a04ee201d514b27, type: 3}
+  - {fileID: 21300000, guid: c39a72f5edc913747a391593e14651dc, type: 3}
+  - {fileID: 21300000, guid: c8bfaa410dc48d24b90efd2fe2f40c20, type: 3}
+  - {fileID: 21300000, guid: 73d059ff79deca841889e3949016442f, type: 3}
+  icyPlanets:
+  - {fileID: 21300000, guid: e656275e193dd0a4ea5991d69f4f50d4, type: 3}
+  - {fileID: 21300000, guid: 10398a1ddd753ff4799612835eaa7c22, type: 3}
+  - {fileID: 21300000, guid: aadb1dc4860c99a43b0d8633c23025cc, type: 3}
+  - {fileID: 21300000, guid: e899a72fe148eb344baf3705fb25e864, type: 3}
+  - {fileID: 21300000, guid: 036aed00b5b8b0a47834aec81671b30d, type: 3}
+  lunarPlanets:
+  - {fileID: 21300000, guid: c370904ff85e3a34c8856089bbe5a965, type: 3}
+  - {fileID: 21300000, guid: 930f24e6e77b8524d979ebc151d42b52, type: 3}
+  - {fileID: 21300000, guid: b3023549ec4ba5a4ea74e334f277fee4, type: 3}
+  - {fileID: 21300000, guid: 68c636d460fff594093d97a54204745b, type: 3}
+  - {fileID: 21300000, guid: 9e722dbd8d035f54bbe71afef6508acd, type: 3}
+  lushPlanets:
+  - {fileID: 21300000, guid: a1cf9fc308406f04b9db453a043b1812, type: 3}
+  - {fileID: 21300000, guid: 9673654e79a86fd41a07337972e30024, type: 3}
+  - {fileID: 21300000, guid: bbd7bc58e6dc5c543aca89a1af30bd6f, type: 3}
+  - {fileID: 21300000, guid: 4761f7abd354be841b83b385d686935f, type: 3}
+  - {fileID: 21300000, guid: 7d68ec37c8caee447abb08d2527772e5, type: 3}
+  magmaPlanets:
+  - {fileID: 21300000, guid: 87b5747f29ec0784d90f63c3ce564ce1, type: 3}
+  - {fileID: 21300000, guid: 0e444d3edfa83c44590a2c7c1c395fd2, type: 3}
+  - {fileID: 21300000, guid: f127f42c9858a5a4eb5c87f45d38732b, type: 3}
+  - {fileID: 21300000, guid: 5bf1a12bef2ef794183dc75b02eabe54, type: 3}
+  - {fileID: 21300000, guid: 4433bc14b5212e040b106f2316622a36, type: 3}
+  muddyPlanets:
+  - {fileID: 21300000, guid: cd555c66312665b458fa2e9266404fec, type: 3}
+  - {fileID: 21300000, guid: 124524cd049482c45953530cffeb0ffe, type: 3}
+  - {fileID: 21300000, guid: 22371f94b1fc3f94582faa6538e31b5a, type: 3}
+  - {fileID: 21300000, guid: 051aab47158900f4c908ba53f4fc1270, type: 3}
+  - {fileID: 21300000, guid: 27b8d516d35239741a6f0580f34618a8, type: 3}
+  oasisPlanets:
+  - {fileID: 21300000, guid: dc384eb243ca8174caf0fc3a11d8df1b, type: 3}
+  - {fileID: 21300000, guid: a860b1cfe5de22b4a827f92950d9af02, type: 3}
+  - {fileID: 21300000, guid: 907711dbc5421fb46a51481191632dad, type: 3}
+  - {fileID: 21300000, guid: 14ade3ae0902e6b418bccc98490b9f15, type: 3}
+  - {fileID: 21300000, guid: 8bb8144bb385993479d785c042ae36a0, type: 3}
+  oceanPlanets:
+  - {fileID: 21300000, guid: ae8d1fc11cf89a34d99666a4befb8476, type: 3}
+  - {fileID: 21300000, guid: 63f490a653533984e940ef0fc63b98e8, type: 3}
+  - {fileID: 21300000, guid: d0d9f8cc9e92f2440ad4157e2e5946ed, type: 3}
+  - {fileID: 21300000, guid: e7580b626ab7edf43a6a1d1f67c27eb4, type: 3}
+  - {fileID: 21300000, guid: 13984055419d66c43959c52d89d6e7ae, type: 3}
+  rockyPlanets:
+  - {fileID: 21300000, guid: 5ee001645f8752a43a0ec6d9a3571f56, type: 3}
+  - {fileID: 21300000, guid: 68b86ef8c2bfb4d44b0465f5bb8dc47b, type: 3}
+  - {fileID: 21300000, guid: cb02e8393dc85da429aaf539a54ae763, type: 3}
+  - {fileID: 21300000, guid: 26bcd6232409ed947b62bcf2087b94c2, type: 3}
+  - {fileID: 21300000, guid: 6c3ddb1871bf48847b013659216250d1, type: 3}
+  snowyPlanets:
+  - {fileID: 21300000, guid: 465f0d4487a981c4b9e05f3cad4298e6, type: 3}
+  - {fileID: 21300000, guid: 6daec44bd171acc4aa74d9a585fda23e, type: 3}
+  - {fileID: 21300000, guid: 3fffc374c5868224fa438e55460fb2e5, type: 3}
+  - {fileID: 21300000, guid: 36c3fdd8c446c5d4d908c2c35af64170, type: 3}
+  - {fileID: 21300000, guid: 8e997c6d2a6db86498de2a2b1d369220, type: 3}
+  terrestrialPlanets:
+  - {fileID: 21300000, guid: dcbedff2b4c7ec343a29e2c711fa360f, type: 3}
+  - {fileID: 21300000, guid: 0bfec6332bcf68145a3b29dadf90d722, type: 3}
+  - {fileID: 21300000, guid: f1bd2c6bf6c3c814ea41b58a5cd29b6e, type: 3}
+  - {fileID: 21300000, guid: 3c326caaf4df73b47ad212ab3f764f21, type: 3}
+  - {fileID: 21300000, guid: c07b1d5a771b400409e4ccb5199ebea5, type: 3}
+  tropicalPlanets:
+  - {fileID: 21300000, guid: b2517c9924fcea44487679c39a72b27c, type: 3}
+  - {fileID: 21300000, guid: b87211279dd9b844fbbf7f086ecc4e1c, type: 3}
+  - {fileID: 21300000, guid: 17446d214418c94489b4b255eae4a2a4, type: 3}
+  - {fileID: 21300000, guid: 533991bceb6360e47a7b21b841f81b21, type: 3}
+  - {fileID: 21300000, guid: f350c639e829a1340a1408d7b46aab19, type: 3}
