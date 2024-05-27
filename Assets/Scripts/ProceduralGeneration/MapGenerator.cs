@@ -1,4 +1,5 @@
 using Assets.Scripts;
+using Assets.Scripts.Enums;
 using Assets.Scripts.SpaceObjects;
 using System.Collections.Generic;
 using UnityEngine;
@@ -97,11 +98,18 @@ public class MapGenerator : ChunkGenerator<MapChunk>
             orbitLocation *= currentDist;
 
             var satelliteObjectPrefab = planetPrefab;
+            bool isPlanet = true;
 
-            if (currentDist > maxSystemRadius / 2 && Random.Range(0, int.MaxValue) % gasGiantChance == 0) satelliteObjectPrefab = gasGiantPrefab;
+            if (currentDist > maxSystemRadius / 2 && Random.Range(0, int.MaxValue) % gasGiantChance == 0)
+            {
+                satelliteObjectPrefab = gasGiantPrefab;
+                isPlanet = false;
+            }
 
             var planet = Instantiate(satelliteObjectPrefab, new Vector3(point.x + orbitLocation.x, point.y + orbitLocation.y, 0), Quaternion.identity);
-            planet.GetComponent<SatelliteObject>().SetOrbit(point, currentDist);
+
+            if (isPlanet) planet.GetComponent<SatelliteObject<ePlanetType>>().SetOrbit(point, currentDist);
+            else planet.GetComponent<SatelliteObject<eGasGiantType>>().SetOrbit(point, currentDist);
 
             spaceObjects.Add(planet);
         }

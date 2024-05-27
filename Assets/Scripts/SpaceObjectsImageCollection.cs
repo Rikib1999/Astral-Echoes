@@ -6,7 +6,7 @@ public class SpaceObjectsImageCollection : ScriptableObject
     public Sprite[] blueStars;
     public Sprite[] redStars;
     public Sprite[] yellowStars;
-    public Sprite[] blackHoles;
+    public Sprite[] blueBlackHoles;
     public Sprite[] blueGiants;
     public Sprite[] greenGiants;
     public Sprite[] orangeGiants;

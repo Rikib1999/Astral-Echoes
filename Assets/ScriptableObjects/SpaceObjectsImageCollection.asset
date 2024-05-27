@@ -30,7 +30,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 8e5c54f2e84bbbd4f9bc48f0fc95e339, type: 3}
   - {fileID: 21300000, guid: a5dfbdac25332094e921ac88dbbc5116, type: 3}
   - {fileID: 21300000, guid: 3d9c289bb5a3fdb43ae056f753e40cf9, type: 3}
-  blackHoles:
+  blueBlackHoles:
   - {fileID: 21300000, guid: afaa0c14e524d2f489a2ddf021506f33, type: 3}
   blueGiants:
   - {fileID: 21300000, guid: 8df2c083c92d5574d821699ee5191f76, type: 3}

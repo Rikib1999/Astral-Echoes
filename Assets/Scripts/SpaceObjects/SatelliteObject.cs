@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Assets.Scripts.SpaceObjects
 {
-    public abstract class SatelliteObject : SpaceObject
+    public abstract class SatelliteObject<T> : SpaceObject<T> where T : Enum
     {
         public Vector3 CentreObjectPosition { get; set; }
         public float OrbitRadius { get; set; }
