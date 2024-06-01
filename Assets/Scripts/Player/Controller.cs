@@ -8,9 +8,15 @@ public class Controller : MonoBehaviour
     [SerializeField] Transform[] guns; // Array to store references to all guns
     [SerializeField] Transform crosshair;
     [SerializeField] float moveSpeed = 2;
+    [SerializeField] float dashSpeed = 10f;
+    [SerializeField] float dashDuration = 0.2f;
+    [SerializeField] float dashCooldown = 1f;
     [SerializeField] float dirX = 0;
     [SerializeField] float dirY = 0;
     bool facingRight = true;
+    bool isDashing = false;
+    float dashTime = 0;
+    float lastDashTime = -10f;
     Animator animator;
     private Vector3 lastMousePosition;
     private int activeGunIndex = 0; // Index of the currently active gun
@@ -60,8 +66,15 @@ public class Controller : MonoBehaviour
         // Update movement input
         dirX = Input.GetAxisRaw("Horizontal");
         dirY = Input.GetAxis("Vertical");
-        if (dirX*moveSpeed != 0 || dirY* moveSpeed != 0) animator.SetBool("isWalking",true);
-        else animator.SetBool("isWalking",false);
+        if (dirX * moveSpeed != 0 || dirY * moveSpeed != 0) animator.SetBool("isWalking", true);
+        else animator.SetBool("isWalking", false);
+
+        // Dash input
+        if (Input.GetKeyDown(KeyCode.LeftShift) && Time.time >= lastDashTime + dashCooldown)
+        {
+            StartCoroutine(Dash());
+        }
+
         // Switch active gun based on player input
         if (Input.GetKeyDown(KeyCode.Alpha1) && guns.Length >= 1)
         {
@@ -79,9 +92,12 @@ public class Controller : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // Move the player based on input
-        Vector2 movement = new Vector2(dirX, dirY).normalized * moveSpeed;
-        rb.velocity = movement;
+        if (!isDashing)
+        {
+            // Move the player based on input
+            Vector2 movement = new Vector2(dirX, dirY).normalized * moveSpeed;
+            rb.velocity = movement;
+        }
     }
 
     private void LateUpdate()
@@ -113,5 +129,19 @@ public class Controller : MonoBehaviour
         guns[activeGunIndex].gameObject.SetActive(false);
         guns[newIndex].gameObject.SetActive(true);
         activeGunIndex = newIndex;
+    }
+
+    private IEnumerator Dash()
+    {
+        isDashing = true;
+        dashTime = Time.time;
+        lastDashTime = Time.time;
+
+        Vector2 dashDirection = new Vector2(dirX, dirY).normalized;
+        rb.velocity = dashDirection * dashSpeed;
+
+        yield return new WaitForSeconds(dashDuration);
+
+        isDashing = false;
     }
 }
