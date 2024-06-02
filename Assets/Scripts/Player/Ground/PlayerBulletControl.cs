@@ -44,5 +44,16 @@ public class PlayerBulletControl : MonoBehaviour
     }
 
 
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            Destroy(gameObject);
+        }
+        Debug.Log("Hit enemy");
+
+    }   
+
+
 
 }

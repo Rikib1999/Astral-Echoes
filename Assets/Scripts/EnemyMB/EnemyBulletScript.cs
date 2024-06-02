@@ -24,7 +24,7 @@ public class EnemyBulletScript : MonoBehaviour
         
         Vector3 direction = player.transform.position - transform.position;
 
-        rb.velocity = new Vector2(direction.x, direction.y-1).normalized * force;
+        rb.velocity = new Vector2(direction.x, direction.y).normalized * force;
 
         float rot = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
 
@@ -62,11 +62,13 @@ public class EnemyBulletScript : MonoBehaviour
 
     void GetDamaged(GameObject player)
     {
-        PlayerLogic playerLogic = player.GetComponent<PlayerLogic>();
+        //PlayerLogic playerLogic = player.GetComponent<PlayerLogic>();
+        ShipHealth shipHealth = player.GetComponent<ShipHealth>();
 
-        if(playerLogic != null)
+        if(shipHealth != null)
         {
-            playerLogic.damage(2);
+           
+            shipHealth.damage(5);
         }
         else
         {
