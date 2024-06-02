@@ -34,10 +34,12 @@ public class BasicEnemies : MonoBehaviour
 
         direction.Normalize();
 
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(direction.y-0.25f, direction.x) * Mathf.Rad2Deg;
 
         transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, speed * Time.deltaTime);
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
+
+
 
     }
 }

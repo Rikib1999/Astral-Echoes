@@ -6,6 +6,8 @@ public class ShootingEnemie : MonoBehaviour
 {
     public GameObject bullet;
     public Transform firePoint;
+    public float shootingTime;
+
 
     private float timeBtwShots;
     private GameObject player;
@@ -29,7 +31,15 @@ public class ShootingEnemie : MonoBehaviour
 
             timeBtwShots += Time.deltaTime;
 
-            if (timeBtwShots >= 1)
+            Vector2 hm = transform.localScale;
+
+            float fasterBullets = hm.x;
+
+            //Debug.Log(hm.x);
+
+            shootingTime = fasterBullets - 0.2f;
+
+            if (timeBtwShots >= shootingTime)
             {
                 //Instantiate(bullet, firePoint.position, firePoint.rotation);
                 timeBtwShots = 0;

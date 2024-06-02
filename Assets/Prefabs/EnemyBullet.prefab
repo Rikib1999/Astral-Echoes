@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2630857941526874136}
   - component: {fileID: 5228237910527933766}
   - component: {fileID: 3339332613408177823}
-  - component: {fileID: 447399996000611243}
+  - component: {fileID: -7823900923229809817}
   m_Layer: 0
   m_Name: EnemyBullet
   m_TagString: Untagged
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 5
-  timer: 0
+  timer: 2
 --- !u!50 &3339332613408177823
 Rigidbody2D:
   serializedVersion: 4
@@ -128,8 +128,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!61 &447399996000611243
-BoxCollider2D:
+--- !u!58 &-7823900923229809817
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -161,15 +161,5 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.8514285, y: 5.8514285}
-    newSize: {x: 20.48, y: 20.48}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5.8514285, y: 5.8514285}
-  m_EdgeRadius: 0
+  m_Radius: 2.9257143
