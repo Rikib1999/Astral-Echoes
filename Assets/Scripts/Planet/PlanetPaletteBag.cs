@@ -18,7 +18,7 @@ namespace Assets.Scripts.Planet
                     level = planetPalette.levels[i]
                 };
 
-                Palette[i].tile.colliderType = planetPalette.isWalkable[i] ? ColliderType.None : ColliderType.Sprite;
+                Palette[i].tile.m_DefaultColliderType = planetPalette.isWalkable[i] ? ColliderType.None : ColliderType.Sprite;
             }
         }
     }
