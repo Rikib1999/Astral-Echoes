@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class Controller : MonoBehaviour
+public class Controller : NetworkBehaviour
 {
     [SerializeField] Rigidbody2D rb;
     [SerializeField] Transform[] guns; // Array to store references to all guns
-    [SerializeField] Transform crosshair;
+    [SerializeField] GameObject crosshair;
     [SerializeField] float moveSpeed = 2;
     [SerializeField] float dashSpeed = 10f;
     [SerializeField] float dashDuration = 0.2f;
@@ -20,6 +21,17 @@ public class Controller : MonoBehaviour
     Animator animator;
     private Vector3 lastMousePosition;
     private int activeGunIndex = 0; // Index of the currently active gun
+
+    // Called on client join
+    public override void OnNetworkSpawn()
+    {
+        if(!IsOwner)
+        {
+            //Destroy(this);
+            enabled=false;
+            crosshair.SetActive(false);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -43,14 +55,14 @@ public class Controller : MonoBehaviour
         // Move the crosshair with the mouse
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0;
-        crosshair.position = mousePosition;
+        crosshair.transform.position = mousePosition;
 
         // Determine if the mouse has moved left or right
-        if (crosshair.position.x > transform.position.x)
+        if (crosshair.transform.position.x > transform.position.x)
         {
             facingRight = true;
         }
-        else if (crosshair.position.x < transform.position.x)
+        else if (crosshair.transform.position.x < transform.position.x)
         {
             facingRight = false;
         }
@@ -108,7 +120,7 @@ public class Controller : MonoBehaviour
     private void RotateWeapon()
     {
         // Get the position of the crosshair
-        Vector3 targetPosition = crosshair.position;
+        Vector3 targetPosition = crosshair.transform.position;
 
         // Get the direction from the active gun's muzzle to the crosshair
         Vector3 direction = targetPosition - guns[activeGunIndex].position;
