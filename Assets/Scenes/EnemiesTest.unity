@@ -123,25 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &604593605 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8954185768799606110, guid: b3b4876e3950bbb4baa667587df7ad20, type: 3}
-  m_PrefabInstance: {fileID: 3752513978106065797}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &604593612
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 604593605}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 150e69a8ca35f7040bcda4163a08bcb4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  maxShield: 50
 --- !u!1 &1832215744
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,6 +267,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3711853236478355259, guid: b3b4876e3950bbb4baa667587df7ad20, type: 3}
+      propertyPath: m_Name
+      value: FirePosPlayer
+      objectReference: {fileID: 0}
     - target: {fileID: 8954185768799606110, guid: b3b4876e3950bbb4baa667587df7ad20, type: 3}
       propertyPath: m_Name
       value: PlayeShip
@@ -293,10 +278,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8954185768799606110, guid: b3b4876e3950bbb4baa667587df7ad20, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 604593612}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3b4876e3950bbb4baa667587df7ad20, type: 3}
 --- !u!1001 &8081509694721861974
 PrefabInstance:
@@ -354,7 +336,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8785401314802707214, guid: ea4305d9a62d21d4eb570c68d0faaa49, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3386633912779028058, guid: ea4305d9a62d21d4eb570c68d0faaa49, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

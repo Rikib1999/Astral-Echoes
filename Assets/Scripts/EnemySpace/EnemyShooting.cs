@@ -11,11 +11,15 @@ public class ShootingEnemie : MonoBehaviour
 
     private float timeBtwShots;
     private GameObject player;
+    private BasicEnemies chaseEnemy;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+
+        chaseEnemy = GetComponent<BasicEnemies>();
+
     }
 
     // Update is called once per frame
@@ -26,7 +30,7 @@ public class ShootingEnemie : MonoBehaviour
 
         float distance = Vector2.Distance(transform.position, player.transform.position);
 
-        if(distance < 10 )
+        if(distance < chaseEnemy.chaseDistance )
         {
 
             timeBtwShots += Time.deltaTime;

@@ -5,6 +5,7 @@ using UnityEngine;
 public class ShipController : MonoBehaviour
 {
     public GameObject crosshair;
+    public float speed = 4f;
 
     // Start is called before the first frame update
     void Start()
@@ -36,7 +37,7 @@ public class ShipController : MonoBehaviour
         if (Input.GetKey(KeyCode.W)){
 
             //follow where the crosshair is pointing
-            transform.position = Vector2.MoveTowards(transform.position, crosshair.transform.position, 5 * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, crosshair.transform.position, speed * Time.deltaTime);
 
 
         }

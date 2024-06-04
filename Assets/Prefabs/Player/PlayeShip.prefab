@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 405134879617916191}
   m_Layer: 3
-  m_Name: FirePos
+  m_Name: FirePosPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -128,6 +128,8 @@ GameObject:
   - component: {fileID: 346879848894558279}
   - component: {fileID: 3059447399479625339}
   - component: {fileID: 2786464102640875187}
+  - component: {fileID: 5753413705948211090}
+  - component: {fileID: 452207974285259613}
   m_Layer: 0
   m_Name: PlayeShip
   m_TagString: Player
@@ -150,7 +152,7 @@ Transform:
   - {fileID: 4468710228051611538}
   - {fileID: 405134879617916191}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7711705554668479705
 SpriteRenderer:
@@ -492,3 +494,33 @@ PolygonCollider2D:
       - {x: 0.13499999, y: -4.0499997}
       - {x: 0.16499999, y: -3.97}
   m_UseDelaunayMesh: 0
+--- !u!114 &5753413705948211090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8954185768799606110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad6c94ae628ff734db1480754c2e38fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 2835332959312534908, guid: 08a9d5641844c80468c66281f5ad623c, type: 3}
+  firePoint: {fileID: 0}
+  shootingTime: 2
+  crosshair: {fileID: 0}
+--- !u!114 &452207974285259613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8954185768799606110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 150e69a8ca35f7040bcda4163a08bcb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  maxShield: 50

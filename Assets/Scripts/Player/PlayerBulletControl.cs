@@ -9,7 +9,7 @@ public class PlayerBulletControl : MonoBehaviour
     public GameObject crosshair;
 
 
-    public float force = 5;
+    public float force = 8;
     public float timer;
 
     // Start is called before the first frame update
@@ -48,11 +48,27 @@ public class PlayerBulletControl : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
+            GetDamage(other.gameObject);
             Destroy(gameObject);
         }
         Debug.Log("Hit enemy");
 
-    }   
+    }
+    
+    void GetDamage(GameObject enemy)
+    {
+        EnemyShipHealth eshipHealth = enemy.GetComponent<EnemyShipHealth>();
+    
+        if(eshipHealth != null)
+        {
+            eshipHealth.damage(5);
+        }
+        else
+        {
+            Debug.Log("EnemyShipHealth is null");
+        }
+    
+    }
 
 
 

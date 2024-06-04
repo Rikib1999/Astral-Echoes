@@ -17,7 +17,8 @@ public class PlayerShooting : MonoBehaviour
     void Start()
     {
 
-        crosshair = GameObject.FindGameObjectWithTag("Crosshair"); 
+        crosshair = GameObject.FindGameObjectWithTag("Crosshair");
+        firePoint = GameObject.Find("FirePosPlayer").transform;
 
     }
 
