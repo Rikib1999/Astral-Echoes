@@ -1,7 +1,8 @@
 using Assets.Scripts;
-using Assets.Scripts.Enums;
 using Assets.Scripts.SpaceObjects;
+using Assets.Scripts.SpaceSystem;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MapGenerator : ChunkGenerator<MapChunk>
@@ -81,11 +82,49 @@ public class MapGenerator : ChunkGenerator<MapChunk>
 
     private List<GameObject> GenerateSystem(Vector2 point)
     {
+        var systemDataBag = new SystemDataBag();
         var spaceObjects = new List<GameObject>();
 
-        var centralObjectPrefab = Random.Range(0, int.MaxValue) % blackHoleChance == 0 ? blackHolePrefab : starPrefab;
+        bool isStar = Random.Range(0, int.MaxValue) % blackHoleChance != 0;
+
+        var centralObjectPrefab = isStar ? starPrefab : blackHolePrefab;
         var centralObject = Instantiate(centralObjectPrefab, new Vector3(point.x, point.y, 0), Quaternion.identity);
         spaceObjects.Add(centralObject);
+
+        if (isStar)
+        {
+            var star = centralObject.GetComponent<Star>();
+            systemDataBag.CentralObject = new SpaceObjectDataBag()
+            {
+                Name = star.Name,
+                OrbitRadius = 0,
+                Coordinates = star.transform.position,
+                RelativePosition = Vector2.zero,
+                Size = star.Size,
+                SubType= star.SubType,
+                Type= star.Type
+            };
+
+            star.AddComponent<SpaceSystemClick>();
+            star.GetComponent<SpaceSystemClick>().systemDataBag = systemDataBag;
+        }
+        else
+        {
+            var blackHole = centralObject.GetComponent<BlackHole>();
+            systemDataBag.CentralObject = new SpaceObjectDataBag()
+            {
+                Name = blackHole.Name,
+                OrbitRadius = 0,
+                Coordinates = blackHole.transform.position,
+                RelativePosition = Vector2.zero,
+                Size = blackHole.Size,
+                SubType = blackHole.SubType,
+                Type = blackHole.Type
+            };
+
+            blackHole.AddComponent<SpaceSystemClick>();
+            blackHole.GetComponent<SpaceSystemClick>().systemDataBag = systemDataBag;
+        }
 
         float currentDist = 0;
 
@@ -98,20 +137,53 @@ public class MapGenerator : ChunkGenerator<MapChunk>
             orbitLocation *= currentDist;
 
             var satelliteObjectPrefab = planetPrefab;
-            bool isPlanet = true;
+            bool isPlanet = currentDist <= maxSystemRadius / 2 || Random.Range(0, int.MaxValue) % gasGiantChance != 0;
 
-            if (currentDist > maxSystemRadius / 2 && Random.Range(0, int.MaxValue) % gasGiantChance == 0)
+            if (!isPlanet) satelliteObjectPrefab = gasGiantPrefab;
+
+            var satelliteObject = Instantiate(satelliteObjectPrefab, new Vector3(point.x + orbitLocation.x, point.y + orbitLocation.y, 0), Quaternion.identity);
+            spaceObjects.Add(satelliteObject);
+
+            if (isPlanet)
             {
-                satelliteObjectPrefab = gasGiantPrefab;
-                isPlanet = false;
+                var planet = satelliteObject.GetComponent<Planet>();
+                planet.SetOrbit(point, currentDist);
+                planet.SetTooltip();
+
+                systemDataBag.SatelliteObjects.Add(new SpaceObjectDataBag()
+                {
+                    Name = planet.Name,
+                    OrbitRadius = currentDist,
+                    Coordinates = planet.transform.position,
+                    RelativePosition = planet.transform.position - centralObject.transform.position,
+                    Size = planet.Size,
+                    SubType = planet.SubType,
+                    Type = planet.Type
+                });
+
+                planet.AddComponent<SpaceSystemClick>();
+                planet.GetComponent<SpaceSystemClick>().systemDataBag = systemDataBag;
             }
+            else
+            {
+                var gasGiant = satelliteObject.GetComponent<GasGiant>();
+                gasGiant.SetOrbit(point, currentDist);
+                gasGiant.SetTooltip();
 
-            var planet = Instantiate(satelliteObjectPrefab, new Vector3(point.x + orbitLocation.x, point.y + orbitLocation.y, 0), Quaternion.identity);
+                systemDataBag.SatelliteObjects.Add(new SpaceObjectDataBag()
+                {
+                    Name = gasGiant.Name,
+                    OrbitRadius = currentDist,
+                    Coordinates = gasGiant.transform.position,
+                    RelativePosition = gasGiant.transform.position - centralObject.transform.position,
+                    Size = gasGiant.Size,
+                    SubType = gasGiant.SubType,
+                    Type = gasGiant.Type
+                });
 
-            if (isPlanet) planet.GetComponent<SatelliteObject<ePlanetType>>().SetOrbit(point, currentDist);
-            else planet.GetComponent<SatelliteObject<eGasGiantType>>().SetOrbit(point, currentDist);
-
-            spaceObjects.Add(planet);
+                gasGiant.AddComponent<SpaceSystemClick>();
+                gasGiant.GetComponent<SpaceSystemClick>().systemDataBag = systemDataBag;
+            }
         }
 
         return spaceObjects;

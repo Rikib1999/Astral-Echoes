@@ -1,10 +1,10 @@
-﻿using UnityEngine;
+﻿using UnityEngine.Tilemaps;
 
 namespace Assets.Scripts.Planet
 {
     public struct PlanetPaletteLayer
     {
-        public RuleTile tile;
+        public Tile[] tiles;
         public float level;
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.Structs;
+using System;
 using UnityEngine;
 
 namespace Assets.Scripts.SpaceObjects
@@ -10,9 +11,12 @@ namespace Assets.Scripts.SpaceObjects
 
         [SerializeField] private LineRenderer lineRenderer;
 
-        private new void Start()
+        protected virtual new void Awake()
         {
-            base.Start();
+            base.Awake();
+
+            SetRotation();
+            SetTooltip();
         }
 
         private void SetLineRenderer()
@@ -21,6 +25,20 @@ namespace Assets.Scripts.SpaceObjects
             lineRenderer.endColor = new Color(1, 1, 1, 0.25f);
             lineRenderer.startWidth = 0.2f;
             lineRenderer.endWidth = 0.2f;
+        }
+
+        private void SetRotation()
+        {
+            Vector3 v = (CentreObjectPosition - transform.position).normalized;
+
+            float r = (float)(Math.Atan2(v.y, v.x) * 180 / Math.PI) - 41;
+
+            transform.Rotate(0, 0, r);
+        }
+
+        public new void SetTooltip(float scaleDownConst = 1)
+        {
+            GetComponent<TooltipSetter>().tooltipData = new TooltipData(Name, Type, SubType, Coordinates.x, Coordinates.y, Size / scaleDownConst, OrbitRadius / scaleDownConst, IsLandable);
         }
 
         public void SetOrbit(Vector2 centreObjectPosition, float orbitRadius)

@@ -1,36 +1,28 @@
 using Assets.Scripts;
-using System.Collections.Generic;
+using Assets.Scripts.Planet;
+using System;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class PlanetGenerator : ChunkGenerator<Chunk>
 {
-    private float scale = 0.5f;
+    private readonly float scale = 0.5f;
 
     protected override int ChunkSize { get; set; } = 32;
-    protected override int MaxExistingChunks { get; set; } = 64;
-    protected override int VisibleCoordsDistance { get; set; } = 3;
+    protected override int MaxExistingChunks { get; set; } = 32;
+    protected override int VisibleCoordsDistance { get; set; } = 2;
 
     [SerializeField] private Tilemap tilemap;
+    [SerializeField] private PlanetPalette planetPalette;
 
-    //for now hardcoded, later in static MapManager based on current planet and seed
-    private Dictionary<double, Tile> palette;
-
-    public Tile tileWater;
-    public Tile tileSand;
-    public Tile tileGrass;
+    private PlanetPaletteBag planetPaletteBag;
 
     private new void Start()
     {
         base.Start();
 
-        //TODO: remove
-        palette = new Dictionary<double, Tile>()
-        {
-            { 0.3, tileWater },
-            { 0.5, tileSand },
-            { int.MaxValue, tileGrass },
-        };
+        planetPaletteBag = new(planetPalette);
+        NoiseS3D.seed = 10;
     }
 
     protected override void DeleteChunk(Chunk chunk)
@@ -52,20 +44,22 @@ public class PlanetGenerator : ChunkGenerator<Chunk>
             {
                 float xCoord = ((ChunkSize * coords.x) + x) / (ChunkSize * scale);
                 float yCoord = ((ChunkSize * coords.y) + y) / (ChunkSize * scale);
-
                 double noiseValue = NoiseS3D.Noise(xCoord, yCoord);
-                Tile tile = null;
 
-                foreach (var layer in palette)
+                PlanetPaletteLayer layer = new();
+
+                foreach (var l in planetPaletteBag.Palette)
                 {
-                    if (layer.Key >= noiseValue)
+                    if (l.level >= noiseValue)
                     {
-                        tile = layer.Value;
+                        layer = l;
                         break;
                     }
                 }
 
-                tilemap.SetTile(new Vector3Int((ChunkSize * coords.x) + x, (ChunkSize * coords.y) + y, 0), tile);
+                int i = (int)(Math.Abs(noiseValue) * 100) % layer.tiles.Length;
+
+                tilemap.SetTile(new Vector3Int((ChunkSize * coords.x) + x, (ChunkSize * coords.y) + y, 0), layer.tiles[i]);
             }
         }
 

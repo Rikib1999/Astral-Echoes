@@ -8,17 +8,20 @@ namespace Assets.Scripts.Planet
 
         public PlanetPaletteBag(PlanetPalette planetPalette)
         {
-            Palette = new PlanetPaletteLayer[planetPalette.tiles.Length];
+            Palette = new PlanetPaletteLayer[planetPalette.tileList.Length];
 
-            for (int i = 0; i < planetPalette.tiles.Length; i++)
+            for (int i = 0; i < planetPalette.tileList.Length; i++)
             {
                 Palette[i] = new PlanetPaletteLayer
                 {
-                    tile = planetPalette.tiles[i],
+                    tiles = planetPalette.tileList[i].tiles,
                     level = planetPalette.levels[i]
                 };
 
-                Palette[i].tile.m_DefaultColliderType = planetPalette.isWalkable[i] ? ColliderType.None : ColliderType.Sprite;
+                foreach (var tile in Palette[i].tiles)
+                {
+                    tile.colliderType = planetPalette.isWalkable[i] ? ColliderType.None : ColliderType.Sprite;
+                }
             }
         }
     }

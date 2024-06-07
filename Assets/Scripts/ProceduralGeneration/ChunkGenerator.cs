@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public abstract class ChunkGenerator<T> : Singleton<ChunkGenerator<T>> where T : Chunk
+public abstract class ChunkGenerator<T> : MonoBehaviour where T : Chunk
 {
     protected abstract int ChunkSize { get; set; }
     protected abstract int MaxExistingChunks { get; set; }

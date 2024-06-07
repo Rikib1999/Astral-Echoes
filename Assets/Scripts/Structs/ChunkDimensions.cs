@@ -2,13 +2,13 @@
 
 namespace Assets.Scripts
 {
-    public struct ChunkDimensions
+    public readonly struct ChunkDimensions
     {
-        public Vector2 centre;
-        public float top;
-        public float bottom;
-        public float left;
-        public float right;
+        public readonly Vector2 centre;
+        public readonly float top;
+        public readonly float bottom;
+        public readonly float left;
+        public readonly float right;
 
         public ChunkDimensions(float size, float radius, Vector2Int coords)
         {

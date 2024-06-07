@@ -7,10 +7,10 @@ namespace Assets.Scripts.SpaceObjects
         protected override float MinSize { get; } = 1.5f;
         protected override float MaxSize { get; } = 3.5f;
 
-        private new void Start()
+        protected override void Awake()
         {
             Type = eSpaceObjectType.GasGiant;
-            base.Start();
+            base.Awake();
         }
     }
 }
