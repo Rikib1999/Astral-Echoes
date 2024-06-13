@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: PlanetPalette
   m_EditorClassIdentifier: 
   tiles:
-  - {fileID: 11400000, guid: b8dbff7abcc9c134aa84ea943fa6039a, type: 2}
-  - {fileID: 11400000, guid: 439447a118f806640957ef91a8911863, type: 2}
-  - {fileID: 11400000, guid: 0959997130719d142940183a9d5a17ec, type: 2}
+  - {fileID: 11400000, guid: cebfeb040a8e90c458f7fe17b91eda80, type: 2}
+  - {fileID: 11400000, guid: 5717dc8420b8cf442a3bd227756f55c3, type: 2}
+  - {fileID: 11400000, guid: 5717dc8420b8cf442a3bd227756f55c3, type: 2}
   levels:
   - 0.3
   - 0.4
