@@ -15,7 +15,7 @@ namespace Assets.Scripts.SpaceObjects
             SetIsLandable();
         }
 
-        protected new void SetIsLandable()
+        public new void SetIsLandable()
         {
             IsLandable = SubType != ePlanetType.Ocean;
         }

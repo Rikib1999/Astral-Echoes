@@ -22,7 +22,7 @@ public class PlanetGenerator : ChunkGenerator<Chunk>
         base.Start();
 
         planetPaletteBag = new(planetPalette);
-        NoiseS3D.seed = 10;
+        NoiseS3D.seed = PlanetMapManager.Seed;
     }
 
     protected override void DeleteChunk(Chunk chunk)

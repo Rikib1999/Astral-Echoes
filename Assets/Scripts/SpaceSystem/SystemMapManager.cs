@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Enums;
 using Assets.Scripts.SpaceObjects;
 using Assets.Scripts.SpaceSystem;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -84,8 +85,14 @@ namespace Assets.Scripts
                     planet.SetSize(satellite.Size * scaleUpConst);
                     planet.SetName(satellite.Name);
                     planet.SetCoordinates(satellite.Coordinates);
+                    planet.SetIsLandable();
                     planet.SetTooltip(scaleUpConst);
                     planet.SetSprite();
+                    if (planet.IsLandable)
+                    {
+                        planet.AddComponent<PlanetClick>();
+                        planet.GetComponent<PlanetClick>().spaceObjectDataBag = satellite;
+                    }
                 }
                 else
                 {
