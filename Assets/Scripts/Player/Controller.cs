@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using Assets.Scripts.Player;
 
 public class Controller : NetworkBehaviour
 {
@@ -22,14 +23,21 @@ public class Controller : NetworkBehaviour
     private Vector3 lastMousePosition;
     private int activeGunIndex = 0; // Index of the currently active gun
 
+    private CameraFollow playerCamera;
+
     // Called on client join
     public override void OnNetworkSpawn()
     {
-        if(!IsOwner)
+        if(!IsOwner) //Disable this script if not owner
         {
             //Destroy(this);
             enabled=false;
             crosshair.SetActive(false);
+        }
+        else //Set the camera to follow
+        {
+            playerCamera = FindObjectOfType<CameraFollow>();
+            playerCamera.Target = this.transform;
         }
     }
 

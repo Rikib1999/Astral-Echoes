@@ -28,6 +28,7 @@ public abstract class ChunkGenerator<T> : MonoBehaviour where T : Chunk
 
     private void Update()
     {
+        if(player == null){return;}
         if (playerCoordsChanged)
         {
             UpdateMap();

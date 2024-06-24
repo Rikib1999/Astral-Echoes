@@ -4,15 +4,18 @@ using Assets.Scripts.SpaceSystem;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Unity.Netcode;
 
 namespace Assets.Scripts
 {
-    public class SystemMapManager : Singleton<SystemMapManager>
+    public class SystemMapManager : NetworkSingleton<SystemMapManager>
     {
         [SerializeField] private GameObject starPrefab;
         [SerializeField] private GameObject blackHolePrefab;
         [SerializeField] private GameObject planetPrefab;
         [SerializeField] private GameObject gasGiantPrefab;
+
+        [SerializeField] private UnityEditor.SceneAsset system_map_scene;
 
         private const float scaleUpConst = 10;
 
@@ -36,7 +39,13 @@ namespace Assets.Scripts
         {
             SystemDataBag = systemDataBag;
             SceneManager.sceneLoaded += OnSceneLoaded;
-            SceneManager.LoadScene("SystemMap");
+
+            //SceneManager.LoadScene("SystemMap");
+            var status = NetworkManager.SceneManager.LoadScene(system_map_scene.name,LoadSceneMode.Single);
+            if (status != SceneEventProgressStatus.Started)
+            {
+                Debug.LogWarning($"Failed to load system map scene with a {nameof(SceneEventProgressStatus)}: {status}");
+            }
         }
 
         private void GenerateSystem()

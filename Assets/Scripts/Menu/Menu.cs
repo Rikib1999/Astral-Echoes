@@ -10,16 +10,21 @@ public class Menu : NetworkBehaviour
 {
     [SerializeField] public TMP_InputField tmp_ip_address;
     [SerializeField] public TMP_InputField tmp_port;
-    public UnityEditor.SceneAsset play_scene;
+    [SerializeField] public UnityEditor.SceneAsset play_scene;
 
     public override void OnNetworkSpawn()
     {
-        NetworkManager.SceneManager.LoadScene(play_scene.name,LoadSceneMode.Single);
+        if(!IsServer){return;}
+        var status = NetworkManager.SceneManager.LoadScene(play_scene.name,LoadSceneMode.Single);
+        if (status != SceneEventProgressStatus.Started)
+        {
+            Debug.LogWarning($"Failed to load play scene with a {nameof(SceneEventProgressStatus)}: {status}");
+        }
     }
 
     public void OnPlayButton ()
     {
-        NetworkManager.Singleton.StartServer();
+        NetworkManager.Singleton.StartHost();
     }
     public void OnQuitButton ()
     {

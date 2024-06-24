@@ -392,7 +392,7 @@ GameObject:
   - component: {fileID: 7418398579443811059}
   - component: {fileID: 283803974068010929}
   - component: {fileID: 5026557653012948480}
-  - component: {fileID: 7097389643222394293}
+  - component: {fileID: 5391033915135047912}
   - component: {fileID: 8823524170830891100}
   - component: {fileID: 9002615646633688850}
   - component: {fileID: 2959628651907909632}
@@ -700,7 +700,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &7097389643222394293
+--- !u!114 &5391033915135047912
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -712,11 +712,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3605509014
+  GlobalObjectIdHash: 3765452495
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
+  ActiveSceneSynchronization: 1
   SceneMigrationSynchronization: 1
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
