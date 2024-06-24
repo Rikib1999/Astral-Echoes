@@ -13,10 +13,19 @@ public class PlayerLogic : MonoBehaviour
     }
     public void damage(int damage)
     {
-        if (health > maxHealth)
+        
+        /*if (health > maxHealth)
         {
             health -= damage;
+            
         }
-        if(health <= 0) { Destroy(gameObject); }
+        if(health <= 0) { Destroy(gameObject); }*/
+
+        health -= damage;
+        Debug.Log("Player Health: " + health);
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }
