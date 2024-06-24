@@ -527,7 +527,7 @@ MonoBehaviour:
     EnableNetworkLogs: 1
     OldPrefabList: []
   RunInBackground: 1
-  LogLevel: 1
+  LogLevel: 0
 --- !u!4 &736501653
 Transform:
   m_ObjectHideFlags: 0
@@ -2219,7 +2219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tmp_ip_address: {fileID: 1560212634}
   tmp_port: {fileID: 1261200839}
-  play_scene: {fileID: 102900000, guid: 6fd9e35e6400af3a4a5478f2e83995e6, type: 3}
+  play_scene: {fileID: 102900000, guid: e21c60ef06f038244a2d2f175fe7302e, type: 3}
 --- !u!114 &1960329484
 MonoBehaviour:
   m_ObjectHideFlags: 0

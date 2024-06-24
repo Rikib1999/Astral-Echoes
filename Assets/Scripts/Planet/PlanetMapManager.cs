@@ -1,11 +1,14 @@
 ﻿using Assets.Scripts.SpaceSystem;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Unity.Netcode;
 
 namespace Assets.Scripts
 {
-    public class PlanetMapManager : Singleton<PlanetMapManager>
+    public class PlanetMapManager : NetworkSingleton<PlanetMapManager>
     {
+        [SerializeField] private UnityEditor.SceneAsset planet_scene;
+
         public static SpaceObjectDataBag PlanetDataBag { get; set; }
         public static int Seed { get; private set; }
 
@@ -14,7 +17,13 @@ namespace Assets.Scripts
             SystemMapManager.SystemDataBag = null;
             PlanetDataBag = planetDataBag;
             ComputeSeed();
-            SceneManager.LoadScene("Planet");
+            
+            //SceneManager.LoadScene("Planet");
+            var status = NetworkManager.SceneManager.LoadScene(planet_scene.name,LoadSceneMode.Single);
+            if (status != SceneEventProgressStatus.Started)
+            {
+                Debug.LogWarning($"Failed to load planet scene with a {nameof(SceneEventProgressStatus)}: {status}");
+            }
         }
 
         private void ComputeSeed()
