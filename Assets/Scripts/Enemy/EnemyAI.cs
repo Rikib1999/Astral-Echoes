@@ -22,6 +22,18 @@ public class EnemyAI : MonoBehaviour
     private Animator animator;
     private Enemy enemyState;
 
+
+    //MB added shooting enemy
+    public float shootingTime;
+
+    private float timeBtwShots;
+
+    public GameObject bullet;
+    public Transform firePoint;
+    public float shootrange = 5f;
+
+
+
     void Start()
     {
         startPosition = transform.position;
@@ -35,7 +47,8 @@ public class EnemyAI : MonoBehaviour
     {
         if (isChasing)
         {
-            ChasePlayer();
+            //ChasePlayer();
+            StopAndShoot();
         }
         else
         {
@@ -102,6 +115,45 @@ public class EnemyAI : MonoBehaviour
             enemyState = Enemy.walking;
             FlipTowardsPlayer();
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
+        }
+    }
+
+
+    void StopAndShoot()
+    {
+        if (Vector2.Distance(transform.position, player.transform.position) < shootrange && player != null)
+        {
+            ShootPlayer();
+             
+        }
+        else
+        {
+            enemyState = Enemy.walking;
+            FlipTowardsPlayer();
+            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
+        }
+
+
+    }
+
+    void ShootPlayer()
+    {
+        enemyState = Enemy.attacking;
+        timeBtwShots += Time.deltaTime;
+
+        Vector2 hm = transform.localScale;
+
+        float fasterBullets = hm.x;
+
+        //Debug.Log(hm.x);
+
+        shootingTime = fasterBullets - 0.2f;
+
+        if (timeBtwShots >= shootingTime)
+        {
+            //Instantiate(bullet, firePoint.position, firePoint.rotation);
+            timeBtwShots = 0;
+            Instantiate(bullet, firePoint.position, Quaternion.identity);
         }
     }
 
