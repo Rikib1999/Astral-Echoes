@@ -6,14 +6,42 @@ public class ShipHealth : MonoBehaviour
 {
     private int health;
     private int shield;
+    private float fuel;
+    private float fuelConsumptionRate = 20f;
     [SerializeField] int maxHealth;
     [SerializeField] int maxShield;
+    [SerializeField] float maxFuel;
 
     private void Start()
     {
         health = maxHealth;
         shield = maxShield;
+        fuel = maxFuel;
     }
+
+    private void Update()
+    {
+
+        if(Input.GetKey(KeyCode.W))
+        {
+            fuel -= fuelConsumptionRate * Time.deltaTime;
+            //getFuel(fuel);
+            
+        }
+        if(fuel <= 0)
+        {
+            fuel = 0;
+        }
+
+        Debug.Log("Fuel: " + fuel);
+
+    }
+
+    public float getFuel()
+    {
+        return fuel;
+    }
+
     public void damage(int damage)
     {
 
