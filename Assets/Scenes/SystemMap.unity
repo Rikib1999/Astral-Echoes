@@ -260,6 +260,7 @@ MonoBehaviour:
   blackHolePrefab: {fileID: 3354605895257267086, guid: 079e0d9b31f44014c81a72bceee89812, type: 3}
   planetPrefab: {fileID: 3354605895257267086, guid: 3582ae498819651419819290300db10a, type: 3}
   gasGiantPrefab: {fileID: 3354605895257267086, guid: 3dae1f29183cab345bd91838a713c680, type: 3}
+  system_map_scene: {fileID: 102900000, guid: f93acfe06c1a0c841920e328a0faf82b, type: 3}
 --- !u!4 &280019106
 Transform:
   m_ObjectHideFlags: 0
