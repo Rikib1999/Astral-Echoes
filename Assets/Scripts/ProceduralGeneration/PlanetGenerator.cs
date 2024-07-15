@@ -1,4 +1,5 @@
 using Assets.Scripts;
+using Assets.Scripts.Enums;
 using Assets.Scripts.Planet;
 using System;
 using UnityEngine;
@@ -13,7 +14,7 @@ public class PlanetGenerator : ChunkGenerator<Chunk>
     protected override int VisibleCoordsDistance { get; set; } = 2;
 
     [SerializeField] private Tilemap tilemap;
-    [SerializeField] private PlanetPalette planetPalette;
+    [SerializeField] private PlanetPalettesList planetPalettesList;
 
     private PlanetPaletteBag planetPaletteBag;
 
@@ -21,8 +22,35 @@ public class PlanetGenerator : ChunkGenerator<Chunk>
     {
         base.Start();
 
-        planetPaletteBag = new(planetPalette);
+        planetPaletteBag = new(GetPlanetPalette());
         NoiseS3D.seed = PlanetMapManager.Seed;
+    }
+
+    private PlanetPalette GetPlanetPalette()
+    {
+        switch ((ePlanetType)PlanetMapManager.PlanetDataBag.SubType)
+        {
+            case ePlanetType.Airless: return planetPalettesList.airlessPlanets;
+            case ePlanetType.Aquamarine: return planetPalettesList.aquamarinePlanets;
+            case ePlanetType.Arid: return planetPalettesList.aridPlanets;
+            case ePlanetType.Barren: return planetPalettesList.barrenPlanets;
+            case ePlanetType.Cloudy: return planetPalettesList.cloudyPlanets;
+            case ePlanetType.Cratered: return planetPalettesList.crateredPlanets;
+            case ePlanetType.Dry: return planetPalettesList.dryPlanets;
+            case ePlanetType.Frozen: return planetPalettesList.frozenPlanets;
+            case ePlanetType.Glacial: return planetPalettesList.glacialPlanets;
+            case ePlanetType.Icy: return planetPalettesList.icyPlanets;
+            case ePlanetType.Lunar: return planetPalettesList.lunarPlanets;
+            case ePlanetType.Lush: return planetPalettesList.lushPlanets;
+            case ePlanetType.Magma: return planetPalettesList.magmaPlanets;
+            case ePlanetType.Muddy: return planetPalettesList.muddyPlanets;
+            case ePlanetType.Oasis: return planetPalettesList.oasisPlanets;
+            case ePlanetType.Rocky: return planetPalettesList.rockyPlanets;
+            case ePlanetType.Snowy: return planetPalettesList.snowyPlanets;
+            case ePlanetType.Terrestrial: return planetPalettesList.terrestrialPlanets;
+            case ePlanetType.Tropical: return planetPalettesList.tropicalPlanets;
+            default: return null;
+        }
     }
 
     protected override void DeleteChunk(Chunk chunk)

@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f00e6daa25ec12d42924b5d9d6226fbb, type: 3}
+  m_Name: PlanetPalettesList
+  m_EditorClassIdentifier: 
+  airlessPlanets: {fileID: 11400000, guid: 114bc99fbec33d54c844f8e79b488589, type: 2}
+  aquamarinePlanets: {fileID: 11400000, guid: 0af12e0b694ac42428922e6405b3e64c, type: 2}
+  aridPlanets: {fileID: 11400000, guid: c87bfde23aaa5d246a31a67ac27637b1, type: 2}
+  barrenPlanets: {fileID: 11400000, guid: ed9e79d8aa02fd74da4efcf795b8050f, type: 2}
+  cloudyPlanets: {fileID: 11400000, guid: 64e15a3c136fc9a45b6781af97a6ca60, type: 2}
+  crateredPlanets: {fileID: 11400000, guid: dc4b14f3043b4064eb6d2e35a60a5aa2, type: 2}
+  dryPlanets: {fileID: 11400000, guid: b6ef40b7787b74d4cbf0935ca900db90, type: 2}
+  frozenPlanets: {fileID: 11400000, guid: dcc78154752900d4e996ddebd0d183c2, type: 2}
+  glacialPlanets: {fileID: 11400000, guid: 1413b0d68c1e0794f8f55794cb08cedd, type: 2}
+  icyPlanets: {fileID: 11400000, guid: 715099f26c069d842966de956529f034, type: 2}
+  lunarPlanets: {fileID: 11400000, guid: 6969c9532951e7f45bda30d34c59e86a, type: 2}
+  lushPlanets: {fileID: 11400000, guid: 82697cf3cfce81344aeecd828026134a, type: 2}
+  magmaPlanets: {fileID: 11400000, guid: 36cecb3cc14b19a4ab78e5eb7aa34853, type: 2}
+  muddyPlanets: {fileID: 11400000, guid: 0ad1881ed0b579c4d950e2bab7dc7b63, type: 2}
+  oasisPlanets: {fileID: 11400000, guid: 985ab39c3bb6efd4ab0c8ba023d727a2, type: 2}
+  rockyPlanets: {fileID: 11400000, guid: ad06644a904f1ac4a9b330ea26d42c90, type: 2}
+  snowyPlanets: {fileID: 11400000, guid: 848f11f8bd17fbf458b09f55c35f420e, type: 2}
+  terrestrialPlanets: {fileID: 11400000, guid: 652328b4d9a2d6a44b9fe2b68a786366, type: 2}
+  tropicalPlanets: {fileID: 11400000, guid: 29838d53c81db1141b3a0c2d3454053d, type: 2}

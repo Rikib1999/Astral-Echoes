@@ -261,7 +261,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   tilemap: {fileID: 968884254}
-  planetPalette: {fileID: 11400000, guid: edd96f4115e9e514fb8888870f3444ce, type: 2}
+  planetPalettesList: {fileID: 11400000, guid: f4598a697cf2d284f86e4f3476fcb1fc, type: 2}
 --- !u!4 &813323101
 Transform:
   m_ObjectHideFlags: 0
