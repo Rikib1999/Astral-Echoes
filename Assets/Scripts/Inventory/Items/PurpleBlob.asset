@@ -9,11 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bb740bc702209e4f96195b15ddc7439, type: 3}
-  m_Name: Purple
+  m_Script: {fileID: 11500000, guid: c2d7512ca8a100140b8fd8bfe4143493, type: 3}
+  m_Name: PurpleBlob
   m_EditorClassIdentifier: 
-  id: 1
-  craftName: PurpleCraft
+  id: 3
+  itemName: Purple
+  value: 100
   icon: {fileID: 21300000, guid: be65c833ee84d024584eb9e5054db5f5, type: 3}
-  itemNeeded1: GreenBlob
-  itemNeeded2: RedBlob

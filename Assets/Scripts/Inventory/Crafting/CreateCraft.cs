@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -10,4 +8,6 @@ public class CreateCraft : ScriptableObject
     public int id;
     public string craftName;
     public Sprite icon;
+    public string itemNeeded1;
+    public string itemNeeded2;
 }
