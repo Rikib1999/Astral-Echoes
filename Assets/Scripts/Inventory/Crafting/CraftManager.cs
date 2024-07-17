@@ -48,7 +48,11 @@ public class CraftManager : MonoBehaviour
         // Iterate through all crafts
         foreach (var craftItem in crafts)
         {
-            if (canCraft)
+            // Check if required items are present in the inventory
+            bool hasItemNeeded1 = inventoryManager.items.Exists(item => item.itemName == craftItem.itemNeeded1);
+            bool hasItemNeeded2 = inventoryManager.items.Exists(item => item.itemName == craftItem.itemNeeded2);
+
+            if (hasItemNeeded1 && hasItemNeeded2)
             {
                 // Remove the required items from the inventory
                 inventoryManager.RemoveItem(craftItem.item1);
@@ -62,13 +66,8 @@ public class CraftManager : MonoBehaviour
                     if (item.itemName == craftItem.craftName)
                         inventoryManager.AddItem(item);
                 }
-
+               
             }
-            else
-            {
-                Debug.Log("You need to have the required items to craft this item");
-            }
-        
         }
     }
 
