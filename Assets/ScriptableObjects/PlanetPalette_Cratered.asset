@@ -14,21 +14,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileList:
   - tiles:
-    - {fileID: 11400000, guid: ca22584ac2f48a84087bb2c38585f5c4, type: 2}
-    - {fileID: 11400000, guid: aa55ced985828e3449991d2ebb76eb5a, type: 2}
-    - {fileID: 11400000, guid: a0de83503f06ebb4c9eadbdb2d5e2807, type: 2}
-    - {fileID: 11400000, guid: a0de83503f06ebb4c9eadbdb2d5e2807, type: 2}
-    - {fileID: 11400000, guid: a0de83503f06ebb4c9eadbdb2d5e2807, type: 2}
+    - {fileID: 11400000, guid: a86bb2e7438c76144ad0675db1cbf41f, type: 2}
   - tiles:
-    - {fileID: 11400000, guid: ca22584ac2f48a84087bb2c38585f5c4, type: 2}
-    - {fileID: 11400000, guid: aa55ced985828e3449991d2ebb76eb5a, type: 2}
-    - {fileID: 11400000, guid: a0de83503f06ebb4c9eadbdb2d5e2807, type: 2}
-    - {fileID: 11400000, guid: a0de83503f06ebb4c9eadbdb2d5e2807, type: 2}
-    - {fileID: 11400000, guid: a0de83503f06ebb4c9eadbdb2d5e2807, type: 2}
+    - {fileID: 11400000, guid: 895014de0f291534085948a7f5e0cd12, type: 2}
+    - {fileID: 11400000, guid: 7a5af1b6f99737c42926889d6829c903, type: 2}
+    - {fileID: 11400000, guid: 94f1f63133b0a9540895b31faded6a0e, type: 2}
+    - {fileID: 11400000, guid: 8d9c1abc303ee9240a6b6014bdc05739, type: 2}
+    - {fileID: 11400000, guid: 8f6bcb7101a1bec4fa6892f48422ea87, type: 2}
+    - {fileID: 11400000, guid: 96c969ceac3928d478ed8a51102219e1, type: 2}
+    - {fileID: 11400000, guid: 5e5b4b06e47ec2042bfc8d873cddc55e, type: 2}
+    - {fileID: 11400000, guid: 4dafa045c21861745aa5f0d64ef6477d, type: 2}
+    - {fileID: 11400000, guid: aac70947bcd80cd43a5f90cca6f6d6d2, type: 2}
+    - {fileID: 11400000, guid: 96f84177edac11541a12b87a70d2bcd8, type: 2}
+    - {fileID: 11400000, guid: 64bf7466503847d40a829d14f5853f5f, type: 2}
   - tiles:
-    - {fileID: 11400000, guid: 20adb991bbddb23429eaae1a2632c206, type: 2}
+    - {fileID: 11400000, guid: 73faa53f33dfe874faad4562a8c48d7f, type: 2}
+    - {fileID: 11400000, guid: 75da5f8daabde4442ae368cc2d77e986, type: 2}
+    - {fileID: 11400000, guid: 2cff3456efadd7c47be3e98d5f3bd1c7, type: 2}
   levels:
   - 0.3
-  - 0.4
+  - 0.9
   - 10
   isWalkable: 000101
