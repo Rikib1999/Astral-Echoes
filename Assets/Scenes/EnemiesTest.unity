@@ -267,6 +267,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 452207974285259613, guid: b3b4876e3950bbb4baa667587df7ad20, type: 3}
+      propertyPath: maxFuel
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 3711853236478355259, guid: b3b4876e3950bbb4baa667587df7ad20, type: 3}
       propertyPath: m_Name
       value: FirePosPlayer
