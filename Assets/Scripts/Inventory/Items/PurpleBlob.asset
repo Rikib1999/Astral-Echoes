@@ -16,3 +16,4 @@ MonoBehaviour:
   itemName: Purple
   value: 100
   icon: {fileID: 21300000, guid: be65c833ee84d024584eb9e5054db5f5, type: 3}
+  craftable: 1

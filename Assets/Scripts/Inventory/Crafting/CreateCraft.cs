@@ -10,4 +10,6 @@ public class CreateCraft : ScriptableObject
     public Sprite icon;
     public string itemNeeded1;
     public string itemNeeded2;
+    public Item item1;
+    public Item item2;
 }

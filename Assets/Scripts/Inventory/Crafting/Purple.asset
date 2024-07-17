@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Purple
   m_EditorClassIdentifier: 
   id: 1
-  craftName: PurpleCraft
+  craftName: Purple
   icon: {fileID: 21300000, guid: be65c833ee84d024584eb9e5054db5f5, type: 3}
   itemNeeded1: GreenBlob
   itemNeeded2: RedBlob
+  item1: {fileID: 11400000, guid: 370143a9f77e17c478a63fc688833442, type: 2}
+  item2: {fileID: 11400000, guid: f0429989b664cbc4a8a5689d3c836280, type: 2}
