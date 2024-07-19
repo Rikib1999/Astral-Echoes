@@ -1,18 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class ShipController : MonoBehaviour
+public class ShipController : NetworkBehaviour
 {
     public GameObject crosshair;
     public float speed = 4f;
     private Vector2 lastDirection;
 
+
+    // Called on client join
+    public override void OnNetworkSpawn()
+    {
+        if(!IsOwner) //Disable this script if not owner
+        {
+            //Destroy(this);
+            enabled=false;
+            crosshair.SetActive(false);
+        }
+        else //Set the camera to follow
+        {
+            //playerCamera = FindObjectOfType<CameraFollow>();
+            //playerCamera.Target = this.transform;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
 
-        crosshair = GameObject.FindGameObjectWithTag("Crosshair");
+        //crosshair = GameObject.FindGameObjectWithTag("Crosshair");
 
  
         

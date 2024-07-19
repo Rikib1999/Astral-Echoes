@@ -125,13 +125,15 @@ GameObject:
   m_Component:
   - component: {fileID: 81431997874049715}
   - component: {fileID: 7711705554668479705}
+  - component: {fileID: 6882258330229165997}
   - component: {fileID: 346879848894558279}
   - component: {fileID: 3059447399479625339}
   - component: {fileID: 2786464102640875187}
   - component: {fileID: 5753413705948211090}
   - component: {fileID: 452207974285259613}
+  - component: {fileID: -3124573585980518634}
   m_Layer: 0
-  m_Name: PlayeShip
+  m_Name: PlayerShip
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -206,6 +208,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6882258330229165997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8954185768799606110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3883665097
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 1
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!114 &346879848894558279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,7 +241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9143625413580034d9ab64a2c1330bb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crosshair: {fileID: 0}
+  crosshair: {fileID: 8577651889921150955}
   speed: 4
 --- !u!50 &3059447399479625339
 Rigidbody2D:
@@ -510,7 +533,7 @@ MonoBehaviour:
   bullet: {fileID: 2835332959312534908, guid: 08a9d5641844c80468c66281f5ad623c, type: 3}
   firePoint: {fileID: 0}
   shootingTime: 2
-  crosshair: {fileID: 0}
+  crosshair: {fileID: 8577651889921150955}
 --- !u!114 &452207974285259613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -526,3 +549,34 @@ MonoBehaviour:
   maxHealth: 100
   maxShield: 50
   maxFuel: 100
+--- !u!114 &-3124573585980518634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8954185768799606110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df2868252ab5c4d1da357e8f11f1b524, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UseUnreliableDeltas: 0
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
+  SyncScaleX: 1
+  SyncScaleY: 1
+  SyncScaleZ: 1
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  UseQuaternionSynchronization: 0
+  UseQuaternionCompression: 0
+  UseHalfFloatPrecision: 0
+  InLocalSpace: 0
+  Interpolate: 1
+  SlerpPosition: 0

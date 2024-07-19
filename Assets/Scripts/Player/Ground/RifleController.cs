@@ -1,8 +1,9 @@
 using UnityEngine;
+using Unity.Netcode;
 
-public class RifleController : MonoBehaviour
+public class RifleController : NetworkBehaviour
 {
-    [SerializeField] GameObject bulletPrefab;
+    [SerializeField] NetworkObject bulletPrefab;
     [SerializeField] Transform firePoint;
     [SerializeField] float fireRate = 0.1f;
     private float nextFireTime = 0f;
@@ -18,6 +19,17 @@ public class RifleController : MonoBehaviour
 
     void Shoot()
     {
-        Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+
+        //Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        if(IsServer){
+            var playerNetworkObject = NetworkManager.SpawnManager.InstantiateAndSpawn(bulletPrefab,NetworkManager.ServerClientId,true,false,true,firePoint.position,firePoint.rotation);
+        }else{
+            SpawnBulletServerRpc();
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    void SpawnBulletServerRpc(ServerRpcParams serverRpcParams = default){
+        var playerNetworkObject = NetworkManager.SpawnManager.InstantiateAndSpawn(bulletPrefab,serverRpcParams.Receive.SenderClientId,true,false,true,firePoint.position,firePoint.rotation);
     }
 }

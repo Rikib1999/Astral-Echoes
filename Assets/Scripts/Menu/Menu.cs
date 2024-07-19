@@ -22,15 +22,15 @@ public class Menu : NetworkBehaviour
         }
     }
 
-    public void OnPlayButton ()
+    public void OnPlayButton()
     {
         NetworkManager.Singleton.StartHost();
     }
-    public void OnQuitButton ()
+    public void OnQuitButton()
     {
         Application.Quit();
     }
-    public void OnJoinButton ()
+    public void OnJoinButton()
     {
         //Load multiplayer scene
         NetworkManager.GetComponent<UnityTransport>().SetConnectionData(tmp_ip_address.text,ushort.Parse(tmp_port.text));
