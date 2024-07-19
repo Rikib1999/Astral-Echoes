@@ -33,7 +33,7 @@ public class ShipHealth : MonoBehaviour
             fuel = 0;
         }
 
-        Debug.Log("Fuel: " + fuel);
+        //Debug.Log("Fuel: " + fuel);
 
     }
 
