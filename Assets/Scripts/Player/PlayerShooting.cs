@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class PlayerShooting : MonoBehaviour
+public class PlayerShooting : NetworkBehaviour
 {
-    public GameObject bullet;
+    public NetworkObject bullet;
     public Transform firePoint;
     public float shootingTime;
 
@@ -16,9 +17,13 @@ public class PlayerShooting : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-        crosshair = GameObject.FindGameObjectWithTag("Crosshair");
-        firePoint = GameObject.Find("FirePosPlayer").transform;
+        if(!IsOwner) //Disable this script if not owner
+        {
+            enabled=false;
+        }else{
+            crosshair = GameObject.FindGameObjectWithTag("Crosshair");
+            firePoint = gameObject.transform.Find("FirePosPlayer");
+        }
 
     }
 
@@ -58,7 +63,19 @@ public class PlayerShooting : MonoBehaviour
 
     void shoot()
     {
-        Instantiate(bullet, firePoint.position, Quaternion.identity);
+        //Instantiate(bullet, firePoint.position, Quaternion.identity);
+        if(IsServer){
+            var playerNetworkObject = NetworkManager.SpawnManager.InstantiateAndSpawn(bullet,NetworkManager.ServerClientId,true,false,true,firePoint.position,Quaternion.identity);
+            playerNetworkObject.GetComponent<PlayerBulletControl>().crosshair_pos = crosshair.transform.position;
+        }else{
+            SpawnBulletServerRpc(firePoint.position,crosshair.transform.position);
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    void SpawnBulletServerRpc(Vector3 bullet_pos,Vector3 target,ServerRpcParams serverRpcParams = default){
+        var playerNetworkObject = NetworkManager.SpawnManager.InstantiateAndSpawn(bullet,serverRpcParams.Receive.SenderClientId,true,false,true,bullet_pos,Quaternion.identity);
+        playerNetworkObject.GetComponent<PlayerBulletControl>().crosshair_pos = target;
     }
 
 

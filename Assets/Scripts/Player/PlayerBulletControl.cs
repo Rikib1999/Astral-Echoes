@@ -6,7 +6,7 @@ public class PlayerBulletControl : MonoBehaviour
 {
     //private GameObject player;
     private Rigidbody2D rb;
-    public GameObject crosshair;
+    public Vector3 crosshair_pos;
 
 
     public float force = 8;
@@ -18,9 +18,9 @@ public class PlayerBulletControl : MonoBehaviour
 
         rb = GetComponent<Rigidbody2D>();
         //player = GameObject.FindGameObjectWithTag("Player");
-        crosshair = GameObject.FindGameObjectWithTag("Crosshair");
+        //crosshair = GameObject.FindGameObjectWithTag("Crosshair"); //Set during instantiation
 
-        Vector3 direction = crosshair.transform.position - transform.position;
+        Vector3 direction = crosshair_pos - transform.position;
 
         rb.velocity = new Vector2(direction.x, direction.y).normalized * force;
 

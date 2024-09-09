@@ -530,7 +530,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad6c94ae628ff734db1480754c2e38fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 2835332959312534908, guid: 08a9d5641844c80468c66281f5ad623c, type: 3}
+  bullet: {fileID: 4299907772752605265, guid: 08a9d5641844c80468c66281f5ad623c, type: 3}
   firePoint: {fileID: 0}
   shootingTime: 2
   crosshair: {fileID: 8577651889921150955}
