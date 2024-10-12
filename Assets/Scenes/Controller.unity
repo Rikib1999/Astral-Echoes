@@ -1169,7 +1169,7 @@ MonoBehaviour:
   - {fileID: 1340964133}
   - {fileID: 1315798058}
   - {fileID: 182126858}
-  crosshair: {fileID: 255861363}
+  crosshair: {fileID: 255861362}
   moveSpeed: 3
   dashSpeed: 25
   dashDuration: 0.3
