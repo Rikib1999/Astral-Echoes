@@ -6,6 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Scenes/Menu.unity
+    guid: 9245fda9014a860e7a869d49edb3a802
+  - enabled: 1
+    path: Assets/Scenes/Planet.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/SpaceMap.unity
+    guid: e21c60ef06f038244a2d2f175fe7302e
+  - enabled: 1
+    path: Assets/Scenes/SystemMap.unity
+    guid: f93acfe06c1a0c841920e328a0faf82b
+  - enabled: 1
+    path: Assets/Scenes/ShipInterior.unity
+    guid: 9305c83bfd9b294409cc643226288647
   m_configObjects: {}

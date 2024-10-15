@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fa0059e436656249a66ec702f24e5fc, type: 3}
+  m_Name: PlanetPalette_Snowy
+  m_EditorClassIdentifier: 
+  tileList:
+  - tiles:
+    - {fileID: 11400000, guid: 317b3b5a00b69c8489359b22b791d861, type: 2}
+  - tiles:
+    - {fileID: 11400000, guid: f1661663d5e4b6244b8dbc90c15ddd12, type: 2}
+    - {fileID: 11400000, guid: bd45fe65dd769be4badb5cde416486e7, type: 2}
+    - {fileID: 11400000, guid: aadc77d076b58f048a5d28b2135897c4, type: 2}
+    - {fileID: 11400000, guid: ce27f5fc71b4ed542a07988523ceb8d2, type: 2}
+    - {fileID: 11400000, guid: 7f89430a2b703e54d90c0b9dff7650ff, type: 2}
+    - {fileID: 11400000, guid: 3c11d838c159f2746b37d3601b40b6aa, type: 2}
+    - {fileID: 11400000, guid: 4a18d8cdbeb10104883a8d404ba22ded, type: 2}
+    - {fileID: 11400000, guid: f56d5d606d5c76744a336e8d83323d61, type: 2}
+    - {fileID: 11400000, guid: 90c572378f29b3e4a9616d3b76245d54, type: 2}
+    - {fileID: 11400000, guid: 024c28e63761b7648a6af33108e682be, type: 2}
+    - {fileID: 11400000, guid: cea38cd31f7e6344ab70d7767f32a8d0, type: 2}
+  - tiles:
+    - {fileID: 11400000, guid: 2017c4a31a506704f919d3e60ba1c003, type: 2}
+    - {fileID: 11400000, guid: dec472bddeba5b74db950e44eccd60d2, type: 2}
+    - {fileID: 11400000, guid: 8ba92a2f56d22c4438537f0a63434c1a, type: 2}
+  levels:
+  - 0.3
+  - 0.9
+  - 10
+  isWalkable: 000101

@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fa0059e436656249a66ec702f24e5fc, type: 3}
+  m_Name: PlanetPalette_Muddy
+  m_EditorClassIdentifier: 
+  tileList:
+  - tiles:
+    - {fileID: 11400000, guid: 78ede8a5326dc6f4fa94def60907e3bc, type: 2}
+  - tiles:
+    - {fileID: 11400000, guid: d804a68080a5c6442aa4fad3288ef7a3, type: 2}
+    - {fileID: 11400000, guid: 2b93dc39741a10b42acda9397ce8095a, type: 2}
+    - {fileID: 11400000, guid: 286276f78b9b34f489447f3ff836a167, type: 2}
+    - {fileID: 11400000, guid: a9e835f0b8231d74fb77c22a1dbca36e, type: 2}
+    - {fileID: 11400000, guid: bb2e8464a9ff1cf4680b1e8743753f91, type: 2}
+    - {fileID: 11400000, guid: c78456fc182433b4d99e3a63c9c30b24, type: 2}
+    - {fileID: 11400000, guid: 6459ba88209b72f48bf6d50b3b09ab04, type: 2}
+    - {fileID: 11400000, guid: ef105674db406a242baf839a750c9e20, type: 2}
+    - {fileID: 11400000, guid: 7365ccaad1f81f74a88ef4c27a71dfee, type: 2}
+    - {fileID: 11400000, guid: fd5028a99675d944693d9d65831c91a8, type: 2}
+    - {fileID: 11400000, guid: 67994fb8353f1ac49b675cb32d8fe3e1, type: 2}
+  - tiles:
+    - {fileID: 11400000, guid: ec065c3f67f69aa43aa43a37dd8f790e, type: 2}
+    - {fileID: 11400000, guid: 209c8c77a2f77e44f9d132cbda5f2675, type: 2}
+    - {fileID: 11400000, guid: 13a922fe25e8c5e42b22a1de685ec3f9, type: 2}
+  levels:
+  - 0.3
+  - 0.9
+  - 10
+  isWalkable: 000101

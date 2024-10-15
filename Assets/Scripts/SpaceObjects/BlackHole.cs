@@ -7,10 +7,10 @@ namespace Assets.Scripts.SpaceObjects
         protected override float MinSize { get; } = 0.5f;
         protected override float MaxSize { get; } = 6f;
 
-        private new void Start()
+        private new void Awake()
         {
             Type = eSpaceObjectType.BlackHole;
-            base.Start();
+            base.Awake();
         }
     }
 }

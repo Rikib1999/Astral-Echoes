@@ -13,6 +13,8 @@ namespace Assets.Scripts
 
         protected void CreateSingleton()
         {
+            if (transform.parent != null) transform.SetParent(null, false);
+
             if (Instance == null)
             {
                 Instance = GetComponent<T>();

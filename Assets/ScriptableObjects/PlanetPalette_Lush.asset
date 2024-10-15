@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fa0059e436656249a66ec702f24e5fc, type: 3}
+  m_Name: PlanetPalette_Lush
+  m_EditorClassIdentifier: 
+  tileList:
+  - tiles:
+    - {fileID: 11400000, guid: 40f6854cd7ca57a4da8deb5b5e3d0303, type: 2}
+  - tiles:
+    - {fileID: 11400000, guid: 3c7e4498623c7d543a67ddab4ca464cf, type: 2}
+    - {fileID: 11400000, guid: 908d8821ab9ed194c9c5e671b3d4e322, type: 2}
+    - {fileID: 11400000, guid: b1b3a189d9a2a6045a367f693b184463, type: 2}
+    - {fileID: 11400000, guid: 22c0ea4eb97cc6c42a5d4e09e7c39e7d, type: 2}
+    - {fileID: 11400000, guid: ed7d458aee2adc64eb879f3202c578cb, type: 2}
+    - {fileID: 11400000, guid: e015db9a0686e0c44a8755317ce14c4f, type: 2}
+    - {fileID: 11400000, guid: f5d616d31a9f0dc458d80fc7777d0160, type: 2}
+    - {fileID: 11400000, guid: c80e7209b2f00054c864a3f856115068, type: 2}
+    - {fileID: 11400000, guid: c896fe71ae34a4248a36daf2f259f059, type: 2}
+    - {fileID: 11400000, guid: 1f56aea734015f9469bdd8510cf959ac, type: 2}
+    - {fileID: 11400000, guid: dff63cc7f70d4914d9ca49da2edd5589, type: 2}
+  - tiles:
+    - {fileID: 11400000, guid: 5f9c9df60ba68774580fb34538c5bc8f, type: 2}
+    - {fileID: 11400000, guid: 3fe70017c89e34a48bb50abdd1361476, type: 2}
+    - {fileID: 11400000, guid: 4ffb663aced0c8641b071d3fe0cb682f, type: 2}
+  levels:
+  - 0.3
+  - 0.9
+  - 10
+  isWalkable: 000101

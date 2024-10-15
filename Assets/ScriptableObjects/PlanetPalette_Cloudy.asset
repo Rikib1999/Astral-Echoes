@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fa0059e436656249a66ec702f24e5fc, type: 3}
+  m_Name: PlanetPalette_Cloudy
+  m_EditorClassIdentifier: 
+  tileList:
+  - tiles:
+    - {fileID: 11400000, guid: e0f1dac1067bbbd44a5005e8793b0f42, type: 2}
+  - tiles:
+    - {fileID: 11400000, guid: 387895a67ddb3c04380fd05338704a95, type: 2}
+    - {fileID: 11400000, guid: a7921afb9857b01429658b9c0a36d45c, type: 2}
+    - {fileID: 11400000, guid: d20d176c0f8601b41ba16ff65c9d25c0, type: 2}
+    - {fileID: 11400000, guid: ab10df0e6dd07c843bb444c20cb4358f, type: 2}
+    - {fileID: 11400000, guid: ca835ee815d293a4f9e26357cd85216b, type: 2}
+    - {fileID: 11400000, guid: f6cebb36a2ce6fc4d92eed63b49d8517, type: 2}
+    - {fileID: 11400000, guid: 1b194a294fb95aa448d7a70ca216ddab, type: 2}
+    - {fileID: 11400000, guid: fb29bfc03f0e3b04e87adc642f20ec2f, type: 2}
+    - {fileID: 11400000, guid: 0021ef7e2f7cac644bdeed1ec2e99bae, type: 2}
+    - {fileID: 11400000, guid: 331a7ff50c2c9754695ae3c058272f16, type: 2}
+    - {fileID: 11400000, guid: e3159a27ccdc5f749832fd45620418d4, type: 2}
+  - tiles:
+    - {fileID: 11400000, guid: b238ad3d925bd7e4ebade286a28d7be0, type: 2}
+    - {fileID: 11400000, guid: 80bcb3e20c5c8234894b3a16d65091af, type: 2}
+    - {fileID: 11400000, guid: 24907e9d3e15b1246bbda7a9dd984b29, type: 2}
+  levels:
+  - 0.3
+  - 0.9
+  - 10
+  isWalkable: 000101

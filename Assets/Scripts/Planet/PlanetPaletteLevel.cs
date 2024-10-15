@@ -4,7 +4,7 @@ namespace Assets.Scripts.Planet
 {
     public struct PlanetPaletteLayer
     {
-        public Tile tile;
+        public Tile[] tiles;
         public float level;
     }
 }

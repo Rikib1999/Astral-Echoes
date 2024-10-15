@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fa0059e436656249a66ec702f24e5fc, type: 3}
+  m_Name: PlanetPalette_Aquamarine
+  m_EditorClassIdentifier: 
+  tileList:
+  - tiles:
+    - {fileID: 11400000, guid: f088a41317c5d1542b27d0cb2720abf6, type: 2}
+  - tiles:
+    - {fileID: 11400000, guid: aac1dfbaae491c545b3210acd6c65df4, type: 2}
+    - {fileID: 11400000, guid: 4bbf79e7f62386442bb50165fb5f9f16, type: 2}
+    - {fileID: 11400000, guid: deb43bc3ab8009f48ba584c3f8bc9a50, type: 2}
+    - {fileID: 11400000, guid: d3c110339e3f76d41a6aaa6acb8e4c5b, type: 2}
+    - {fileID: 11400000, guid: a6d4f255c3e45314f8523945271d98d8, type: 2}
+    - {fileID: 11400000, guid: 5a50ef1cf5d83fc429c2760d894d432f, type: 2}
+    - {fileID: 11400000, guid: 4463f3951f6ecf247ad8addc056a6b79, type: 2}
+    - {fileID: 11400000, guid: ca791c0d7f7faf343995c2eeb4b0684d, type: 2}
+    - {fileID: 11400000, guid: ccc0d318edee40840870d2a8031f3bc5, type: 2}
+    - {fileID: 11400000, guid: 0de25b6832a5b714e814a2a8a51233c2, type: 2}
+    - {fileID: 11400000, guid: 2b3161c88db581f4ab25f138d3002afc, type: 2}
+  - tiles:
+    - {fileID: 11400000, guid: 036456433f44f88429c541c514135859, type: 2}
+    - {fileID: 11400000, guid: 21767cdf68af08f43baa96068488f30b, type: 2}
+    - {fileID: 11400000, guid: 210544412e869e549911eea5a9f9a041, type: 2}
+  levels:
+  - 0.3
+  - 0.9
+  - 10
+  isWalkable: 000101
