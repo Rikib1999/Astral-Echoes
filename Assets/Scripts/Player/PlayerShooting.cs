@@ -8,7 +8,7 @@ public class PlayerShooting : NetworkBehaviour
     public NetworkObject bullet;
     public Transform firePoint;
     public float shootingTime;
-
+    public AudioSource bulletSource;
     public GameObject crosshair;
 
 
@@ -17,10 +17,12 @@ public class PlayerShooting : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         if(!IsOwner) //Disable this script if not owner
         { 
             enabled=false;
         }else{
+            bulletSource = GetComponent<AudioSource>();
             crosshair = GameObject.FindGameObjectWithTag("Crosshair");
             firePoint = gameObject.transform.Find("FirePosPlayer");
         }
@@ -51,6 +53,8 @@ public class PlayerShooting : NetworkBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             shoot();
+            Debug.Log("player shooting");
+            bulletSource.Play();
         }
 
     }

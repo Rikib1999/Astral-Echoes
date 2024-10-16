@@ -8,6 +8,8 @@ public class Shotgun : MonoBehaviour
     [SerializeField] Transform firePoint;
     [SerializeField] int numBullets = 4;
     [SerializeField] float spreadAngle = 30f;
+    [SerializeField] AudioSource audioSource;
+
 
     void Update()
     {
@@ -19,6 +21,7 @@ public class Shotgun : MonoBehaviour
 
     void Shoot()
     {
+        audioSource.Play();
         for (int i = 0; i < numBullets; i++)
         {
             float randomAngle = Random.Range(-spreadAngle, spreadAngle);

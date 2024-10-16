@@ -7,20 +7,22 @@ public class RifleController : NetworkBehaviour
     [SerializeField] Transform firePoint;
     [SerializeField] float fireRate = 0.1f;
     private float nextFireTime = 0f;
+    [SerializeField] AudioSource audioSource;
 
     void Update()
     {
         if (Input.GetButton("Fire1") && Time.time >= nextFireTime)
         {
             Shoot();
+
             nextFireTime = Time.time + fireRate;
         }
     }
 
     void Shoot()
     {
-
-        if(IsServer){
+        audioSource.Play();
+        if (IsServer){
             var playerNetworkObject = NetworkManager.SpawnManager.InstantiateAndSpawn(bulletPrefab,NetworkManager.ServerClientId,true,false,true,firePoint.position,firePoint.rotation);
         }else{
             SpawnBulletServerRpc();

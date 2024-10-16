@@ -22,8 +22,10 @@ public class Controller : NetworkBehaviour
     Animator animator;
     private Vector3 lastMousePosition;
     private int activeGunIndex = 0; // Index of the currently active gun
-
+    AudioSource audioSource;
+    [SerializeField] AudioSource dashAudioSource;
     private CameraFollow playerCamera;
+    SpriteRenderer spriteRenderer;
 
     // Called on client join
     public override void OnNetworkSpawn()
@@ -44,6 +46,8 @@ public class Controller : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();    
+        audioSource = GetComponent<AudioSource>();  
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         lastMousePosition = Input.mousePosition;
@@ -86,8 +90,27 @@ public class Controller : NetworkBehaviour
         // Update movement input
         dirX = Input.GetAxisRaw("Horizontal");
         dirY = Input.GetAxis("Vertical");
-        if (dirX * moveSpeed != 0 || dirY * moveSpeed != 0) animator.SetBool("isWalking", true);
-        else animator.SetBool("isWalking", false);
+
+        if (dirX * moveSpeed != 0 || dirY * moveSpeed != 0)
+        {
+            animator.SetBool("isWalking", true);
+
+            // Play walking sound if not already playing
+            if (!audioSource.isPlaying)
+            {
+                audioSource.Play();
+            }
+        }
+        else
+        {
+            animator.SetBool("isWalking", false);
+
+            // Stop the sound when the player stops walking
+            if (audioSource.isPlaying)
+            {
+                audioSource.Stop();
+            }
+        }
 
         // Dash input
         if (Input.GetKeyDown(KeyCode.LeftShift) && Time.time >= lastDashTime + dashCooldown)
@@ -109,6 +132,7 @@ public class Controller : NetworkBehaviour
             SwitchGun(2);
         }
     }
+
 
     private void FixedUpdate()
     {
@@ -153,12 +177,27 @@ public class Controller : NetworkBehaviour
         isDashing = true;
         dashTime = Time.time;
         lastDashTime = Time.time;
+        dashAudioSource.Play();
+
+        // Set alpha to 50% (semi-transparent) at the start of the dash
+        ChangeAlpha(0.5f);
 
         Vector2 dashDirection = new Vector2(dirX, dirY).normalized;
         rb.velocity = dashDirection * dashSpeed;
 
         yield return new WaitForSeconds(dashDuration);
 
+        // Reset alpha to fully visible after the dash
+        ChangeAlpha(1f);
+
         isDashing = false;
+    }
+
+    // Method to change the player's sprite alpha
+    private void ChangeAlpha(float alphaValue)
+    {
+        Color color = spriteRenderer.color;
+        color.a = alphaValue; // Change only the alpha, keeping the rest of the color
+        spriteRenderer.color = color;
     }
 }
