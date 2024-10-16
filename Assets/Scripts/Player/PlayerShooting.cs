@@ -18,7 +18,7 @@ public class PlayerShooting : NetworkBehaviour
     void Start()
     {
         if(!IsOwner) //Disable this script if not owner
-        {
+        { 
             enabled=false;
         }else{
             crosshair = GameObject.FindGameObjectWithTag("Crosshair");
@@ -53,11 +53,6 @@ public class PlayerShooting : NetworkBehaviour
             shoot();
         }
 
-        
-
-
-
-
     }
 
 
@@ -66,7 +61,6 @@ public class PlayerShooting : NetworkBehaviour
         //Instantiate(bullet, firePoint.position, Quaternion.identity);
         if(IsServer){
             var playerNetworkObject = NetworkManager.SpawnManager.InstantiateAndSpawn(bullet,NetworkManager.ServerClientId,true,false,true,firePoint.position,Quaternion.identity);
-            playerNetworkObject.GetComponent<PlayerBulletControl>().crosshair_pos = crosshair.transform.position;
         }else{
             SpawnBulletServerRpc(firePoint.position,crosshair.transform.position);
         }
@@ -75,7 +69,6 @@ public class PlayerShooting : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     void SpawnBulletServerRpc(Vector3 bullet_pos,Vector3 target,ServerRpcParams serverRpcParams = default){
         var playerNetworkObject = NetworkManager.SpawnManager.InstantiateAndSpawn(bullet,serverRpcParams.Receive.SenderClientId,true,false,true,bullet_pos,Quaternion.identity);
-        playerNetworkObject.GetComponent<PlayerBulletControl>().crosshair_pos = target;
     }
 
 

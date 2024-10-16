@@ -4,72 +4,57 @@ using UnityEngine;
 
 public class PlayerBulletControl : MonoBehaviour
 {
-    //private GameObject player;
     private Rigidbody2D rb;
-    public Vector3 crosshair_pos;
+    [SerializeField] float speed = 10f;
+    [SerializeField] int bulletDamage = 0;
+    [SerializeField] string enemyTag;
 
+    private Vector2 bulletDirection; // Store the initial direction of the bullet
 
-    public float force = 8;
-    public float timer;
-
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
+        Transform player = GameObject.FindGameObjectWithTag("Player").transform;
 
-        rb = GetComponent<Rigidbody2D>();
-        //player = GameObject.FindGameObjectWithTag("Player");
-        //crosshair = GameObject.FindGameObjectWithTag("Crosshair"); //Set during instantiation
-
-        Vector3 direction = crosshair_pos - transform.position;
-
-        rb.velocity = new Vector2(direction.x, direction.y).normalized * force;
-
-        float rot = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
-
-        transform.rotation = Quaternion.Euler(0, 0, rot + 90);
-
+        // Calculate the initial direction based on the player's facing direction
+        if (player.localScale.x < 0)
+            bulletDirection = Vector2.left;  // If player is facing left
+        else
+            bulletDirection = Vector2.right; // If player is facing right
     }
 
-    // Update is called once per frame
     void Update()
     {
-
-        timer += Time.deltaTime;
-
-        if (timer >= 10)
-        {
-            Destroy(gameObject);
-        }
-
+        // Move the bullet in the initial direction
+        transform.Translate(bulletDirection * speed * Time.deltaTime);
     }
 
 
+    // Detect collision with an enemy
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            GetDamage(other.gameObject);
-            Destroy(gameObject);
+            GetDamage(other.gameObject); // Apply damage to the enemy
+            Destroy(gameObject); // Destroy the bullet
         }
-        Debug.Log("Hit enemy");
-
     }
-    
+    private void OnBecameInvisible()
+    {
+        Destroy(gameObject); // Destroy the bullet when it goes off-screen
+    }
+
+    // Apply damage to the enemy when hit
     void GetDamage(GameObject enemy)
     {
         EnemyShipHealth eshipHealth = enemy.GetComponent<EnemyShipHealth>();
-    
-        if(eshipHealth != null)
+
+        if (eshipHealth != null)
         {
-            eshipHealth.damage(5);
+            eshipHealth.damage(5); // Apply damage (5 points in this case)
         }
         else
         {
             Debug.Log("EnemyShipHealth is null");
         }
-    
     }
-
-
-
 }

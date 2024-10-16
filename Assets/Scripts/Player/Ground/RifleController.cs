@@ -20,7 +20,6 @@ public class RifleController : NetworkBehaviour
     void Shoot()
     {
 
-        //Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         if(IsServer){
             var playerNetworkObject = NetworkManager.SpawnManager.InstantiateAndSpawn(bulletPrefab,NetworkManager.ServerClientId,true,false,true,firePoint.position,firePoint.rotation);
         }else{

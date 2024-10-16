@@ -127,16 +127,13 @@ public class Controller : NetworkBehaviour
 
     private void RotateWeapon()
     {
-        // Get the position of the crosshair
+
         Vector3 targetPosition = crosshair.transform.position;
 
-        // Get the direction from the active gun's muzzle to the crosshair
         Vector3 direction = targetPosition - guns[activeGunIndex].position;
 
-        // Calculate the rotation angle in degrees
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-        // Flip the gun along the X axis if it's on the left side
         if (!facingRight)
         {
             angle += 180f;
