@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//public enum EnemyW { walking, attacking, dead }
 
-public enum Enemy { walking, attacking, dead }
-
-public class EnemyAI : MonoBehaviour
+public class EnemyAIPunch : MonoBehaviour
 {
     public float moveSpeed = 1f;
     public float detectionRange = 5f;
@@ -25,14 +24,14 @@ public class EnemyAI : MonoBehaviour
 
 
     //MB added shooting enemy
-    public float shootingTime;
+   /* public float shootingTime;
 
     private float timeBtwShots;
 
     public GameObject bullet;
     public Transform firePoint;
     public float shootrange = 5f;
-
+   */
 
 
     void Start()
@@ -46,10 +45,12 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
+
+        
         if (isChasing)
         {
-            //ChasePlayer();
-            StopAndShoot();
+            ChasePlayer();
+            //StopAndShoot();
         }
         else
         {
@@ -61,6 +62,7 @@ public class EnemyAI : MonoBehaviour
 
     private void FixedUpdate()
     {
+        Debug.Log(enemyState);
         if (enemyState == Enemy.walking)
         {
             animator.SetBool("isWalking", true);
@@ -103,10 +105,13 @@ public class EnemyAI : MonoBehaviour
 
     void ChasePlayer()
     {
+
+        
         if (Vector2.Distance(transform.position, player.transform.position) < attackRange && player!=null)
         {
             if (Time.time >= lastAttackTime + attackCooldown)
             {
+                Debug.Log("AttackPlayer");
                 AttackPlayer();
                 lastAttackTime = Time.time;
             }
@@ -119,7 +124,7 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-
+    /*
     void StopAndShoot()
     {
         if (Vector2.Distance(transform.position, player.transform.position) < shootrange && player != null)
@@ -156,14 +161,31 @@ public class EnemyAI : MonoBehaviour
             timeBtwShots = 0;
             Instantiate(bullet, firePoint.position, Quaternion.identity);
         }
-    }
+    }*/
 
     void AttackPlayer()
     {
         enemyState = Enemy.attacking;
         FlipTowardsPlayer();
         // Implement attack logic here
+        PunchDamage(player);
+
+
         Debug.Log("Attack!");
+    }
+
+    void PunchDamage(GameObject player)
+    {
+        PlayerLogic playerLogic = player.GetComponent<PlayerLogic>();
+
+        if (playerLogic != null)
+        {
+            playerLogic.damage(5); // Apply damage (5 points in this case)
+        }
+        else
+        {
+            Debug.Log("PlayerLogic is null");
+        }
     }
 
     void FlipTowardsPlayer()

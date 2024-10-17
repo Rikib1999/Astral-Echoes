@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class EnemyBulletScript : MonoBehaviour
+public class EnemyBulletScriptPlanet : MonoBehaviour
 {
     private GameObject player;
     private Rigidbody2D rb;
@@ -62,14 +62,14 @@ public class EnemyBulletScript : MonoBehaviour
 
     void GetDamaged(GameObject player)
     {
-        //PlayerLogic playerLogic = player.GetComponent<PlayerLogic>();
-        ShipHealth shipHealth = player.GetComponent<ShipHealth>();
+        PlayerLogic playerLogic = player.GetComponent<PlayerLogic>();
+        //ShipHealth shipHealth = player.GetComponent<ShipHealth>();
         
 
-        if(shipHealth != null)
+        if(playerLogic != null)
         {
-           
-            shipHealth.damage(5);
+
+            playerLogic.damage(5);
         
 
         }
