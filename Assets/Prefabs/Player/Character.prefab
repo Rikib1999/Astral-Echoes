@@ -108,7 +108,7 @@ Transform:
   - {fileID: 6448858459872644164}
   - {fileID: 5620503712440490582}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4511388142669456115
 SpriteRenderer:
@@ -399,7 +399,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 949277683
+  GlobalObjectIdHash: 941972308
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -483,7 +483,7 @@ MonoBehaviour:
   firePoint: {fileID: 6448858459872644164}
   shootingTime: 0
   bulletSource: {fileID: 5901091484928540354}
-  crosshair: {fileID: 0}
+  crosshair: {fileID: 7268092818745831833}
 --- !u!114 &6920983849493788688
 MonoBehaviour:
   m_ObjectHideFlags: 0
