@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class ShipHealth : MonoBehaviour
@@ -7,7 +8,8 @@ public class ShipHealth : MonoBehaviour
     private int health;
     private int shield;
     private float fuel;
-    private float fuelConsumptionRate = 20f;
+    public float fuelConsumptionRate = 5f;
+    public static ShipHealth Instance;
     [SerializeField] int maxHealth;
     [SerializeField] int maxShield;
     [SerializeField] float maxFuel;
@@ -17,6 +19,10 @@ public class ShipHealth : MonoBehaviour
         health = maxHealth;
         shield = maxShield;
         fuel = maxFuel;
+    }
+    private void Awake()
+    {
+        Instance = this;
     }
 
     private void Update()
@@ -40,6 +46,12 @@ public class ShipHealth : MonoBehaviour
     public float getFuel()
     {
         return fuel;
+    }
+
+    public void IncreaseFuel(float fill)
+    {
+        fuel += fill;
+
     }
 
     public void damage(int damage)

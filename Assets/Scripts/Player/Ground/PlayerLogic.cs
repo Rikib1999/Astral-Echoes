@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerLogic : MonoBehaviour
 {
+    public static PlayerLogic Instance;
     private int health;
     [SerializeField] int maxHealth;
 
@@ -11,6 +12,23 @@ public class PlayerLogic : MonoBehaviour
     {
         health = maxHealth;
     }
+
+    public void Update()
+    {
+        //Debug.Log(health);
+    }
+
+    public void Awake()
+    {
+        Instance = this;
+    }
+
+    public void IncreaseHealth(int value)
+    {
+        health += value;
+        Debug.Log(health);
+    }
+
     public void damage(int damage)
     {
 
