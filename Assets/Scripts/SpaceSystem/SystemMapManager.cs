@@ -15,9 +15,11 @@ namespace Assets.Scripts
         [SerializeField] private GameObject planetPrefab;
         [SerializeField] private GameObject gasGiantPrefab;
 
+        [SerializeField] private EnemySpawner enemySpawner;
+
         [SerializeField] private UnityEditor.SceneAsset system_map_scene;
 
-        private const float scaleUpConst = 10;
+        public const float scaleUpConst = 10;
 
         public static SystemDataBag SystemDataBag { get; set; }
 
