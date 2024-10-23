@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 
@@ -12,4 +13,15 @@ public class Item : ScriptableObject
     public int value;
     public Sprite icon;
     public bool craftable;
+    public ItemType itemType;
+
+    public enum ItemType
+    {
+        Resource,
+        Fuel,
+        Potion
+    }
+
 }
+
+

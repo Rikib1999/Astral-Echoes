@@ -11,12 +11,17 @@ public class InventoryManager : MonoBehaviour
     public Transform itemContent;
     public GameObject inventoryItem;
 
+    public InventoryItemController[] inventoryItemsController;
+    public void Update()
+    {
+        //ListItems();
+    }
+
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
+       
+       Instance = this;
+        
     }
 
     public void AddItem(Item item)
@@ -29,14 +34,17 @@ public class InventoryManager : MonoBehaviour
         items.Remove(item);
     }
 
-
-    public void ListItems()
+    public void RemoveDuplicate()
     {
         foreach (Transform item in itemContent)
         {
             Destroy(item.gameObject);
         }
 
+    }
+
+    public void ListItems()
+    {
 
         foreach (var item in items)
         {
@@ -46,6 +54,20 @@ public class InventoryManager : MonoBehaviour
 
             ItemName.text = item.itemName;
             ItemIcon.sprite = item.icon;
+        }
+
+        SetInventoryItems();
+    }
+
+ 
+    public void SetInventoryItems()
+    {
+
+        inventoryItemsController = itemContent.GetComponentsInChildren<InventoryItemController>();
+
+        for(int i = 0; i<items.Count; i++)
+        {
+            inventoryItemsController[i].AddItem(items[i]);
         }
     }
 }
