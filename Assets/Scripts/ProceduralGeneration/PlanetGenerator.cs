@@ -5,7 +5,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class PlanetGenerator : ChunkGenerator<Chunk>
+public class PlanetGenerator : ChunkGenerator<PlanetChunk>
 {
     private readonly float scale = 0.5f;
 
@@ -15,6 +15,7 @@ public class PlanetGenerator : ChunkGenerator<Chunk>
 
     [SerializeField] private Tilemap tilemap;
     [SerializeField] private PlanetPalettesList planetPalettesList;
+    [SerializeField] private GameObject[] enemyPrefabs;
 
     private PlanetPaletteBag planetPaletteBag;
 
@@ -53,7 +54,7 @@ public class PlanetGenerator : ChunkGenerator<Chunk>
         }
     }
 
-    protected override void DeleteChunk(Chunk chunk)
+    protected override void DeleteChunk(PlanetChunk chunk)
     {
         for (int y = -ChunkRadius; y <= ChunkRadius; y++)
         {
@@ -62,10 +63,22 @@ public class PlanetGenerator : ChunkGenerator<Chunk>
                 tilemap.SetTile(new Vector3Int((ChunkSize * chunk.Coords.x) + x, (ChunkSize * chunk.Coords.y) + y, 0), null);
             }
         }
+
+        if (chunk.Enemies == null) return;
+
+        foreach (var obj in chunk.Enemies) Destroy(obj);
+
+        chunk.Enemies = null;
     }
 
-    protected override Chunk GenerateChunk(Vector2Int coords)
+    protected override PlanetChunk GenerateChunk(Vector2Int coords)
     {
+        PlanetChunk chunk = new()
+        {
+            Coords = coords,
+            Enemies = new()
+        };
+
         for (int y = -ChunkRadius; y <= ChunkRadius; y++)
         {
             for (int x = -ChunkRadius; x <= ChunkRadius; x++)
@@ -86,11 +99,20 @@ public class PlanetGenerator : ChunkGenerator<Chunk>
                 }
 
                 int i = (int)(Math.Abs(noiseValue) * 100) % layer.tiles.Length;
+                var tile = layer.tiles[i];
 
-                tilemap.SetTile(new Vector3Int((ChunkSize * coords.x) + x, (ChunkSize * coords.y) + y, 0), layer.tiles[i]);
+                tilemap.SetTile(new Vector3Int((ChunkSize * coords.x) + x, (ChunkSize * coords.y) + y, 0), tile);
+
+                if (tile.colliderType == Tile.ColliderType.None)
+                {
+                    if (UnityEngine.Random.Range(0, 100) % 7 == 0)
+                    {
+                        Instantiate(enemyPrefabs[UnityEngine.Random.Range(0, enemyPrefabs.Length)], new Vector3Int((ChunkSize * coords.x) + x, (ChunkSize * coords.y) + y, -1), Quaternion.identity);
+                    }
+                }
             }
         }
 
-        return new() { Coords = coords };
+        return chunk;
     }
 }

@@ -262,6 +262,9 @@ MonoBehaviour:
   player: {fileID: 2710943257060632749}
   tilemap: {fileID: 968884254}
   planetPalettesList: {fileID: 11400000, guid: f4598a697cf2d284f86e4f3476fcb1fc, type: 2}
+  enemyPrefabs:
+  - {fileID: 6548424145853133787, guid: 16869dd84c8708d4ca4c9977f013a5ad, type: 3}
+  - {fileID: 2045180046827259553, guid: 26249c141ef3caf46be277c28baa9627, type: 3}
 --- !u!4 &813323101
 Transform:
   m_ObjectHideFlags: 0
@@ -642,6 +645,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 2835332959312534908, guid: 08a9d5641844c80468c66281f5ad623c, type: 3}
   firePoint: {fileID: 8391355176042550136}
   pistolFireRate: 0.5
+  audioSource: {fileID: 0}
 --- !u!4 &1167964215416093397
 Transform:
   m_ObjectHideFlags: 0
@@ -1036,6 +1040,7 @@ MonoBehaviour:
   dashCooldown: 1
   dirX: 0
   dirY: 0
+  dashAudioSource: {fileID: 0}
 --- !u!212 &4143521948647199004
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1195,6 +1200,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 2835332959312534908, guid: 08a9d5641844c80468c66281f5ad623c, type: 3}
   firePoint: {fileID: 6996684725696977526}
   fireRate: 0.1
+  audioSource: {fileID: 0}
 --- !u!1 &5725425977266945128
 GameObject:
   m_ObjectHideFlags: 0
@@ -1437,6 +1443,7 @@ MonoBehaviour:
   firePoint: {fileID: 7820898449108306118}
   numBullets: 5
   spreadAngle: 40
+  audioSource: {fileID: 0}
 --- !u!4 &7820898449108306118
 Transform:
   m_ObjectHideFlags: 0
