@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.UI; // Required for UI elements
 using Assets.Scripts.Player;
 
 public class Controller : NetworkBehaviour
@@ -13,52 +14,55 @@ public class Controller : NetworkBehaviour
     [SerializeField] float dashSpeed = 10f;
     [SerializeField] float dashDuration = 0.2f;
     [SerializeField] float dashCooldown = 1f;
-    [SerializeField] float dirX = 0;
-    [SerializeField] float dirY = 0;
-    bool facingRight = true;
-    bool isDashing = false;
-    float dashTime = 0;
-    float lastDashTime = -10f;
-    Animator animator;
-    private Vector3 lastMousePosition;
-    private int activeGunIndex = 0; // Index of the currently active gun
-    AudioSource audioSource;
-    [SerializeField] AudioSource dashAudioSource;
-    private CameraFollow playerCamera;
-    SpriteRenderer spriteRenderer;
+    [SerializeField] int maxHealth = 100; // Max player health
+    [SerializeField] Slider healthBar; // Health UI element
+    [SerializeField] Slider dashBar; // Dash UI element
 
-    // Called on client join
+    private float dirX = 0;
+    private float dirY = 0;
+    private int currentHealth;
+    private bool facingRight = true;
+    private bool isDashing = false;
+    private float lastDashTime = -10f;
+    private Animator animator;
+    private int activeGunIndex = 0; // Index of the currently active gun
+    private AudioSource audioSource;
+    [SerializeField] AudioSource dashAudioSource;
+    private SpriteRenderer spriteRenderer;
+    private CameraFollow playerCamera;
+
     public override void OnNetworkSpawn()
     {
-        if(!IsOwner) //Disable this script if not owner
+        if (!IsOwner) // Disable this script if not owner
         {
-            //Destroy(this);
-            enabled=false;
+            enabled = false;
             crosshair.SetActive(false);
         }
-        else //Set the camera to follow
+        else // Set the camera to follow
         {
             playerCamera = FindObjectOfType<CameraFollow>();
             playerCamera.Target = this.transform;
         }
     }
 
-    // Start is called before the first frame update
     void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();    
-        audioSource = GetComponent<AudioSource>();  
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        lastMousePosition = Input.mousePosition;
+        currentHealth = maxHealth;
+
+        // Initialize UI values
+        healthBar.maxValue = maxHealth;
+        healthBar.value = currentHealth;
+        dashBar.maxValue = dashCooldown;
+        dashBar.value = dashCooldown;
 
         // Deactivate all guns except the first one
         for (int i = 0; i < guns.Length; i++)
         {
-            if (i != activeGunIndex)
-            {
-                guns[i].gameObject.SetActive(false);
-            }
+            guns[i].gameObject.SetActive(i == activeGunIndex);
         }
     }
 
@@ -70,14 +74,7 @@ public class Controller : NetworkBehaviour
         crosshair.transform.position = mousePosition;
 
         // Determine if the mouse has moved left or right
-        if (crosshair.transform.position.x > transform.position.x)
-        {
-            facingRight = true;
-        }
-        else if (crosshair.transform.position.x < transform.position.x)
-        {
-            facingRight = false;
-        }
+        facingRight = crosshair.transform.position.x > transform.position.x;
 
         // Flip the player sprite accordingly
         if (facingRight && transform.localScale.x < 0 || !facingRight && transform.localScale.x > 0)
@@ -91,26 +88,18 @@ public class Controller : NetworkBehaviour
         dirX = Input.GetAxisRaw("Horizontal");
         dirY = Input.GetAxis("Vertical");
 
-        if (dirX * moveSpeed != 0 || dirY * moveSpeed != 0)
-        {
-            animator.SetBool("isWalking", true);
+        // Update walking animation and sound
+        bool isWalking = dirX * moveSpeed != 0 || dirY * moveSpeed != 0;
+        animator.SetBool("isWalking", isWalking);
 
-            // Play walking sound if not already playing
-            if (!audioSource.isPlaying)
-            {
-                audioSource.Play();
-            }
-        }
-        else
+        if (isWalking)
         {
-            animator.SetBool("isWalking", false);
-
-            // Stop the sound when the player stops walking
-            if (audioSource.isPlaying)
-            {
-                audioSource.Stop();
-            }
+            if (!audioSource.isPlaying) audioSource.Play();
         }
+        else if (audioSource.isPlaying) audioSource.Stop();
+
+        // Update dash cooldown UI
+        dashBar.value = Mathf.Clamp(Time.time - lastDashTime, 0, dashCooldown);
 
         // Dash input
         if (Input.GetKeyDown(KeyCode.LeftShift) && Time.time >= lastDashTime + dashCooldown)
@@ -133,7 +122,6 @@ public class Controller : NetworkBehaviour
         }
     }
 
-
     private void FixedUpdate()
     {
         if (!isDashing)
@@ -151,17 +139,11 @@ public class Controller : NetworkBehaviour
 
     private void RotateWeapon()
     {
-
         Vector3 targetPosition = crosshair.transform.position;
-
         Vector3 direction = targetPosition - guns[activeGunIndex].position;
-
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-        if (!facingRight)
-        {
-            angle += 180f;
-        }
+        if (!facingRight) angle += 180f;
         guns[activeGunIndex].rotation = Quaternion.Euler(0f, 0f, angle);
     }
 
@@ -175,7 +157,6 @@ public class Controller : NetworkBehaviour
     private IEnumerator Dash()
     {
         isDashing = true;
-        dashTime = Time.time;
         lastDashTime = Time.time;
         dashAudioSource.Play();
 
@@ -199,5 +180,17 @@ public class Controller : NetworkBehaviour
         Color color = spriteRenderer.color;
         color.a = alphaValue; // Change only the alpha, keeping the rest of the color
         spriteRenderer.color = color;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        healthBar.value = currentHealth;
+
+        if (currentHealth <= 0)
+        {
+            // Handle player death
+        }
     }
 }
