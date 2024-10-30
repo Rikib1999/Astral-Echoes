@@ -9,6 +9,12 @@ public class RifleController : NetworkBehaviour
     private float nextFireTime = 0f;
     [SerializeField] AudioSource audioSource;
 
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+        gameObject.SetActive(false);
+    }
+
     void Update()
     {
         if (Input.GetButton("Fire1") && Time.time >= nextFireTime)

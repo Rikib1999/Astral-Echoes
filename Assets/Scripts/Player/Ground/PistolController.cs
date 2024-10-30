@@ -1,6 +1,7 @@
 using UnityEngine;
+using Unity.Netcode;
 
-public class ShotgunController : MonoBehaviour
+public class ShotgunController : NetworkBehaviour
 {
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] Transform firePoint;

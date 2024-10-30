@@ -24,7 +24,7 @@ public class PlayerShooting : NetworkBehaviour
         }else{
             bulletSource = GetComponent<AudioSource>();
             crosshair = GameObject.FindGameObjectWithTag("Crosshair");
-            firePoint = gameObject.transform.Find("FirePosPlayer");
+            //firePoint = gameObject.transform.Find("FirePosPlayer");
         }
 
     }
