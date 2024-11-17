@@ -8,6 +8,7 @@ TagManager:
   - Crosshair
   - ShipWall
   - CraftTable
+  - PlanetResource
   layers:
   - Default
   - TransparentFX

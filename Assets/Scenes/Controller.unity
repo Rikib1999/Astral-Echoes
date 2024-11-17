@@ -2064,6 +2064,7 @@ MonoBehaviour:
   maxHealth: 100
   healthBar: {fileID: 0}
   dashBar: {fileID: 0}
+  dashAudioSource: {fileID: 0}
 --- !u!50 &2007009888
 Rigidbody2D:
   serializedVersion: 4
@@ -2126,7 +2127,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.49999997, y: 0.1363355}
     oldSize: {x: 5.8514285, y: 5.8514285}
     newSize: {x: 5.8514285, y: 5.8514285}
     adaptiveTilingThreshold: 0.5
@@ -2406,6 +2407,10 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 949277683
       objectReference: {fileID: 0}
+    - target: {fileID: 708647709542015462, guid: bcca8a56055043f4b942c307524761d8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2031403605423719854, guid: bcca8a56055043f4b942c307524761d8, type: 3}
       propertyPath: dashBar
       value: 
@@ -2422,10 +2427,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2969704927360156466, guid: bcca8a56055043f4b942c307524761d8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4609214943306674748, guid: bcca8a56055043f4b942c307524761d8, type: 3}
       propertyPath: bullet
       value: 
       objectReference: {fileID: 4299907772752605265, guid: 08a9d5641844c80468c66281f5ad623c, type: 3}
+    - target: {fileID: 5870597359928102899, guid: bcca8a56055043f4b942c307524761d8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6448858459872644164, guid: bcca8a56055043f4b942c307524761d8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8819029552903902162, guid: bcca8a56055043f4b942c307524761d8, type: 3}
       propertyPath: m_RootOrder
       value: 3

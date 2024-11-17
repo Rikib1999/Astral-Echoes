@@ -1,3 +1,4 @@
+using Assets.Scripts.PlanetResources;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -5,6 +6,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] float speed = 10f;
     [SerializeField] int bulletDamage = 0;
     [SerializeField] string enemyTag;
+    [SerializeField] string resourceTag;
 
     private Vector2 bulletDirection; // Store the initial direction of the bullet
 
@@ -35,6 +37,10 @@ public class Bullet : MonoBehaviour
         if (collision.gameObject.CompareTag(enemyTag))
         {
             collision.gameObject.GetComponent<EnemyLogic>().damage(bulletDamage); // Deal damage to the enemy
+        }
+        else if (collision.gameObject.CompareTag(resourceTag))
+        {
+            collision.gameObject.GetComponent<ResourceDrop>().Damage(bulletDamage); // Deal damage to the enemy
         }
         Destroy(gameObject); // Destroy the bullet on collision
     }

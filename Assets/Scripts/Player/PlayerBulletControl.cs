@@ -1,3 +1,4 @@
+using Assets.Scripts.PlanetResources;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -37,7 +38,13 @@ public class PlayerBulletControl : MonoBehaviour
             GetDamage(other.gameObject); // Apply damage to the enemy
             Destroy(gameObject); // Destroy the bullet
         }
+        else if (other.gameObject.CompareTag("PlanetResource"))
+        {
+            other.gameObject.GetComponent<ResourceDrop>().Damage(bulletDamage); // Deal damage to the enemy
+            Destroy(gameObject); // Destroy the bullet
+        }
     }
+
     private void OnBecameInvisible()
     {
         Destroy(gameObject); // Destroy the bullet when it goes off-screen

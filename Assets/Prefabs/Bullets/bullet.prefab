@@ -138,9 +138,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29438ee931bf1da45b7867554e5d3aea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crosshair_pos: {x: 0, y: 0, z: 0}
-  force: 5
-  timer: 1
+  speed: 10
+  bulletDamage: 5
+  enemyTag: 
 --- !u!50 &-6181618205923404538
 Rigidbody2D:
   serializedVersion: 4
@@ -245,5 +245,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  bulletDamage: 0
+  bulletDamage: 5
   enemyTag: enemy
+  resourceTag: PlanetResource

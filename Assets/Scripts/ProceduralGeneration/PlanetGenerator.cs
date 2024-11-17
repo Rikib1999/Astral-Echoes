@@ -117,7 +117,7 @@ public class PlanetGenerator : ChunkGenerator<PlanetChunk>
 
                 tilemap.SetTile(new Vector3Int((ChunkSize * coords.x) + x, (ChunkSize * coords.y) + y, 0), tile);
 
-                if (tile.colliderType == Tile.ColliderType.Sprite && UnityEngine.Random.Range(0, 300) == 123)
+                if (/*tile.colliderType == Tile.ColliderType.Sprite && */UnityEngine.Random.Range(0, 300) == 123)
                 {
                     Instantiate(enemyPrefabs[UnityEngine.Random.Range(0, enemyPrefabs.Length)], new Vector3Int((ChunkSize * coords.x) + x, (ChunkSize * coords.y) + y, -1), Quaternion.identity);
                 }
