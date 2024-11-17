@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36d8bd3c4ceb5024b93f9eb876f7daec, type: 3}
+  m_Name: PlanetResourcesList
+  m_EditorClassIdentifier: 
+  trees:
+  - {fileID: 11400000, guid: 92b014fef28b31344ac1b6f03a6711a9, type: 2}
+  - {fileID: 11400000, guid: 86ad2e4aca6bd8543b695bf73cc916bf, type: 2}
+  - {fileID: 11400000, guid: 7cd6b2a1f26cc434bbabd4a117537a49, type: 2}
+  - {fileID: 11400000, guid: da2620cbc9c073d479be077ad5dc8da1, type: 2}
+  - {fileID: 11400000, guid: 99db7a9803ec9ec42a1d2b5785ec4728, type: 2}
+  - {fileID: 11400000, guid: 2d28d4706f4f3314eb67ce879c133027, type: 2}
+  - {fileID: 11400000, guid: fca1b2839ed0b5e409d3efc9b787eb73, type: 2}
+  - {fileID: 11400000, guid: e60b5fe6a5a0ec04f9d50018f0887858, type: 2}
+  - {fileID: 11400000, guid: 35421ecc7a41fff43afa323d9802ca44, type: 2}
+  - {fileID: 11400000, guid: 80215a9b1ee68534fbd13f77688a5c73, type: 2}
+  - {fileID: 11400000, guid: 79b9aafeb9105a445b0f0bdf580d1005, type: 2}
+  bushes:
+  - {fileID: 11400000, guid: 4ba8825570e6eb24590619a303873e7f, type: 2}
+  - {fileID: 11400000, guid: c406a4aeb1f44e245b90a01a71282251, type: 2}
+  - {fileID: 11400000, guid: 52b6cf91a2eb6bd4c99edfbbb2bc10e1, type: 2}
+  - {fileID: 11400000, guid: fd9542ec0cc6f5b49887238fcc002fb8, type: 2}
+  - {fileID: 11400000, guid: aa8ddba8077c9884cbf30aeb0d3857f1, type: 2}
+  - {fileID: 11400000, guid: 745356758f19a284f8d536821b5f3bf6, type: 2}
+  - {fileID: 11400000, guid: 1a177eeae5fa06646b88fea6d6146387, type: 2}
+  - {fileID: 11400000, guid: 159727b5f4182eb4286ef75c9c016c59, type: 2}
+  - {fileID: 11400000, guid: 39893de838334f143ab99a13aa940b31, type: 2}
+  - {fileID: 11400000, guid: c84e68d07fa49724fafcfcde3ffa1ec2, type: 2}
+  - {fileID: 11400000, guid: 2bae77eca60be8f49a7b1d8daf4963a4, type: 2}
+  - {fileID: 11400000, guid: 7e898fa1ce62aec45bfcfbe425f6cd18, type: 2}
+  - {fileID: 11400000, guid: 48e29548910f2e244a7fb130c845a3c0, type: 2}
+  - {fileID: 11400000, guid: 5683eb575a4f855488a4eb41f96dc361, type: 2}
+  stones:
+  - {fileID: 11400000, guid: 36fee916189f35f41aaf0c4029b4a837, type: 2}
+  - {fileID: 11400000, guid: cea45137d62c08a4f95f1543e6450721, type: 2}
+  - {fileID: 11400000, guid: 26b56d86505c28f439190e47f48278fe, type: 2}
+  - {fileID: 11400000, guid: 8244c931ad720214b90d2f5fb08ece06, type: 2}
+  - {fileID: 11400000, guid: 2a39a120d94e178469c933500c9fd1c1, type: 2}
+  - {fileID: 11400000, guid: f506c05937607ec49ad8e4f5b3149a4d, type: 2}
+  - {fileID: 11400000, guid: 32401c249a4734549b63cdacf2ae4686, type: 2}
+  - {fileID: 11400000, guid: 48f9bac9723cc6148a60f81ff8a11764, type: 2}
+  crystals:
+  - {fileID: 11400000, guid: eb2e7776af704ff40928fa66655ac1de, type: 2}
+  - {fileID: 11400000, guid: abcc03ec0120bfc4daf404854ff9c2d2, type: 2}
+  - {fileID: 11400000, guid: 50a5c7a5615befc48b9b84f5557fad54, type: 2}
+  - {fileID: 11400000, guid: bb208a0eb1cd5964d803ee59f3067e74, type: 2}
+  - {fileID: 11400000, guid: 3570fce99a6d4bf489516fc108761320, type: 2}
+  - {fileID: 11400000, guid: 4b5037a256fe2844eb498bdecb8fed96, type: 2}
+  - {fileID: 11400000, guid: 08d4a2587d253a04fb56af292ae36f76, type: 2}
+  - {fileID: 11400000, guid: f6cda6b959e1d7f4eb61f7fde52f4f30, type: 2}
+  - {fileID: 11400000, guid: a8067f0dc7124e44a989eb07e4f7a5f7, type: 2}
+  - {fileID: 11400000, guid: dbc3afd7758abc249950e53033280e55, type: 2}

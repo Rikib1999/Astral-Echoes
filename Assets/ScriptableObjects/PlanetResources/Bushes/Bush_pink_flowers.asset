@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f25d9685f1ba4a4ca98f6c63163bde8, type: 3}
+  m_Name: Bush_pink_flowers
+  m_EditorClassIdentifier: 
+  resources:
+  - {fileID: 5154410461709401693, guid: 3b91d39054bc76a48bcde0407d57c299, type: 3}
+  - {fileID: 5754323412344303348, guid: 167121620716b4c41adcd57cc6644dbb, type: 3}
+  - {fileID: 5485507146337122538, guid: 53082a69e2d2d9146bf2baa4ee4dfcdf, type: 3}

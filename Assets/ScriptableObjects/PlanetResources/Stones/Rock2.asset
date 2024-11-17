@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f25d9685f1ba4a4ca98f6c63163bde8, type: 3}
+  m_Name: Rock2
+  m_EditorClassIdentifier: 
+  resources:
+  - {fileID: 5137438254458918401, guid: 2d9209d04539f7140871825da5fd7c22, type: 3}
+  - {fileID: 3603463507895395560, guid: 4419056eb0e5efe499b95ad91b84dee5, type: 3}
+  - {fileID: 7882055062334426823, guid: 13f25deed5689184a90482975891aa53, type: 3}
+  - {fileID: 4948455476369163108, guid: 12662b07dac0c1e499aa84ff23fd83c7, type: 3}
+  - {fileID: 2710294380922640616, guid: d517266dfc943a042992e1763b21760e, type: 3}

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f25d9685f1ba4a4ca98f6c63163bde8, type: 3}
+  m_Name: Black_crystal
+  m_EditorClassIdentifier: 
+  resources:
+  - {fileID: 5308335286458888652, guid: 968eb0aea9e2aba4f88bc3cf7c51bf0d, type: 3}
+  - {fileID: 1533859593525084485, guid: c1ba1814bfa31c549a7214ebefdd408a, type: 3}
+  - {fileID: 639894184266671387, guid: c33485c569ec74549b3e0cd831b12c74, type: 3}
+  - {fileID: 1795665523928785178, guid: 2ee719490ca01044e8833facc0cf5d24, type: 3}

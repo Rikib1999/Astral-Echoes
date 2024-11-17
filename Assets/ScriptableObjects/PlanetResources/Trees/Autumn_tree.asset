@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f25d9685f1ba4a4ca98f6c63163bde8, type: 3}
+  m_Name: Autumn_tree
+  m_EditorClassIdentifier: 
+  resources:
+  - {fileID: 1042043844757961722, guid: 42085ef335800d04fa9b94e79c92c883, type: 3}
+  - {fileID: 6708249567999450724, guid: 3361b6dea37b7284c89bda68cff2e788, type: 3}
+  - {fileID: 6548972046968406080, guid: 97bf77e8a57235a42907af714c9251a6, type: 3}
+  - {fileID: 7982091663358665169, guid: 831471d50606c0749b4e3dd25f1d4db6, type: 3}

@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f25d9685f1ba4a4ca98f6c63163bde8, type: 3}
+  m_Name: Autumn_bush
+  m_EditorClassIdentifier: 
+  resources:
+  - {fileID: 8488186387331539383, guid: 7f0ccac16ac66f14fb36a174e705b690, type: 3}
+  - {fileID: 5716041701210612576, guid: 4d7ff7f0951643d4f9fe16aa4d076ab2, type: 3}
+  - {fileID: 2315921019112974076, guid: bb0d7e9030f5f7043bc74a679ece8e16, type: 3}

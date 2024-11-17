@@ -15,7 +15,12 @@ public class PlanetGenerator : ChunkGenerator<PlanetChunk>
 
     [SerializeField] private Tilemap tilemap;
     [SerializeField] private PlanetPalettesList planetPalettesList;
+    [SerializeField] private PlanetResourcesList planetResourcesList;
     [SerializeField] private GameObject[] enemyPrefabs;
+    [SerializeField] private GameObject[] treePrefabs;
+    [SerializeField] private GameObject[] bushPrefabs;
+    [SerializeField] private GameObject[] stonePrefabs;
+    [SerializeField] private GameObject[] crystalPrefabs;
 
     private PlanetPaletteBag planetPaletteBag;
 
@@ -24,6 +29,7 @@ public class PlanetGenerator : ChunkGenerator<PlanetChunk>
         base.Start();
 
         planetPaletteBag = new(GetPlanetPalette());
+        SetPlanetResources();
         NoiseS3D.seed = PlanetMapManager.Seed;
     }
 
@@ -52,6 +58,14 @@ public class PlanetGenerator : ChunkGenerator<PlanetChunk>
             case ePlanetType.Tropical: return planetPalettesList.tropicalPlanets;
             default: return null;
         }
+    }
+
+    private void SetPlanetResources()
+    {
+        treePrefabs = planetResourcesList.trees[UnityEngine.Random.Range(0, planetResourcesList.trees.Length)].resources;
+        bushPrefabs = planetResourcesList.bushes[UnityEngine.Random.Range(0, planetResourcesList.bushes.Length)].resources;
+        stonePrefabs = planetResourcesList.stones[UnityEngine.Random.Range(0, planetResourcesList.stones.Length)].resources;
+        crystalPrefabs = planetResourcesList.crystals[UnityEngine.Random.Range(0, planetResourcesList.crystals.Length)].resources;
     }
 
     protected override void DeleteChunk(PlanetChunk chunk)
@@ -106,6 +120,22 @@ public class PlanetGenerator : ChunkGenerator<PlanetChunk>
                 if (tile.colliderType == Tile.ColliderType.Sprite && UnityEngine.Random.Range(0, 300) == 123)
                 {
                     Instantiate(enemyPrefabs[UnityEngine.Random.Range(0, enemyPrefabs.Length)], new Vector3Int((ChunkSize * coords.x) + x, (ChunkSize * coords.y) + y, -1), Quaternion.identity);
+                }
+                else if (UnityEngine.Random.Range(0, 300) == 123)
+                {
+                    Instantiate(treePrefabs[UnityEngine.Random.Range(0, treePrefabs.Length)], new Vector3Int((ChunkSize * coords.x) + x, (ChunkSize * coords.y) + y, -1), Quaternion.identity);
+                }
+                else if (UnityEngine.Random.Range(0, 300) == 123)
+                {
+                    Instantiate(bushPrefabs[UnityEngine.Random.Range(0, bushPrefabs.Length)], new Vector3Int((ChunkSize * coords.x) + x, (ChunkSize * coords.y) + y, -1), Quaternion.identity);
+                }
+                else if (UnityEngine.Random.Range(0, 300) == 123)
+                {
+                    Instantiate(stonePrefabs[UnityEngine.Random.Range(0, stonePrefabs.Length)], new Vector3Int((ChunkSize * coords.x) + x, (ChunkSize * coords.y) + y, -1), Quaternion.identity);
+                }
+                else if (UnityEngine.Random.Range(0, 300) == 123)
+                {
+                    Instantiate(crystalPrefabs[UnityEngine.Random.Range(0, crystalPrefabs.Length)], new Vector3Int((ChunkSize * coords.x) + x, (ChunkSize * coords.y) + y, -1), Quaternion.identity);
                 }
             }
         }

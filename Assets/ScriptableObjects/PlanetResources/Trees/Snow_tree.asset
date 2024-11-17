@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f25d9685f1ba4a4ca98f6c63163bde8, type: 3}
+  m_Name: Snow_tree
+  m_EditorClassIdentifier: 
+  resources:
+  - {fileID: 6786146158305954925, guid: 6866e01e6b84e3b4d8e651ada3f71f53, type: 3}
+  - {fileID: 1215257121165506298, guid: 48e7ef2ff4391ef4286bfc47749c8d01, type: 3}
+  - {fileID: 6422283054101863497, guid: b730fc3621c76c941a3b7249c8bb0b13, type: 3}
+  - {fileID: 7299406482524845486, guid: b412fd2b697958940920ea73057bebc8, type: 3}

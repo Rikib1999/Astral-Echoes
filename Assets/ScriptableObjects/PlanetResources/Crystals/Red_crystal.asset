@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f25d9685f1ba4a4ca98f6c63163bde8, type: 3}
+  m_Name: Red_crystal
+  m_EditorClassIdentifier: 
+  resources:
+  - {fileID: 6407388318041572533, guid: c383300fd91f11445a5be8c43be8e4aa, type: 3}
+  - {fileID: 3157564066306587287, guid: f4596afb17c2e0d4b8e1834bdc00c41c, type: 3}
+  - {fileID: 3233210233171920591, guid: ea818edd6cfd7bd4795eec3dd357a665, type: 3}
+  - {fileID: 9040070138887812062, guid: d090c8439111f3b4ca6c0ad47fcb0679, type: 3}

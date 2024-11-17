@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f25d9685f1ba4a4ca98f6c63163bde8, type: 3}
+  m_Name: Pink_crystal
+  m_EditorClassIdentifier: 
+  resources:
+  - {fileID: 1555575322805307439, guid: 433b787ee9861904d957a84d2857d963, type: 3}
+  - {fileID: 7415506221101841174, guid: d272f6a6e36c1c04d8f9c994d6e9592f, type: 3}
+  - {fileID: 1788394019028583865, guid: a37329f18767d694eb81a4e9043d78a8, type: 3}
+  - {fileID: 8687438017415502653, guid: 2c9439e41fe04ff449209eba261c8d3a, type: 3}
