@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlanetClick : MonoBehaviour
 {
-    public SpaceObjectDataBag spaceObjectDataBag;
+    [SerializeField] public SpaceObjectDataBag spaceObjectDataBag;
 
     private void OnMouseUpAsButton()
     {

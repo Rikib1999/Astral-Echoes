@@ -14,8 +14,12 @@ namespace Assets.Scripts
 
         public void LandPlanet(SpaceObjectDataBag planetDataBag)
         {
-            SystemMapManager.SystemDataBag = null;
+            Debug.Log(JsonUtility.ToJson(SystemMapManager.Instance.gameObject.GetComponent<SystemDataBag>(), true));
+            
+            //var bag = this.gameObject.GetComponent<SystemDataBag>();
             PlanetDataBag = planetDataBag;
+            SystemMapManager.Instance.gameObject.GetComponent<SystemDataBag>().SatelliteObjects = null;
+            SystemMapManager.Instance.gameObject.GetComponent<SystemDataBag>().CentralObject = null;
             ComputeSeed();
             
             //SceneManager.LoadScene("Planet");

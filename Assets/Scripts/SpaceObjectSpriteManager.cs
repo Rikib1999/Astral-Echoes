@@ -5,15 +5,21 @@ using UnityEngine;
 
 namespace Assets.Scripts
 {
-    public class SpaceObjectSpriteManager : Singleton<SpaceObjectSpriteManager>
+    public class SpaceObjectSpriteManager : NetworkSingleton<SpaceObjectSpriteManager>
     {
         [SerializeField] protected SpaceObjectsImageCollection spaceObjectsImageCollection;
 
         public Dictionary<eSpaceObjectType, Dictionary<Enum, Sprite[]>> storage;
 
-        private void Start()
+        /*private void Start()
         {
             FillStorage();
+        }*/
+
+        protected override void Awake()
+        {
+            FillStorage();
+            base.Awake();
         }
 
         private void FillStorage()

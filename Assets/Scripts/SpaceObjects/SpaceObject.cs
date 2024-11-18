@@ -3,10 +3,11 @@ using Assets.Scripts.Structs;
 using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using Unity.Netcode;
 
 namespace Assets.Scripts.SpaceObjects
 {
-    public abstract class SpaceObject<T> : MonoBehaviour where T : Enum
+    public abstract class SpaceObject<T> : NetworkBehaviour where T : Enum
     {
         protected abstract float MinSize { get; }
         protected abstract float MaxSize { get; }
@@ -18,7 +19,12 @@ namespace Assets.Scripts.SpaceObjects
         public bool IsLandable { get; protected set; }
         protected Vector2 Coordinates { get; set; }
 
-        protected virtual void Awake()
+        public override void OnNetworkSpawn()
+        {
+            Debug.Log("Spawn "+Name);
+        }
+
+        public virtual void Randomize()
         {
             Coordinates = transform.position;
             SetName();

@@ -257,10 +257,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 924b779ab7383004dbc4648dda3d253c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  starPrefab: {fileID: 3354605895257267086, guid: e808b2d9d580e674c9d88e67ddfe7b3e, type: 3}
-  blackHolePrefab: {fileID: 3354605895257267086, guid: 079e0d9b31f44014c81a72bceee89812, type: 3}
-  planetPrefab: {fileID: 3354605895257267086, guid: 3582ae498819651419819290300db10a, type: 3}
-  gasGiantPrefab: {fileID: 3354605895257267086, guid: 3dae1f29183cab345bd91838a713c680, type: 3}
+  starPrefab: {fileID: 7792722827237113596, guid: e808b2d9d580e674c9d88e67ddfe7b3e, type: 3}
+  blackHolePrefab: {fileID: -2101912729329981387, guid: 079e0d9b31f44014c81a72bceee89812, type: 3}
+  planetPrefab: {fileID: 4935195273652456141, guid: 3582ae498819651419819290300db10a, type: 3}
+  gasGiantPrefab: {fileID: -2456099437559798539, guid: 3dae1f29183cab345bd91838a713c680, type: 3}
   enemySpawner: {fileID: 0}
   system_map_scene: {fileID: 102900000, guid: f93acfe06c1a0c841920e328a0faf82b, type: 3}
 --- !u!4 &280019106
@@ -293,7 +293,7 @@ MonoBehaviour:
   GlobalObjectIdHash: 297100833
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
+  SynchronizeTransform: 0
   ActiveSceneSynchronization: 0
   SceneMigrationSynchronization: 1
   SpawnWithObservers: 1
@@ -1247,7 +1247,7 @@ MonoBehaviour:
   GlobalObjectIdHash: 2599625390
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
+  SynchronizeTransform: 0
   ActiveSceneSynchronization: 0
   SceneMigrationSynchronization: 1
   SpawnWithObservers: 1
@@ -1262,6 +1262,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1115274614}
+  - component: {fileID: 1115274615}
   - component: {fileID: 1115274613}
   m_Layer: 0
   m_Name: MapGenerator
@@ -1302,6 +1303,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1115274615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1115274612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 198716894
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &1214683961
 GameObject:
   m_ObjectHideFlags: 0
@@ -1792,6 +1814,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1796582133}
+  - component: {fileID: 1796582134}
   - component: {fileID: 1796582132}
   m_Layer: 0
   m_Name: SpaceObjectSpriteManager
@@ -1828,6 +1851,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1796582134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1796582131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3654354469
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &1908620875
 GameObject:
   m_ObjectHideFlags: 0

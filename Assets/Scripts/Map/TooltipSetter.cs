@@ -1,7 +1,8 @@
 using Assets.Scripts.Structs;
 using UnityEngine;
+using Unity.Netcode;
 
-public class TooltipSetter : MonoBehaviour
+public class TooltipSetter : NetworkBehaviour
 {
     public TooltipData tooltipData;
 

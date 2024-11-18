@@ -2,23 +2,72 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
+using Unity.Collections;
 
 namespace Assets.Scripts.SpaceSystem
 {
-    public class SystemDataBag
+    [Serializable]
+    public class SystemDataBag : NetworkBehaviour
     {
-        public SpaceObjectDataBag CentralObject { get; set; }
-        public List<SpaceObjectDataBag> SatelliteObjects { get; set; } = new();
+        [SerializeField] public NetworkVariable<SpaceObjectDataBag> CentralObject = new NetworkVariable<SpaceObjectDataBag>();// { get => CentralObject.Value; set => CentralObject.Value = value; }
+        //public SpaceObjectDataBag CentralObject { get => centralObject.Value; set => centralObject.Value = value; }
+        [field: SerializeField] public NetworkList<SpaceObjectDataBag> SatelliteObjects;// { get => SatelliteObjects.Value; set => SatelliteObjects.Value = value; }
+        //public NetworkList<SpaceObjectDataBag> SatelliteObjects { get => satelliteObjects.Value; set => satelliteObjects.Value = value; }
+        public void Awake()
+        {
+            //CentralObject = new NetworkVariable<SpaceObjectDataBag>();
+            SatelliteObjects = new NetworkList<SpaceObjectDataBag>();
+            //Debug.Log("Awake");
+        }
     }
 
-    public class SpaceObjectDataBag
+    [Serializable]
+    public struct SpaceObjectDataBag : INetworkSerializeByMemcpy, System.IEquatable<SpaceObjectDataBag>
     {
-        public string Name { get; set; }
-        public eSpaceObjectType Type { get; set; }
-        public Enum SubType { get; set; }
-        public float Size { get; set; }
-        public Vector2 Coordinates { get; set; }
-        public Vector2 RelativePosition { get; set; }
-        public float OrbitRadius { get; set; }
+        [SerializeField] public FixedString64Bytes Name ;//{ get; set; }
+        [SerializeField] public eSpaceObjectType Type ;//{ get; set; }
+        [SerializeField] public int SubType ;//{ get; set; }
+        [SerializeField] public float Size ;//{ get; set; }
+        [SerializeField] public Vector2 Coordinates ;//{ get; set; }
+        [SerializeField] public Vector2 RelativePosition ;//{ get; set; }
+        [SerializeField] public float OrbitRadius ;//{ get; set; }
+
+        public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
+        {
+            if (serializer.IsReader)
+            {
+                var reader = serializer.GetFastBufferReader();
+                reader.ReadValueSafe(out Name);
+                reader.ReadValueSafe(out Type);
+                reader.ReadValueSafe(out SubType);
+                reader.ReadValueSafe(out Size);
+                reader.ReadValueSafe(out Coordinates);
+                reader.ReadValueSafe(out RelativePosition);
+                reader.ReadValueSafe(out OrbitRadius);
+            }
+            else
+            {
+                var writer = serializer.GetFastBufferWriter();
+                writer.WriteValueSafe(Name);
+                writer.WriteValueSafe(Type);
+                writer.WriteValueSafe(SubType);
+                writer.WriteValueSafe(Size);
+                writer.WriteValueSafe(Coordinates);
+                writer.WriteValueSafe(RelativePosition);
+                writer.WriteValueSafe(OrbitRadius);
+            }
+        }
+
+        public bool Equals(SpaceObjectDataBag other)
+        {
+            return Name == other.Name
+            && Type == other.Type
+            && SubType == other.SubType
+            && Size == other.Size
+            && Coordinates == other.Coordinates
+            && RelativePosition == other.RelativePosition
+            && OrbitRadius == other.OrbitRadius;
+        }
     }
 }

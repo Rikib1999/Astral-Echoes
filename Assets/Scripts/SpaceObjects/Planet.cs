@@ -7,10 +7,10 @@ namespace Assets.Scripts.SpaceObjects
         protected override float MinSize { get; } = 0.3f;
         protected override float MaxSize { get; } = 2f;
 
-        protected override void Awake()
+        public override void Randomize()
         {
             Type = eSpaceObjectType.Planet;
-            base.Awake();
+            base.Randomize();
 
             SetIsLandable();
         }

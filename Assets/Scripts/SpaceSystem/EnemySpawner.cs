@@ -9,9 +9,15 @@ public class EnemySpawner : MonoBehaviour
 
     private void Start()
     {
-        SystemDataBag systemDataBag = SystemMapManager.SystemDataBag;
+        SystemDataBag systemDataBag = SystemMapManager.Instance.gameObject.GetComponent<SystemDataBag>();
 
-        float maxOrbit = systemDataBag.SatelliteObjects.Max(x => x.OrbitRadius);
+
+        float maxOrbit = 0.0f; //systemDataBag.SatelliteObjects.Max(x => x.OrbitRadius);
+        
+        foreach(SpaceObjectDataBag satObject in systemDataBag.SatelliteObjects)
+        {
+            maxOrbit = Mathf.Max(maxOrbit, satObject.OrbitRadius);
+        }
 
         int count = Random.Range(10, 30);
 

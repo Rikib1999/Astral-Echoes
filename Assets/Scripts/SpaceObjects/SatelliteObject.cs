@@ -11,9 +11,9 @@ namespace Assets.Scripts.SpaceObjects
 
         [SerializeField] private LineRenderer lineRenderer;
 
-        protected virtual new void Awake()
+        public override void Randomize()
         {
-            base.Awake();
+            base.Randomize();
 
             SetRotation();
             SetTooltip();
