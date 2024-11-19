@@ -7,7 +7,7 @@ using Unity.Netcode;
 
 namespace Assets.Scripts.SpaceObjects
 {
-    public abstract class SpaceObject<T> : NetworkBehaviour where T : Enum
+    public abstract class SpaceObject<T> : MonoBehaviour where T : Enum
     {
         protected abstract float MinSize { get; }
         protected abstract float MaxSize { get; }
@@ -19,10 +19,6 @@ namespace Assets.Scripts.SpaceObjects
         public bool IsLandable { get; protected set; }
         protected Vector2 Coordinates { get; set; }
 
-        public override void OnNetworkSpawn()
-        {
-            Debug.Log("Spawn "+Name);
-        }
 
         public virtual void Randomize()
         {
@@ -69,6 +65,8 @@ namespace Assets.Scripts.SpaceObjects
 
         public void SetSprite()
         {
+            //Debug.Log(Type);
+            //Debug.Log(SubType);
             int maxIndex = SpaceObjectSpriteManager.Instance.storage[Type][SubType].Length - 1;
             int index = Random.Range(0, maxIndex);
             GetComponent<SpriteRenderer>().sprite = SpaceObjectSpriteManager.Instance.storage[Type][SubType][index];

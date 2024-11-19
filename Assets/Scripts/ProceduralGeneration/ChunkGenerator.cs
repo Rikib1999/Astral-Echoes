@@ -2,9 +2,8 @@ using Assets.Scripts;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Unity.Netcode;
 
-public abstract class ChunkGenerator<T> : NetworkBehaviour where T : Chunk
+public abstract class ChunkGenerator<T> : MonoBehaviour where T : Chunk
 {
     protected abstract int ChunkSize { get; set; }
     protected abstract int MaxExistingChunks { get; set; }

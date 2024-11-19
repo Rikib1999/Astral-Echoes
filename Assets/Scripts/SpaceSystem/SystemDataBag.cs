@@ -7,19 +7,10 @@ using Unity.Collections;
 
 namespace Assets.Scripts.SpaceSystem
 {
-    [Serializable]
-    public class SystemDataBag : NetworkBehaviour
+    public class SystemDataBag
     {
-        [SerializeField] public NetworkVariable<SpaceObjectDataBag> CentralObject = new NetworkVariable<SpaceObjectDataBag>();// { get => CentralObject.Value; set => CentralObject.Value = value; }
-        //public SpaceObjectDataBag CentralObject { get => centralObject.Value; set => centralObject.Value = value; }
-        [field: SerializeField] public NetworkList<SpaceObjectDataBag> SatelliteObjects;// { get => SatelliteObjects.Value; set => SatelliteObjects.Value = value; }
-        //public NetworkList<SpaceObjectDataBag> SatelliteObjects { get => satelliteObjects.Value; set => satelliteObjects.Value = value; }
-        public void Awake()
-        {
-            //CentralObject = new NetworkVariable<SpaceObjectDataBag>();
-            SatelliteObjects = new NetworkList<SpaceObjectDataBag>();
-            //Debug.Log("Awake");
-        }
+        public SpaceObjectDataBag CentralObject { get; set; }
+        public List<SpaceObjectDataBag> SatelliteObjects { get; set; } = new();
     }
 
     [Serializable]

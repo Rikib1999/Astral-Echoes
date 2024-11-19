@@ -10,67 +10,95 @@ namespace Assets.Scripts
 {
     public class SystemMapManager : NetworkSingleton<SystemMapManager>
     {
-        [SerializeField] private NetworkObject starPrefab;
-        [SerializeField] private NetworkObject blackHolePrefab;
-        [SerializeField] private NetworkObject planetPrefab;
-        [SerializeField] private NetworkObject gasGiantPrefab;
+        [SerializeField] private GameObject starPrefab;
+        [SerializeField] private GameObject blackHolePrefab;
+        [SerializeField] private GameObject planetPrefab;
+        [SerializeField] private GameObject gasGiantPrefab;
 
         [SerializeField] private EnemySpawner enemySpawner;
 
         [SerializeField] private UnityEditor.SceneAsset system_map_scene;
 
         //[SerializeField] public static SystemDataBag SystemDataBag;
+        [SerializeField] public NetworkVariable<SpaceObjectDataBag> CentralObject = new NetworkVariable<SpaceObjectDataBag>();// { get => CentralObject.Value; set => CentralObject.Value = value; }
+        //public SpaceObjectDataBag CentralObject { get => centralObject.Value; set => centralObject.Value = value; }
+        [field: SerializeField] public NetworkList<SpaceObjectDataBag> SatelliteObjects;// { get => SatelliteObjects.Value; set => SatelliteObjects.Value = value; }
+        //public NetworkList<SpaceObjectDataBag> SatelliteObjects { get => satelliteObjects.Value; set => satelliteObjects.Value = value; }
+        
 
         public const float scaleUpConst = 10;
 
 
-        protected virtual void OnDestroy()
+        public override void OnDestroy()
         {
             if (Instance == this)// && IsServer)
             {
-                //NetworkManager.Singleton.SceneManager.OnSceneEvent -= OnSceneEvent;
-                SceneManager.sceneLoaded -= OnSceneLoaded;
+                NetworkManager.Singleton.SceneManager.OnSceneEvent -= OnSceneEvent;
+                //SceneManager.sceneLoaded -= OnSceneLoaded;
             }
-           // base.OnDestroy();
+           base.OnDestroy();
         }
-        void Start()
+        public void Awake(){
+            //base.Awake();
+            //GetComponent<NetworkObject>().Spawn();
+            SatelliteObjects = new NetworkList<SpaceObjectDataBag>();
+        }
+        public override void Start()
         {
-            if(!IsServer)
+            base.Start();
+            //GetComponent<NetworkObject>().Spawn();
+            //SatelliteObjects = new NetworkList<SpaceObjectDataBag>();
+            /*if(!IsServer)
             {
                 enabled=false;
-            }
+            }*/
         }
 
         private void OnSceneEvent(SceneEvent sceneEvent)
         {
-            /*if(sceneEvent.SceneEventType != SceneEventType.LoadEventCompleted)
+            if(sceneEvent.SceneEventType != SceneEventType.LoadEventCompleted)
             {
                 return;
-            }*/
-            if (Instance.gameObject.GetComponent<SystemDataBag>() == null) return;
+            }
+            if (CentralObject == null) return;
+
             GenerateSystem();
         }
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            if (Instance.gameObject.GetComponent<SystemDataBag>() == null) return;
-            Debug.Log(JsonUtility.ToJson(Instance.gameObject.GetComponent<SystemDataBag>(), true));
+            if (CentralObject == null) return;
+            //Debug.Log(JsonUtility.ToJson(Instance.gameObject.GetComponent<SystemDataBag>(), true));
             GenerateSystem();
         }
 
         public void EnterSystem(SystemDataBag systemDataBag)
         {
-            Instance.gameObject.AddComponent<SystemDataBag>();
-            Instance.gameObject.GetComponent<NetworkObject>().Spawn(true);
-            var bag = Instance.gameObject.GetComponent<SystemDataBag>();
-            bag.CentralObject.Value = systemDataBag.CentralObject.Value;
+            //Instance.gameObject.AddComponent<SystemDataBag>();
+            //Instance.gameObject.GetComponent<NetworkObject>().Spawn(false);
+            //var bag = Instance.gameObject.GetComponent<SystemDataBag>();
+            //SatelliteObjects = new NetworkList<SpaceObjectDataBag>();
+            CentralObject.Value = systemDataBag.CentralObject;
             foreach(SpaceObjectDataBag satObject in systemDataBag.SatelliteObjects)
             {
-                bag.SatelliteObjects.Add(satObject);
+                SatelliteObjects.Add(satObject);
             }
-            //NetworkManager.Singleton.SceneManager.OnSceneEvent += OnSceneEvent;
-            SceneManager.sceneLoaded += OnSceneLoaded;
+            if(IsServer)
+            {
+                LoadSystemScene();
+                LoadSystemSceneClientRpc();
+            }
+        }
 
-            Debug.Log(JsonUtility.ToJson(bag, true));
+        [ClientRpc]
+        private void LoadSystemSceneClientRpc()
+        {
+            NetworkManager.Singleton.SceneManager.OnSceneEvent += OnSceneEvent;
+            //SceneManager.sceneLoaded += OnSceneLoaded;
+        }
+        private void LoadSystemScene()
+        {
+            NetworkManager.Singleton.SceneManager.OnSceneEvent += OnSceneEvent;
+            //SceneManager.sceneLoaded += OnSceneLoaded;
 
             //SceneManager.LoadScene("SystemMap");
             var status = NetworkManager.SceneManager.LoadScene(system_map_scene.name,LoadSceneMode.Single);
@@ -82,40 +110,39 @@ namespace Assets.Scripts
 
         private void GenerateSystem()
         {
-            var SystemDataBag = Instance.gameObject.GetComponent<SystemDataBag>();
-            bool isStar = SystemDataBag.CentralObject.Value.Type == eSpaceObjectType.Star;
+            bool isStar = CentralObject.Value.Type == eSpaceObjectType.Star;
 
             var centralObjectPrefab = isStar ? starPrefab : blackHolePrefab;
             var centralObject = Instantiate(centralObjectPrefab,Vector3.zero, Quaternion.identity);
 
             if (isStar)
             {
-                var star = centralObject.GetComponent<Star>();
+                var star = centralObject.GetComponent<Star>(); star.Randomize();
 
-                star.SetSubType((eStarType)SystemDataBag.CentralObject.Value.SubType);
-                star.SetSize(SystemDataBag.CentralObject.Value.Size * scaleUpConst);
-                star.SetName(SystemDataBag.CentralObject.Value.Name.ToString());
-                star.SetCoordinates(SystemDataBag.CentralObject.Value.Coordinates);
+                star.SetSubType((eStarType)CentralObject.Value.SubType);
+                star.SetSize(CentralObject.Value.Size * scaleUpConst);
+                star.SetName(CentralObject.Value.Name.ToString());
+                star.SetCoordinates(CentralObject.Value.Coordinates);
                 star.SetTooltip(scaleUpConst);
                 star.SetSprite();
             }
             else
             {
-                var blackHole = centralObject.GetComponent<BlackHole>();
+                var blackHole = centralObject.GetComponent<BlackHole>(); blackHole.Randomize();
 
-                blackHole.SetSubType((eBlackHoleType)SystemDataBag.CentralObject.Value.SubType);
-                blackHole.SetSize(SystemDataBag.CentralObject.Value.Size * scaleUpConst);
-                blackHole.SetName(SystemDataBag.CentralObject.Value.Name.ToString());
-                blackHole.SetCoordinates(SystemDataBag.CentralObject.Value.Coordinates);
+                blackHole.SetSubType((eBlackHoleType)CentralObject.Value.SubType);
+                blackHole.SetSize(CentralObject.Value.Size * scaleUpConst);
+                blackHole.SetName(CentralObject.Value.Name.ToString());
+                blackHole.SetCoordinates(CentralObject.Value.Coordinates);
                 blackHole.SetTooltip(scaleUpConst);
                 blackHole.SetSprite();
             }
-            Debug.Log("T2"+SystemDataBag.CentralObject.Value.Name.ToString()+" "+SystemDataBag.CentralObject.Value.Type);
+            //Debug.Log("T2"+CentralObject.Value.Name.ToString()+" "+CentralObject.Value.Type);
 
-            centralObject.GetComponent<NetworkObject>().Spawn(true);
+            //centralObject.GetComponent<NetworkObject>().Spawn(true);
             
 
-            foreach (var satellite in SystemDataBag.SatelliteObjects)
+            foreach (var satellite in SatelliteObjects)
             {
                 bool isPlanet = satellite.Type == eSpaceObjectType.Planet;
 
@@ -124,7 +151,7 @@ namespace Assets.Scripts
 
                 if (isPlanet)
                 {
-                    var planet = satelliteObject.GetComponent<SpaceObjects.Planet>();
+                    var planet = satelliteObject.GetComponent<SpaceObjects.Planet>(); planet.Randomize();
 
                     planet.SetOrbit(Vector2.zero, satellite.OrbitRadius * scaleUpConst);
                     planet.SetSubType((ePlanetType)satellite.SubType);
@@ -142,7 +169,7 @@ namespace Assets.Scripts
                 }
                 else
                 {
-                    var gasGiant = satelliteObject.GetComponent<GasGiant>();
+                    var gasGiant = satelliteObject.GetComponent<GasGiant>(); gasGiant.Randomize();
 
                     gasGiant.SetOrbit(Vector2.zero, satellite.OrbitRadius * scaleUpConst);
                     gasGiant.SetSubType((eGasGiantType)satellite.SubType);
@@ -152,9 +179,9 @@ namespace Assets.Scripts
                     gasGiant.SetTooltip(scaleUpConst);
                     gasGiant.SetSprite();
                 }
-                Debug.Log("T2"+satellite.Name.ToString()+" "+satellite.Type);
+                //Debug.Log("T2"+satellite.Name.ToString()+" "+satellite.Type);
 
-                satelliteObject.GetComponent<NetworkObject>().Spawn(true);
+                //satelliteObject.GetComponent<NetworkObject>().Spawn(true);
             }
         }
     }

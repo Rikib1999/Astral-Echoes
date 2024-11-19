@@ -7,7 +7,7 @@ namespace Assets.Scripts.SpaceObjects
         protected override float MinSize { get; } = 3.5f;
         protected override float MaxSize { get; } = 6f;
 
-        public override void Randomize()
+        public new void Randomize()
         {
             Type = eSpaceObjectType.Star;
             base.Randomize();

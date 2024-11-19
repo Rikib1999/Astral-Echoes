@@ -1,20 +1,15 @@
-﻿using Assets.Scripts.Enums;
+﻿﻿using Assets.Scripts.Enums;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts
 {
-    public class SpaceObjectSpriteManager : NetworkSingleton<SpaceObjectSpriteManager>
+    public class SpaceObjectSpriteManager : Singleton<SpaceObjectSpriteManager>
     {
         [SerializeField] protected SpaceObjectsImageCollection spaceObjectsImageCollection;
 
         public Dictionary<eSpaceObjectType, Dictionary<Enum, Sprite[]>> storage;
-
-        /*private void Start()
-        {
-            FillStorage();
-        }*/
 
         protected override void Awake()
         {
