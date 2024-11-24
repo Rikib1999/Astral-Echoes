@@ -29,7 +29,7 @@ public class PlanetGenerator : ChunkGenerator<PlanetChunk>
 
     private PlanetPalette GetPlanetPalette()
     {
-        switch ((ePlanetType)PlanetMapManager.PlanetDataBag.SubType)
+        switch ((ePlanetType)PlanetMapManager.PlanetDataBag.Value.SubType)
         {
             case ePlanetType.Airless: return planetPalettesList.airlessPlanets;
             case ePlanetType.Aquamarine: return planetPalettesList.aquamarinePlanets;

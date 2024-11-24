@@ -9,17 +9,45 @@ namespace Assets.Scripts
     {
         [SerializeField] private UnityEditor.SceneAsset planet_scene;
 
-        public static SpaceObjectDataBag PlanetDataBag { get; set; }
+        //public static SpaceObjectDataBag PlanetDataBag { get; set; } 
+        //[SerializeField] public static SystemDataBag SystemDataBag;
+        [SerializeField] public static NetworkVariable<SpaceObjectDataBag> PlanetDataBag = new NetworkVariable<SpaceObjectDataBag>();// { get => CentralObject.Value; set => CentralObject.Value = value; }
+        //public SpaceObjectDataBag CentralObject { get => centralObject.Value; set => centralObject.Value = value; }
+ 
         public static int Seed { get; private set; }
+
+
 
         public void LandPlanet(SpaceObjectDataBag planetDataBag)
         {
             //Debug.Log(JsonUtility.ToJson(SystemMapManager.Instance.gameObject.GetComponent<SystemDataBag>(), true));
             
-            //var bag = this.gameObject.GetComponent<SystemDataBag>();
-            PlanetDataBag = planetDataBag;
+            //PlanetDataBag = planetDataBag;
+            PlanetDataBag.Value = planetDataBag;
             SystemMapManager.Instance.SatelliteObjects = null;
             SystemMapManager.Instance.CentralObject = null;
+
+            if(IsServer)
+            {
+                LoadPlanetSceneClientRpc();
+                LoadPlanetScene();
+            }
+        }
+        
+        [ClientRpc]
+        private void LoadPlanetSceneClientRpc()
+        {
+            ComputeSeed();
+            
+            //SceneManager.LoadScene("Planet");
+            /*var status = NetworkManager.SceneManager.LoadScene(planet_scene.name,LoadSceneMode.Single);
+            if (status != SceneEventProgressStatus.Started)
+            {
+                Debug.LogWarning($"Failed to load planet scene with a {nameof(SceneEventProgressStatus)}: {status}");
+            }*/
+        }
+        private void LoadPlanetScene()
+        {
             ComputeSeed();
             
             //SceneManager.LoadScene("Planet");
@@ -32,7 +60,7 @@ namespace Assets.Scripts
 
         private void ComputeSeed()
         {
-            Seed = (int)((PlanetDataBag.Coordinates.x + PlanetDataBag.Coordinates.y) * (PlanetDataBag.Coordinates.x / Mathf.Max(Mathf.Abs(PlanetDataBag.Coordinates.y), 7)));
+            Seed = (int)((PlanetDataBag.Value.Coordinates.x + PlanetDataBag.Value.Coordinates.y) * (PlanetDataBag.Value.Coordinates.x / Mathf.Max(Mathf.Abs(PlanetDataBag.Value.Coordinates.y), 7)));
         }
     }
 }

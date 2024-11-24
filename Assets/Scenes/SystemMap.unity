@@ -1189,6 +1189,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1450760590308612143, guid: 3cdc6bfab32ff0ee3b6324298f75e9a2, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1535270930
+      objectReference: {fileID: 0}
     - target: {fileID: 1562592407985520859, guid: 3cdc6bfab32ff0ee3b6324298f75e9a2, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 4025468961
@@ -1402,7 +1406,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1273534055
 MonoBehaviour:
   m_ObjectHideFlags: 0

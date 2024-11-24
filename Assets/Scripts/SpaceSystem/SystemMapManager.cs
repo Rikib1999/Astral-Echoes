@@ -82,6 +82,7 @@ namespace Assets.Scripts
             {
                 SatelliteObjects.Add(satObject);
             }
+            
             if(IsServer)
             {
                 LoadSystemScene();
