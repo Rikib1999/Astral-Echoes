@@ -9,6 +9,7 @@ TagManager:
   - ShipWall
   - CraftTable
   - PlanetResource
+  - enemy
   layers:
   - Default
   - TransparentFX
