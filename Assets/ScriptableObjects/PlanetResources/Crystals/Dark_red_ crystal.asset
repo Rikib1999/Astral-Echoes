@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f25d9685f1ba4a4ca98f6c63163bde8, type: 3}
+  m_Name: Dark_red_ crystal
+  m_EditorClassIdentifier: 
+  resources:
+  - {fileID: 5057606122010562490, guid: 2483e4d87bfe0a64cac6e50c3c6a7e6f, type: 3}
+  - {fileID: 2539693500669694554, guid: c9b050be0f45fa84c958705b17799c5e, type: 3}
+  - {fileID: 3858555799560128841, guid: 78f56394eeda4d744bc15096498ce3a4, type: 3}
+  - {fileID: 2733233165162954003, guid: 49d866af6ea4f194fa4283751850f291, type: 3}

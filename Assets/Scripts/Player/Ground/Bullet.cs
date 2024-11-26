@@ -1,11 +1,13 @@
+using Assets.Scripts.PlanetResources;
 using UnityEngine;
 using Unity.Netcode;
 
 public class Bullet : NetworkBehaviour
 {
     [SerializeField] float speed = 10f;
-    [SerializeField] int bulletDamage = 0;
+    [SerializeField] int bulletDamage = 20;
     [SerializeField] string enemyTag;
+    [SerializeField] string resourceTag;
 
     private Vector2 bulletDirection; // Store the initial direction of the bullet
 
@@ -36,6 +38,22 @@ public class Bullet : NetworkBehaviour
         if (collision.gameObject.CompareTag(enemyTag))
         {
             collision.gameObject.GetComponent<EnemyLogic>().damage(bulletDamage); // Deal damage to the enemy
+        }
+        else if (collision.gameObject.CompareTag(resourceTag))
+        {
+            collision.gameObject.GetComponent<ResourceDrop>().Damage(bulletDamage); // Deal damage to the enemy
+        }
+        Destroy(gameObject); // Destroy the bullet on collision
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(enemyTag))
+        { 
+            collision.gameObject.GetComponent<EnemyLogic>().damage(bulletDamage); // Deal damage to the enemy
+        }
+        else if (collision.gameObject.CompareTag(resourceTag))
+        {
+            collision.gameObject.GetComponent<ResourceDrop>().Damage(bulletDamage); // Deal damage to the enemy
         }
         Destroy(gameObject); // Destroy the bullet on collision
     }

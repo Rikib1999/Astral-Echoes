@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f25d9685f1ba4a4ca98f6c63163bde8, type: 3}
+  m_Name: White_crystal
+  m_EditorClassIdentifier: 
+  resources:
+  - {fileID: 2121139680959015902, guid: 044c94b166c52e74fabfeb1af5bc04bf, type: 3}
+  - {fileID: 1199000248136029558, guid: 6dbd2600fa801f64692523f3da61ccc6, type: 3}
+  - {fileID: 140826763768869399, guid: c361e75f77c18994d90ffc0900bc7c34, type: 3}
+  - {fileID: 7440390885675385569, guid: ebd114712c71b704bb4df048d00776a4, type: 3}

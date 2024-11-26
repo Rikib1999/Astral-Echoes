@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f25d9685f1ba4a4ca98f6c63163bde8, type: 3}
+  m_Name: Palm_tree2
+  m_EditorClassIdentifier: 
+  resources:
+  - {fileID: 7021758316886643851, guid: f814001374312074899cda89c3303a33, type: 3}
+  - {fileID: 2462578066063107873, guid: 25350c9d47350034cb08d8c17001f22a, type: 3}
+  - {fileID: 8061387381283353043, guid: d874783882f3313408d19a83fea2210e, type: 3}

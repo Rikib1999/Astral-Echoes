@@ -558,24 +558,6 @@ Transform:
   m_Father: {fileID: 794013205}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &182057295 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2830171947627101589, guid: f669c0943363d9547a23dc89c20a4e35, type: 3}
-  m_PrefabInstance: {fileID: 707879463}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &182057300
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 182057295}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3610bd1e29191d44a65a1c677210c8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: f0429989b664cbc4a8a5689d3c836280, type: 2}
 --- !u!1 &196204937
 GameObject:
   m_ObjectHideFlags: 0
@@ -2035,10 +2017,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5532509891341477591, guid: 7c847c16ba631c443a2d46c82ff245af, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1119576652}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c847c16ba631c443a2d46c82ff245af, type: 3}
 --- !u!1 &580891143
 GameObject:
@@ -2971,10 +2950,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2830171947627101589, guid: f669c0943363d9547a23dc89c20a4e35, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 182057300}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f669c0943363d9547a23dc89c20a4e35, type: 3}
 --- !u!1 &734585221
 GameObject:
@@ -4745,24 +4721,6 @@ Transform:
   m_Father: {fileID: 1867765399}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!1 &1119576647 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5532509891341477591, guid: 7c847c16ba631c443a2d46c82ff245af, type: 3}
-  m_PrefabInstance: {fileID: 555371838}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1119576652
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1119576647}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3610bd1e29191d44a65a1c677210c8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 370143a9f77e17c478a63fc688833442, type: 2}
 --- !u!1 &1119589791
 GameObject:
   m_ObjectHideFlags: 0
@@ -5885,8 +5843,9 @@ MonoBehaviour:
   dashSpeed: 25
   dashDuration: 0.3
   dashCooldown: 1
-  dirX: 0
-  dirY: 0
+  maxHealth: 100
+  healthBar: {fileID: 0}
+  dashBar: {fileID: 0}
   dashAudioSource: {fileID: 1380896060}
 --- !u!50 &1380896056
 Rigidbody2D:
@@ -5950,7 +5909,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.49999997, y: 0.1363355}
     oldSize: {x: 5.8514285, y: 5.8514285}
     newSize: {x: 5.8514285, y: 5.8514285}
     adaptiveTilingThreshold: 0.5

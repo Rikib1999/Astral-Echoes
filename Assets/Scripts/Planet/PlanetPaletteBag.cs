@@ -20,7 +20,7 @@ namespace Assets.Scripts.Planet
 
                 foreach (var tile in Palette[i].tiles)
                 {
-                    tile.colliderType = planetPalette.isWalkable[i] ? ColliderType.None : ColliderType.Sprite;
+                    tile.colliderType = ColliderType.None; // planetPalette.isWalkable[i] ? ColliderType.None : ColliderType.Sprite;
                 }
             }
         }

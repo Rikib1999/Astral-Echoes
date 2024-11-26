@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f25d9685f1ba4a4ca98f6c63163bde8, type: 3}
+  m_Name: Yellow-green_crystal
+  m_EditorClassIdentifier: 
+  resources:
+  - {fileID: 3433380515883233374, guid: 31d3dd3a7c5722545a3aa1da0099149c, type: 3}
+  - {fileID: 4128983309571834814, guid: 04877560163adc145badd62fe7a7fb5b, type: 3}
+  - {fileID: 5876603352018731266, guid: 9e1487eb91c626b4ebb5c6ee2300e1af, type: 3}
+  - {fileID: 7604534526955424723, guid: e315ad786c5a2304fb47d2f03ca076c7, type: 3}

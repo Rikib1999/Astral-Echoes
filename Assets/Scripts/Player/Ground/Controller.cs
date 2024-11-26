@@ -120,6 +120,9 @@ public class Controller : NetworkBehaviour
         {
             SwitchGun(2);
         }
+
+
+        // SaveInv();
     }
 
     private void FixedUpdate()
@@ -193,4 +196,32 @@ public class Controller : NetworkBehaviour
             // Handle player death
         }
     }
+
+    // private void SaveInv()
+    // {
+    //     InventoryManager inventoryManager = InventoryManager.Instance;
+
+    //     for (int i = 0; i < inventoryManager.items.Count; i++)
+    //     {
+    //         var item = inventoryManager.items[i];
+
+    //         PlayerPrefs.SetInt("ID#" + i, item.id);
+    //         PlayerPrefs.SetString("itemName#" + i, item.itemName);
+    //         PlayerPrefs.SetInt("Value#" + i, item.value);
+    //         PlayerPrefs.SetString("Icon#" + i, item.icon.ToString());
+    //         PlayerPrefs.SetInt("Craftable#" + i, item.craftable ? 1 : 0);
+    //         PlayerPrefs.SetString("ItemTime#" + i, item.itemType.ToString());
+
+    //         /*
+    //         public int id;
+    //         public string itemName;
+    //         public int value;
+    //         public Sprite icon;
+    //         public bool craftable;
+    //         public ItemType itemType;
+    //          */
+    //         //Debug.Log(item.icon.ToString());
+    //     }
+    //     Debug.Log("saved");
+    // }
 }
