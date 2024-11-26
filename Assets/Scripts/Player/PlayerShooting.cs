@@ -65,6 +65,7 @@ public class PlayerShooting : NetworkBehaviour
         //Instantiate(bullet, firePoint.position, Quaternion.identity);
         if(IsServer){
             var playerNetworkObject = NetworkManager.SpawnManager.InstantiateAndSpawn(bullet,NetworkManager.ServerClientId,true,false,true,firePoint.position,Quaternion.identity);
+            playerNetworkObject.gameObject.transform.rotation = Quaternion.Euler(0,0,Vector3.Angle(crosshair.transform.position,Vector3.right));
         }else{
             SpawnBulletServerRpc(firePoint.position,crosshair.transform.position);
         }

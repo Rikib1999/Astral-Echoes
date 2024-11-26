@@ -47,7 +47,7 @@ public class EnemyAIPunch : MonoBehaviour
     {
 
         
-        if (isChasing)
+        if (player && isChasing)
         {
             ChasePlayer();
             //StopAndShoot();
@@ -57,12 +57,15 @@ public class EnemyAIPunch : MonoBehaviour
             Roam();
         }
 
-        DetectPlayer();
+        if(player)
+        {
+            DetectPlayer();
+        }
     }
 
     private void FixedUpdate()
     {
-        Debug.Log(enemyState);
+        //Debug.Log(enemyState);
         if (enemyState == Enemy.walking)
         {
             animator.SetBool("isWalking", true);

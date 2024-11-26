@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class SpawnShooting : MonoBehaviour
+public class SpawnShooting : NetworkBehaviour
 {
     public GameObject ShipToSpawn;
     public Transform SpawnPoint;
@@ -59,9 +60,15 @@ public class SpawnShooting : MonoBehaviour
 
     public void SpawnShip()
     {
+        if(!IsServer)
+        {
+            return;
+        }
 
         Debug.Log("Spawned");
 
-        Instantiate(ShipToSpawn, SpawnPoint.position, Quaternion.identity);
+        var ship = Instantiate(ShipToSpawn, SpawnPoint.position, Quaternion.identity);
+        ship.GetComponent<NetworkObject>().Spawn();
+
     }
 }

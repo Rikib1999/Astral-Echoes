@@ -29,9 +29,12 @@ public class BasicEnemies : MonoBehaviour
 
     void Update()
     {
-        distance = Vector2.Distance(transform.position, player.transform.position);
+        if(player)
+        {
+            distance = Vector2.Distance(transform.position, player.transform.position);
+        }
 
-        if (distance < chaseDistance)
+        if (player && (distance < chaseDistance))
         {
             // Chase the player
             ChasePlayer();

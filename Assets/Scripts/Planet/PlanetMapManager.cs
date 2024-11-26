@@ -11,7 +11,7 @@ namespace Assets.Scripts
 
         //public static SpaceObjectDataBag PlanetDataBag { get; set; } 
         //[SerializeField] public static SystemDataBag SystemDataBag;
-        [SerializeField] public static NetworkVariable<SpaceObjectDataBag> PlanetDataBag = new NetworkVariable<SpaceObjectDataBag>();// { get => CentralObject.Value; set => CentralObject.Value = value; }
+        [SerializeField] public NetworkVariable<SpaceObjectDataBag> PlanetDataBag = new NetworkVariable<SpaceObjectDataBag>();// { get => CentralObject.Value; set => CentralObject.Value = value; }
         //public SpaceObjectDataBag CentralObject { get => centralObject.Value; set => centralObject.Value = value; }
  
         public static int Seed { get; private set; }
@@ -24,8 +24,10 @@ namespace Assets.Scripts
             
             //PlanetDataBag = planetDataBag;
             PlanetDataBag.Value = planetDataBag;
-            SystemMapManager.Instance.SatelliteObjects = null;
-            SystemMapManager.Instance.CentralObject = null;
+            SystemMapManager.Instance.SatelliteObjects.Clear();
+            SystemMapManager.Instance.CentralObject.Value = default;
+            //SystemMapManager.Instance.SatelliteObjects = null;
+            //SystemMapManager.Instance.CentralObject = null;
 
             if(IsServer)
             {
@@ -58,7 +60,7 @@ namespace Assets.Scripts
             }
         }
 
-        private void ComputeSeed()
+        public void ComputeSeed()
         {
             Seed = (int)((PlanetDataBag.Value.Coordinates.x + PlanetDataBag.Value.Coordinates.y) * (PlanetDataBag.Value.Coordinates.x / Mathf.Max(Mathf.Abs(PlanetDataBag.Value.Coordinates.y), 7)));
         }

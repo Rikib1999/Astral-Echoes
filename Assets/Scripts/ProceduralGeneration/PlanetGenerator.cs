@@ -4,6 +4,7 @@ using Assets.Scripts.Planet;
 using System;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Unity.Netcode;
 
 public class PlanetGenerator : ChunkGenerator<PlanetChunk>
 {
@@ -24,12 +25,13 @@ public class PlanetGenerator : ChunkGenerator<PlanetChunk>
         base.Start();
 
         planetPaletteBag = new(GetPlanetPalette());
+        PlanetMapManager.Instance.ComputeSeed(); //Recompute the seed because the networkVariable is slow to synchronize
         NoiseS3D.seed = PlanetMapManager.Seed;
     }
 
     private PlanetPalette GetPlanetPalette()
     {
-        switch ((ePlanetType)PlanetMapManager.PlanetDataBag.Value.SubType)
+        switch ((ePlanetType)PlanetMapManager.Instance.PlanetDataBag.Value.SubType)
         {
             case ePlanetType.Airless: return planetPalettesList.airlessPlanets;
             case ePlanetType.Aquamarine: return planetPalettesList.aquamarinePlanets;
@@ -105,7 +107,8 @@ public class PlanetGenerator : ChunkGenerator<PlanetChunk>
 
                 if (tile.colliderType == Tile.ColliderType.Sprite && UnityEngine.Random.Range(0, 300) == 123)
                 {
-                    Instantiate(enemyPrefabs[UnityEngine.Random.Range(0, enemyPrefabs.Length)], new Vector3Int((ChunkSize * coords.x) + x, (ChunkSize * coords.y) + y, -1), Quaternion.identity);
+                    var enemy = Instantiate(enemyPrefabs[UnityEngine.Random.Range(0, enemyPrefabs.Length)], new Vector3Int((ChunkSize * coords.x) + x, (ChunkSize * coords.y) + y, -1), Quaternion.identity);
+                    enemy.GetComponent<NetworkObject>().Spawn();
                 }
             }
         }

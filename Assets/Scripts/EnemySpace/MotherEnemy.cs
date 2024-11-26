@@ -37,7 +37,10 @@ public class MotherEnemy : MonoBehaviour
 
     void Update()
     {
-        distance = Vector2.Distance(transform.position, player.transform.position);
+        if(player)
+        {
+            distance = Vector2.Distance(transform.position, player.transform.position);
+        }
 
         publicDistance = distance;
 
@@ -45,7 +48,7 @@ public class MotherEnemy : MonoBehaviour
         
         //Debug.Log("Distance: "+publicDistance);
 
-        if (distance < StopToSpawnDistance)
+        if (player && (distance < StopToSpawnDistance))
         {
             // Chase the player
             //chase = true;
