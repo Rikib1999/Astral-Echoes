@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 506541847755318954}
   - component: {fileID: 721256998924823717}
   m_Layer: 0
-  m_Name: Enemhyshi[5
+  m_Name: EnemyShip5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

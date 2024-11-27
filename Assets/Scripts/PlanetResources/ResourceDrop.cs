@@ -6,7 +6,7 @@ namespace Assets.Scripts.PlanetResources
 {
     public class ResourceDrop : MonoBehaviour
     {
-        [SerializeField] private eResourceType resourceType;
+        [SerializeField] public eResourceType resourceType;
 
         private new ParticleSystem particleSystem;
         private int health;
