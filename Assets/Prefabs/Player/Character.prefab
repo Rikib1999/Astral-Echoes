@@ -854,8 +854,8 @@ MonoBehaviour:
   dashDuration: 0.3
   dashCooldown: 1
   maxHealth: 100
-  healthBar: {fileID: 0}
-  dashBar: {fileID: 0}
+  healthBar: {fileID: 8210151442537754941}
+  dashBar: {fileID: 603415456703509948}
   dashAudioSource: {fileID: 2592547594608714400}
 --- !u!95 &7935891670201596183
 Animator:
