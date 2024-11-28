@@ -4,6 +4,7 @@ using Assets.Scripts.SpaceSystem;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using Unity.Netcode;
 
 public class MapGenerator : ChunkGenerator<MapChunk>
 {
@@ -27,6 +28,11 @@ public class MapGenerator : ChunkGenerator<MapChunk>
 
     private new void Start()
 	{
+        /*if(!IsServer){
+            enabled=false;
+            return;
+        }*/
+                    
 		base.Start();
 
         minSystemDist = (systemChunkSize / 2) / Mathf.Sqrt(2);
@@ -94,6 +100,7 @@ public class MapGenerator : ChunkGenerator<MapChunk>
         if (isStar)
         {
             var star = centralObject.GetComponent<Star>();
+            star.Randomize();
             systemDataBag.CentralObject = new SpaceObjectDataBag()
             {
                 Name = star.Name,
@@ -101,7 +108,7 @@ public class MapGenerator : ChunkGenerator<MapChunk>
                 Coordinates = star.transform.position,
                 RelativePosition = Vector2.zero,
                 Size = star.Size,
-                SubType= star.SubType,
+                SubType = (int)star.SubType,
                 Type= star.Type
             };
 
@@ -111,6 +118,7 @@ public class MapGenerator : ChunkGenerator<MapChunk>
         else
         {
             var blackHole = centralObject.GetComponent<BlackHole>();
+            blackHole.Randomize();
             systemDataBag.CentralObject = new SpaceObjectDataBag()
             {
                 Name = blackHole.Name,
@@ -118,7 +126,7 @@ public class MapGenerator : ChunkGenerator<MapChunk>
                 Coordinates = blackHole.transform.position,
                 RelativePosition = Vector2.zero,
                 Size = blackHole.Size,
-                SubType = blackHole.SubType,
+                SubType = (int)blackHole.SubType,
                 Type = blackHole.Type
             };
 
@@ -147,6 +155,7 @@ public class MapGenerator : ChunkGenerator<MapChunk>
             if (isPlanet)
             {
                 var planet = satelliteObject.GetComponent<Planet>();
+                planet.Randomize();
                 planet.SetOrbit(point, currentDist);
                 planet.SetTooltip();
 
@@ -157,7 +166,7 @@ public class MapGenerator : ChunkGenerator<MapChunk>
                     Coordinates = planet.transform.position,
                     RelativePosition = planet.transform.position - centralObject.transform.position,
                     Size = planet.Size,
-                    SubType = planet.SubType,
+                    SubType = (int)planet.SubType,
                     Type = planet.Type
                 });
 
@@ -167,6 +176,7 @@ public class MapGenerator : ChunkGenerator<MapChunk>
             else
             {
                 var gasGiant = satelliteObject.GetComponent<GasGiant>();
+                gasGiant.Randomize();
                 gasGiant.SetOrbit(point, currentDist);
                 gasGiant.SetTooltip();
 
@@ -177,7 +187,7 @@ public class MapGenerator : ChunkGenerator<MapChunk>
                     Coordinates = gasGiant.transform.position,
                     RelativePosition = gasGiant.transform.position - centralObject.transform.position,
                     Size = gasGiant.Size,
-                    SubType = gasGiant.SubType,
+                    SubType = (int)gasGiant.SubType,
                     Type = gasGiant.Type
                 });
 

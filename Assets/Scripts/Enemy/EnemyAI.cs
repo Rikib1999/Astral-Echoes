@@ -46,7 +46,7 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
-        if (isChasing)
+        if (player && isChasing)
         {
             //ChasePlayer();
             StopAndShoot();
@@ -56,7 +56,10 @@ public class EnemyAI : MonoBehaviour
             Roam();
         }
 
-        DetectPlayer();
+        if(player)
+        {
+            DetectPlayer();
+        }
     }
 
     private void FixedUpdate()

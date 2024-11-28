@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
+using Unity.Collections;
 
 namespace Assets.Scripts.SpaceSystem
 {
@@ -11,14 +13,52 @@ namespace Assets.Scripts.SpaceSystem
         public List<SpaceObjectDataBag> SatelliteObjects { get; set; } = new();
     }
 
-    public class SpaceObjectDataBag
+    [Serializable]
+    public struct SpaceObjectDataBag : INetworkSerializeByMemcpy, System.IEquatable<SpaceObjectDataBag>
     {
-        public string Name { get; set; }
-        public eSpaceObjectType Type { get; set; }
-        public Enum SubType { get; set; }
-        public float Size { get; set; }
-        public Vector2 Coordinates { get; set; }
-        public Vector2 RelativePosition { get; set; }
-        public float OrbitRadius { get; set; }
+        [SerializeField] public FixedString64Bytes Name ;//{ get; set; }
+        [SerializeField] public eSpaceObjectType Type ;//{ get; set; }
+        [SerializeField] public int SubType ;//{ get; set; }
+        [SerializeField] public float Size ;//{ get; set; }
+        [SerializeField] public Vector2 Coordinates ;//{ get; set; }
+        [SerializeField] public Vector2 RelativePosition ;//{ get; set; }
+        [SerializeField] public float OrbitRadius ;//{ get; set; }
+
+        public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
+        {
+            if (serializer.IsReader)
+            {
+                var reader = serializer.GetFastBufferReader();
+                reader.ReadValueSafe(out Name);
+                reader.ReadValueSafe(out Type);
+                reader.ReadValueSafe(out SubType);
+                reader.ReadValueSafe(out Size);
+                reader.ReadValueSafe(out Coordinates);
+                reader.ReadValueSafe(out RelativePosition);
+                reader.ReadValueSafe(out OrbitRadius);
+            }
+            else
+            {
+                var writer = serializer.GetFastBufferWriter();
+                writer.WriteValueSafe(Name);
+                writer.WriteValueSafe(Type);
+                writer.WriteValueSafe(SubType);
+                writer.WriteValueSafe(Size);
+                writer.WriteValueSafe(Coordinates);
+                writer.WriteValueSafe(RelativePosition);
+                writer.WriteValueSafe(OrbitRadius);
+            }
+        }
+
+        public bool Equals(SpaceObjectDataBag other)
+        {
+            return Name == other.Name
+            && Type == other.Type
+            && SubType == other.SubType
+            && Size == other.Size
+            && Coordinates == other.Coordinates
+            && RelativePosition == other.RelativePosition
+            && OrbitRadius == other.OrbitRadius;
+        }
     }
 }

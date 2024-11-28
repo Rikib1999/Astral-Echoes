@@ -3,6 +3,7 @@ using Assets.Scripts.Structs;
 using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using Unity.Netcode;
 
 namespace Assets.Scripts.SpaceObjects
 {
@@ -18,7 +19,8 @@ namespace Assets.Scripts.SpaceObjects
         public bool IsLandable { get; protected set; }
         protected Vector2 Coordinates { get; set; }
 
-        protected virtual void Awake()
+
+        public virtual void Randomize()
         {
             Coordinates = transform.position;
             SetName();
@@ -63,6 +65,8 @@ namespace Assets.Scripts.SpaceObjects
 
         public void SetSprite()
         {
+            //Debug.Log(Type);
+            //Debug.Log(SubType);
             int maxIndex = SpaceObjectSpriteManager.Instance.storage[Type][SubType].Length - 1;
             int index = Random.Range(0, maxIndex);
             GetComponent<SpriteRenderer>().sprite = SpaceObjectSpriteManager.Instance.storage[Type][SubType][index];

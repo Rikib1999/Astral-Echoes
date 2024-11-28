@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class Shotgun : MonoBehaviour
+public class Shotgun : NetworkBehaviour
 {
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] Transform firePoint;

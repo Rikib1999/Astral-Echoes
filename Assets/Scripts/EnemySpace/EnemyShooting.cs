@@ -25,9 +25,12 @@ public class ShootingEnemie : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        //Fix for error when player = null
+        if(!player)
+        {
+            return;
+        }
  
-
         float distance = Vector2.Distance(transform.position, player.transform.position);
 
         if(distance < chaseEnemy.chaseDistance )

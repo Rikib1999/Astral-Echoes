@@ -4,6 +4,7 @@ using Assets.Scripts.Planet;
 using System;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Unity.Netcode;
 
 public class PlanetGenerator : ChunkGenerator<PlanetChunk>
 {
@@ -29,13 +30,14 @@ public class PlanetGenerator : ChunkGenerator<PlanetChunk>
         base.Start();
 
         planetPaletteBag = new(GetPlanetPalette());
+        PlanetMapManager.Instance.ComputeSeed(); //Recompute the seed because the networkVariable is slow to synchronize
         SetPlanetResources();
         NoiseS3D.seed = PlanetMapManager.Seed;
     }
 
     private PlanetPalette GetPlanetPalette()
     {
-        switch ((ePlanetType)PlanetMapManager.PlanetDataBag.SubType)
+        switch ((ePlanetType)PlanetMapManager.Instance.PlanetDataBag.Value.SubType)
         {
             case ePlanetType.Airless: return planetPalettesList.airlessPlanets;
             case ePlanetType.Aquamarine: return planetPalettesList.aquamarinePlanets;
@@ -117,23 +119,24 @@ public class PlanetGenerator : ChunkGenerator<PlanetChunk>
 
                 tilemap.SetTile(new Vector3Int((ChunkSize * coords.x) + x, (ChunkSize * coords.y) + y, 0), tile);
 
-                if (/*tile.colliderType == Tile.ColliderType.Sprite && */UnityEngine.Random.Range(0, 300) == 123)
+                if (/*tile.colliderType == Tile.ColliderType.Sprite && */UnityEngine.Random.Range(0, 300) == 123 && IsServer)
                 {
-                    Instantiate(enemyPrefabs[UnityEngine.Random.Range(0, enemyPrefabs.Length)], new Vector3Int((ChunkSize * coords.x) + x, (ChunkSize * coords.y) + y, -1), Quaternion.identity);
+                    var enemy = Instantiate(enemyPrefabs[UnityEngine.Random.Range(0, enemyPrefabs.Length)], new Vector3Int((ChunkSize * coords.x) + x, (ChunkSize * coords.y) + y, -1), Quaternion.identity);
+                    enemy.GetComponent<NetworkObject>().Spawn();
                 }
-                else if (UnityEngine.Random.Range(0, 300) == 123)
+                else if (UnityEngine.Random.Range(0, 300) == 123 && IsServer)
                 {
                     Instantiate(treePrefabs[UnityEngine.Random.Range(0, treePrefabs.Length)], new Vector3Int((ChunkSize * coords.x) + x, (ChunkSize * coords.y) + y, -1), Quaternion.identity);
                 }
-                else if (UnityEngine.Random.Range(0, 300) == 123)
+                else if (UnityEngine.Random.Range(0, 300) == 123 && IsServer)
                 {
                     Instantiate(bushPrefabs[UnityEngine.Random.Range(0, bushPrefabs.Length)], new Vector3Int((ChunkSize * coords.x) + x, (ChunkSize * coords.y) + y, -1), Quaternion.identity);
                 }
-                else if (UnityEngine.Random.Range(0, 300) == 123)
+                else if (UnityEngine.Random.Range(0, 300) == 123 && IsServer)
                 {
                     Instantiate(stonePrefabs[UnityEngine.Random.Range(0, stonePrefabs.Length)], new Vector3Int((ChunkSize * coords.x) + x, (ChunkSize * coords.y) + y, -1), Quaternion.identity);
                 }
-                else if (UnityEngine.Random.Range(0, 300) == 123)
+                else if (UnityEngine.Random.Range(0, 300) == 123 && IsServer)
                 {
                     Instantiate(crystalPrefabs[UnityEngine.Random.Range(0, crystalPrefabs.Length)], new Vector3Int((ChunkSize * coords.x) + x, (ChunkSize * coords.y) + y, -1), Quaternion.identity);
                 }

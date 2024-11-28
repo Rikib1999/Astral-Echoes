@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.Enums;
+﻿﻿using Assets.Scripts.Enums;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,9 +11,10 @@ namespace Assets.Scripts
 
         public Dictionary<eSpaceObjectType, Dictionary<Enum, Sprite[]>> storage;
 
-        private void Start()
+        protected override void Awake()
         {
             FillStorage();
+            base.Awake();
         }
 
         private void FillStorage()

@@ -532,7 +532,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 4299907772752605265, guid: 08a9d5641844c80468c66281f5ad623c, type: 3}
-  firePoint: {fileID: 0}
+  firePoint: {fileID: 405134879617916191}
   shootingTime: 2
   bulletSource: {fileID: 5427265848207959148}
   crosshair: {fileID: 8577651889921150955}
@@ -548,6 +548,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 150e69a8ca35f7040bcda4163a08bcb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fuelConsumptionRate: 5
   maxHealth: 100
   maxShield: 50
   maxFuel: 100

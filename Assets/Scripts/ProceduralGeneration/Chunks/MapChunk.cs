@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.SpaceObjects;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
 namespace Assets.Scripts
 {

@@ -7,7 +7,7 @@ namespace Assets.Scripts
     {
         public static T Instance;
 
-        protected virtual void Awake()
+        public virtual void Start()
         {
             CreateSingleton();
         }
@@ -18,14 +18,14 @@ namespace Assets.Scripts
 
             if (Instance == null)
             {
-                Instance = GetComponent<T>();
+                Instance = this as T;
+                DontDestroyOnLoad(gameObject);
             }
             else
             {
                 Destroy(gameObject);
             }
 
-            DontDestroyOnLoad(gameObject);
         }
     }
 }

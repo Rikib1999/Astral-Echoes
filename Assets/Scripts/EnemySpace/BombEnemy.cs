@@ -33,13 +33,16 @@ public class BombEnemy : MonoBehaviour
 
     void Update()
     {
-        distance = Vector2.Distance(transform.position, player.transform.position);
+        if(player)
+        {
+            distance = Vector2.Distance(transform.position, player.transform.position);
+        }
 
         publicDistance = distance;
 
         //Debug.Log("Distance: "+publicDistance);
 
-        if (distance < chesDist)
+        if (player && (distance < chesDist))
         {
             // Chase the player
             chase = true;
