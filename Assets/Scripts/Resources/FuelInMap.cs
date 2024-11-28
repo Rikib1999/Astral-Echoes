@@ -10,7 +10,7 @@ public class FuelInMap : MonoBehaviour
 
     private void Start()
     {
-        fuel = PlayerPrefs.GetFloat("fuel");
+        fuel = PlayerPrefs.GetFloat("fuel", 3000);
         fuelText.text = fuel.ToString();
         maxFuelText.text = PlayerPrefs.GetFloat("maxFuel").ToString();
     }

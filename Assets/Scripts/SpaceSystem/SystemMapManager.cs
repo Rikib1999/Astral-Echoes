@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Unity.Netcode;
+using Assets.Scripts.Structs;
 
 namespace Assets.Scripts
 {
@@ -25,9 +26,7 @@ namespace Assets.Scripts
         [field: SerializeField] public NetworkList<SpaceObjectDataBag> SatelliteObjects;// { get => SatelliteObjects.Value; set => SatelliteObjects.Value = value; }
         //public NetworkList<SpaceObjectDataBag> SatelliteObjects { get => satelliteObjects.Value; set => satelliteObjects.Value = value; }
         
-
         public const float scaleUpConst = 10;
-
 
         public override void OnDestroy()
         {
@@ -38,11 +37,13 @@ namespace Assets.Scripts
             }
            base.OnDestroy();
         }
+
         public void Awake(){
             //base.Awake();
             //GetComponent<NetworkObject>().Spawn();
             SatelliteObjects = new NetworkList<SpaceObjectDataBag>();
         }
+
         public override void Start()
         {
             base.Start();
@@ -60,23 +61,32 @@ namespace Assets.Scripts
             {
                 return;
             }
-            if (CentralObject == null) return;
+            if (CentralObject == null || CentralObject.Value.Type == 0) return;
 
             GenerateSystem();
         }
+
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            if (CentralObject == null) return;
+            if (CentralObject == null || CentralObject.Value.Type == 0) return;
             //Debug.Log(JsonUtility.ToJson(Instance.gameObject.GetComponent<SystemDataBag>(), true));
             GenerateSystem();
         }
 
         public void EnterSystem(SystemDataBag systemDataBag)
         {
+            if (!systemDataBag.CanTravel) return;
+
+            PlayerPrefs.SetFloat("fuel", systemDataBag.Fuel - systemDataBag.Distance);
+
             //Instance.gameObject.AddComponent<SystemDataBag>();
             //Instance.gameObject.GetComponent<NetworkObject>().Spawn(false);
             //var bag = Instance.gameObject.GetComponent<SystemDataBag>();
             //SatelliteObjects = new NetworkList<SpaceObjectDataBag>();
+
+            PlayerPrefs.SetFloat("currentSystemPositionX", systemDataBag.Position.x);
+            PlayerPrefs.SetFloat("currentSystemPositionY", systemDataBag.Position.y);
+
             CentralObject.Value = systemDataBag.CentralObject;
             foreach(SpaceObjectDataBag satObject in systemDataBag.SatelliteObjects)
             {

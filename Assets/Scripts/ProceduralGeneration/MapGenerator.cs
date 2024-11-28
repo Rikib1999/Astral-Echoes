@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using Unity.Netcode;
+using Assets.Scripts.Structs;
 
 public class MapGenerator : ChunkGenerator<MapChunk>
 {
@@ -16,6 +17,8 @@ public class MapGenerator : ChunkGenerator<MapChunk>
 
     private float minSystemDist;
     private float maxSystemRadius;
+
+    private Vector2 playerPos;
 
     protected override int ChunkSize { get; set; } = 2048;
     protected override int MaxExistingChunks { get; set; } = 4;
@@ -32,8 +35,11 @@ public class MapGenerator : ChunkGenerator<MapChunk>
             enabled=false;
             return;
         }*/
-                    
-		base.Start();
+
+        player.position = new(PlayerPrefs.GetFloat("currentSystemPositionX"), PlayerPrefs.GetFloat("currentSystemPositionY"), -10);
+        playerPos = player.position;
+
+        base.Start();
 
         minSystemDist = (systemChunkSize / 2) / Mathf.Sqrt(2);
         maxSystemRadius = minSystemDist / 2;
@@ -93,6 +99,13 @@ public class MapGenerator : ChunkGenerator<MapChunk>
 
         bool isStar = Random.Range(0, int.MaxValue) % blackHoleChance != 0;
 
+        systemDataBag.Position = point;
+
+        float distance = Vector2.Distance(systemDataBag.Position, playerPos);
+        systemDataBag.Distance = distance;
+        systemDataBag.Fuel = PlayerPrefs.GetFloat("fuel", 3000);
+        systemDataBag.CanTravel = systemDataBag.Fuel >= distance;
+
         var centralObjectPrefab = isStar ? starPrefab : blackHolePrefab;
         var centralObject = Instantiate(centralObjectPrefab, new Vector3(point.x, point.y, 0), Quaternion.identity);
         spaceObjects.Add(centralObject);
@@ -114,6 +127,7 @@ public class MapGenerator : ChunkGenerator<MapChunk>
 
             star.AddComponent<SpaceSystemClick>();
             star.GetComponent<SpaceSystemClick>().systemDataBag = systemDataBag;
+            star.SetTooltipDistance(systemDataBag.CanTravel, distance);
         }
         else
         {
@@ -132,6 +146,7 @@ public class MapGenerator : ChunkGenerator<MapChunk>
 
             blackHole.AddComponent<SpaceSystemClick>();
             blackHole.GetComponent<SpaceSystemClick>().systemDataBag = systemDataBag;
+            blackHole.SetTooltipDistance(systemDataBag.CanTravel, distance);
         }
 
         float currentDist = 0;
@@ -172,6 +187,7 @@ public class MapGenerator : ChunkGenerator<MapChunk>
 
                 planet.AddComponent<SpaceSystemClick>();
                 planet.GetComponent<SpaceSystemClick>().systemDataBag = systemDataBag;
+                planet.SetTooltipDistance(systemDataBag.CanTravel, distance);
             }
             else
             {
@@ -193,6 +209,7 @@ public class MapGenerator : ChunkGenerator<MapChunk>
 
                 gasGiant.AddComponent<SpaceSystemClick>();
                 gasGiant.GetComponent<SpaceSystemClick>().systemDataBag = systemDataBag;
+                gasGiant.SetTooltipDistance(systemDataBag.CanTravel, distance);
             }
         }
 

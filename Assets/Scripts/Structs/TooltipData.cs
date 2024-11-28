@@ -3,7 +3,7 @@ using System;
 
 namespace Assets.Scripts.Structs
 {
-    public readonly struct TooltipData
+    public struct TooltipData
     {
         public readonly string name;
         public readonly eSpaceObjectType type;
@@ -13,6 +13,8 @@ namespace Assets.Scripts.Structs
         public readonly float size;
         public readonly float orbitDistance;
         public readonly bool isLandable;
+        public bool canTravel;
+        public float distance;
 
         public TooltipData(string name, eSpaceObjectType type, Enum subType, float posX, float posY, float size, float orbitDistance, bool isLandable)
         {
@@ -24,6 +26,8 @@ namespace Assets.Scripts.Structs
             this.size = size;
             this.orbitDistance = orbitDistance;
             this.isLandable = isLandable;
+            canTravel = false;
+            distance = 0;
         }
     }
 }

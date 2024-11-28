@@ -77,6 +77,13 @@ namespace Assets.Scripts.SpaceObjects
             GetComponent<TooltipSetter>().tooltipData = new TooltipData(Name, Type, SubType, Coordinates.x, Coordinates.y, Size / scaleDownConst, 0, IsLandable);
         }
 
+        public void SetTooltipDistance(bool canTravel, float distance)
+        {
+            var t = GetComponent<TooltipSetter>();
+            t.tooltipData.canTravel = canTravel;
+            t.tooltipData.distance = distance;
+        }
+
         public void SetSize(float size)
         {
             transform.localScale = new Vector3(size, size, 1);

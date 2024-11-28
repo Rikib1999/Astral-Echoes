@@ -14,6 +14,7 @@ public class TooltipManager : MonoBehaviour
     public TextMeshProUGUI orbitDistanceLabel;
     public TextMeshProUGUI orbitDistanceText;
     public TextMeshProUGUI isLandableText;
+    public TextMeshProUGUI distanceText;
 
     private void Start()
     {
@@ -57,6 +58,19 @@ public class TooltipManager : MonoBehaviour
             isLandableText.text = "Not landable";
             isLandableText.color = Color.gray;
         }
+
+        if (tooltipData.distance == 0)
+        {
+            distanceText.text = "Current system";
+        }
+        else if (tooltipData.canTravel)
+        {
+            distanceText.text = "Fuel needed: " + tooltipData.distance;
+        }
+        else
+        {
+            distanceText.text = "Not enough fuel\n(" + tooltipData.distance + ")";
+        }
     }
 
     public void HideToolTip()
@@ -69,5 +83,6 @@ public class TooltipManager : MonoBehaviour
         sizeText.text = string.Empty;
         orbitDistanceText.text = string.Empty;
         isLandableText.text = string.Empty;
+        distanceText.text = string.Empty;
     }
 }

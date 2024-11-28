@@ -9,6 +9,10 @@ namespace Assets.Scripts.SpaceSystem
 {
     public class SystemDataBag
     {
+        public bool CanTravel { get; set; }
+        public float Distance { get; set; }
+        public float Fuel { get; set; }
+        public Vector2 Position { get; set; }
         public SpaceObjectDataBag CentralObject { get; set; }
         public List<SpaceObjectDataBag> SatelliteObjects { get; set; } = new();
     }
