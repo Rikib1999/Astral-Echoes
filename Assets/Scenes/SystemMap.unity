@@ -1427,6 +1427,11 @@ MonoBehaviour:
   - {fileID: 9040468951012162567, guid: bfc2fd14f6023f84ab7c55cc7a4c46d1, type: 3}
   - {fileID: 7475119080331930194, guid: ea4305d9a62d21d4eb570c68d0faaa49, type: 3}
   - {fileID: 3430764061618806681, guid: ca5ee3d6d4435644088fc10b36930ed2, type: 3}
+  - {fileID: 1025626754520705650, guid: 16839387cc68041488efe566815c0caa, type: 3}
+  - {fileID: 6848828580141004010, guid: 9d5e89ed6cc58024abb8d8b1540689a4, type: 3}
+  - {fileID: 91088110751259815, guid: 52562351a01b9044082674ea8c0c9f94, type: 3}
+  - {fileID: 2604211671479331917, guid: 84c061e145e4bc648bea0064a161829e, type: 3}
+  - {fileID: 417659375524679898, guid: 400b0713eb33b5f4eb08e35a9efaef0b, type: 3}
 --- !u!4 &1273534056
 Transform:
   m_ObjectHideFlags: 0
@@ -1568,7 +1573,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7d949bac78b5ff4ab366534ee157482, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zoomSpeed: 40
+  zoomSpeed: 120
 --- !u!1 &1574122335
 GameObject:
   m_ObjectHideFlags: 0
