@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using Unity.Netcode;
 using Assets.Scripts.Structs;
+using Assets.Scripts.Resources;
 
 public class MapGenerator : ChunkGenerator<MapChunk>
 {
@@ -36,7 +37,7 @@ public class MapGenerator : ChunkGenerator<MapChunk>
             return;
         }*/
 
-        player.position = new(PlayerPrefs.GetFloat("currentSystemPositionX"), PlayerPrefs.GetFloat("currentSystemPositionY"), -10);
+        player.position = new(PlayerPrefs.GetFloat("currentSystemPositionX", 0), PlayerPrefs.GetFloat("currentSystemPositionY", 0), -10);
         playerPos = player.position;
 
         base.Start();
@@ -103,7 +104,7 @@ public class MapGenerator : ChunkGenerator<MapChunk>
 
         float distance = Vector2.Distance(systemDataBag.Position, playerPos);
         systemDataBag.Distance = distance;
-        systemDataBag.Fuel = PlayerPrefs.GetFloat("fuel", 3000);
+        systemDataBag.Fuel = PlayerPrefs.GetFloat("fuel", ResourceDefaultValues.Fuel);
         systemDataBag.CanTravel = systemDataBag.Fuel >= distance;
 
         var centralObjectPrefab = isStar ? starPrefab : blackHolePrefab;

@@ -7,7 +7,6 @@ public class EnemySpawner : NetworkBehaviour
 {
     [SerializeField] private GameObject[] enemyPrefabs;
 
-
     private void Start()
     {
         if(!IsServer)
@@ -22,7 +21,7 @@ public class EnemySpawner : NetworkBehaviour
             maxOrbit = Mathf.Max(maxOrbit, satObject.OrbitRadius);
         }
 
-        int count = Random.Range(50, 80);
+        int count = Random.Range(30, 50);
 
         for (int i = 0; i < count; i++)
         {

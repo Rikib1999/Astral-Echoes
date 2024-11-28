@@ -1,3 +1,4 @@
+using Assets.Scripts.Resources;
 using TMPro;
 using UnityEngine;
 
@@ -13,18 +14,18 @@ public class ResourceTextUpdater : MonoBehaviour
 
     private void Start()
     {
-        waterText.text = PlayerPrefs.GetFloat("water").ToString();
-        foodText.text = PlayerPrefs.GetFloat("food").ToString();
-        energyText.text = PlayerPrefs.GetFloat("energy").ToString();
-        fuelText.text = PlayerPrefs.GetFloat("fuel").ToString();
-        maxFuelText.text = PlayerPrefs.GetFloat("maxFuel").ToString();
-        metalText.text = PlayerPrefs.GetFloat("metal").ToString();
+        waterText.text = PlayerPrefs.GetFloat("water", ResourceDefaultValues.Water).ToString();
+        foodText.text = PlayerPrefs.GetFloat("food", ResourceDefaultValues.Food).ToString();
+        energyText.text = PlayerPrefs.GetFloat("energy", ResourceDefaultValues.Energy).ToString();
+        fuelText.text = PlayerPrefs.GetFloat("fuel", ResourceDefaultValues.Fuel).ToString();
+        maxFuelText.text = PlayerPrefs.GetFloat("maxFuel", ResourceDefaultValues.MaxFuel).ToString();
+        metalText.text = PlayerPrefs.GetFloat("metal", ResourceDefaultValues.Metal).ToString();
     }
 
-    public void UpdateWater() => waterText.text = PlayerPrefs.GetFloat("water").ToString();
-    public void UpdateFood() => foodText.text = PlayerPrefs.GetFloat("food").ToString();
-    public void UpdateEnergy() => energyText.text = PlayerPrefs.GetFloat("energy").ToString();
-    public void UpdateFuel() => fuelText.text = PlayerPrefs.GetFloat("fuel").ToString();
-    public void UpdateMaxFuel() => maxFuelText.text = PlayerPrefs.GetFloat("maxFuel").ToString();
-    public void UpdateMetal() => metalText.text = PlayerPrefs.GetFloat("metal").ToString();
+    public void UpdateWater() => waterText.text = PlayerPrefs.GetFloat("water", ResourceDefaultValues.Water).ToString();
+    public void UpdateFood() => foodText.text = PlayerPrefs.GetFloat("food", ResourceDefaultValues.Food).ToString();
+    public void UpdateEnergy() => energyText.text = PlayerPrefs.GetFloat("energy", ResourceDefaultValues.Energy).ToString();
+    public void UpdateFuel() => fuelText.text = PlayerPrefs.GetFloat("fuel", ResourceDefaultValues.Fuel).ToString();
+    public void UpdateMaxFuel() => maxFuelText.text = PlayerPrefs.GetFloat("maxFuel", ResourceDefaultValues.MaxFuel).ToString();
+    public void UpdateMetal() => metalText.text = PlayerPrefs.GetFloat("metal", ResourceDefaultValues.Metal).ToString();
 }
