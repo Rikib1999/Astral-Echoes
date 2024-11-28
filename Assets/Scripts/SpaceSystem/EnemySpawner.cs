@@ -1,8 +1,7 @@
 using Assets.Scripts;
 using Assets.Scripts.SpaceSystem;
-using System.Linq;
-using UnityEngine;
 using Unity.Netcode;
+using UnityEngine;
 
 public class EnemySpawner : NetworkBehaviour
 {
@@ -23,13 +22,15 @@ public class EnemySpawner : NetworkBehaviour
             maxOrbit = Mathf.Max(maxOrbit, satObject.OrbitRadius);
         }
 
-        int count = Random.Range(10, 30);
+        int count = Random.Range(50, 80);
 
         for (int i = 0; i < count; i++)
         {
-            var enemy = Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)], new Vector3(Random.Range(3, maxOrbit) * SystemMapManager.scaleUpConst, Random.Range(3, maxOrbit) * SystemMapManager.scaleUpConst, -5), Quaternion.identity);
-            enemy.GetComponent<NetworkObject>().Spawn(true);
+            int signX = Random.Range(0, 2) > 0 ? 1 : -1;
+            int signY = Random.Range(0, 2) > 0 ? 1 : -1;
 
+            var enemy = Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)], new Vector3(Random.Range(3, maxOrbit) * SystemMapManager.scaleUpConst * signX, Random.Range(3, maxOrbit) * SystemMapManager.scaleUpConst * signY, -5), Quaternion.identity);
+            enemy.GetComponent<NetworkObject>().Spawn(true);
         }
     }
 }

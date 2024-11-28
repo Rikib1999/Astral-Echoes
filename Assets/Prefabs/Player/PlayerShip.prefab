@@ -149,8 +149,8 @@ Transform:
   m_GameObject: {fileID: 8954185768799606110}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.36, y: -1.58, z: 0}
-  m_LocalScale: {x: 0.20549306, y: 0.20549306, z: 0.20549306}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4468710228051611538}
   - {fileID: 405134879617916191}
@@ -197,7 +197,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 3d739676f2b7d0a4eb21f4cf5bd2fb32, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3883665097
+  GlobalObjectIdHash: 1536615368
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -243,7 +243,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crosshair: {fileID: 8577651889921150955}
-  speed: 4
+  speed: 100
 --- !u!50 &3059447399479625339
 Rigidbody2D:
   serializedVersion: 4
@@ -548,7 +548,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 150e69a8ca35f7040bcda4163a08bcb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fuelConsumptionRate: 5
+  fuelConsumptionRate: 0
   maxHealth: 100
   maxShield: 50
   maxFuel: 100

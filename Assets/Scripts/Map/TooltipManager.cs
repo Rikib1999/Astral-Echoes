@@ -59,6 +59,8 @@ public class TooltipManager : MonoBehaviour
             isLandableText.color = Color.gray;
         }
 
+        if (distanceText == null) return;
+
         if (tooltipData.distance == 0)
         {
             distanceText.text = "Current system";
@@ -83,6 +85,9 @@ public class TooltipManager : MonoBehaviour
         sizeText.text = string.Empty;
         orbitDistanceText.text = string.Empty;
         isLandableText.text = string.Empty;
+
+        if (distanceText == null) return;
+
         distanceText.text = string.Empty;
     }
 }

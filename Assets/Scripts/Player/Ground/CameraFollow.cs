@@ -14,6 +14,7 @@ namespace Assets.Scripts.Player
             if(player == null){return;}
             transform.position = Vector3.SmoothDamp(transform.position, new Vector3(player.position.x, player.position.y, transform.position.z), ref velocity, smoothTime);
         }
+
         public Transform Target
         {
             get { return player;}

@@ -43,10 +43,10 @@ GameObject:
   - component: {fileID: 6541957417965888140}
   - component: {fileID: 8422406371118146692}
   - component: {fileID: 314699502200082688}
+  - component: {fileID: -3553439017374942358}
   - component: {fileID: 1733507345998717400}
   - component: {fileID: 3205462183919657003}
   - component: {fileID: 5708543622591263367}
-  - component: {fileID: -3553439017374942358}
   - component: {fileID: 5952980463317554957}
   m_Layer: 0
   m_Name: Mothership
@@ -64,8 +64,8 @@ Transform:
   m_GameObject: {fileID: 9040468951012162567}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.65, y: -0.4554534, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 7.5, y: 7.5, z: 5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4788348895208607251}
   m_Father: {fileID: 0}
@@ -111,7 +111,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: d38b6a82b1ec4b14db956ebc2e6f9aec, type: 3}
   m_Color: {r: 0.8773585, g: 0.6166341, b: 0.6166341, a: 1}
   m_FlipX: 0
@@ -195,6 +195,27 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-3553439017374942358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9040468951012162567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3453522935
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!114 &1733507345998717400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,27 +264,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 30
   maxShield: 150
---- !u!114 &-3553439017374942358
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9040468951012162567}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3453522935
-  InScenePlacedSourceGlobalObjectIdHash: 0
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
 --- !u!114 &5952980463317554957
 MonoBehaviour:
   m_ObjectHideFlags: 0

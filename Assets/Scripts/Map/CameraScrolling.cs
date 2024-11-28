@@ -7,8 +7,9 @@ public class CameraScrolling : MonoBehaviour
 
     private Camera cam;
     private Vector3 dragOrigin;
-    
+
     [SerializeField] private float zoomSpeed = 40f;
+    [SerializeField] private bool canDrag = true;
 
     private void Start()
     {
@@ -17,13 +18,16 @@ public class CameraScrolling : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(1)) dragOrigin = cam.ScreenToWorldPoint(Input.mousePosition);
-
-        if (Input.GetMouseButton(1))
+        if (canDrag)
         {
-            Vector3 difference = dragOrigin - cam.ScreenToWorldPoint(Input.mousePosition);
+            if (Input.GetMouseButtonDown(1)) dragOrigin = cam.ScreenToWorldPoint(Input.mousePosition);
 
-            cam.transform.position += difference;
+            if (Input.GetMouseButton(1))
+            {
+                Vector3 difference = dragOrigin - cam.ScreenToWorldPoint(Input.mousePosition);
+
+                cam.transform.position += difference;
+            }
         }
 
         if (Input.GetAxis("Mouse ScrollWheel") == 0) return;
