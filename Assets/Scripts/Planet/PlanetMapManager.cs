@@ -1,7 +1,7 @@
 ﻿using Assets.Scripts.SpaceSystem;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Unity.Netcode;
 
 namespace Assets.Scripts
 {
@@ -16,8 +16,6 @@ namespace Assets.Scripts
  
         public static int Seed { get; private set; }
 
-
-
         public void LandPlanet(SpaceObjectDataBag planetDataBag)
         {
             //Debug.Log(JsonUtility.ToJson(SystemMapManager.Instance.gameObject.GetComponent<SystemDataBag>(), true));
@@ -29,7 +27,7 @@ namespace Assets.Scripts
             //SystemMapManager.Instance.SatelliteObjects = null;
             //SystemMapManager.Instance.CentralObject = null;
 
-            if(IsServer)
+            if (IsServer)
             {
                 LoadPlanetSceneClientRpc();
                 LoadPlanetScene();
@@ -48,6 +46,7 @@ namespace Assets.Scripts
                 Debug.LogWarning($"Failed to load planet scene with a {nameof(SceneEventProgressStatus)}: {status}");
             }*/
         }
+
         private void LoadPlanetScene()
         {
             ComputeSeed();

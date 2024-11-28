@@ -17,10 +17,15 @@ public class ResourceTextUpdater : MonoBehaviour
         waterText.text = PlayerPrefs.GetFloat("water", ResourceDefaultValues.Water).ToString();
         foodText.text = PlayerPrefs.GetFloat("food", ResourceDefaultValues.Food).ToString();
         energyText.text = PlayerPrefs.GetFloat("energy", ResourceDefaultValues.Energy).ToString();
-        fuelText.text = PlayerPrefs.GetFloat("fuel", ResourceDefaultValues.Fuel).ToString();
-        maxFuelText.text = PlayerPrefs.GetFloat("maxFuel", ResourceDefaultValues.MaxFuel).ToString();
+        if (fuelText != null) fuelText.text = PlayerPrefs.GetFloat("fuel", ResourceDefaultValues.Fuel).ToString();
+        if (maxFuelText != null) maxFuelText.text = PlayerPrefs.GetFloat("maxFuel", ResourceDefaultValues.MaxFuel).ToString();
         metalText.text = PlayerPrefs.GetFloat("metal", ResourceDefaultValues.Metal).ToString();
     }
+
+    public void SetWater(float amount) => waterText.text = amount.ToString();
+    public void SetFood(float amount) => foodText.text = amount.ToString();
+    public void SetEnergy(float amount) => energyText.text = amount.ToString();
+    public void SetMetal(float amount) => metalText.text = amount.ToString();
 
     public void UpdateWater() => waterText.text = PlayerPrefs.GetFloat("water", ResourceDefaultValues.Water).ToString();
     public void UpdateFood() => foodText.text = PlayerPrefs.GetFloat("food", ResourceDefaultValues.Food).ToString();

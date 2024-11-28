@@ -1,12 +1,10 @@
 using Assets.Scripts;
+using Assets.Scripts.Resources;
 using Assets.Scripts.SpaceObjects;
 using Assets.Scripts.SpaceSystem;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using Unity.Netcode;
-using Assets.Scripts.Structs;
-using Assets.Scripts.Resources;
 
 public class MapGenerator : ChunkGenerator<MapChunk>
 {

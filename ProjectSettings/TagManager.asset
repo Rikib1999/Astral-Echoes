@@ -10,6 +10,7 @@ TagManager:
   - CraftTable
   - PlanetResource
   - enemy
+  - ResourcesText
   layers:
   - Default
   - TransparentFX

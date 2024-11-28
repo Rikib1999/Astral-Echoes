@@ -18,7 +18,7 @@ namespace Assets.Scripts.SpaceSystem
     }
 
     [Serializable]
-    public struct SpaceObjectDataBag : INetworkSerializeByMemcpy, System.IEquatable<SpaceObjectDataBag>
+    public struct SpaceObjectDataBag : INetworkSerializeByMemcpy, IEquatable<SpaceObjectDataBag>
     {
         [SerializeField] public FixedString64Bytes Name ;//{ get; set; }
         [SerializeField] public eSpaceObjectType Type ;//{ get; set; }
