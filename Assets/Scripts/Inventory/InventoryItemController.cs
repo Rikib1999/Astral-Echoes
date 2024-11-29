@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,13 +32,23 @@ public class InventoryItemController : MonoBehaviour
                 ShipHealth.Instance.IncreaseFuel(item.value);
                 //RemoveInventoryItem();
                 break;
+            case Item.ItemType.Resource:
+                Debug.Log("Not implemented yet.");
+                break;
+            case Item.ItemType.Food:
+                Debug.Log("Not implemented yet.");
+                break;
             default:
                 Debug.Log("No more item types");
                 break;
 
         }
 
-        RemoveInventoryItem();
+        if(item.itemType != Item.ItemType.Resource)
+        {
+            RemoveInventoryItem();
+        }
+        
 
     }
 

@@ -18,6 +18,7 @@ public class Item : ScriptableObject
     public enum ItemType
     {
         Resource,
+        Food,
         Fuel,
         Potion
     }
