@@ -45,6 +45,7 @@ public class InventoryManager : MonoBehaviour
 
     public void ListItems()
     {
+        RemoveDuplicate();
 
         foreach (var item in items)
         {
@@ -55,7 +56,7 @@ public class InventoryManager : MonoBehaviour
             ItemName.text = item.itemName;
             ItemIcon.sprite = item.icon;
         }
-
+        //Debug.Log("WTF");
         SetInventoryItems();
     }
 

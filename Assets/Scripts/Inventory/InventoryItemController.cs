@@ -25,9 +25,11 @@ public class InventoryItemController : MonoBehaviour
         {
             case Item.ItemType.Potion:
                 PlayerLogic.Instance.IncreaseHealth(item.value);
+                //RemoveInventoryItem();
                 break;
             case Item.ItemType.Fuel:
                 ShipHealth.Instance.IncreaseFuel(item.value);
+                //RemoveInventoryItem();
                 break;
             default:
                 Debug.Log("No more item types");
