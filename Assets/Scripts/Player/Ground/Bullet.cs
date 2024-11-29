@@ -9,9 +9,21 @@ public class Bullet : NetworkBehaviour
     [SerializeField] string enemyTag;
     [SerializeField] string resourceTag;
 
+    private Vector2 bulletDirection;
+
+    private void Awake()
+    {
+        Transform player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        if (player.localScale.x < 0)
+            bulletDirection = Vector2.left;
+        else
+            bulletDirection = Vector2.right;
+    }
+
     void Update()
     {
-        transform.Translate(speed * Time.deltaTime * Vector3.right);
+        transform.Translate(speed * Time.deltaTime * Vector3.right * bulletDirection);
     }
 
     private void OnBecameInvisible()
@@ -36,8 +48,8 @@ public class Bullet : NetworkBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag(enemyTag))
-        { 
-            collision.gameObject.GetComponent<EnemyShipHealth>().damage(bulletDamage);
+        {
+            collision.gameObject.GetComponent<EnemyLogic>().damage(bulletDamage);
             Destroy(gameObject);
         }
         else if (collision.gameObject.CompareTag(resourceTag))

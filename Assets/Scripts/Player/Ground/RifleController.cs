@@ -28,15 +28,19 @@ public class RifleController : NetworkBehaviour
     void Shoot()
     {
         audioSource.Play();
-        if (IsServer){
-            var playerNetworkObject = NetworkManager.SpawnManager.InstantiateAndSpawn(bulletPrefab,NetworkManager.ServerClientId,true,false,true,firePoint.position,firePoint.rotation);
-        }else{
+        if (IsServer)
+        {
+            var playerNetworkObject = NetworkManager.SpawnManager.InstantiateAndSpawn(bulletPrefab, NetworkManager.ServerClientId, true, false, true, firePoint.position, firePoint.rotation);
+        }
+        else
+        {
             SpawnBulletServerRpc();
         }
     }
 
     [ServerRpc(RequireOwnership = false)]
-    void SpawnBulletServerRpc(ServerRpcParams serverRpcParams = default){
-        var playerNetworkObject = NetworkManager.SpawnManager.InstantiateAndSpawn(bulletPrefab,serverRpcParams.Receive.SenderClientId,true,false,true,firePoint.position,firePoint.rotation);
+    void SpawnBulletServerRpc(ServerRpcParams serverRpcParams = default)
+    {
+        var playerNetworkObject = NetworkManager.SpawnManager.InstantiateAndSpawn(bulletPrefab, serverRpcParams.Receive.SenderClientId, true, false, true, firePoint.position, firePoint.rotation);
     }
 }

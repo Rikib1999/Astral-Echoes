@@ -7,7 +7,7 @@ public class PistolController : NetworkBehaviour
     [SerializeField] Transform firePoint;
     [SerializeField] float pistolFireRate = 0.5f;
     [SerializeField] AudioSource audioSource;
-    
+
     private float nextFireTime = 0f;
 
     public override void OnNetworkSpawn()

@@ -1,13 +1,16 @@
 using Assets.Scripts.Enums;
 using Assets.Scripts.PlanetResources;
 using Assets.Scripts.Resources;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerLogic : MonoBehaviour
 {
     public static PlayerLogic Instance;
     private int health;
     [SerializeField] int maxHealth;
+    [SerializeField] Slider healthBar;
 
     private float water;
     private float food;
@@ -16,10 +19,14 @@ public class PlayerLogic : MonoBehaviour
     private float particleValue = 0.1f;
     private int particleCounter = 0;
     private ResourceTextUpdater resourceTextUpdater;
+    private SpriteRenderer spriteRenderer;
 
     private void Start()
     {
         health = maxHealth;
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        healthBar.maxValue = maxHealth;
+        healthBar.value = health;
 
         water = PlayerPrefs.GetFloat("water", ResourceDefaultValues.Water);
         food = PlayerPrefs.GetFloat("food", ResourceDefaultValues.Food);
@@ -44,11 +51,21 @@ public class PlayerLogic : MonoBehaviour
     public void damage(int damage)
     {
         health -= damage;
-        Debug.Log("Player Health: " + health);
+        health = Mathf.Clamp(health, 0, maxHealth);
+        healthBar.value = health;
+        StartCoroutine(ShowDamage());
+
         if (health <= 0)
         {
             Destroy(gameObject);
         }
+    }
+
+    private IEnumerator ShowDamage()
+    {
+        spriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(1);
+        spriteRenderer.color = Color.white;
     }
 
     public void OnParticleCollision(GameObject other)

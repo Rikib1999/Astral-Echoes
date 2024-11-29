@@ -5,6 +5,6 @@ namespace Assets.Scripts
 {
     public class PlanetChunk : Chunk
     {
-        public List<GameObject> Enemies { get; set; }
+        public List<GameObject> PlanetObjects { get; set; }
     }
 }

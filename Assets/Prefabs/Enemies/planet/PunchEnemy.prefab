@@ -125,7 +125,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 5
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -138,7 +138,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!60 &6706216592439592303
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -377,16 +377,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3c230c7e1b20c446872fd81416a14b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.56
-  detectionRange: 5.81
-  attackRange: 2.06
-  roamRadius: 10.49
+  moveSpeed: 2
+  detectionRange: 5
+  attackRange: 1
+  roamRadius: 20
   attackCooldown: 1
   player: {fileID: 0}
   playerLayer:
     serializedVersion: 2
     m_Bits: 8
-  playerDamage: 10
+  playerDamage: 20
 --- !u!114 &5367663159602155351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -400,7 +400,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
-  maxHealth: 70
+  maxHealth: 100
   Player: {fileID: 0}
 --- !u!114 &-2159259361179501731
 MonoBehaviour:

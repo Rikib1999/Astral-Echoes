@@ -2178,6 +2178,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MediumMetal (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1106088439054587387, guid: 3a159db9b759a6f499bdd2bfeec8fe19, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8492885617163409282, guid: 3a159db9b759a6f499bdd2bfeec8fe19, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -5282,6 +5286,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MediumMetal
       objectReference: {fileID: 0}
+    - target: {fileID: 1106088439054587387, guid: 3a159db9b759a6f499bdd2bfeec8fe19, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8492885617163409282, guid: 3a159db9b759a6f499bdd2bfeec8fe19, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -7385,6 +7393,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  healthBar: {fileID: 0}
 --- !u!95 &1380896054
 Animator:
   serializedVersion: 5
@@ -7429,7 +7438,6 @@ MonoBehaviour:
   dashDuration: 0.3
   dashCooldown: 1
   maxHealth: 100
-  healthBar: {fileID: 0}
   dashBar: {fileID: 0}
   dashAudioSource: {fileID: 1380896060}
 --- !u!50 &1380896056

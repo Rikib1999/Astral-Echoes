@@ -1,31 +1,28 @@
+using Assets.Scripts.Player;
 using System.Collections;
-using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.UI; // Required for UI elements
-using Assets.Scripts.Player;
+using UnityEngine.UI;
 
 public class Controller : NetworkBehaviour
 {
     [SerializeField] Rigidbody2D rb;
-    [SerializeField] Transform[] guns; // Array to store references to all guns
+    [SerializeField] Transform[] guns;
     [SerializeField] GameObject crosshair;
     [SerializeField] float moveSpeed = 2;
     [SerializeField] float dashSpeed = 10f;
     [SerializeField] float dashDuration = 0.2f;
     [SerializeField] float dashCooldown = 1f;
-    [SerializeField] int maxHealth = 100; // Max player health
-    [SerializeField] Slider healthBar; // Health UI element
-    [SerializeField] Slider dashBar; // Dash UI element
+    [SerializeField] int maxHealth = 100;
+    [SerializeField] Slider dashBar;
 
     private float dirX = 0;
     private float dirY = 0;
-    private int currentHealth;
     private bool facingRight = true;
     private bool isDashing = false;
     private float lastDashTime = -10f;
     private Animator animator;
-    private int activeGunIndex = 0; // Index of the currently active gun
+    private int activeGunIndex = 0;
     private AudioSource audioSource;
     [SerializeField] AudioSource dashAudioSource;
     private SpriteRenderer spriteRenderer;
@@ -33,12 +30,12 @@ public class Controller : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        if (!IsOwner) // Disable this script if not owner
+        if (!IsOwner)
         {
             enabled = false;
             crosshair.SetActive(false);
         }
-        else // Set the camera to follow
+        else
         {
             playerCamera = FindObjectOfType<CameraFollow>();
             playerCamera.Target = this.transform;
@@ -51,15 +48,10 @@ public class Controller : NetworkBehaviour
         audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        currentHealth = maxHealth;
 
-        // Initialize UI values
-        healthBar.maxValue = maxHealth;
-        healthBar.value = currentHealth;
         dashBar.maxValue = dashCooldown;
         dashBar.value = dashCooldown;
 
-        // Deactivate all guns except the first one
         for (int i = 0; i < guns.Length; i++)
         {
             guns[i].gameObject.SetActive(i == activeGunIndex);
@@ -68,15 +60,12 @@ public class Controller : NetworkBehaviour
 
     private void Update()
     {
-        // Move the crosshair with the mouse
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0;
         crosshair.transform.position = mousePosition;
 
-        // Determine if the mouse has moved left or right
         facingRight = crosshair.transform.position.x > transform.position.x;
 
-        // Flip the player sprite accordingly
         if (facingRight && transform.localScale.x < 0 || !facingRight && transform.localScale.x > 0)
         {
             Vector3 newScale = transform.localScale;
@@ -84,11 +73,9 @@ public class Controller : NetworkBehaviour
             transform.localScale = newScale;
         }
 
-        // Update movement input
         dirX = Input.GetAxisRaw("Horizontal");
         dirY = Input.GetAxis("Vertical");
 
-        // Update walking animation and sound
         bool isWalking = dirX * moveSpeed != 0 || dirY * moveSpeed != 0;
         animator.SetBool("isWalking", isWalking);
 
@@ -98,16 +85,11 @@ public class Controller : NetworkBehaviour
         }
         else if (audioSource.isPlaying) audioSource.Stop();
 
-        // Update dash cooldown UI
-        //dashBar.value = Mathf.Clamp(Time.time - lastDashTime, 0, dashCooldown);
-
-        // Dash input
         if (Input.GetKeyDown(KeyCode.LeftShift) && Time.time >= lastDashTime + dashCooldown)
         {
             StartCoroutine(Dash());
         }
 
-        // Switch active gun based on player input
         if (Input.GetKeyDown(KeyCode.Alpha1) && guns.Length >= 1)
         {
             SwitchGun(0);
@@ -121,7 +103,6 @@ public class Controller : NetworkBehaviour
             SwitchGun(2);
         }
 
-
         // SaveInv();
     }
 
@@ -129,7 +110,6 @@ public class Controller : NetworkBehaviour
     {
         if (!isDashing)
         {
-            // Move the player based on input
             Vector2 movement = new Vector2(dirX, dirY).normalized * moveSpeed;
             rb.velocity = movement;
         }
@@ -163,7 +143,6 @@ public class Controller : NetworkBehaviour
         lastDashTime = Time.time;
         dashAudioSource.Play();
 
-        // Set alpha to 50% (semi-transparent) at the start of the dash
         ChangeAlpha(0.5f);
 
         Vector2 dashDirection = new Vector2(dirX, dirY).normalized;
@@ -171,30 +150,16 @@ public class Controller : NetworkBehaviour
 
         yield return new WaitForSeconds(dashDuration);
 
-        // Reset alpha to fully visible after the dash
         ChangeAlpha(1f);
 
         isDashing = false;
     }
 
-    // Method to change the player's sprite alpha
     private void ChangeAlpha(float alphaValue)
     {
         Color color = spriteRenderer.color;
-        color.a = alphaValue; // Change only the alpha, keeping the rest of the color
+        color.a = alphaValue;
         spriteRenderer.color = color;
-    }
-
-    public void TakeDamage(int damage)
-    {
-        currentHealth -= damage;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-        healthBar.value = currentHealth;
-
-        if (currentHealth <= 0)
-        {
-            // Handle player death
-        }
     }
 
     // private void SaveInv()

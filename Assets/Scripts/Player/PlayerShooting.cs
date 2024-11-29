@@ -22,14 +22,14 @@ public class PlayerShooting : NetworkBehaviour
         }
     }
 
-    private void Update()
+    /*private void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
             shoot();
             bulletSource.Play();
         }
-    }
+    }*/
 
     private void shoot()
     {

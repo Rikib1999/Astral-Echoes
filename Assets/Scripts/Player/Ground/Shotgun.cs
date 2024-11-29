@@ -31,7 +31,6 @@ public class Shotgun : NetworkBehaviour
         {
             float randomAngle = Random.Range(-spreadAngle, spreadAngle);
             bulletRotation = Quaternion.Euler(0f, 0f, firePoint.rotation.eulerAngles.z + randomAngle);
-            Instantiate(bulletPrefab, firePoint.position, bulletRotation);
 
             if (IsServer)
             {
