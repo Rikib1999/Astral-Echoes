@@ -22,11 +22,20 @@ public class InventoryItemController : MonoBehaviour
             case Item.ItemType.Potion:
                 PlayerLogic.Instance.IncreaseHealth(item.value);
                 break;
+            case Item.ItemType.Resource:
+                Debug.Log("Not implemented yet.");
+                break;
+            case Item.ItemType.Food:
+                Debug.Log("Not implemented yet.");
+                break;
             default:
                 Debug.Log("No more item types");
                 break;
         }
 
-        RemoveInventoryItem();
+        if(item.itemType != Item.ItemType.Resource)
+        {
+            RemoveInventoryItem();
+        }
     }
 }

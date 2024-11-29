@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c2d7512ca8a100140b8fd8bfe4143493, type: 3}
-  m_Name: GreenBlob
+  m_Name: MediumMetal
   m_EditorClassIdentifier: 
-  id: 1
-  itemName: GreenBlob
+  id: 11
+  itemName: MediumMetal
   value: 5
-  icon: {fileID: 21300000, guid: 376be569fdc610c448cfa4ea6fb98287, type: 3}
+  icon: {fileID: 21300000, guid: 7a04d1bdcfb08eb4aad96549597c11f4, type: 3}
   craftable: 0
-  itemType: 3
+  itemType: 0

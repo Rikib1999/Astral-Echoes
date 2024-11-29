@@ -1,20 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class CraftManager : MonoBehaviour
 {
-    
+
     public List<CreateCraft> crafts = new List<CreateCraft>();
-    public List<Item> itemToCraft = new List<Item>();
+   //public List<Item> itemToCraft = new List<Item>();
+    public Crafting[] craftings;
+    //public Crafting[] itemsToCraft;
 
 
     public Transform craftContent;
     public GameObject craft;
 
-    private bool canCraft = false;
-
-    public void checkItems()
+    /*public void checkItems()
     {
         // Get the inventory instance
         InventoryManager inventoryManager = InventoryManager.Instance;
@@ -23,8 +24,8 @@ public class CraftManager : MonoBehaviour
         foreach (var craftItem in crafts)
         {
             // Check if required items are present in the inventory
-            bool hasItemNeeded1 = inventoryManager.items.Exists(item => item.itemName == craftItem.item1.itemName);
-            bool hasItemNeeded2 = inventoryManager.items.Exists(item => item.itemName == craftItem.item2.itemName);
+            bool hasItemNeeded1 = inventoryManager.items.Exists(item => item.id == craftItem.item1.id);
+            bool hasItemNeeded2 = inventoryManager.items.Exists(item => item.id == craftItem.item2.id);
 
             if (hasItemNeeded1 && hasItemNeeded2)
             {
@@ -49,8 +50,8 @@ public class CraftManager : MonoBehaviour
         foreach (var craftItem in crafts)
         {
             // Check if required items are present in the inventory
-            bool hasItemNeeded1 = inventoryManager.items.Exists(item => item.itemName == craftItem.itemNeeded1);
-            bool hasItemNeeded2 = inventoryManager.items.Exists(item => item.itemName == craftItem.itemNeeded2);
+            bool hasItemNeeded1 = inventoryManager.items.Exists(item => item.id == craftItem.item1.id);
+            bool hasItemNeeded2 = inventoryManager.items.Exists(item => item.id == craftItem.item2.id);
 
             if (hasItemNeeded1 && hasItemNeeded2)
             {
@@ -58,28 +59,26 @@ public class CraftManager : MonoBehaviour
                 inventoryManager.RemoveItem(craftItem.item1);
                 inventoryManager.RemoveItem(craftItem.item2);
 
-
-                // Add the crafted item to the inventory
-                foreach (var item in itemToCraft)
-                {
-
-                    if (item.itemName == craftItem.craftName)
-                        inventoryManager.AddItem(item);
-                }
-               
             }
         }
     }
 
-
    
-    public void ListItems()
+    */
+   
+    public void RemoveDuplicateCraft()
     {
         foreach (Transform item in craftContent)
         {
             Destroy(item.gameObject);
         }
 
+    }
+
+    public void ListItems()
+    {
+     
+        RemoveDuplicateCraft();
 
         foreach (var item in crafts)
         {
@@ -95,6 +94,21 @@ public class CraftManager : MonoBehaviour
             ItemNeeded1.text = item.item1.itemName;
             ItemNeeded2.text = item.item2.itemName;
             //Item1.text = item.item1.itemName;
+
+            
+        }
+        SetCraftsItems();
+    }
+    public void SetCraftsItems()
+    {
+
+        craftings = craftContent.GetComponentsInChildren<Crafting>();
+
+        for (int i = 0; i < crafts.Count; i++)
+        {
+
+            craftings[i].AddCraft(crafts[i]);
         }
     }
+
 }

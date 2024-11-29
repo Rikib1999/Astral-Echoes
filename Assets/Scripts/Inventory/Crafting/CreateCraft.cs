@@ -6,10 +6,12 @@ using UnityEngine;
 public class CreateCraft : ScriptableObject
 {
     public int id;
+    public int itemID;
     public string craftName;
     public Sprite icon;
-    public string itemNeeded1;
-    public string itemNeeded2;
+    public int itemNeeded1;
+    public int itemNeeded2;
     public Item item1;
     public Item item2;
+    public Item ItemToCraft;
 }

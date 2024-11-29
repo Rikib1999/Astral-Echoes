@@ -99,7 +99,7 @@ public class Controller : NetworkBehaviour
         else if (audioSource.isPlaying) audioSource.Stop();
 
         // Update dash cooldown UI
-        dashBar.value = Mathf.Clamp(Time.time - lastDashTime, 0, dashCooldown);
+        //dashBar.value = Mathf.Clamp(Time.time - lastDashTime, 0, dashCooldown);
 
         // Dash input
         if (Input.GetKeyDown(KeyCode.LeftShift) && Time.time >= lastDashTime + dashCooldown)
