@@ -21,7 +21,7 @@ public class EnemyLogic : MonoBehaviour
             health -= damage;
             Debug.Log(health);
         }
-        if (health < 0) { Destroy(gameObject); }
+        if (health <= 0) { Destroy(gameObject); }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

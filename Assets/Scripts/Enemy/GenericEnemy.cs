@@ -2,33 +2,33 @@ using UnityEngine;
 
 public class GenericEnemy : MonoBehaviour
 {
-    public Transform player;               // Reference to the player
-    public float moveSpeed = 2f;           // Movement speed
-    public float attackRange = 1.5f;       // Distance within which the enemy attacks
-    public float detectionRange = 10f;     // Distance within which the enemy starts following the player
-    public float attackCooldown = 2f;      // Time between attacks
+    public Transform player;
+    public float moveSpeed = 2f;
+    public float attackRange = 1.5f;
+    public float detectionRange = 10f;
+    public float attackCooldown = 2f;
 
-    private Animator animator;             // Reference to the Animator component
-    private bool isAttacking = false;      // If the enemy is currently attacking
-    private float attackTimer = 0f;        // Timer to manage attack cooldown
-    private Transform enemyTransform;      // Cached reference to enemy's transform
+    private Animator animator;
+    private Rigidbody2D rb;
+    private bool isAttacking = false;
+    private float attackTimer = 0f;
 
     private void Start()
     {
         if (player == null)
         {
-            player = GameObject.FindGameObjectWithTag("Player").transform;  
+            player = GameObject.FindGameObjectWithTag("Player").transform;
         }
-        // Cache components
+
         animator = GetComponent<Animator>();
-        enemyTransform = gameObject.transform;
+        rb = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
     {
-        if (player == null) return; // Exit if player is not assigned
+        if (player == null) return;
 
-        float distanceToPlayer = Vector3.Distance(enemyTransform.position, player.position);
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
         if (distanceToPlayer <= detectionRange && !isAttacking)
         {
@@ -40,7 +40,6 @@ public class GenericEnemy : MonoBehaviour
             AttackPlayer();
         }
 
-        // Update attack cooldown timer
         if (attackTimer > 0f)
         {
             attackTimer -= Time.deltaTime;
@@ -49,33 +48,33 @@ public class GenericEnemy : MonoBehaviour
 
     private void FollowPlayer(float distanceToPlayer)
     {
-        // Play walk animation
         if (animator != null)
         {
             animator.SetBool("isWalking", true);
         }
 
-        // Move towards the player
-        Vector3 direction = (player.position - enemyTransform.position).normalized;
-        enemyTransform.position += direction * moveSpeed * Time.deltaTime;
+        Vector3 direction = (player.position - transform.position).normalized;
+        rb.velocity = direction * moveSpeed;
+        FacePlayer(direction);
+    }
 
-        // Variables for scale
-        Vector3 originalScale = enemyTransform.localScale; // Store the initial scale
-
-        // Face the player
+    private void FacePlayer(Vector3 direction)
+    {
+        Vector3 originalScale = transform.localScale;
         if (direction.x > 0)
         {
-            enemyTransform.localScale = new Vector3(Mathf.Abs(originalScale.x), originalScale.y, originalScale.z); // Face right
+            transform.localScale = new Vector3(Mathf.Abs(originalScale.x), originalScale.y, originalScale.z);
         }
         else if (direction.x < 0)
         {
-            enemyTransform.localScale = new Vector3(-Mathf.Abs(originalScale.x), originalScale.y, originalScale.z); // Face left
+            transform.localScale = new Vector3(-Mathf.Abs(originalScale.x), originalScale.y, originalScale.z);
         }
     }
 
     private void AttackPlayer()
     {
-        // Stop moving and play attack animation
+        rb.velocity = Vector3.zero;
+
         if (animator != null)
         {
             animator.SetBool("isWalking", false);
@@ -85,10 +84,7 @@ public class GenericEnemy : MonoBehaviour
         isAttacking = true;
         attackTimer = attackCooldown;
 
-        // Damage logic can be added here, e.g., calling a method on the player's health component
-
-        // Simulate attack completion after animation ends (adjust time as per animation length)
-        Invoke(nameof(ResetAttack), 1f); // 1 second is an example; match this to your animation length
+        Invoke(nameof(ResetAttack), 1f);
     }
 
     private void ResetAttack()
@@ -98,7 +94,6 @@ public class GenericEnemy : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        // Draw detection and attack range in the editor
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, detectionRange);
 
