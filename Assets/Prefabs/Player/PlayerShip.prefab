@@ -103,7 +103,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 604f577ae2783244e8171e32ffe61490, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 452207974285259613}
   - component: {fileID: -3124573585980518634}
   - component: {fileID: 5427265848207959148}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PlayerShip
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -548,10 +548,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 150e69a8ca35f7040bcda4163a08bcb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fuelConsumptionRate: 0
   maxHealth: 100
   maxShield: 50
-  maxFuel: 100
 --- !u!114 &-3124573585980518634
 MonoBehaviour:
   m_ObjectHideFlags: 0

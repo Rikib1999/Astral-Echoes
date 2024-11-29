@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MotherEnemy : MonoBehaviour
 {
     public GameObject player;
     public float speed;
-    //public float size;
     public float StopToSpawnDistance = 10f; // Distance at which the enemy starts chasing the player
     public float roamRadius = 3f; // Radius around the roamPosition where the enemy can roam
     public float roamSpeed = 2f; // Speed at which the enemy roams
@@ -19,16 +16,12 @@ public class MotherEnemy : MonoBehaviour
     private Vector2 roamTarget;
     private SpawnShooting spawn;
     
-
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         chase = false;
         timer = 6;
         spawn = GetComponent<SpawnShooting>();
-
-        //size = Random.Range(0.5f, 2f);
-        //transform.localScale = new Vector3(size, size, 1);
 
         // Set initial roam position to the enemy's starting position
         roamPosition = transform.position;
@@ -37,7 +30,7 @@ public class MotherEnemy : MonoBehaviour
 
     void Update()
     {
-        if(player)
+        if (player)
         {
             distance = Vector2.Distance(transform.position, player.transform.position);
         }
@@ -46,26 +39,22 @@ public class MotherEnemy : MonoBehaviour
 
         timer -= Time.deltaTime;
         
-        //Debug.Log("Distance: "+publicDistance);
-
         if (player && (distance < StopToSpawnDistance))
         {
             // Chase the player
-            //chase = true;
-            //ChasePlayer();
-            //Debug.Log("SpawnIT NOW");
+            chase = true;
+            ChasePlayer();
+
             if(timer <= 0)
             {
                 spawn.SpawnShip();
                 timer = 6;
-            }
-            //spawn.SpawnShip();
-            
+            }            
         }
         else
         {
             // Roam around the roamPosition
-            //chase = false;
+            chase = false;
             Roam();
         }
     }

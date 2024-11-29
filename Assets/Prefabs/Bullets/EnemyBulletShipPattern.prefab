@@ -11,14 +11,13 @@ GameObject:
   - component: {fileID: 3006897929441287603}
   - component: {fileID: 2630857941526874136}
   - component: {fileID: 2916949223987235829}
-  - component: {fileID: -8354799634644575461}
   - component: {fileID: -6181618205923404538}
   - component: {fileID: 4299907772752605265}
   - component: {fileID: 6562112794498571551}
   - component: {fileID: 4628690145052490693}
-  - component: {fileID: 9002409694604372426}
+  - component: {fileID: -2725873877083175808}
   m_Layer: 0
-  m_Name: bullet
+  m_Name: EnemyBulletShipPattern
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -126,21 +125,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 2
---- !u!114 &-8354799634644575461
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2835332959312534908}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29438ee931bf1da45b7867554e5d3aea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 10
-  bulletDamage: 5
-  enemyTag: 
 --- !u!50 &-6181618205923404538
 Rigidbody2D:
   serializedVersion: 4
@@ -180,7 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2683552902
+  GlobalObjectIdHash: 454552421
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -232,7 +216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80d7c879794dfda4687da0e400131852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &9002409694604372426
+--- !u!114 &-2725873877083175808
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -241,10 +225,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 2835332959312534908}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7964a75e191d6274f9476e153d188b7e, type: 3}
+  m_Script: {fileID: 11500000, guid: 031958413f996cf46922a81869199be0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  bulletDamage: 5
-  enemyTag: enemy
-  resourceTag: PlanetResource

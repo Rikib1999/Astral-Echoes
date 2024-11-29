@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class PatternShooter : MonoBehaviour
 {
-    public GameObject bulletPrefab;   // Bullet prefab
-    public float shootInterval = 2f; // Time between shots
-    public float bulletSpeed = 5f;   // Speed of the bullets
-    public int numberOfBullets = 8;  // Number of bullets to shoot
-    public PatternType patternType;  // Shooting pattern
+    public GameObject bulletPrefab;
+    public float shootInterval = 2f;
+    public float bulletSpeed = 5f;
+    public int numberOfBullets = 8;
+    public PatternType patternType;
 
     private float shootTimer;
 
@@ -15,17 +15,16 @@ public class PatternShooter : MonoBehaviour
         Circle,
         Pentagon,
         Star,
-        Custom // Allows custom-defined points
+        Custom
     }
 
     private void Update()
     {
-        // Timer for shooting
         shootTimer -= Time.deltaTime;
         if (shootTimer <= 0f)
         {
             Shoot();
-            shootTimer = shootInterval; // Reset timer
+            shootTimer = shootInterval;
         }
     }
 
@@ -43,14 +42,14 @@ public class PatternShooter : MonoBehaviour
                 ShootInStar();
                 break;
             case PatternType.Custom:
-                ShootCustom(); // Define your custom pattern logic
+                ShootCustom();
                 break;
         }
     }
 
     private void ShootInCircle()
     {
-        float angleStep = 360f / numberOfBullets; // Evenly spaced angles
+        float angleStep = 360f / numberOfBullets;
         for (int i = 0; i < numberOfBullets; i++)
         {
             float angle = i * angleStep;
@@ -70,12 +69,12 @@ public class PatternShooter : MonoBehaviour
 
     private void ShootInStar()
     {
-        int points = numberOfBullets / 2; // Number of points in the star
+        int points = numberOfBullets / 2;
         float angleStep = 360f / points;
         for (int i = 0; i < points; i++)
         {
-            float innerAngle = i * angleStep;             // Inner point angle
-            float outerAngle = innerAngle + angleStep / 2; // Outer point angle
+            float innerAngle = i * angleStep;
+            float outerAngle = innerAngle + angleStep / 2;
             SpawnBulletAtAngle(innerAngle);
             SpawnBulletAtAngle(outerAngle);
         }
@@ -83,7 +82,6 @@ public class PatternShooter : MonoBehaviour
 
     private void ShootCustom()
     {
-        // Example: Custom points
         Vector2[] customOffsets = { new Vector2(1, 0), new Vector2(-1, 0), new Vector2(0, 1), new Vector2(0, -1) };
         foreach (Vector2 offset in customOffsets)
         {
@@ -93,9 +91,8 @@ public class PatternShooter : MonoBehaviour
 
     private void SpawnBulletAtAngle(float angle)
     {
-        // Convert angle to radians and calculate direction
         float radians = angle * Mathf.Deg2Rad;
-        Vector2 direction = new Vector2(Mathf.Cos(radians), Mathf.Sin(radians));
+        Vector2 direction = new(Mathf.Cos(radians), Mathf.Sin(radians));
 
         SpawnBullet(transform.position, direction * bulletSpeed);
     }
@@ -103,8 +100,7 @@ public class PatternShooter : MonoBehaviour
     private void SpawnBullet(Vector3 position, Vector2 velocity)
     {
         GameObject bullet = Instantiate(bulletPrefab, position, Quaternion.identity);
-        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        if (rb != null)
+        if (bullet.TryGetComponent<Rigidbody2D>(out var rb))
         {
             rb.velocity = velocity;
         }

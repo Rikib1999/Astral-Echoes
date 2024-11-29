@@ -14,12 +14,12 @@ GameObject:
   - component: {fileID: 4414262935274076460}
   - component: {fileID: 5175931286097004386}
   - component: {fileID: 3344948791599662365}
-  - component: {fileID: 5957983767803886964}
   - component: {fileID: -2152525208059646671}
   - component: {fileID: -5418622605771297803}
-  m_Layer: 0
+  - component: {fileID: -86977404384569524}
+  m_Layer: 6
   m_Name: EnemyShip3
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -104,9 +104,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  moveSpeed: 0.2
-  attackRange: 15.71
-  detectionRange: 10.36
+  moveSpeed: 15
+  attackRange: 80
+  detectionRange: 120
   attackCooldown: 2
 --- !u!60 &4414262935274076460
 PolygonCollider2D:
@@ -272,24 +272,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 2835332959312534908, guid: 238d3ce9b9a03c94caecb489ef9bb1b4, type: 3}
   shootInterval: 2
-  bulletSpeed: 5
+  bulletSpeed: 100
   numberOfBullets: 8
   patternType: 2
---- !u!114 &5957983767803886964
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 91088110751259815}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 820e4f240659336448cbd18a1fbae8e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 0
-  maxHealth: 50
-  Player: {fileID: 0}
 --- !u!114 &-2152525208059646671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -342,3 +327,17 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
+--- !u!114 &-86977404384569524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 91088110751259815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7950931227bd87418ba89fc296795ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  maxShield: 10

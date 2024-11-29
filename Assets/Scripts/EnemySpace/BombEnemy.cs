@@ -33,7 +33,7 @@ public class BombEnemy : MonoBehaviour
 
     void Update()
     {
-        if(player)
+        if (player)
         {
             distance = Vector2.Distance(transform.position, player.transform.position);
         }

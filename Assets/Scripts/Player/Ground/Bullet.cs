@@ -25,7 +25,7 @@ public class Bullet : NetworkBehaviour
     void Update()
     {
         // Move the bullet in the initial direction
-        transform.Translate(bulletDirection * speed * Time.deltaTime);
+        transform.Translate(Vector3.right * speed * Time.deltaTime);
     }
 
     private void OnBecameInvisible()
@@ -38,23 +38,26 @@ public class Bullet : NetworkBehaviour
         if (collision.gameObject.CompareTag(enemyTag))
         {
             collision.gameObject.GetComponent<EnemyLogic>().damage(bulletDamage); // Deal damage to the enemy
+            Destroy(gameObject);
         }
         else if (collision.gameObject.CompareTag(resourceTag))
         {
-            collision.gameObject.GetComponent<ResourceDrop>().Damage(bulletDamage); // Deal damage to the enemy
+            collision.gameObject.GetComponent<ResourceDrop>().Damage(bulletDamage);
+            Destroy(gameObject);
         }
-        Destroy(gameObject); // Destroy the bullet on collision
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag(enemyTag))
         { 
-            collision.gameObject.GetComponent<EnemyLogic>().damage(bulletDamage); // Deal damage to the enemy
+            collision.gameObject.GetComponent<EnemyShipHealth>().damage(bulletDamage);
+            Destroy(gameObject);
         }
         else if (collision.gameObject.CompareTag(resourceTag))
         {
-            collision.gameObject.GetComponent<ResourceDrop>().Damage(bulletDamage); // Deal damage to the enemy
+            collision.gameObject.GetComponent<ResourceDrop>().Damage(bulletDamage);
+            Destroy(gameObject);
         }
-        Destroy(gameObject); // Destroy the bullet on collision
     }
 }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class InventoryItemController : MonoBehaviour
@@ -19,28 +17,16 @@ public class InventoryItemController : MonoBehaviour
 
     public void UseItem()
     {
-        
-
         switch (item.itemType)
         {
             case Item.ItemType.Potion:
                 PlayerLogic.Instance.IncreaseHealth(item.value);
-                //RemoveInventoryItem();
-                break;
-            case Item.ItemType.Fuel:
-                ShipHealth.Instance.IncreaseFuel(item.value);
-                //RemoveInventoryItem();
                 break;
             default:
                 Debug.Log("No more item types");
                 break;
-
         }
 
         RemoveInventoryItem();
-
     }
-
-
-
 }

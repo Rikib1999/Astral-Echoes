@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
 
 public class EnemyBoom : MonoBehaviour
@@ -10,53 +7,32 @@ public class EnemyBoom : MonoBehaviour
 
     public float timer;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-
         bombE = GetComponent<BombEnemy>();
         player = GameObject.FindGameObjectWithTag("Player");
-        timer = 10;
-        
+        timer = 5;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        //timer += Time.deltaTime;
-
-
-
         if (bombE.chase == true)
         {
-            
-            
             timer -= Time.deltaTime;
-
-            Debug.Log(timer);
 
             if (timer <= 0)
             {
-                Debug.Log("Boom");
-                Destroy(gameObject);
+                GetComponent<ParticleSystem>().Play();
 
-                if(bombE.publicDistance < 3)
+                if (bombE.publicDistance < 40)
                 {
                     player.GetComponent<ShipHealth>().damage(50);
-
-                    Debug.Log("Player Hit");
                 }
-
             }
-
         }
         else
         {
-            timer=10;
-            //Debug.Log("No Boom");
+            timer = 10;
         }
-
-
-
     }
 }
