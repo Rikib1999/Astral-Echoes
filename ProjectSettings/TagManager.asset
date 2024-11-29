@@ -9,7 +9,6 @@ TagManager:
   - ShipWall
   - CraftTable
   - PlanetResource
-  - enemy
   - ResourcesText
   layers:
   - Default

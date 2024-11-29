@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 
 public enum Enemy { walking, attacking, dead }
 
@@ -22,17 +19,12 @@ public class EnemyAI : MonoBehaviour
     private bool isChasing = false;
     private Animator animator;
     private Enemy enemyState;
-
-
-    //MB added shooting enemy
-    public float shootingTime;
-
     private float timeBtwShots;
 
+    public float shootingTime;
     public GameObject bullet;
     public Transform firePoint;
     public float shootrange = 5f;
-
 
 
     void Start()
@@ -48,7 +40,7 @@ public class EnemyAI : MonoBehaviour
     {
         if (player && isChasing)
         {
-            //ChasePlayer();
+            ChasePlayer();
             StopAndShoot();
         }
         else
@@ -56,7 +48,7 @@ public class EnemyAI : MonoBehaviour
             Roam();
         }
 
-        if(player)
+        if (player)
         {
             DetectPlayer();
         }
@@ -122,13 +114,11 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-
     void StopAndShoot()
     {
         if (Vector2.Distance(transform.position, player.transform.position) < shootrange && player != null)
         {
             ShootPlayer();
-             
         }
         else
         {
@@ -136,8 +126,6 @@ public class EnemyAI : MonoBehaviour
             FlipTowardsPlayer();
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
         }
-
-
     }
 
     void ShootPlayer()
@@ -149,13 +137,10 @@ public class EnemyAI : MonoBehaviour
 
         float fasterBullets = hm.x;
 
-        //Debug.Log(hm.x);
-
         shootingTime = fasterBullets - 0.2f;
 
         if (timeBtwShots >= shootingTime)
         {
-            //Instantiate(bullet, firePoint.position, firePoint.rotation);
             timeBtwShots = 0;
             Instantiate(bullet, firePoint.position, Quaternion.identity);
         }
@@ -165,7 +150,6 @@ public class EnemyAI : MonoBehaviour
     {
         enemyState = Enemy.attacking;
         FlipTowardsPlayer();
-        // Implement attack logic here
         Debug.Log("Attack!");
     }
 

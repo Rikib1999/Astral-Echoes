@@ -573,7 +573,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 0bdc5a42a4852b4408b81cdcf1c2ec6c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -584,7 +584,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!60 &5452797202665992246
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -822,7 +822,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3965024115
+  GlobalObjectIdHash: 941972308
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -903,7 +903,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad6c94ae628ff734db1480754c2e38fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 4299907772752605265, guid: 08a9d5641844c80468c66281f5ad623c, type: 3}
+  bullet: {fileID: 4299907772752605265, guid: 1f27c02ed7cda8242a9b4ea2e0c1ddd0, type: 3}
   firePoint: {fileID: 6448858459872644164}
   shootingTime: 0
   bulletSource: {fileID: 5901091484928540354}
@@ -1643,7 +1643,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b73298754eaf464ba3625b75e107d5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 2835332959312534908, guid: 08a9d5641844c80468c66281f5ad623c, type: 3}
+  bulletPrefab: {fileID: 2835332959312534908, guid: 1f27c02ed7cda8242a9b4ea2e0c1ddd0, type: 3}
   firePoint: {fileID: 528607343430771591}
   pistolFireRate: 0.5
   audioSource: {fileID: 751821665221016487}
@@ -1841,7 +1841,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2cc840277bdfb5448413d637a44a178, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 4299907772752605265, guid: 08a9d5641844c80468c66281f5ad623c, type: 3}
+  bulletPrefab: {fileID: 4299907772752605265, guid: 1f27c02ed7cda8242a9b4ea2e0c1ddd0, type: 3}
   firePoint: {fileID: 4910595116259506013}
   fireRate: 0.1
   audioSource: {fileID: 5901091484928540354}
@@ -2020,7 +2020,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b89608d51b7be64a94f1dcc00602b6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 2835332959312534908, guid: 08a9d5641844c80468c66281f5ad623c, type: 3}
+  bulletPrefab: {fileID: 2835332959312534908, guid: 1f27c02ed7cda8242a9b4ea2e0c1ddd0, type: 3}
   firePoint: {fileID: 4601623332823721323}
   numBullets: 5
   spreadAngle: 40

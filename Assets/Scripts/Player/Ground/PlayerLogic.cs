@@ -43,7 +43,6 @@ public class PlayerLogic : MonoBehaviour
 
     public void damage(int damage)
     {
-
         health -= damage;
         Debug.Log("Player Health: " + health);
         if (health <= 0)

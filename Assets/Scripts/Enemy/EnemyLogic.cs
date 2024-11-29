@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyLogic : MonoBehaviour
@@ -13,6 +11,7 @@ public class EnemyLogic : MonoBehaviour
         if (Player == null) { Player = GameObject.FindWithTag("Player"); }
         health = maxHealth;
     }
+
     public void damage(int damage)
     {
         Debug.Log("HIT");
@@ -29,7 +28,6 @@ public class EnemyLogic : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             Player.GetComponent<PlayerLogic>().damage(10);
-
         }
     }
 }

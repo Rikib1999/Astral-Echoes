@@ -9,35 +9,21 @@ public class Bullet : NetworkBehaviour
     [SerializeField] string enemyTag;
     [SerializeField] string resourceTag;
 
-    private Vector2 bulletDirection; // Store the initial direction of the bullet
-
-    private void Awake()
-    {
-        Transform player = GameObject.FindGameObjectWithTag("Player").transform;
-
-        // Calculate the initial direction based on the player's facing direction
-        if (player.localScale.x < 0)
-            bulletDirection = Vector2.left;  // If player is facing left
-        else
-            bulletDirection = Vector2.right; // If player is facing right
-    }
-
     void Update()
     {
-        // Move the bullet in the initial direction
-        transform.Translate(Vector3.right * speed * Time.deltaTime);
+        transform.Translate(speed * Time.deltaTime * Vector3.right);
     }
 
     private void OnBecameInvisible()
     {
-        Destroy(gameObject); // Destroy the bullet when it goes off-screen
+        Destroy(gameObject);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag(enemyTag))
         {
-            collision.gameObject.GetComponent<EnemyLogic>().damage(bulletDamage); // Deal damage to the enemy
+            collision.gameObject.GetComponent<EnemyLogic>().damage(bulletDamage);
             Destroy(gameObject);
         }
         else if (collision.gameObject.CompareTag(resourceTag))

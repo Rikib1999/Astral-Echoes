@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 4299907772752605265}
   - component: {fileID: 6562112794498571551}
   - component: {fileID: 4628690145052490693}
-  - component: {fileID: -4241437096770461039}
+  - component: {fileID: -3183109075156384759}
   m_Layer: 0
-  m_Name: PlayerBulletShip
+  m_Name: PlayerBulletPlanet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 2835332959312534908}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2684144767
+  GlobalObjectIdHash: 3520332908
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -216,7 +216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80d7c879794dfda4687da0e400131852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-4241437096770461039
+--- !u!114 &-3183109075156384759
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -225,9 +225,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2835332959312534908}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa91cb2b843fd7145a7e8bf3cc2b3802, type: 3}
+  m_Script: {fileID: 11500000, guid: 7964a75e191d6274f9476e153d188b7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 150
+  speed: 30
   bulletDamage: 20
   enemyTag: Enemy
+  resourceTag: PlanetResource

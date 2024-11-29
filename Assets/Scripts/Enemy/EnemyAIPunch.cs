@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-//public enum EnemyW { walking, attacking, dead }
 
 public class EnemyAIPunch : MonoBehaviour
 {
@@ -23,17 +19,6 @@ public class EnemyAIPunch : MonoBehaviour
     private Enemy enemyState;
 
 
-    //MB added shooting enemy
-   /* public float shootingTime;
-
-    private float timeBtwShots;
-
-    public GameObject bullet;
-    public Transform firePoint;
-    public float shootrange = 5f;
-   */
-
-
     void Start()
     {
         startPosition = transform.position;
@@ -45,8 +30,6 @@ public class EnemyAIPunch : MonoBehaviour
 
     void Update()
     {
-
-        
         if (player && isChasing)
         {
             ChasePlayer();
@@ -108,8 +91,6 @@ public class EnemyAIPunch : MonoBehaviour
 
     void ChasePlayer()
     {
-
-        
         if (Vector2.Distance(transform.position, player.transform.position) < attackRange && player!=null)
         {
             if (Time.time >= lastAttackTime + attackCooldown)
@@ -127,52 +108,11 @@ public class EnemyAIPunch : MonoBehaviour
         }
     }
 
-    /*
-    void StopAndShoot()
-    {
-        if (Vector2.Distance(transform.position, player.transform.position) < shootrange && player != null)
-        {
-            ShootPlayer();
-             
-        }
-        else
-        {
-            enemyState = Enemy.walking;
-            FlipTowardsPlayer();
-            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
-        }
-
-
-    }
-
-    void ShootPlayer()
-    {
-        enemyState = Enemy.attacking;
-        timeBtwShots += Time.deltaTime;
-
-        Vector2 hm = transform.localScale;
-
-        float fasterBullets = hm.x;
-
-        //Debug.Log(hm.x);
-
-        shootingTime = fasterBullets - 0.2f;
-
-        if (timeBtwShots >= shootingTime)
-        {
-            //Instantiate(bullet, firePoint.position, firePoint.rotation);
-            timeBtwShots = 0;
-            Instantiate(bullet, firePoint.position, Quaternion.identity);
-        }
-    }*/
-
     void AttackPlayer()
     {
         enemyState = Enemy.attacking;
         FlipTowardsPlayer();
-        // Implement attack logic here
         PunchDamage(player);
-
 
         Debug.Log("Attack!");
     }
@@ -183,7 +123,7 @@ public class EnemyAIPunch : MonoBehaviour
 
         if (playerLogic != null)
         {
-            playerLogic.damage(5); // Apply damage (5 points in this case)
+            playerLogic.damage(5);
         }
         else
         {
