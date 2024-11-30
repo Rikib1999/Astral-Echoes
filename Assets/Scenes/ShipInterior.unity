@@ -1111,6 +1111,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 245198006}
   m_CullTransparentMesh: 1
+--- !u!1 &250150088
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 250150090}
+  - component: {fileID: 250150089}
+  m_Layer: 0
+  m_Name: CraftManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &250150089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 250150088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56f7840bf025f394cae5874d3a830c6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  possibleCrafts:
+  - {fileID: 11400000, guid: 1b0fd13508bae9743864c181d5dad2f3, type: 2}
+  - {fileID: 11400000, guid: 012f40951aa4d9748af049c27c9139ad, type: 2}
+  - {fileID: 11400000, guid: c4323cb159dad704bb34f7ef91f49ba8, type: 2}
+  craftContent: {fileID: 1826935248}
+  craftPrefab: {fileID: 3203922640719946989, guid: b5d149a938161dc42b3776cbd558dc02, type: 3}
+--- !u!4 &250150090
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 250150088}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 81.91964, y: 16.17769, z: 0.21574792}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &283606120
 GameObject:
   m_ObjectHideFlags: 0
@@ -9423,6 +9473,11 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!224 &1826935248 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4074297595745900642, guid: 8cb589cc74e55f440a7f1061beb1b56b, type: 3}
+  m_PrefabInstance: {fileID: 4510688733351422297}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1836395094
 GameObject:
   m_ObjectHideFlags: 0
@@ -11660,14 +11715,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 119938372}
-    - target: {fileID: 5336405397818262247, guid: 005de4e2ac6c9ae479515f161ed22a8e, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5336405397818262247, guid: 005de4e2ac6c9ae479515f161ed22a8e, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

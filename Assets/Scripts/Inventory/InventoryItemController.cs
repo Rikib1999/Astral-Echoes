@@ -6,7 +6,7 @@ public class InventoryItemController : MonoBehaviour
 
     public void RemoveInventoryItem()
     {
-        InventoryManager.Instance.RemoveItem(item);
+        InventoryManager.Instance.RemoveItem(item, 1);
     }
 
     public void UseItem()

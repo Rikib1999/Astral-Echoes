@@ -2,7 +2,6 @@ using Assets.Scripts.Resources;
 using System.Linq;
 using TMPro;
 using UnityEngine;
-using static UnityEngine.EventSystems.EventTrigger;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -70,11 +69,11 @@ public class InventoryManager : MonoBehaviour
         ListItems();
     }
 
-    public void RemoveItem(Item item)
+    public void RemoveItem(Item item, int count)
     {
         var inventoryItem = possibleItems.First(x => x.id == item.id);
 
-        inventoryItem.count--;
+        inventoryItem.count -= count;
 
         PlayerPrefs.SetInt(item.itemName, inventoryItem.count);
 
