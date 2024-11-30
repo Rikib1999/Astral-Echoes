@@ -7,8 +7,8 @@ public class EnemyLogic : MonoBehaviour
     [SerializeField] private int health;
     [SerializeField] int maxHealth;
     [SerializeField] GameObject Player;
-    [SerializeField] GameObject DropItem;
-    public List<GameObject> lootTable;
+    public GameObject DropItem;
+    public List<Item> lootTable;
     private SpriteRenderer spriteRenderer;
 
     private void Start()
@@ -30,8 +30,11 @@ public class EnemyLogic : MonoBehaviour
         { 
             Destroy(gameObject);
 
+            InstantiateLoot(transform.position);
+
+            /*
             //Random drop from enemy, from the list of items
-            var rand = Random.Range(0, lootTable.Count);
+            var rand = Random.Range(0, lootTable.Count+2);
 
             for(int i = 0; i < lootTable.Count; i++)
             {
@@ -39,7 +42,50 @@ public class EnemyLogic : MonoBehaviour
                 {
                     Instantiate(lootTable[i], transform.position, transform.rotation);
                 }
+                else{
+                    Debug.Log("No loot dropped");
+                }
+            }*/
+        }
+    }
+
+    Item GetDroppedItem()
+    {
+        int randomNumber = Random.Range(0, lootTable.Count + 2);
+
+        List<Item> possibleItems = new List<Item>();
+
+        for (int i = 0; i < lootTable.Count; i++)
+        {
+            if (i == randomNumber)
+            {
+                //Instantiate(lootTable[i], transform.position, transform.rotation);
+                possibleItems.Add(lootTable[i]);
+                 
             }
+
+        }
+
+        if(possibleItems.Count > 0)
+        {
+            Item droppedItem = possibleItems[Random.Range(0, possibleItems.Count)];
+            return droppedItem;
+        }
+        Debug.Log("No loot dropped");
+        return null;
+    }
+
+    public void InstantiateLoot(Vector2 spawnPos)
+    {
+        Item droppedItem = GetDroppedItem();
+
+        if(droppedItem != null)
+        {
+            GameObject itemGameObject = Instantiate(DropItem, spawnPos, Quaternion.identity);
+
+            itemGameObject.GetComponent<SpriteRenderer>().sprite = droppedItem.icon;
+
+            itemGameObject.GetComponent<ItemPickUp>().item = droppedItem;
         }
     }
 
