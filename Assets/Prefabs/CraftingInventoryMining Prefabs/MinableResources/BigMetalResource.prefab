@@ -27,8 +27,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1147083892179123845}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.19, y: -1.58, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -2.4241, y: -2.108, z: 0}
+  m_LocalScale: {x: 0.6722, y: 0.6722, z: 0.6722}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -100,6 +100,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 3
   item: {fileID: 1106088439054587387, guid: f6fd2a0d204c16b49949b2b9bd18de32, type: 3}
+  DropItem: {fileID: 7524921067370148921, guid: 8ce8cf632124e834b908acb35f19c613, type: 3}
+  lootTable:
+  - {fileID: 11400000, guid: d42b515bef1275e45aff287ce209098a, type: 2}
+  - {fileID: 11400000, guid: d42b515bef1275e45aff287ce209098a, type: 2}
+  - {fileID: 11400000, guid: d42b515bef1275e45aff287ce209098a, type: 2}
 --- !u!61 &6932472221115295985
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -132,7 +137,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.04042697, y: 2.3786643}
+  m_Offset: {x: -0.19730806, y: 2.1346264}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.47059736, y: 0.20133087}
@@ -143,5 +148,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5.244846, y: 6.102777}
+  m_Size: {x: 5.558608, y: 6.3816767}
   m_EdgeRadius: 0
