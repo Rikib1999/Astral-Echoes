@@ -46,7 +46,8 @@ public class PlayerLogic : MonoBehaviour
     public void IncreaseHealth(int value)
     {
         health += value;
-        Debug.Log(health);
+        health = Mathf.Clamp(health, 0, maxHealth);
+        healthBar.value = health;
     }
 
     public void damage(int damage)
