@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyLogic : MonoBehaviour
@@ -6,6 +7,8 @@ public class EnemyLogic : MonoBehaviour
     [SerializeField] private int health;
     [SerializeField] int maxHealth;
     [SerializeField] GameObject Player;
+    [SerializeField] GameObject DropItem;
+    public List<GameObject> lootTable;
     private SpriteRenderer spriteRenderer;
 
     private void Start()
@@ -23,7 +26,21 @@ public class EnemyLogic : MonoBehaviour
             if (spriteRenderer != null) StartCoroutine(ShowDamage());
         }
 
-        if (health <= 0) Destroy(gameObject);
+        if (health <= 0)
+        { 
+            Destroy(gameObject);
+
+            //Random drop from enemy, from the list of items
+            var rand = Random.Range(0, lootTable.Count);
+
+            for(int i = 0; i < lootTable.Count; i++)
+            {
+                if (i == rand)
+                {
+                    Instantiate(lootTable[i], transform.position, transform.rotation);
+                }
+            }
+        }
     }
 
     private IEnumerator ShowDamage()
@@ -31,6 +48,11 @@ public class EnemyLogic : MonoBehaviour
         spriteRenderer.color = Color.red;
         yield return new WaitForSeconds(1);
         spriteRenderer.color = Color.white;
+    }
+
+    public void OnMouseDown()
+    {
+        damage(10);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

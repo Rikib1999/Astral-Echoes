@@ -40,8 +40,12 @@ public class Crafting : MonoBehaviour
             Debug.Log(craftItem.name);
 
         }
+        else
+        {
+            Debug.Log("You do not have the items");
+        }
 
-        Debug.Log("ADSDSA");
+        //Debug.Log("ADSDSA");
     }
 
 
