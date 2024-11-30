@@ -1,5 +1,6 @@
 using Assets.Scripts.Enums;
 using Assets.Scripts.PlanetResources;
+using Assets.Scripts.Player;
 using Assets.Scripts.Resources;
 using System.Collections;
 using UnityEngine;
@@ -55,10 +56,7 @@ public class PlayerLogic : MonoBehaviour
         healthBar.value = health;
         StartCoroutine(ShowDamage());
 
-        if (health <= 0)
-        {
-            Destroy(gameObject);
-        }
+        if (health <= 0) GetComponent<PlayerDeath>().Die();
     }
 
     private IEnumerator ShowDamage()

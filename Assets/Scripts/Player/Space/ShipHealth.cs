@@ -1,3 +1,4 @@
+using Assets.Scripts.Player;
 using UnityEngine;
 
 public class ShipHealth : MonoBehaviour
@@ -32,9 +33,6 @@ public class ShipHealth : MonoBehaviour
             Debug.Log("Player Health: " + health);
         }
 
-        if (health <= 0)
-        {
-            Destroy(gameObject);
-        }
+        if (health <= 0) GetComponent<PlayerDeath>().Die();
     }
 }

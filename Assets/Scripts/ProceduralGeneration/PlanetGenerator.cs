@@ -2,9 +2,10 @@ using Assets.Scripts;
 using Assets.Scripts.Enums;
 using Assets.Scripts.Planet;
 using System;
-using UnityEngine;
-using UnityEngine.Tilemaps;
 using Unity.Netcode;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.Tilemaps;
 
 public class PlanetGenerator : ChunkGenerator<PlanetChunk>
 {
@@ -33,6 +34,31 @@ public class PlanetGenerator : ChunkGenerator<PlanetChunk>
         PlanetMapManager.Instance.ComputeSeed(); //Recompute the seed because the networkVariable is slow to synchronize
         SetPlanetResources();
         NoiseS3D.seed = PlanetMapManager.Seed;
+
+        SceneManager.sceneUnloaded -= OnSceneUnloaded;
+        SceneManager.sceneUnloaded += OnSceneUnloaded;
+    }
+
+    private void OnSceneUnloaded(Scene current)
+    {
+        if (chunkList == null) return;
+
+        foreach (var chunk in chunkList)
+        {
+            foreach (var obj in chunk.PlanetObjects)
+            {
+                if (obj != null)
+                {
+                    var networkComp = obj.GetComponent<NetworkObject>();
+                    if (networkComp != null)
+                    {
+                        networkComp.Despawn();
+                        continue;
+                    }
+                    Destroy(obj);
+                }
+            }
+        }
     }
 
     private PlanetPalette GetPlanetPalette()
@@ -79,10 +105,21 @@ public class PlanetGenerator : ChunkGenerator<PlanetChunk>
                 tilemap.SetTile(new Vector3Int((ChunkSize * chunk.Coords.x) + x, (ChunkSize * chunk.Coords.y) + y, 0), null);
             }
         }
-
         if (chunk.PlanetObjects == null) return;
 
-        foreach (var obj in chunk.PlanetObjects) if (obj != null) Destroy(obj);
+        foreach (var obj in chunk.PlanetObjects)
+        {
+            if (obj != null)
+            {
+                var networkComp = obj.GetComponent<NetworkObject>();
+                if (networkComp != null)
+                {
+                    networkComp.Despawn();
+                    continue;
+                }
+                Destroy(obj);
+            }
+        }
 
         chunk.PlanetObjects = null;
     }
