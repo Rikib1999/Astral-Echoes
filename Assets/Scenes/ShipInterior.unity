@@ -11781,12 +11781,20 @@ PrefabInstance:
       objectReference: {fileID: 2085968306}
     - target: {fileID: 8111537323322590774, guid: 62f57d3af54d568499a4313a493e2d6d, type: 3}
       propertyPath: crafts.Array.size
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8111537323322590774, guid: 62f57d3af54d568499a4313a493e2d6d, type: 3}
       propertyPath: crafts.Array.data[1]
       value: 
       objectReference: {fileID: 11400000, guid: 9459b7442fcb79c499e3637d50979055, type: 2}
+    - target: {fileID: 8111537323322590774, guid: 62f57d3af54d568499a4313a493e2d6d, type: 3}
+      propertyPath: crafts.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 012f40951aa4d9748af049c27c9139ad, type: 2}
+    - target: {fileID: 8111537323322590774, guid: 62f57d3af54d568499a4313a493e2d6d, type: 3}
+      propertyPath: crafts.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: c4323cb159dad704bb34f7ef91f49ba8, type: 2}
     - target: {fileID: 8111537323322590774, guid: 62f57d3af54d568499a4313a493e2d6d, type: 3}
       propertyPath: itemToCraft.Array.size
       value: 2
