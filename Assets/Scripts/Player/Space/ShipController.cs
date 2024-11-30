@@ -9,7 +9,7 @@ public class ShipController : NetworkBehaviour
     // Called on client join
     public override void OnNetworkSpawn()
     {
-        if(!IsOwner) //Disable this script if not owner
+        if (!IsOwner) //Disable this script if not owner
         {
             enabled=false;
             crosshair.SetActive(false);
@@ -33,10 +33,8 @@ public class ShipController : NetworkBehaviour
 
     private void FlyForward()
     {
-
         if (Input.GetKey(KeyCode.W))
         {
-            //follow where the crosshair is pointing
             transform.position = Vector2.MoveTowards(transform.position, crosshair.transform.position, speed * Time.deltaTime);
         }
     }

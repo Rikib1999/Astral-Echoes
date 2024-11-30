@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.SpaceSystem;
+using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,24 +9,27 @@ namespace Assets.Scripts
     public class PlanetMapManager : NetworkSingleton<PlanetMapManager>
     {
         [SerializeField] private UnityEditor.SceneAsset planet_scene;
+        [SerializeField] public NetworkVariable<SpaceObjectDataBag> PlanetDataBag = new();
 
-        //public static SpaceObjectDataBag PlanetDataBag { get; set; } 
-        //[SerializeField] public static SystemDataBag SystemDataBag;
-        [SerializeField] public NetworkVariable<SpaceObjectDataBag> PlanetDataBag = new NetworkVariable<SpaceObjectDataBag>();// { get => CentralObject.Value; set => CentralObject.Value = value; }
-        //public SpaceObjectDataBag CentralObject { get => centralObject.Value; set => centralObject.Value = value; }
- 
+        private SpaceObjectDataBag centralObjectStorage;
+        private List<SpaceObjectDataBag> satelliteObjectsStorage = new();
+
         public static int Seed { get; private set; }
 
         public void LandPlanet(SpaceObjectDataBag planetDataBag)
         {
-            //Debug.Log(JsonUtility.ToJson(SystemMapManager.Instance.gameObject.GetComponent<SystemDataBag>(), true));
-            
-            //PlanetDataBag = planetDataBag;
+            SceneManager.sceneUnloaded -= OnSceneUnloaded;
+            SceneManager.sceneUnloaded += OnSceneUnloaded;
+
+            centralObjectStorage = SystemMapManager.Instance.CentralObject.Value;
+            foreach (var item in SystemMapManager.Instance.SatelliteObjects)
+            {
+                satelliteObjectsStorage.Add(item);
+            }
+
             PlanetDataBag.Value = planetDataBag;
             SystemMapManager.Instance.SatelliteObjects.Clear();
             SystemMapManager.Instance.CentralObject.Value = default;
-            //SystemMapManager.Instance.SatelliteObjects = null;
-            //SystemMapManager.Instance.CentralObject = null;
 
             if (IsServer)
             {
@@ -33,25 +37,29 @@ namespace Assets.Scripts
                 LoadPlanetScene();
             }
         }
-        
+
+        private void OnSceneUnloaded(Scene current)
+        {
+            if (current.name != planet_scene.name) return;
+
+            SystemMapManager.Instance.CentralObject.Value = centralObjectStorage;
+
+            foreach (var item in satelliteObjectsStorage)
+            {
+                SystemMapManager.Instance.SatelliteObjects.Add(item);
+            }
+        }
+
         [ClientRpc]
         private void LoadPlanetSceneClientRpc()
         {
             ComputeSeed();
-            
-            //SceneManager.LoadScene("Planet");
-            /*var status = NetworkManager.SceneManager.LoadScene(planet_scene.name,LoadSceneMode.Single);
-            if (status != SceneEventProgressStatus.Started)
-            {
-                Debug.LogWarning($"Failed to load planet scene with a {nameof(SceneEventProgressStatus)}: {status}");
-            }*/
         }
 
         private void LoadPlanetScene()
         {
             ComputeSeed();
             
-            //SceneManager.LoadScene("Planet");
             var status = NetworkManager.SceneManager.LoadScene(planet_scene.name,LoadSceneMode.Single);
             if (status != SceneEventProgressStatus.Started)
             {

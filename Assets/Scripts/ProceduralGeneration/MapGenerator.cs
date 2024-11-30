@@ -5,6 +5,7 @@ using Assets.Scripts.SpaceSystem;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MapGenerator : ChunkGenerator<MapChunk>
 {
@@ -30,6 +31,9 @@ public class MapGenerator : ChunkGenerator<MapChunk>
 
     private new void Start()
 	{
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        SceneManager.sceneLoaded += OnSceneLoaded;
+
         /*if(!IsServer){
             enabled=false;
             return;
@@ -44,7 +48,15 @@ public class MapGenerator : ChunkGenerator<MapChunk>
         maxSystemRadius = minSystemDist / 2;
     }
 
-	protected override void DeleteChunk(MapChunk chunk)
+    private void OnSceneLoaded(Scene current, LoadSceneMode loadSceneMode)
+    {
+        if (current.name != "SpaceMap") return;
+
+        SystemMapManager.Instance.SatelliteObjects.Clear();
+        SystemMapManager.Instance.CentralObject.Value = default;
+    }
+
+    protected override void DeleteChunk(MapChunk chunk)
 	{
         if (chunk.SpaceObjects == null) return;
 
