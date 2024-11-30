@@ -5,7 +5,7 @@ using UnityEngine;
 public class WaterFoodDepletion : MonoBehaviour
 {
     private float elapsedTime = 5;
-    private float depletionRate = 100;
+    private float depletionRate = 10;
 
     public TMP_Text waterText;
     public TMP_Text foodText;

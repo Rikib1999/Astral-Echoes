@@ -16,7 +16,7 @@ public class PlayerLogic : MonoBehaviour
     private float food;
     private float energy;
     private float metal;
-    private float particleValue = 0.1f;
+    private float particleValue = 1f;
     private int particleCounter = 0;
     private ResourceTextUpdater resourceTextUpdater;
     private SpriteRenderer spriteRenderer;
@@ -91,17 +91,17 @@ public class PlayerLogic : MonoBehaviour
                 break;
             case eResourceType.Food:
                 food += particleValue;
-                resourceTextUpdater.SetWater(food);
+                resourceTextUpdater.SetFood(food);
                 if (save) PlayerPrefs.SetFloat("food", food);
                 break;
             case eResourceType.Energy:
                 energy += particleValue;
-                resourceTextUpdater.SetWater(energy);
+                resourceTextUpdater.SetEnergy(energy);
                 if (save) PlayerPrefs.SetFloat("energy", energy);
                 break;
             case eResourceType.Metals:
                 metal += particleValue;
-                resourceTextUpdater.SetWater(metal);
+                resourceTextUpdater.SetMetal(metal);
                 if (save) PlayerPrefs.SetFloat("metal", metal);
                 break;
             default: break;

@@ -823,7 +823,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 941972308
+  GlobalObjectIdHash: 3965024115
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -853,7 +853,7 @@ MonoBehaviour:
   moveSpeed: 3
   dashSpeed: 15
   dashDuration: 0.3
-  dashCooldown: 1
+  dashCooldown: 1.5
   maxHealth: 100
   dashBar: {fileID: 603415456703509948}
   dashAudioSource: {fileID: 2592547594608714400}

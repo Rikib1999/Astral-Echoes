@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class EnemyLogic : MonoBehaviour
@@ -5,22 +6,31 @@ public class EnemyLogic : MonoBehaviour
     [SerializeField] private int health;
     [SerializeField] int maxHealth;
     [SerializeField] GameObject Player;
+    private SpriteRenderer spriteRenderer;
 
     private void Start()
     {
-        if (Player == null) { Player = GameObject.FindWithTag("Player"); }
+        if (Player == null) Player = GameObject.FindWithTag("Player");
         health = maxHealth;
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 
     public void damage(int damage)
     {
-        Debug.Log("HIT");
         if (health >= 0)
         {
             health -= damage;
-            Debug.Log(health);
+            if (spriteRenderer != null) StartCoroutine(ShowDamage());
         }
-        if (health <= 0) { Destroy(gameObject); }
+
+        if (health <= 0) Destroy(gameObject);
+    }
+
+    private IEnumerator ShowDamage()
+    {
+        spriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(1);
+        spriteRenderer.color = Color.white;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

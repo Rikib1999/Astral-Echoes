@@ -12,7 +12,7 @@ public class Controller : NetworkBehaviour
     [SerializeField] float moveSpeed = 2;
     [SerializeField] float dashSpeed = 10f;
     [SerializeField] float dashDuration = 0.2f;
-    [SerializeField] float dashCooldown = 1f;
+    [SerializeField] float dashCooldown = 2f;
     [SerializeField] int maxHealth = 100;
     [SerializeField] Slider dashBar;
 
@@ -84,6 +84,8 @@ public class Controller : NetworkBehaviour
             if (!audioSource.isPlaying) audioSource.Play();
         }
         else if (audioSource.isPlaying) audioSource.Stop();
+
+        dashBar.value = Mathf.Clamp(Time.time - lastDashTime, 0, dashCooldown);
 
         if (Input.GetKeyDown(KeyCode.LeftShift) && Time.time >= lastDashTime + dashCooldown)
         {
