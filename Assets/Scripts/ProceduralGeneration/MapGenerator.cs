@@ -29,6 +29,8 @@ public class MapGenerator : ChunkGenerator<MapChunk>
     [SerializeField] private GameObject planetPrefab;
     [SerializeField] private GameObject gasGiantPrefab;
 
+    public GameObject deathAlert;
+
     private new void Start()
 	{
         SceneManager.sceneLoaded -= OnSceneLoaded;
@@ -46,6 +48,19 @@ public class MapGenerator : ChunkGenerator<MapChunk>
 
         minSystemDist = (systemChunkSize / 2) / Mathf.Sqrt(2);
         maxSystemRadius = minSystemDist / 2;
+
+        if (deathAlert != null)
+        {
+            if (SystemMapManager.Instance.Death)
+            {
+                SystemMapManager.Instance.Death = false;
+                deathAlert.SetActive(true);
+            }
+            else
+            {
+                deathAlert.SetActive(false);
+            }
+        }
     }
 
     private void OnSceneLoaded(Scene current, LoadSceneMode loadSceneMode)

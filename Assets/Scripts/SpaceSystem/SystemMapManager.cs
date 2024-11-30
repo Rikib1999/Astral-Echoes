@@ -15,44 +15,33 @@ namespace Assets.Scripts
         [SerializeField] private GameObject blackHolePrefab;
         [SerializeField] private GameObject planetPrefab;
         [SerializeField] private GameObject gasGiantPrefab;
-
         [SerializeField] private EnemySpawner enemySpawner;
-
         [SerializeField] private UnityEditor.SceneAsset system_map_scene;
-
-        //[SerializeField] public static SystemDataBag SystemDataBag;
-        [SerializeField] public NetworkVariable<SpaceObjectDataBag> CentralObject = new NetworkVariable<SpaceObjectDataBag>();// { get => CentralObject.Value; set => CentralObject.Value = value; }
-        //public SpaceObjectDataBag CentralObject { get => centralObject.Value; set => centralObject.Value = value; }
-        [field: SerializeField] public NetworkList<SpaceObjectDataBag> SatelliteObjects;// { get => SatelliteObjects.Value; set => SatelliteObjects.Value = value; }
-        //public NetworkList<SpaceObjectDataBag> SatelliteObjects { get => satelliteObjects.Value; set => satelliteObjects.Value = value; }
+        [SerializeField] public NetworkVariable<SpaceObjectDataBag> CentralObject = new();
+        [field: SerializeField] public NetworkList<SpaceObjectDataBag> SatelliteObjects;
         
         public const float scaleUpConst = 10;
 
+        public bool Death { get; set; }
+
         public override void OnDestroy()
         {
-            if (Instance == this)// && IsServer)
+            if (Instance == this)
             {
                 NetworkManager.Singleton.SceneManager.OnSceneEvent -= OnSceneEvent;
-                //SceneManager.sceneLoaded -= OnSceneLoaded;
             }
-           base.OnDestroy();
+
+            base.OnDestroy();
         }
 
-        public void Awake(){
-            //base.Awake();
-            //GetComponent<NetworkObject>().Spawn();
+        public void Awake()
+        {
             SatelliteObjects = new NetworkList<SpaceObjectDataBag>();
         }
 
         public override void Start()
         {
             base.Start();
-            //GetComponent<NetworkObject>().Spawn();
-            //SatelliteObjects = new NetworkList<SpaceObjectDataBag>();
-            /*if(!IsServer)
-            {
-                enabled=false;
-            }*/
         }
 
         private void OnSceneEvent(SceneEvent sceneEvent)
@@ -69,7 +58,6 @@ namespace Assets.Scripts
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             if (CentralObject == null || CentralObject.Value.Type == 0) return;
-            //Debug.Log(JsonUtility.ToJson(Instance.gameObject.GetComponent<SystemDataBag>(), true));
             GenerateSystem();
         }
 
@@ -78,11 +66,6 @@ namespace Assets.Scripts
             if (!systemDataBag.CanTravel) return;
 
             PlayerPrefs.SetFloat("fuel", systemDataBag.Fuel - systemDataBag.Distance);
-
-            //Instance.gameObject.AddComponent<SystemDataBag>();
-            //Instance.gameObject.GetComponent<NetworkObject>().Spawn(false);
-            //var bag = Instance.gameObject.GetComponent<SystemDataBag>();
-            //SatelliteObjects = new NetworkList<SpaceObjectDataBag>();
 
             PlayerPrefs.SetFloat("currentSystemPositionX", systemDataBag.Position.x);
             PlayerPrefs.SetFloat("currentSystemPositionY", systemDataBag.Position.y);
@@ -104,14 +87,11 @@ namespace Assets.Scripts
         private void LoadSystemSceneClientRpc()
         {
             NetworkManager.Singleton.SceneManager.OnSceneEvent += OnSceneEvent;
-            //SceneManager.sceneLoaded += OnSceneLoaded;
         }
         private void LoadSystemScene()
         {
             NetworkManager.Singleton.SceneManager.OnSceneEvent += OnSceneEvent;
-            //SceneManager.sceneLoaded += OnSceneLoaded;
 
-            //SceneManager.LoadScene("SystemMap");
             var status = NetworkManager.SceneManager.LoadScene(system_map_scene.name,LoadSceneMode.Single);
             if (status != SceneEventProgressStatus.Started)
             {
@@ -148,10 +128,6 @@ namespace Assets.Scripts
                 blackHole.SetTooltip(scaleUpConst);
                 blackHole.SetSprite();
             }
-            //Debug.Log("T2"+CentralObject.Value.Name.ToString()+" "+CentralObject.Value.Type);
-
-            //centralObject.GetComponent<NetworkObject>().Spawn(true);
-            
 
             foreach (var satellite in SatelliteObjects)
             {
@@ -190,9 +166,6 @@ namespace Assets.Scripts
                     gasGiant.SetTooltip(scaleUpConst);
                     gasGiant.SetSprite();
                 }
-                //Debug.Log("T2"+satellite.Name.ToString()+" "+satellite.Type);
-
-                //satelliteObject.GetComponent<NetworkObject>().Spawn(true);
             }
         }
     }

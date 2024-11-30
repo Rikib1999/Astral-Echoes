@@ -14,6 +14,7 @@ namespace Assets.Scripts.Player
             PlayerPrefs.DeleteAll();
 
             SystemMapManager.Instance.CentralObject = new NetworkVariable<SpaceObjectDataBag> { Value = new SpaceObjectDataBag() { Type = 0 } };
+            SystemMapManager.Instance.Death = true;
             var status = NetworkManager.SceneManager.LoadScene(return_scene.name, LoadSceneMode.Single);
         }
     }
