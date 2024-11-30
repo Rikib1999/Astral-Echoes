@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2d7512ca8a100140b8fd8bfe4143493, type: 3}
+  m_Name: ShotgunPartBack
+  m_EditorClassIdentifier: 
+  id: 61
+  itemName: Shotgun Part Back
+  value: 500
+  icon: {fileID: 21300000, guid: b4ffe649d1cad8c4bbd2ac9682a91802, type: 3}
+  craftable: 0
+  itemType: 0

@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c2d7512ca8a100140b8fd8bfe4143493, type: 3}
-  m_Name: GreenBlob
+  m_Name: Water
   m_EditorClassIdentifier: 
-  id: 1
-  itemName: GreenBlob
-  value: 5
-  icon: {fileID: 21300000, guid: 376be569fdc610c448cfa4ea6fb98287, type: 3}
+  id: 820
+  itemName: Water
+  value: 20
+  icon: {fileID: -1559858571687980271, guid: 13a670e20d88e1d489acb123661a5046, type: 3}
   craftable: 0
-  itemType: 3
+  itemType: 0
