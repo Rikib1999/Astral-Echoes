@@ -403,7 +403,12 @@ MonoBehaviour:
   maxHealth: 100
   Player: {fileID: 0}
   DropItem: {fileID: 7524921067370148921, guid: 8ce8cf632124e834b908acb35f19c613, type: 3}
-  lootTable: []
+  lootTable:
+  - {fileID: 11400000, guid: 370143a9f77e17c478a63fc688833442, type: 2}
+  - {fileID: 11400000, guid: 4e70b742215c5604e9abfdba428c67e1, type: 2}
+  - {fileID: 11400000, guid: afe6ce5a0a031c44a87e935558675480, type: 2}
+  - {fileID: 11400000, guid: 130353fc3362b1347b6a6f4bfbcb9a57, type: 2}
+  - {fileID: 11400000, guid: 75e531fa31afac54ab72ecce79d421e2, type: 2}
 --- !u!114 &-2159259361179501731
 MonoBehaviour:
   m_ObjectHideFlags: 0
