@@ -28,58 +28,16 @@ public class EnemyLogic : MonoBehaviour
 
         if (health <= 0)
         { 
-            Destroy(gameObject);
-
             InstantiateLoot(transform.position);
-
-            /*
-            //Random drop from enemy, from the list of items
-            var rand = Random.Range(0, lootTable.Count+2);
-
-            for(int i = 0; i < lootTable.Count; i++)
-            {
-                if (i == rand)
-                {
-                    Instantiate(lootTable[i], transform.position, transform.rotation);
-                }
-                else{
-                    Debug.Log("No loot dropped");
-                }
-            }*/
+            Destroy(gameObject);
         }
-    }
-
-    Item GetDroppedItem()
-    {
-        int randomNumber = Random.Range(0, lootTable.Count + 2);
-
-        List<Item> possibleItems = new List<Item>();
-
-        for (int i = 0; i < lootTable.Count; i++)
-        {
-            if (i == randomNumber)
-            {
-                //Instantiate(lootTable[i], transform.position, transform.rotation);
-                possibleItems.Add(lootTable[i]);
-                 
-            }
-
-        }
-
-        if(possibleItems.Count > 0)
-        {
-            Item droppedItem = possibleItems[Random.Range(0, possibleItems.Count)];
-            return droppedItem;
-        }
-        Debug.Log("No loot dropped");
-        return null;
     }
 
     public void InstantiateLoot(Vector2 spawnPos)
     {
         Item droppedItem = GetDroppedItem();
 
-        if(droppedItem != null)
+        if (droppedItem != null)
         {
             GameObject itemGameObject = Instantiate(DropItem, spawnPos, Quaternion.identity);
 
@@ -89,23 +47,25 @@ public class EnemyLogic : MonoBehaviour
         }
     }
 
+    Item GetDroppedItem()
+    {
+        int randomNumber = Random.Range(0, lootTable.Count);
+
+        for (int i = 0; i < lootTable.Count; i++)
+        {
+            if (i == randomNumber)
+            {
+                return lootTable[i];
+            }
+        }
+
+        return null;
+    }
+
     private IEnumerator ShowDamage()
     {
         spriteRenderer.color = Color.red;
         yield return new WaitForSeconds(1);
         spriteRenderer.color = Color.white;
-    }
-
-    public void OnMouseDown()
-    {
-        damage(10);
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            Player.GetComponent<PlayerLogic>().damage(10);
-        }
     }
 }

@@ -91,7 +91,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!60 &4160170879582311396
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -381,13 +381,10 @@ MonoBehaviour:
   Player: {fileID: 0}
   DropItem: {fileID: 7524921067370148921, guid: 8ce8cf632124e834b908acb35f19c613, type: 3}
   lootTable:
-  - {fileID: 11400000, guid: 370143a9f77e17c478a63fc688833442, type: 2}
   - {fileID: 11400000, guid: 4e70b742215c5604e9abfdba428c67e1, type: 2}
   - {fileID: 11400000, guid: afe6ce5a0a031c44a87e935558675480, type: 2}
   - {fileID: 11400000, guid: 130353fc3362b1347b6a6f4bfbcb9a57, type: 2}
   - {fileID: 11400000, guid: 75e531fa31afac54ab72ecce79d421e2, type: 2}
-  - {fileID: 11400000, guid: 614191462db76ae468cb6611c94ae953, type: 2}
-  - {fileID: 11400000, guid: 1719770ab7c38954cbed20826fc42535, type: 2}
 --- !u!114 &-4680185854368252458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -400,7 +397,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 822812813
+  GlobalObjectIdHash: 402693450
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1

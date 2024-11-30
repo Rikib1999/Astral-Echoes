@@ -15,6 +15,7 @@ MonoBehaviour:
   id: 62
   itemName: Shotgun Part Front
   value: 500
-  icon: {fileID: 21300000, guid: 6f8c53802dda4bf43815e349bb859ad8, type: 3}
+  icon: {fileID: 21300000, guid: d717be12fb4d4764da0956f97fb54c15, type: 3}
   craftable: 0
-  itemType: 0
+  itemType: 5
+  count: 0

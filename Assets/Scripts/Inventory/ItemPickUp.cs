@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemPickUp : MonoBehaviour
@@ -12,9 +10,11 @@ public class ItemPickUp : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnMouseDown()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        PickUp();
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            PickUp();
+        }
     }
-    
 }

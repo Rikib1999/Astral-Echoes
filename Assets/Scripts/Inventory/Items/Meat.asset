@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 103
   itemName: Meat
-  value: 800
-  icon: {fileID: 4985292855646638316, guid: 8a96f944a0bc71742b44c9ef2eb6a03a, type: 3}
+  value: 50
+  icon: {fileID: 21300000, guid: bedcc07e0a5c4044b82ff3110106bd98, type: 3}
   craftable: 0
   itemType: 1
+  count: 0

@@ -1,74 +1,112 @@
-using System.Collections;
-using System.Collections.Generic;
+using Assets.Scripts.Resources;
+using System.Linq;
+using TMPro;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance;
-    public List<Item> items = new List<Item>();
-
-
     public Transform itemContent;
-    public GameObject inventoryItem;
-
-    public InventoryItemController[] inventoryItemsController;
-    public void Update()
-    {
-        //ListItems();
-    }
+    public GameObject inventoryItemPrefab;
+    public Item[] possibleItems;
+    public ResourceTextUpdater resourceTextUpdater;
 
     public void Awake()
     {
-       
-       Instance = this;
-        
+        Instance = this;
+    }
+
+    public void Start()
+    {
+        foreach (var item in possibleItems)
+        {
+            item.count = PlayerPrefs.GetInt(item.itemName, 0);
+        }
+
+        ListItems();
+    }
+
+    public void AddWater(float amount)
+    {
+        resourceTextUpdater.SaveWater();
+        float water = PlayerPrefs.GetFloat("water", ResourceDefaultValues.Water) + amount;
+        resourceTextUpdater.SetWater(water);
+        PlayerPrefs.SetFloat("water", water);
+    }
+
+    public void AddFood(float amount)
+    {
+        resourceTextUpdater.SaveFood();
+        float food = PlayerPrefs.GetFloat("food", ResourceDefaultValues.Food) + amount;
+        resourceTextUpdater.SetFood(food);
+        PlayerPrefs.SetFloat("food", food);
+    }
+
+    public void AddMetal(float amount)
+    {
+        resourceTextUpdater.SaveMetal();
+        float metal = PlayerPrefs.GetFloat("metal", ResourceDefaultValues.Metal) + amount;
+        resourceTextUpdater.SetMetal(metal);
+        PlayerPrefs.SetFloat("metal", metal);
+    }
+
+    public void AddEnergy(float amount)
+    {
+        resourceTextUpdater.SaveEnergy();
+        float energy = PlayerPrefs.GetFloat("energy", ResourceDefaultValues.Energy) + amount;
+        resourceTextUpdater.SetEnergy(energy);
+        PlayerPrefs.SetFloat("energy", energy);
     }
 
     public void AddItem(Item item)
     {
-        items.Add(item);
+        var inventoryItem = possibleItems.First(x => x.id == item.id);
+
+        inventoryItem.count++;
+
+        PlayerPrefs.SetInt(item.itemName, inventoryItem.count);
+        
+        ListItems();
     }
 
     public void RemoveItem(Item item)
     {
-        items.Remove(item);
+        var inventoryItem = possibleItems.First(x => x.id == item.id);
+
+        inventoryItem.count--;
+
+        PlayerPrefs.SetInt(item.itemName, inventoryItem.count);
+
+        ListItems();
     }
 
-    public void RemoveDuplicate()
+    public void ClearList()
     {
         foreach (Transform item in itemContent)
         {
             Destroy(item.gameObject);
         }
-
     }
 
     public void ListItems()
     {
-        RemoveDuplicate();
+        ClearList();
 
-        foreach (var item in items)
+        foreach (var item in possibleItems)
         {
-            GameObject newItem = Instantiate(inventoryItem, itemContent);
-            var ItemName = newItem.transform.Find("ItemName").GetComponent<TMPro.TextMeshProUGUI>();
+            if (item.count <= 0) continue;
+
+            GameObject newItem = Instantiate(inventoryItemPrefab, itemContent);
+            var ItemName = newItem.transform.Find("ItemName").GetComponent<TextMeshProUGUI>();
             var ItemIcon = newItem.transform.Find("Image").GetComponent<UnityEngine.UI.Image>();
+            var ItemCount = newItem.transform.Find("ItemCount").GetComponent<TextMeshProUGUI>();
 
             ItemName.text = item.itemName;
             ItemIcon.sprite = item.icon;
-        }
-        //Debug.Log("WTF");
-        SetInventoryItems();
-    }
+            ItemCount.text = item.count + "x";
 
- 
-    public void SetInventoryItems()
-    {
-
-        inventoryItemsController = itemContent.GetComponentsInChildren<InventoryItemController>();
-
-        for(int i = 0; i<items.Count; i++)
-        {
-            inventoryItemsController[i].AddItem(items[i]);
+            newItem.GetComponent<InventoryItemController>().item = item;
         }
     }
 }

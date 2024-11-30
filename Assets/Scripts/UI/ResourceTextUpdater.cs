@@ -1,5 +1,6 @@
 using Assets.Scripts.Resources;
 using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class ResourceTextUpdater : MonoBehaviour
@@ -33,4 +34,9 @@ public class ResourceTextUpdater : MonoBehaviour
     public void UpdateFuel() => fuelText.text = PlayerPrefs.GetFloat("fuel", ResourceDefaultValues.Fuel).ToString();
     public void UpdateMaxFuel() => maxFuelText.text = PlayerPrefs.GetFloat("maxFuel", ResourceDefaultValues.MaxFuel).ToString();
     public void UpdateMetal() => metalText.text = PlayerPrefs.GetFloat("metal", ResourceDefaultValues.Metal).ToString();
+
+    public void SaveWater() => PlayerPrefs.SetFloat("water", float.TryParse(waterText.text, out float x) ? x : ResourceDefaultValues.Water);
+    public void SaveFood() => PlayerPrefs.SetFloat("food", float.TryParse(foodText.text, out float x) ? x : ResourceDefaultValues.Food);
+    public void SaveEnergy() => PlayerPrefs.SetFloat("energy", float.TryParse(energyText.text, out float x) ? x : ResourceDefaultValues.Energy);
+    public void SaveMetal() => PlayerPrefs.SetFloat("metal", float.TryParse(metalText.text, out float x) ? x : ResourceDefaultValues.Metal);
 }

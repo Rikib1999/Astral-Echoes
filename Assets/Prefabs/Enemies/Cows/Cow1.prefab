@@ -2001,10 +2001,9 @@ MonoBehaviour:
   health: 0
   maxHealth: 300
   Player: {fileID: 0}
-  DropItem: {fileID: 0}
+  DropItem: {fileID: 7524921067370148921, guid: 8ce8cf632124e834b908acb35f19c613, type: 3}
   lootTable:
-  - {fileID: 1106088439054587387, guid: 506bc2f17f0f049468ecdec5e43ce5eb, type: 3}
-  - {fileID: 1106088439054587387, guid: 70d15a36c64c09a41b4d2167829bbe41, type: 3}
+  - {fileID: 11400000, guid: 1719770ab7c38954cbed20826fc42535, type: 2}
 --- !u!50 &6279214410564020098
 Rigidbody2D:
   serializedVersion: 4

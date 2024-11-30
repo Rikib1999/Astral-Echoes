@@ -499,7 +499,6 @@ GameObject:
   - component: {fileID: 2031403605423719854}
   - component: {fileID: 7935891670201596183}
   - component: {fileID: 4042073334705575161}
-  - component: {fileID: 4609214943306674748}
   - component: {fileID: 6920983849493788688}
   - component: {fileID: -8219852356635902950}
   - component: {fileID: 5901091484928540354}
@@ -824,7 +823,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3965024115
+  GlobalObjectIdHash: 941972308
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -893,23 +892,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   healthBar: {fileID: 8210151442537754941}
---- !u!114 &4609214943306674748
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2939469357287639851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad6c94ae628ff734db1480754c2e38fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bullet: {fileID: 4299907772752605265, guid: 1f27c02ed7cda8242a9b4ea2e0c1ddd0, type: 3}
-  firePoint: {fileID: 6448858459872644164}
-  shootingTime: 0
-  bulletSource: {fileID: 5901091484928540354}
-  crosshair: {fileID: 7268092818745831833}
 --- !u!114 &6920983849493788688
 MonoBehaviour:
   m_ObjectHideFlags: 0

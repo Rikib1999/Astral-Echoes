@@ -15,6 +15,7 @@ MonoBehaviour:
   id: 61
   itemName: Shotgun Part Back
   value: 500
-  icon: {fileID: 21300000, guid: b4ffe649d1cad8c4bbd2ac9682a91802, type: 3}
+  icon: {fileID: 21300000, guid: 4e815f9b5055a5249bf5f849a9208497, type: 3}
   craftable: 0
-  itemType: 0
+  itemType: 5
+  count: 0

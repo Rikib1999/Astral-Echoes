@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5016560792001951202
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3526404153171412989}
+  - component: {fileID: 6128394478690601798}
+  m_Layer: 0
+  m_Name: InventoryManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3526404153171412989
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5016560792001951202}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.495452, y: 0.7802708, z: 5.8540254}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6128394478690601798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5016560792001951202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bb05189362ec2243ba35b5802400bb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemContent: {fileID: 0}
+  inventoryItemPrefab: {fileID: 3203922640719946989, guid: 8f9ed49ec1d5e994fa4b550787639636, type: 3}
+  possibleItems:
+  - {fileID: 11400000, guid: 6c453da4cc7113648ad6a28a84843383, type: 2}
+  - {fileID: 11400000, guid: 370143a9f77e17c478a63fc688833442, type: 2}
+  - {fileID: 11400000, guid: 1719770ab7c38954cbed20826fc42535, type: 2}
+  - {fileID: 11400000, guid: 4b080ab53e1bf3048a34c0db71b60c57, type: 2}
+  - {fileID: 11400000, guid: 4e70b742215c5604e9abfdba428c67e1, type: 2}
+  - {fileID: 11400000, guid: afe6ce5a0a031c44a87e935558675480, type: 2}
+  - {fileID: 11400000, guid: 130353fc3362b1347b6a6f4bfbcb9a57, type: 2}
+  - {fileID: 11400000, guid: 75e531fa31afac54ab72ecce79d421e2, type: 2}
+  - {fileID: 11400000, guid: 5c2152a000069bd408e775971114d4e8, type: 2}
+  resourceTextUpdater: {fileID: 0}

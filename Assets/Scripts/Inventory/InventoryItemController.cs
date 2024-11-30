@@ -7,12 +7,6 @@ public class InventoryItemController : MonoBehaviour
     public void RemoveInventoryItem()
     {
         InventoryManager.Instance.RemoveItem(item);
-        Destroy(gameObject);
-    }
-
-    public void AddItem(Item newItem)
-    {
-        item = newItem;
     }
 
     public void UseItem()
@@ -21,21 +15,29 @@ public class InventoryItemController : MonoBehaviour
         {
             case Item.ItemType.Potion:
                 PlayerLogic.Instance.IncreaseHealth(item.value);
+                RemoveInventoryItem();
                 break;
-            case Item.ItemType.Resource:
-                Debug.Log("Not implemented yet.");
+            case Item.ItemType.Water:
+                InventoryManager.Instance.AddWater(item.value);
+                RemoveInventoryItem();
                 break;
             case Item.ItemType.Food:
-                Debug.Log("Not implemented yet.");
+                InventoryManager.Instance.AddFood(item.value);
+                RemoveInventoryItem();
                 break;
+            case Item.ItemType.Metal:
+                InventoryManager.Instance.AddMetal(item.value);
+                RemoveInventoryItem();
+                break;
+            case Item.ItemType.Crystal:
+                InventoryManager.Instance.AddEnergy(item.value);
+                RemoveInventoryItem();
+                break;
+            case Item.ItemType.Component:
+            case Item.ItemType.Fuel:
+            case Item.ItemType.Weapon:
             default:
-                Debug.Log("No more item types");
                 break;
-        }
-
-        if(item.itemType != Item.ItemType.Resource)
-        {
-            RemoveInventoryItem();
         }
     }
 }

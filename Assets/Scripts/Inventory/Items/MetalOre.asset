@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c2d7512ca8a100140b8fd8bfe4143493, type: 3}
-  m_Name: RiflePartFront
+  m_Name: MetalOre
   m_EditorClassIdentifier: 
-  id: 52
-  itemName: Rifle Part Front
-  value: 500
-  icon: {fileID: 21300000, guid: 3b5bf4368c858d44e892aa38a83f7332, type: 3}
+  id: 11
+  itemName: Metal Ore
+  value: 50
+  icon: {fileID: 21300000, guid: 288e56d163a353e4cb2111b053447b6c, type: 3}
   craftable: 0
-  itemType: 5
+  itemType: 0
   count: 0

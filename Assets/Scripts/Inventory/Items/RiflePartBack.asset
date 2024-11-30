@@ -15,6 +15,6 @@ MonoBehaviour:
   id: 51
   itemName: Rifle Part Back
   value: 500
-  icon: {fileID: 21300000, guid: 4222bf37b4cbbb5418852e6b25b733cb, type: 3}
+  icon: {fileID: 21300000, guid: 39fb5a902255b02499dc8c48eaaf8089, type: 3}
   craftable: 0
-  itemType: 0
+  itemType: 5

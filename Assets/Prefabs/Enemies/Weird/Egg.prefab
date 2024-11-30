@@ -291,6 +291,10 @@ MonoBehaviour:
   health: 0
   maxHealth: 30
   Player: {fileID: 0}
+  DropItem: {fileID: 7524921067370148921, guid: 8ce8cf632124e834b908acb35f19c613, type: 3}
+  lootTable:
+  - {fileID: 11400000, guid: 1719770ab7c38954cbed20826fc42535, type: 2}
+  - {fileID: 11400000, guid: 6c453da4cc7113648ad6a28a84843383, type: 2}
 --- !u!114 &-5467337974949437989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -303,7 +307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1332737674
+  GlobalObjectIdHash: 540743414
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
