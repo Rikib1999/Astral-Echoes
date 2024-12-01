@@ -34,6 +34,9 @@ public class InventoryItemController : MonoBehaviour
                 RemoveInventoryItem();
                 break;
             case Item.ItemType.Component:
+                InventoryManager.Instance.AddMetal(item.value);
+                RemoveInventoryItem();
+                break;
             case Item.ItemType.Fuel:
             case Item.ItemType.Weapon:
             default:
