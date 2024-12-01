@@ -62,6 +62,7 @@ public class InventoryManager : MonoBehaviour
     {
         var inventoryItem = possibleItems.First(x => x.id == item.id);
 
+        if (inventoryItem.count < 0) inventoryItem.count = 0;
         inventoryItem.count++;
 
         PlayerPrefs.SetInt(item.itemName, inventoryItem.count);
@@ -74,6 +75,7 @@ public class InventoryManager : MonoBehaviour
         var inventoryItem = possibleItems.First(x => x.id == item.id);
 
         inventoryItem.count -= count;
+        if (inventoryItem.count < 0) inventoryItem.count = 0;
 
         PlayerPrefs.SetInt(item.itemName, inventoryItem.count);
 

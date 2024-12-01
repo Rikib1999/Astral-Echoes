@@ -10,6 +10,7 @@ public class Shotgun : NetworkBehaviour
     [SerializeField] AudioSource audioSource;
     Quaternion bulletRotation;
     private bool hasWeapon;
+    private ResourceTextUpdater resourceTextUpdater;
 
     public override void OnNetworkSpawn()
     {
@@ -20,11 +21,12 @@ public class Shotgun : NetworkBehaviour
     private void Start()
     {
         hasWeapon = PlayerPrefs.GetInt("shotgun", 0) == 1;
+        resourceTextUpdater = FindFirstObjectByType<ResourceTextUpdater>();
     }
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire1") && hasWeapon)
+        if (Input.GetButtonDown("Fire1") && hasWeapon && resourceTextUpdater.ammoCount > 0)
         {
             Shoot();
         }
@@ -33,6 +35,10 @@ public class Shotgun : NetworkBehaviour
     void Shoot()
     {
         audioSource.Play();
+
+        resourceTextUpdater.ammoCount--;
+        resourceTextUpdater.SetAmmo(resourceTextUpdater.ammoCount);
+
         for (int i = 0; i < numBullets; i++)
         {
             float randomAngle = Random.Range(-spreadAngle, spreadAngle);

@@ -9,6 +9,7 @@ public class RifleController : NetworkBehaviour
     private float nextFireTime = 0f;
     [SerializeField] AudioSource audioSource;
     private bool hasWeapon;
+    private ResourceTextUpdater resourceTextUpdater;
 
     public override void OnNetworkSpawn()
     {
@@ -19,11 +20,12 @@ public class RifleController : NetworkBehaviour
     private void Start()
     {
         hasWeapon = PlayerPrefs.GetInt("rifle", 0) == 1;
+        resourceTextUpdater = FindFirstObjectByType<ResourceTextUpdater>();
     }
 
     void Update()
     {
-        if (Input.GetButton("Fire1") && Time.time >= nextFireTime && hasWeapon)
+        if (Input.GetButton("Fire1") && Time.time >= nextFireTime && hasWeapon && resourceTextUpdater.ammoCount > 0)
         {
             Shoot();
 
@@ -34,6 +36,10 @@ public class RifleController : NetworkBehaviour
     void Shoot()
     {
         audioSource.Play();
+
+        resourceTextUpdater.ammoCount--;
+        resourceTextUpdater.SetAmmo(resourceTextUpdater.ammoCount);
+
         if (IsServer)
         {
             var playerNetworkObject = NetworkManager.SpawnManager.InstantiateAndSpawn(bulletPrefab, NetworkManager.ServerClientId, true, false, true, firePoint.position, firePoint.rotation);

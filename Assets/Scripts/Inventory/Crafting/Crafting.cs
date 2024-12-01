@@ -21,10 +21,10 @@ public class Crafting : MonoBehaviour
                 inventoryManager.resourceTextUpdater.SetMetal(metals - craftItem.itemNeeded1);
 
                 //add ammo
-                float ammo = PlayerPrefs.GetFloat("ammo", ResourceDefaultValues.Ammo);
+                int ammo = PlayerPrefs.GetInt("ammo", ResourceDefaultValues.Ammo);
                 ammo += 20;
 
-                PlayerPrefs.SetFloat("ammo", ammo);
+                PlayerPrefs.SetInt("ammo", ammo);
                 inventoryManager.resourceTextUpdater.SetAmmo(ammo);
 
                 break;
