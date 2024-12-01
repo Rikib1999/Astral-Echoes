@@ -8,6 +8,7 @@ public class RifleController : NetworkBehaviour
     [SerializeField] float fireRate = 0.1f;
     private float nextFireTime = 0f;
     [SerializeField] AudioSource audioSource;
+    private bool hasWeapon;
 
     public override void OnNetworkSpawn()
     {
@@ -15,9 +16,14 @@ public class RifleController : NetworkBehaviour
         gameObject.SetActive(false);
     }
 
+    private void Start()
+    {
+        hasWeapon = PlayerPrefs.GetInt("rifle", 0) == 1;
+    }
+
     void Update()
     {
-        if (Input.GetButton("Fire1") && Time.time >= nextFireTime)
+        if (Input.GetButton("Fire1") && Time.time >= nextFireTime && hasWeapon)
         {
             Shoot();
 

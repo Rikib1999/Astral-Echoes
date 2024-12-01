@@ -9,6 +9,7 @@ public class Shotgun : NetworkBehaviour
     [SerializeField] float spreadAngle = 30f;
     [SerializeField] AudioSource audioSource;
     Quaternion bulletRotation;
+    private bool hasWeapon;
 
     public override void OnNetworkSpawn()
     {
@@ -16,9 +17,14 @@ public class Shotgun : NetworkBehaviour
         gameObject.SetActive(false);
     }
 
+    private void Start()
+    {
+        hasWeapon = PlayerPrefs.GetInt("shotgun", 0) == 1;
+    }
+
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && hasWeapon)
         {
             Shoot();
         }

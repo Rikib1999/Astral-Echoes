@@ -27,6 +27,8 @@ public class Controller : NetworkBehaviour
     [SerializeField] AudioSource dashAudioSource;
     private SpriteRenderer spriteRenderer;
     private CameraFollow playerCamera;
+    private bool hasRifle;
+    private bool hasShotgun;
 
     public override void OnNetworkSpawn()
     {
@@ -59,6 +61,9 @@ public class Controller : NetworkBehaviour
         {
             guns[i].gameObject.SetActive(i == activeGunIndex);
         }
+
+        hasRifle = PlayerPrefs.GetInt("rifle", 0) == 1;
+        hasShotgun = PlayerPrefs.GetInt("shotgun", 0) == 1;
     }
 
     private void Update()
@@ -102,11 +107,11 @@ public class Controller : NetworkBehaviour
         {
             SwitchGun(0);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2) && guns.Length >= 2)
+        else if (hasRifle && Input.GetKeyDown(KeyCode.Alpha2) && guns.Length >= 2)
         {
             SwitchGun(1);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha3) && guns.Length >= 3)
+        else if (hasShotgun && Input.GetKeyDown(KeyCode.Alpha3) && guns.Length >= 3)
         {
             SwitchGun(2);
         }
