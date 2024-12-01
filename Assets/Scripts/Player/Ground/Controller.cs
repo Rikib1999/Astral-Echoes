@@ -49,8 +49,11 @@ public class Controller : NetworkBehaviour
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
 
-        dashBar.maxValue = dashCooldown;
-        dashBar.value = dashCooldown;
+        if (dashBar != null)
+        {
+            dashBar.maxValue = dashCooldown;
+            dashBar.value = dashCooldown;
+        }
 
         for (int i = 0; i < guns.Length; i++)
         {
@@ -85,11 +88,14 @@ public class Controller : NetworkBehaviour
         }
         else if (audioSource.isPlaying) audioSource.Stop();
 
-        dashBar.value = Mathf.Clamp(Time.time - lastDashTime, 0, dashCooldown);
-
-        if (Input.GetKeyDown(KeyCode.LeftShift) && Time.time >= lastDashTime + dashCooldown)
+        if (dashBar != null)
         {
-            StartCoroutine(Dash());
+            dashBar.value = Mathf.Clamp(Time.time - lastDashTime, 0, dashCooldown);
+
+            if (Input.GetKeyDown(KeyCode.LeftShift) && Time.time >= lastDashTime + dashCooldown)
+            {
+                StartCoroutine(Dash());
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha1) && guns.Length >= 1)
@@ -117,7 +123,7 @@ public class Controller : NetworkBehaviour
 
     private void LateUpdate()
     {
-        RotateWeapon();
+        if (guns.Length >= 1) RotateWeapon();
     }
 
     private void RotateWeapon()

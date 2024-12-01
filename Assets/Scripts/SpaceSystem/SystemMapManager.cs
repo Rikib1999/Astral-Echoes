@@ -1,11 +1,10 @@
 ﻿using Assets.Scripts.Enums;
 using Assets.Scripts.SpaceObjects;
 using Assets.Scripts.SpaceSystem;
+using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Unity.Netcode;
-using Assets.Scripts.Structs;
 
 namespace Assets.Scripts
 {
@@ -101,6 +100,8 @@ namespace Assets.Scripts
 
         private void GenerateSystem()
         {
+            if (SceneManager.GetActiveScene().name != "SystemMap") return;
+
             bool isStar = CentralObject.Value.Type == eSpaceObjectType.Star;
 
             var centralObjectPrefab = isStar ? starPrefab : blackHolePrefab;
