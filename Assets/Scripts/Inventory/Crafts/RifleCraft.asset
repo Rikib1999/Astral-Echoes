@@ -18,6 +18,11 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 586b8222df6989c43bfae91fb706c528, type: 3}
   itemNeeded1: 51
   itemNeeded2: 52
+  itemNeeded3: 0
   item1: {fileID: 11400000, guid: 4e70b742215c5604e9abfdba428c67e1, type: 2}
   item2: {fileID: 11400000, guid: afe6ce5a0a031c44a87e935558675480, type: 2}
+  item3: {fileID: 0}
+  resource1: 0
+  resource2: 0
   ItemToCraft: {fileID: 11400000, guid: 34dbc4ffc2c62124581f920b56b12ff3, type: 2}
+  craftType: 4

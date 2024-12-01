@@ -34,8 +34,8 @@ public class CraftManager : MonoBehaviour
 
             ItemName.text = item.craftName;
             ItemIcon.sprite = item.icon;
-            ItemNeeded1.text = item.item1.itemName;
-            ItemNeeded2.text = item.item2 != null ? item.item2.itemName : "";
+            ItemNeeded1.text = item.resource1 == 0 ? item.item1.itemName : item.itemNeeded1 + "x " + item.resource1.ToString();
+            ItemNeeded2.text = item.resource2 == 0 ? item.item2 != null ? item.item2.itemName : "" : item.itemNeeded2 + "x " + item.resource2.ToString();
             ItemNeeded3.text = item.item3 != null ? item.item3.itemName : "";
 
             newItem.GetComponent<Crafting>().craftItem = item;

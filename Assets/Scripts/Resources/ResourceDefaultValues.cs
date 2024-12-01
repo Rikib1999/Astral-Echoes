@@ -8,5 +8,6 @@
         public const float Fuel = 3000;
         public const float MaxFuel = 3000;
         public const float Metal = 100;
+        public const float Ammo = 0;
     }
 }

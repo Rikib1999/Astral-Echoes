@@ -22,4 +22,7 @@ MonoBehaviour:
   item1: {fileID: 11400000, guid: 130353fc3362b1347b6a6f4bfbcb9a57, type: 2}
   item2: {fileID: 11400000, guid: 75e531fa31afac54ab72ecce79d421e2, type: 2}
   item3: {fileID: 0}
+  resource1: 0
+  resource2: 0
   ItemToCraft: {fileID: 11400000, guid: 7f6b4645808ce9d4ba829617d0728f79, type: 2}
+  craftType: 5

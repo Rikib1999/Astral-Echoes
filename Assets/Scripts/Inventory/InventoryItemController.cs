@@ -14,6 +14,7 @@ public class InventoryItemController : MonoBehaviour
         switch (item.itemType)
         {
             case Item.ItemType.Potion:
+                if (PlayerLogic.Instance == null) break;
                 PlayerLogic.Instance.IncreaseHealth(item.value);
                 RemoveInventoryItem();
                 break;

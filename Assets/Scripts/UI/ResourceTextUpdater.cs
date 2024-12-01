@@ -1,7 +1,7 @@
 using Assets.Scripts.Resources;
 using TMPro;
-using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ResourceTextUpdater : MonoBehaviour
 {
@@ -11,7 +11,9 @@ public class ResourceTextUpdater : MonoBehaviour
     public TMP_Text fuelText;
     public TMP_Text maxFuelText;
     public TMP_Text metalText;
-
+    public TMP_Text ammoText;
+    public Image rifleImage;
+    public Image shotgunImage;
 
     private void Start()
     {
@@ -21,12 +23,19 @@ public class ResourceTextUpdater : MonoBehaviour
         if (fuelText != null) fuelText.text = PlayerPrefs.GetFloat("fuel", ResourceDefaultValues.Fuel).ToString();
         if (maxFuelText != null) maxFuelText.text = PlayerPrefs.GetFloat("maxFuel", ResourceDefaultValues.MaxFuel).ToString();
         metalText.text = PlayerPrefs.GetFloat("metal", ResourceDefaultValues.Metal).ToString();
+        if (ammoText != null) ammoText.text = PlayerPrefs.GetFloat("ammo", ResourceDefaultValues.Ammo).ToString();
+        if (rifleImage != null) rifleImage.color = new Color(rifleImage.color.r, rifleImage.color.g, rifleImage.color.b, PlayerPrefs.GetInt("rifle", 0));
+        if (shotgunImage != null) shotgunImage.color = new Color(shotgunImage.color.r, shotgunImage.color.g, shotgunImage.color.b, PlayerPrefs.GetInt("shotgun", 0));
     }
 
     public void SetWater(float amount) => waterText.text = amount.ToString();
     public void SetFood(float amount) => foodText.text = amount.ToString();
     public void SetEnergy(float amount) => energyText.text = amount.ToString();
     public void SetMetal(float amount) => metalText.text = amount.ToString();
+    public void SetFuel(float amount) => fuelText.text = amount.ToString();
+    public void SetAmmo(float amount) => ammoText.text = amount.ToString();
+    public void SetRifle(int value) => rifleImage.color = new Color(rifleImage.color.r, rifleImage.color.g, rifleImage.color.b, value);
+    public void SetShotgun(int value) => shotgunImage.color = new Color(shotgunImage.color.r, shotgunImage.color.g, shotgunImage.color.b, value);
 
     public void UpdateWater() => waterText.text = PlayerPrefs.GetFloat("water", ResourceDefaultValues.Water).ToString();
     public void UpdateFood() => foodText.text = PlayerPrefs.GetFloat("food", ResourceDefaultValues.Food).ToString();
