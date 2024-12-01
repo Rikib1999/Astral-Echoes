@@ -273,9 +273,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   moveSpeed: 1
-  attackRange: 1.5
+  attackRange: 2
   detectionRange: 10
   attackCooldown: 2
+  damage: 5
 --- !u!114 &7498485281822738873
 MonoBehaviour:
   m_ObjectHideFlags: 0

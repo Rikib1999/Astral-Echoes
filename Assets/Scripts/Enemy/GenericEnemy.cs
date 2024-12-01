@@ -7,6 +7,7 @@ public class GenericEnemy : MonoBehaviour
     public float attackRange = 1.5f;
     public float detectionRange = 10f;
     public float attackCooldown = 2f;
+    public int damage = 10;
 
     private Animator animator;
     private Rigidbody2D rb;
@@ -79,6 +80,13 @@ public class GenericEnemy : MonoBehaviour
         {
             animator.SetBool("isWalking", false);
             animator.SetTrigger("Attack");
+        }
+
+        PlayerLogic playerLogic = player.GetComponent<PlayerLogic>();
+
+        if (playerLogic != null)
+        {
+            playerLogic.damage(damage);
         }
 
         isAttacking = true;

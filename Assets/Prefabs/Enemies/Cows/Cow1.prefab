@@ -1986,6 +1986,7 @@ MonoBehaviour:
   attackRange: 2
   detectionRange: 5
   attackCooldown: 1
+  damage: 35
 --- !u!114 &5311542111585004959
 MonoBehaviour:
   m_ObjectHideFlags: 0
