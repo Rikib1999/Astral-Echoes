@@ -31,8 +31,14 @@ public class WaterFoodDepletion : MonoBehaviour
 
         if (elapsedTime > 10)
         {
-            water = PlayerPrefs.GetFloat("water") - depletionRate;
-            food = PlayerPrefs.GetFloat("food") - depletionRate;
+            water = PlayerPrefs.GetFloat("water");
+            food = PlayerPrefs.GetFloat("food");
+
+            if (float.TryParse(waterText.text, out float currentWater)) water = currentWater;
+            if (float.TryParse(foodText.text, out float currentFood)) food = currentFood;
+
+            water -= depletionRate;
+            food -= depletionRate;
 
             waterText.text = water.ToString();
             foodText.text = food.ToString();
