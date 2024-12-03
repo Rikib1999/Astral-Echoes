@@ -164,19 +164,27 @@ public class PlanetGenerator : ChunkGenerator<PlanetChunk>
                 }
                 else if (UnityEngine.Random.Range(0, 300) == 123 && IsServer)
                 {
-                    chunk.PlanetObjects.Add(Instantiate(treePrefabs[UnityEngine.Random.Range(0, treePrefabs.Length)], new Vector3Int((ChunkSize * coords.x) + x, (ChunkSize * coords.y) + y, -1), Quaternion.identity));
+                    var tree = Instantiate(treePrefabs[UnityEngine.Random.Range(0, treePrefabs.Length)], new Vector3Int((ChunkSize * coords.x) + x, (ChunkSize * coords.y) + y, -1), Quaternion.identity);
+                    tree.GetComponent<NetworkObject>().Spawn();
+                    chunk.PlanetObjects.Add(tree);
                 }
                 else if (UnityEngine.Random.Range(0, 300) == 123 && IsServer)
                 {
-                    chunk.PlanetObjects.Add(Instantiate(bushPrefabs[UnityEngine.Random.Range(0, bushPrefabs.Length)], new Vector3Int((ChunkSize * coords.x) + x, (ChunkSize * coords.y) + y, -1), Quaternion.identity));
+                    var bush = Instantiate(bushPrefabs[UnityEngine.Random.Range(0, bushPrefabs.Length)], new Vector3Int((ChunkSize * coords.x) + x, (ChunkSize * coords.y) + y, -1), Quaternion.identity);
+                    bush.GetComponent<NetworkObject>().Spawn();
+                    chunk.PlanetObjects.Add(bush);
                 }
                 else if (UnityEngine.Random.Range(0, 300) == 123 && IsServer)
                 {
-                    chunk.PlanetObjects.Add(Instantiate(stonePrefabs[UnityEngine.Random.Range(0, stonePrefabs.Length)], new Vector3Int((ChunkSize * coords.x) + x, (ChunkSize * coords.y) + y, -1), Quaternion.identity));
+                    var stone = Instantiate(stonePrefabs[UnityEngine.Random.Range(0, stonePrefabs.Length)], new Vector3Int((ChunkSize * coords.x) + x, (ChunkSize * coords.y) + y, -1), Quaternion.identity);
+                    stone.GetComponent<NetworkObject>().Spawn();
+                    chunk.PlanetObjects.Add(stone);
                 }
                 else if (UnityEngine.Random.Range(0, 300) == 123 && IsServer)
                 {
-                    chunk.PlanetObjects.Add(Instantiate(crystalPrefabs[UnityEngine.Random.Range(0, crystalPrefabs.Length)], new Vector3Int((ChunkSize * coords.x) + x, (ChunkSize * coords.y) + y, -1), Quaternion.identity));
+                    var crystal = Instantiate(crystalPrefabs[UnityEngine.Random.Range(0, crystalPrefabs.Length)], new Vector3Int((ChunkSize * coords.x) + x, (ChunkSize * coords.y) + y, -1), Quaternion.identity);
+                    crystal.GetComponent<NetworkObject>().Spawn();
+                    chunk.PlanetObjects.Add(crystal);
                 }
             }
         }

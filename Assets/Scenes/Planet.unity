@@ -868,6 +868,7 @@ MonoBehaviour:
   ammoText: {fileID: 387413992}
   rifleImage: {fileID: 1189741125}
   shotgunImage: {fileID: 1455372740}
+  ammoCount: 0
 --- !u!114 &605925324
 MonoBehaviour:
   m_ObjectHideFlags: 0

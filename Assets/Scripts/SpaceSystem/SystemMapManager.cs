@@ -64,11 +64,6 @@ namespace Assets.Scripts
         {
             if (!systemDataBag.CanTravel) return;
 
-            PlayerPrefs.SetFloat("fuel", systemDataBag.Fuel - systemDataBag.Distance);
-
-            PlayerPrefs.SetFloat("currentSystemPositionX", systemDataBag.Position.x);
-            PlayerPrefs.SetFloat("currentSystemPositionY", systemDataBag.Position.y);
-
             CentralObject.Value = systemDataBag.CentralObject;
             foreach(SpaceObjectDataBag satObject in systemDataBag.SatelliteObjects)
             {
@@ -77,6 +72,8 @@ namespace Assets.Scripts
             
             if(IsServer)
             {
+                SyncFuelAndPosition(systemDataBag.Fuel - systemDataBag.Distance, systemDataBag.Position);
+                SyncFuelAndPositionClientRpc(systemDataBag.Fuel - systemDataBag.Distance, systemDataBag.Position);
                 LoadSystemScene();
                 LoadSystemSceneClientRpc();
             }
@@ -87,6 +84,14 @@ namespace Assets.Scripts
         {
             NetworkManager.Singleton.SceneManager.OnSceneEvent += OnSceneEvent;
         }
+        [ClientRpc]
+        private void SyncFuelAndPositionClientRpc(float fuel, Vector3 position)
+        {
+            PlayerPrefs.SetFloat("fuel", fuel);
+            PlayerPrefs.SetFloat("currentSystemPositionX", position.x);
+            PlayerPrefs.SetFloat("currentSystemPositionY", position.y);
+        }
+
         private void LoadSystemScene()
         {
             NetworkManager.Singleton.SceneManager.OnSceneEvent += OnSceneEvent;
@@ -96,6 +101,12 @@ namespace Assets.Scripts
             {
                 Debug.LogWarning($"Failed to load system map scene with a {nameof(SceneEventProgressStatus)}: {status}");
             }
+        }
+        private void SyncFuelAndPosition(float fuel, Vector3 position)
+        {
+            PlayerPrefs.SetFloat("fuel", fuel);
+            PlayerPrefs.SetFloat("currentSystemPositionX", position.x);
+            PlayerPrefs.SetFloat("currentSystemPositionY", position.y);
         }
 
         private void GenerateSystem()

@@ -1,8 +1,9 @@
 using Assets.Scripts.Resources;
 using TMPro;
 using UnityEngine;
+using Unity.Netcode;
 
-public class FuelInMap : MonoBehaviour
+public class FuelInMap : NetworkBehaviour
 {
     public TMP_Text fuelText;
     public TMP_Text maxFuelText;
@@ -16,5 +17,5 @@ public class FuelInMap : MonoBehaviour
         maxFuelText.text = PlayerPrefs.GetFloat("maxFuel", ResourceDefaultValues.MaxFuel).ToString();
     }
 
-    public void UpdateFuel(float price) => PlayerPrefs.SetFloat("fuel", fuel - price);
+    //public void UpdateFuel(float price) => PlayerPrefs.SetFloat("fuel", fuel - price);
 }
