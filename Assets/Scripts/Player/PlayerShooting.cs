@@ -44,13 +44,19 @@ public class PlayerShooting : NetworkBehaviour
         }
         else
         {
-            SpawnBulletServerRpc(firePoint.position,crosshair.transform.position);
+            SpawnBulletServerRpc(firePoint.position,crosshair.transform.position,transform.position);
         }
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void SpawnBulletServerRpc(Vector3 bullet_pos,Vector3 target,ServerRpcParams serverRpcParams = default)
+    private void SpawnBulletServerRpc(Vector3 bullet_pos,Vector3 target,Vector3 shipPos,ServerRpcParams serverRpcParams = default)
     {
         var playerNetworkObject = NetworkManager.SpawnManager.InstantiateAndSpawn(bullet,serverRpcParams.Receive.SenderClientId,true,false,true,bullet_pos,Quaternion.identity);
+
+        Vector3 direction = (target - shipPos).normalized;
+        direction.z = 0;
+
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        playerNetworkObject.transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 }
