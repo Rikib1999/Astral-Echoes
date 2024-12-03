@@ -15,7 +15,6 @@ namespace Assets.Scripts
         [SerializeField] private GameObject planetPrefab;
         [SerializeField] private GameObject gasGiantPrefab;
         [SerializeField] private EnemySpawner enemySpawner;
-        [SerializeField] private UnityEditor.SceneAsset system_map_scene;
         [SerializeField] public NetworkVariable<SpaceObjectDataBag> CentralObject = new();
         [field: SerializeField] public NetworkList<SpaceObjectDataBag> SatelliteObjects;
         
@@ -91,7 +90,7 @@ namespace Assets.Scripts
         {
             NetworkManager.Singleton.SceneManager.OnSceneEvent += OnSceneEvent;
 
-            var status = NetworkManager.SceneManager.LoadScene(system_map_scene.name,LoadSceneMode.Single);
+            var status = NetworkManager.SceneManager.LoadScene("SystemMap" ,LoadSceneMode.Single);
             if (status != SceneEventProgressStatus.Started)
             {
                 Debug.LogWarning($"Failed to load system map scene with a {nameof(SceneEventProgressStatus)}: {status}");

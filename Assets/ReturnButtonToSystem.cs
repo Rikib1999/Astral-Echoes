@@ -4,13 +4,11 @@ using UnityEngine.SceneManagement;
 
 public class ReturnButtonToSystem : NetworkBehaviour
 {
-    [SerializeField] public UnityEditor.SceneAsset return_scene;
-
     public void OnReturnButton()
     {
         if (!IsServer) return;
 
-        var status = NetworkManager.SceneManager.LoadScene(return_scene.name,LoadSceneMode.Single);
+        var status = NetworkManager.SceneManager.LoadScene("SystemMap", LoadSceneMode.Single);
 
         if (status != SceneEventProgressStatus.Started)
         {

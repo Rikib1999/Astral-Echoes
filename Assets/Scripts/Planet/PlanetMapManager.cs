@@ -8,7 +8,6 @@ namespace Assets.Scripts
 {
     public class PlanetMapManager : NetworkSingleton<PlanetMapManager>
     {
-        [SerializeField] private UnityEditor.SceneAsset planet_scene;
         [SerializeField] public NetworkVariable<SpaceObjectDataBag> PlanetDataBag = new();
 
         private SpaceObjectDataBag centralObjectStorage;
@@ -40,7 +39,7 @@ namespace Assets.Scripts
 
         private void OnSceneUnloaded(Scene current)
         {
-            if (current.name != planet_scene.name) return;
+            if (current.name != "Planet") return;
 
             SystemMapManager.Instance.CentralObject.Value = centralObjectStorage;
 
@@ -60,7 +59,7 @@ namespace Assets.Scripts
         {
             ComputeSeed();
             
-            var status = NetworkManager.SceneManager.LoadScene(planet_scene.name,LoadSceneMode.Single);
+            var status = NetworkManager.SceneManager.LoadScene("Planet",  LoadSceneMode.Single);
             if (status != SceneEventProgressStatus.Started)
             {
                 Debug.LogWarning($"Failed to load planet scene with a {nameof(SceneEventProgressStatus)}: {status}");
