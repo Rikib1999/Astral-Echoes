@@ -18,7 +18,7 @@ public class Controller : NetworkBehaviour
 
     private float dirX = 0;
     private float dirY = 0;
-    private bool facingRight = true;
+    public bool facingRight = true;
     private bool isDashing = false;
     private float lastDashTime = -10f;
     private Animator animator;
@@ -142,6 +142,25 @@ public class Controller : NetworkBehaviour
     }
 
     private void SwitchGun(int newIndex)
+    {
+        guns[activeGunIndex].gameObject.SetActive(false);
+        guns[newIndex].gameObject.SetActive(true);
+        activeGunIndex = newIndex;
+        if(!IsServer){
+            SwitchGunServerRpc(newIndex);
+        }else{
+            SwitchGunClientRpc(newIndex);
+        }
+    }
+    [ServerRpc]
+    private void SwitchGunServerRpc(int newIndex)
+    {
+        guns[activeGunIndex].gameObject.SetActive(false);
+        guns[newIndex].gameObject.SetActive(true);
+        activeGunIndex = newIndex;
+    }
+    [ClientRpc]
+    private void SwitchGunClientRpc(int newIndex)
     {
         guns[activeGunIndex].gameObject.SetActive(false);
         guns[newIndex].gameObject.SetActive(true);

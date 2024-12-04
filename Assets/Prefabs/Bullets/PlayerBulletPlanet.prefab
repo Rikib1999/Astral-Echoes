@@ -232,3 +232,4 @@ MonoBehaviour:
   bulletDamage: 20
   enemyTag: Enemy
   resourceTag: PlanetResource
+  timer: 0

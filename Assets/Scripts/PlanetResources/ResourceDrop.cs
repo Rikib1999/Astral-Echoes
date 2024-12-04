@@ -1,10 +1,11 @@
 ﻿using Assets.Scripts.Enums;
 using Unity.VisualScripting;
 using UnityEngine;
+using Unity.Netcode;
 
 namespace Assets.Scripts.PlanetResources
 {
-    public class ResourceDrop : MonoBehaviour
+    public class ResourceDrop : NetworkBehaviour
     {
         [SerializeField] public eResourceType resourceType;
 
@@ -23,9 +24,22 @@ namespace Assets.Scripts.PlanetResources
 
         public void Damage(int damage)
         {
+            if (!IsServer) return;
+            
             health -= damage;
             if (health > 0) return;
 
+            DieClientRpc();
+
+            GetComponent<PolygonCollider2D>().enabled = false;
+            GetComponent<SpriteRenderer>().enabled = false;
+            if (TryGetComponent<CircleCollider2D>(out var circleCollider)) circleCollider.enabled = false;
+
+            particleSystem.Play();
+        }
+        [ClientRpc]
+        private void DieClientRpc()
+        {
             GetComponent<PolygonCollider2D>().enabled = false;
             GetComponent<SpriteRenderer>().enabled = false;
             if (TryGetComponent<CircleCollider2D>(out var circleCollider)) circleCollider.enabled = false;

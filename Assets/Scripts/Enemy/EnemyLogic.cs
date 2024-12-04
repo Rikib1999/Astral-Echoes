@@ -34,11 +34,26 @@ public class EnemyLogic : NetworkBehaviour
         if (health <= 0)
         { 
             InstantiateLoot(transform.position);
+            InstantiateLootClientRpc(transform.position);
             Destroy(gameObject);
         }
     }
 
     public void InstantiateLoot(Vector2 spawnPos)
+    {
+        Item droppedItem = GetDroppedItem();
+
+        if (droppedItem != null)
+        {
+            GameObject itemGameObject = Instantiate(DropItem, spawnPos, Quaternion.identity);
+
+            itemGameObject.GetComponent<SpriteRenderer>().sprite = droppedItem.icon;
+
+            itemGameObject.GetComponent<ItemPickUp>().item = droppedItem;
+        }
+    }
+    [ClientRpc]
+    private void InstantiateLootClientRpc(Vector2 spawnPos)
     {
         Item droppedItem = GetDroppedItem();
 
