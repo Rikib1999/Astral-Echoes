@@ -31,14 +31,15 @@ public class PistolController : NetworkBehaviour
         if (Time.time >= nextFireTime)
         {
             audioSource.Play();
+                var cntrl = gameObject.GetComponentInParent<Controller>();
 
             if (IsServer)
             {
                 var playerNetworkObject = NetworkManager.SpawnManager.InstantiateAndSpawn(bulletPrefab, NetworkManager.ServerClientId, true, false, true, firePoint.position, firePoint.rotation);
+                if(cntrl && !cntrl.facingRight) playerNetworkObject.GetComponent<Bullet>().bulletDirection = Vector2.left;
             }
             else
             {
-                var cntrl = gameObject.GetComponentInParent<Controller>();
                 SpawnBulletServerRpc(firePoint.position,firePoint.rotation,cntrl && !cntrl.facingRight);
             }
 
@@ -49,20 +50,10 @@ public class PistolController : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     void SpawnBulletServerRpc(Vector3 pos, Quaternion rot, bool flip, ServerRpcParams serverRpcParams = default)
     {
-        var rot2 = rot.eulerAngles;
-        if(flip){
-            //Debug.Log("Cleft");
-		    rot2 = new Vector3(rot.x, rot.y, rot.z + 180);
-        }
-        var cntrl = gameObject.GetComponentInParent<Controller>();
-        Debug.Log(cntrl.facingRight);
-        if(cntrl && !cntrl.facingRight){
-            //Debug.Log("Sleft");
-            rot2 = new Vector3(rot.x, rot.y, rot.z + 180);
-        }
 
         //var playerNetworkObject = NetworkManager.SpawnManager.InstantiateAndSpawn(bulletPrefab, serverRpcParams.Receive.SenderClientId, true, false, true, pos, Quaternion.Euler(rot2));
         var playerNetworkObject = NetworkManager.SpawnManager.InstantiateAndSpawn(bulletPrefab, serverRpcParams.Receive.SenderClientId, true, false, true, pos, rot);
+        if(flip) playerNetworkObject.GetComponent<Bullet>().bulletDirection = Vector2.left;
         
     }
 }

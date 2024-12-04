@@ -10,16 +10,17 @@ public class Bullet : NetworkBehaviour
     [SerializeField] string resourceTag;
     public float timer;
 
-    private Vector2 bulletDirection;
+    public Vector2 bulletDirection = Vector2.right;
 
     private void Awake()
     {
-        Transform player = GameObject.FindGameObjectWithTag("Player").transform;
+        /*Transform player = GameObject.FindGameObjectWithTag("Player").transform;
 
         if (player.localScale.x < 0)
             bulletDirection = Vector2.left;
         else
             bulletDirection = Vector2.right;
+            */
     }
 
     void Update()
