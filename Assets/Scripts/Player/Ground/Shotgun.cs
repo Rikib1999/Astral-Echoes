@@ -26,6 +26,8 @@ public class Shotgun : NetworkBehaviour
 
     void Update()
     {
+        if(!IsOwner){return;}
+
         if (Input.GetButtonDown("Fire1") && hasWeapon && resourceTextUpdater.ammoCount > 0)
         {
             Shoot();
@@ -35,6 +37,7 @@ public class Shotgun : NetworkBehaviour
     void Shoot()
     {
         audioSource.Play();
+                var cntrl = gameObject.GetComponentInParent<Controller>();
 
         resourceTextUpdater.ammoCount--;
         resourceTextUpdater.SetAmmo(resourceTextUpdater.ammoCount);
@@ -47,17 +50,19 @@ public class Shotgun : NetworkBehaviour
             if (IsServer)
             {
                 var playerNetworkObject = NetworkManager.SpawnManager.InstantiateAndSpawn(bulletPrefab, NetworkManager.ServerClientId, true, false, true, firePoint.position, bulletRotation);
+                if(cntrl && !cntrl.facingRight) playerNetworkObject.GetComponent<Bullet>().bulletDirection = Vector2.left;
             }
             else
             {
-                SpawnBulletServerRpc();
+                SpawnBulletServerRpc(firePoint.position,firePoint.rotation,cntrl && !cntrl.facingRight);
             }
         }
     }
 
     [ServerRpc(RequireOwnership = false)]
-    void SpawnBulletServerRpc(ServerRpcParams serverRpcParams = default)
+    void SpawnBulletServerRpc(Vector3 pos, Quaternion rot, bool flip, ServerRpcParams serverRpcParams = default)
     {
         var playerNetworkObject = NetworkManager.SpawnManager.InstantiateAndSpawn(bulletPrefab, serverRpcParams.Receive.SenderClientId, true, false, true, firePoint.position, bulletRotation);
+        if(flip) playerNetworkObject.GetComponent<Bullet>().bulletDirection = Vector2.left;
     }
 }
