@@ -27,6 +27,7 @@ namespace Assets.Scripts
             if (Instance == this)
             {
                 NetworkManager.Singleton.SceneManager.OnSceneEvent -= OnSceneEvent;
+                NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnected;
             }
 
             base.OnDestroy();
@@ -40,6 +41,7 @@ namespace Assets.Scripts
         public override void Start()
         {
             base.Start();
+            NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
         }
 
         private void OnSceneEvent(SceneEvent sceneEvent)
@@ -84,11 +86,26 @@ namespace Assets.Scripts
             NetworkManager.Singleton.SceneManager.OnSceneEvent += OnSceneEvent;
         }
         [ClientRpc]
-        private void SyncFuelAndPositionClientRpc(float fuel, Vector3 position)
+        private void SyncFuelAndPositionClientRpc(float fuel, Vector3 position, ClientRpcParams clientRpcParams = default)
         {
             PlayerPrefs.SetFloat("fuel", fuel);
             PlayerPrefs.SetFloat("currentSystemPositionX", position.x);
             PlayerPrefs.SetFloat("currentSystemPositionY", position.y);
+        }
+        private void OnClientConnected(ulong clientId)
+        {
+            if(!IsServer){return;}
+
+            //send to connected client
+            ClientRpcParams clientRpcParams = new ClientRpcParams
+            {
+                Send = new ClientRpcSendParams
+                {
+                    TargetClientIds = new ulong[]{clientId}
+                }
+            };
+
+            SyncFuelAndPositionClientRpc(PlayerPrefs.GetFloat("fuel"),new Vector3(PlayerPrefs.GetFloat("currentSystemPositionX"),PlayerPrefs.GetFloat("currentSystemPositionY"),0), clientRpcParams);
         }
 
         private void LoadSystemScene()

@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class BasicEnemies : MonoBehaviour
+public class BasicEnemies : NetworkBehaviour
 {
     public GameObject player;
     public float speed;
@@ -29,6 +30,8 @@ public class BasicEnemies : MonoBehaviour
 
     void Update()
     {
+        if(!IsServer){return;}
+
         if(player)
         {
             distance = Vector2.Distance(transform.position, player.transform.position);

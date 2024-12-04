@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 2650133423690017542}
   - component: {fileID: 7100342645562146189}
   - component: {fileID: 178230215071951770}
+  - component: {fileID: 5750563094815012613}
   - component: {fileID: 2289420286194643793}
   - component: {fileID: 5477206297061284771}
-  - component: {fileID: 5750563094815012613}
   - component: {fileID: -4087606827211664715}
   - component: {fileID: -2451872308362936479}
   m_Layer: 0
@@ -176,6 +176,27 @@ MonoBehaviour:
   detectionRange: 50
   attackCooldown: 0.5
   damage: 20
+--- !u!114 &5750563094815012613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2422913537211768529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3447497372
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!114 &2289420286194643793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,27 +244,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &5750563094815012613
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2422913537211768529}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3447497372
-  InScenePlacedSourceGlobalObjectIdHash: 0
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
 --- !u!114 &-4087606827211664715
 MonoBehaviour:
   m_ObjectHideFlags: 0

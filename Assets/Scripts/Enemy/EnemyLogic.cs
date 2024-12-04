@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class EnemyLogic : MonoBehaviour
+public class EnemyLogic : NetworkBehaviour
 {
     [SerializeField] private int health;
     [SerializeField] int maxHealth;
@@ -23,7 +24,11 @@ public class EnemyLogic : MonoBehaviour
         if (health >= 0)
         {
             health -= damage;
-            if (spriteRenderer != null) StartCoroutine(ShowDamage());
+            if (spriteRenderer != null)
+            {
+                StartCoroutine(ShowDamage());
+                ShowDamageClientRpc();
+            }
         }
 
         if (health <= 0)
@@ -60,6 +65,12 @@ public class EnemyLogic : MonoBehaviour
         }
 
         return null;
+    }
+
+    [ClientRpc]
+    private void ShowDamageClientRpc()
+    {
+        StartCoroutine(ShowDamage());
     }
 
     private IEnumerator ShowDamage()
