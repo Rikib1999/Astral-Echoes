@@ -48,7 +48,7 @@ namespace Assets.Scripts.PlanetResources
 
         private int GetParticleCount()
         {
-            return (int)(GetComponent<SpriteRenderer>().sprite.texture.Size().x / 4);
+            return (int)(GetComponent<SpriteRenderer>().sprite.rect.size.x / 4);
         }
     }
 }
