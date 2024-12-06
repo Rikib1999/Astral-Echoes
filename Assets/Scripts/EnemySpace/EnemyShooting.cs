@@ -1,6 +1,7 @@
 using UnityEngine;
+using Unity.Netcode;
 
-public class ShootingEnemie : MonoBehaviour
+public class ShootingEnemie : NetworkBehaviour
 {
     public GameObject bullet;
     public Transform firePoint;
@@ -19,7 +20,7 @@ public class ShootingEnemie : MonoBehaviour
 
     void Update()
     {
-        if (!player) return;
+        if (!player || !IsServer) return;
  
         float distance = Vector2.Distance(transform.position, player.transform.position);
 
@@ -46,6 +47,7 @@ public class ShootingEnemie : MonoBehaviour
 
     void shoot()
     {
-        Instantiate(bullet, firePoint.position, Quaternion.identity);
+        var bul = Instantiate(bullet, firePoint.position, Quaternion.identity);
+        bul.GetComponent<NetworkObject>().Spawn();
     }   
 }

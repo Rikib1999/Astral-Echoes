@@ -1,6 +1,6 @@
 using UnityEngine;
-
-public class EnemyBulletScript : MonoBehaviour
+using Unity.Netcode;
+public class EnemyBulletScript : NetworkBehaviour
 {
     private GameObject player;
     private Rigidbody2D rb;
@@ -24,6 +24,8 @@ public class EnemyBulletScript : MonoBehaviour
 
     void Update()
     {
+        if(!IsServer){return;}
+        
         timer += Time.deltaTime;
 
         if (timer >= 6)
