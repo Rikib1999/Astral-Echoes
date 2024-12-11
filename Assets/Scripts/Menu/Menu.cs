@@ -23,10 +23,17 @@ public class Menu : NetworkBehaviour
     {
         NetworkManager.Singleton.StartHost();
     }
+
     public void OnQuitButton()
     {
         Application.Quit();
     }
+
+    public void OnResetButton()
+    {
+        PlayerPrefs.DeleteAll();
+    }
+
     public void OnJoinButton()
     {
         //Load multiplayer scene

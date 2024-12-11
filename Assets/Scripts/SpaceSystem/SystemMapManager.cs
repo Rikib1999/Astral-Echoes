@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Enums;
+using Assets.Scripts.Resources;
 using Assets.Scripts.SpaceObjects;
 using Assets.Scripts.SpaceSystem;
 using Unity.Netcode;
@@ -105,7 +106,7 @@ namespace Assets.Scripts
                 }
             };
 
-            SyncFuelAndPositionClientRpc(PlayerPrefs.GetFloat("fuel"),new Vector3(PlayerPrefs.GetFloat("currentSystemPositionX"),PlayerPrefs.GetFloat("currentSystemPositionY"),0), clientRpcParams);
+            SyncFuelAndPositionClientRpc(PlayerPrefs.GetFloat("fuel", ResourceDefaultValues.Fuel), new Vector3(PlayerPrefs.GetFloat("currentSystemPositionX", 0), PlayerPrefs.GetFloat("currentSystemPositionY", 0), 0), clientRpcParams);
         }
 
         private void LoadSystemScene()
