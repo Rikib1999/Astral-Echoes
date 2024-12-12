@@ -47,6 +47,7 @@ public class MotherEnemy : MonoBehaviour
 
             if(timer <= 0)
             {
+                //spawn enemy ship after timer is 0
                 spawn.SpawnShip();
                 timer = 6;
             }            

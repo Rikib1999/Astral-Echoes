@@ -57,7 +57,10 @@ public class InventoryManager : MonoBehaviour
         resourceTextUpdater.SetEnergy(energy);
         PlayerPrefs.SetFloat("energy", energy);
     }
-
+    /// <summary>
+    /// Add item to the inventory list
+    /// </summary>
+    /// <param name="item"></param>
     public void AddItem(Item item)
     {
         var inventoryItem = possibleItems.First(x => x.id == item.id);
@@ -69,7 +72,11 @@ public class InventoryManager : MonoBehaviour
         
         ListItems();
     }
-
+    /// <summary>
+    /// Remove item from the inventory list
+    /// </summary>
+    /// <param name="item"></param>
+    /// <param name="count"></param>
     public void RemoveItem(Item item, int count)
     {
         var inventoryItem = possibleItems.First(x => x.id == item.id);
@@ -81,7 +88,9 @@ public class InventoryManager : MonoBehaviour
 
         ListItems();
     }
-
+    /// <summary>
+    /// Delete duplicate items from the inventory list
+    /// </summary>
     public void ClearList()
     {
         foreach (Transform item in itemContent)
@@ -90,6 +99,9 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Will list all the items that were picked up from the ground and are in the inventory list
+    /// </summary>
     public void ListItems()
     {
         ClearList();

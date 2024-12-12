@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class CreateCraft : ScriptableObject
 {
+    //set all the variables needed for crafting 
     public int id;
     public int itemID;
     public string craftName;
@@ -20,7 +21,7 @@ public class CreateCraft : ScriptableObject
     public Item ItemToCraft;
     public eCraft craftType;
 }
-
+//times of crafts
 public enum eCraft
 {
     Ammo = 1,

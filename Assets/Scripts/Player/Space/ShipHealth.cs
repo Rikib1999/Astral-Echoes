@@ -11,6 +11,7 @@ public class ShipHealth : MonoBehaviour
 
     private void Start()
     {
+        //init players ship health
         health = maxHealth;
         shield = maxShield;
     }
@@ -20,6 +21,10 @@ public class ShipHealth : MonoBehaviour
         Instance = this;
     }
 
+    /// <summary>
+    /// Damage to the player
+    /// </summary>
+    /// <param name="damage"></param>
     public void damage(int damage)
     {
         if (shield > 0) {

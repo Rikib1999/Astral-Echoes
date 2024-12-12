@@ -16,10 +16,13 @@ public class EnemyBoom : MonoBehaviour
 
     private void Update()
     {
+
+        //chase player
         if (bombE.chase == true)
         {
             timer -= Time.deltaTime;
 
+            //if timer gets to zero explode and damage player
             if (timer <= 0)
             {
                 GetComponent<ParticleSystem>().Play();

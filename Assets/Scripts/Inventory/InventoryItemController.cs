@@ -9,6 +9,9 @@ public class InventoryItemController : MonoBehaviour
         InventoryManager.Instance.RemoveItem(item, 1);
     }
 
+    /// <summary>
+    /// When clicked tell what to do with the item based on the ItemType
+    /// </summary>
     public void UseItem()
     {
         switch (item.itemType)

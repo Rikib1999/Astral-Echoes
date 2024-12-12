@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Item : ScriptableObject
 {
+    // information about the items
     public int id;
     public string itemName;
     public int value;
@@ -12,6 +13,7 @@ public class Item : ScriptableObject
     public ItemType itemType;
     public int count;
 
+    // types of items
     public enum ItemType
     {
         Metal,

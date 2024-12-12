@@ -30,7 +30,7 @@ public class ShipController : NetworkBehaviour
 
         FlyForward();
     }
-
+    
     private void FlyForward()
     {
         if (Input.GetKey(KeyCode.W))

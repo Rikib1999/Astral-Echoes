@@ -29,6 +29,10 @@ public class EnemyAI : MonoBehaviour
 
     void Start()
     {
+
+        //Inicialization to get position, animation,
+        //set enemy state to walking as default,
+        //get player from the scene and set roam for the enemy
         startPosition = transform.position;
         animator = GetComponent<Animator>();
         enemyState = Enemy.walking;
@@ -38,6 +42,7 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
+
         if (player && isChasing)
         {
             ChasePlayer();
@@ -56,6 +61,7 @@ public class EnemyAI : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // change animation based on the state of enemy
         if (enemyState == Enemy.walking)
         {
             animator.SetBool("isWalking", true);
@@ -68,6 +74,9 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Enemy movement and checks if he reached its target position 
+    /// </summary>
     void Roam()
     {
         transform.position = Vector2.MoveTowards(transform.position, roamPosition, moveSpeed * Time.deltaTime);
@@ -77,7 +86,9 @@ public class EnemyAI : MonoBehaviour
             SetNewRoamPosition();
         }
     }
-
+    /// <summary>
+    /// Determines a new random position for the object to roam within a defined radius
+    /// </summary>
     void SetNewRoamPosition()
     {
         float roamX = Random.Range(startPosition.x - roamRadius, startPosition.x + roamRadius);
@@ -114,6 +125,9 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// If player is in shooting distance stop and shoot
+    /// </summary>
     void StopAndShoot()
     {
         if (Vector2.Distance(transform.position, player.transform.position) < shootrange && player != null)
@@ -127,7 +141,9 @@ public class EnemyAI : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
         }
     }
-
+    /// <summary>
+    /// Change enemyState to shooting and spawn a bullet that go towards position of player in the time of the bullet Instatiate(spawn)
+    /// </summary>
     void ShootPlayer()
     {
         enemyState = Enemy.attacking;
@@ -153,6 +169,9 @@ public class EnemyAI : MonoBehaviour
         Debug.Log("Attack!");
     }
 
+    /// <summary>
+    /// Flip sprite so it face player
+    /// </summary>
     void FlipTowardsPlayer()
     {
         Vector3 direction = player.transform.position - transform.position;

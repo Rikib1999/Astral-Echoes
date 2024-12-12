@@ -10,7 +10,9 @@ public class CraftManager : MonoBehaviour
     {
         ListItems();
     }
-
+    /// <summary>
+    /// Remove duplicates from the craft list
+    /// </summary>
     public void RemoveDuplicateCraft()
     {
         foreach (Transform item in craftContent)
@@ -19,6 +21,9 @@ public class CraftManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// List all possible crafting items and items needed to craft
+    /// </summary>
     public void ListItems()
     {
         RemoveDuplicateCraft();

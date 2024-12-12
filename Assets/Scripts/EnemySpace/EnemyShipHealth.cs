@@ -11,9 +11,15 @@ public class EnemyShipHealth : MonoBehaviour
 
     private void Start()
     {
+        //init enemy health
         health = maxHealth;
         shield = maxShield;
     }
+
+    /// <summary>
+    /// Damage to the enemy
+    /// </summary>
+    /// <param name="damage"></param>
     public void damage(int damage)
     {
 

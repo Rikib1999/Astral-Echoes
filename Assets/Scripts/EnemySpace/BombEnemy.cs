@@ -57,6 +57,9 @@ public class BombEnemy : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Chase player if within the range
+    /// </summary>
     void ChasePlayer()
     {
         Vector2 direction = player.transform.position - transform.position;
@@ -64,12 +67,17 @@ public class BombEnemy : MonoBehaviour
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
+        //move towards the player and rotate to him
         transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
     }
 
+    /// <summary>
+    /// Roam around the are, set as target
+    /// </summary>
     void Roam()
     {
+        //if player gets to the roamTarget, set new one
         if (Vector2.Distance(transform.position, roamTarget) < 0.2f)
         {
             SetNewRoamTarget();
@@ -84,6 +92,9 @@ public class BombEnemy : MonoBehaviour
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
     }
 
+    /// <summary>
+    /// Set area to roam around
+    /// </summary>
     void SetNewRoamTarget()
     {
         float randomAngle = Random.Range(0f, 2f * Mathf.PI);

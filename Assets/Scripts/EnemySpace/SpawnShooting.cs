@@ -57,7 +57,9 @@ public class SpawnShooting : NetworkBehaviour
 
 
     }
-
+    /// <summary>
+    /// Spawn enemy ship that will shoot at the player
+    /// </summary>
     public void SpawnShip()
     {
         if(!IsServer)

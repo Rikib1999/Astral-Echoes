@@ -39,6 +39,7 @@ public class ShootingEnemie : NetworkBehaviour
 
             if (timeBtwShots >= shootingTime)
             {
+                //when timer is same as shooting time or bigger, enemy can shoot
                 timeBtwShots = 0;
                 shoot();
             }

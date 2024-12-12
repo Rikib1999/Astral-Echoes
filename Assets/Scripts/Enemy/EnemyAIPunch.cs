@@ -107,7 +107,9 @@ public class EnemyAIPunch : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
         }
     }
-
+    /// <summary>
+    /// Attack player
+    /// </summary>
     void AttackPlayer()
     {
         enemyState = Enemy.attacking;
@@ -117,6 +119,10 @@ public class EnemyAIPunch : MonoBehaviour
         Debug.Log("Attack!");
     }
 
+    /// <summary>
+    /// Give him damage throught the playerLogic
+    /// </summary>
+    /// <param name="player"></param>
     void PunchDamage(GameObject player)
     {
         PlayerLogic playerLogic = player.GetComponent<PlayerLogic>();
