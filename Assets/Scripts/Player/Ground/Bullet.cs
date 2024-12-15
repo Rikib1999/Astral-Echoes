@@ -2,6 +2,7 @@ using Assets.Scripts.PlanetResources;
 using UnityEngine;
 using Unity.Netcode;
 
+//Script for the bullet that damages
 public class Bullet : NetworkBehaviour
 {
     [SerializeField] float speed = 10f;
@@ -22,7 +23,7 @@ public class Bullet : NetworkBehaviour
             bulletDirection = Vector2.right;
             */
     }
-
+    //Bullet movement
     void Update()
     {
         transform.Translate(speed * Time.deltaTime * Vector3.right * bulletDirection);
@@ -40,7 +41,8 @@ public class Bullet : NetworkBehaviour
     {
         Destroy(gameObject);
     }*/
-
+    
+    //Bullet collision effect
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(!IsServer){return;}

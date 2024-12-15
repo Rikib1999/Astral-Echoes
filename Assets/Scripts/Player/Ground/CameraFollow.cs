@@ -2,6 +2,7 @@
 
 namespace Assets.Scripts.Player
 {
+    //Script for the Camera following the player
     public class CameraFollow : MonoBehaviour
     {
         private Vector3 velocity;

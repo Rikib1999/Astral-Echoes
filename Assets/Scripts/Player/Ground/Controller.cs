@@ -4,8 +4,12 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Main Controller for the player on ground
+/// </summary>
 public class Controller : NetworkBehaviour
 {
+    //Components for the player 
     [SerializeField] Rigidbody2D rb;
     [SerializeField] Transform[] guns;
     [SerializeField] GameObject crosshair;
@@ -15,7 +19,7 @@ public class Controller : NetworkBehaviour
     [SerializeField] float dashCooldown = 2f;
     [SerializeField] int maxHealth = 100;
     [SerializeField] Slider dashBar;
-
+    //Variables for the speed of player, dashing , swithcing guns
     private float dirX = 0;
     private float dirY = 0;
     public bool facingRight = true;
@@ -46,6 +50,7 @@ public class Controller : NetworkBehaviour
 
     void Start()
     {
+        //Fetching all the components and setting up dashing bar and active gun
         spriteRenderer = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
@@ -68,6 +73,8 @@ public class Controller : NetworkBehaviour
 
     private void Update()
     {
+        //Setting up mouse position in align with the player controller movement
+        //Getting axis and moving player in that direction
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0;
         crosshair.transform.position = mousePosition;
@@ -86,6 +93,7 @@ public class Controller : NetworkBehaviour
 
         bool isWalking = dirX * moveSpeed != 0 || dirY * moveSpeed != 0;
         animator.SetBool("isWalking", isWalking);
+        //Sound and animations swithincg
 
         if (isWalking)
         {
@@ -131,6 +139,7 @@ public class Controller : NetworkBehaviour
         if (guns.Length >= 1) RotateWeapon();
     }
 
+    //Function to rotate weaoin towards mouse
     private void RotateWeapon()
     {
         Vector3 targetPosition = crosshair.transform.position;
@@ -140,7 +149,7 @@ public class Controller : NetworkBehaviour
         if (!facingRight) angle += 180f;
         guns[activeGunIndex].rotation = Quaternion.Euler(0f, 0f, angle);
     }
-
+    //Function to switch gun and network syncing
     private void SwitchGun(int newIndex)
     {
         guns[activeGunIndex].gameObject.SetActive(false);
@@ -166,7 +175,7 @@ public class Controller : NetworkBehaviour
         guns[newIndex].gameObject.SetActive(true);
         activeGunIndex = newIndex;
     }
-
+    //Coroutine for dashing
     private IEnumerator Dash()
     {
         isDashing = true;

@@ -1,6 +1,7 @@
 using Unity.Netcode;
 using UnityEngine;
 
+//Script for the Shotgun controller -> Shoots in different angles 
 public class Shotgun : NetworkBehaviour
 {
     [SerializeField] NetworkObject bulletPrefab;

@@ -1,8 +1,10 @@
 using UnityEngine;
 using Unity.Netcode;
-
+//Script for the Rifle Controller and networking of it
 public class RifleController : NetworkBehaviour
 {
+    //Components for the shooting
+    //Same working as the Gun controller with better firerate
     [SerializeField] NetworkObject bulletPrefab;
     [SerializeField] Transform firePoint;
     [SerializeField] float fireRate = 0.1f;

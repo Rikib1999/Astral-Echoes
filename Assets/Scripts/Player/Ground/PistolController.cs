@@ -1,6 +1,7 @@
 using Unity.Netcode;
 using UnityEngine;
 
+//Script for the player shooting by simpling spawning a bullet and moving it in direction player is shooting at 
 public class PistolController : NetworkBehaviour
 {
     [SerializeField] NetworkObject bulletPrefab;
