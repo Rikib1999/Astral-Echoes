@@ -1,5 +1,9 @@
 using UnityEngine;
 
+/// <summary>
+/// Script for the basic enemies. Getting player position in the start and chasing the player and when close attack it.
+/// Design to work with all enemies bcecause we can adjust speed range etc
+/// </summary>
 public class GenericEnemy : MonoBehaviour
 {
     public Transform player;
@@ -46,7 +50,10 @@ public class GenericEnemy : MonoBehaviour
             attackTimer -= Time.deltaTime;
         }
     }
-
+    /// <summary>
+    /// Following player and facing its way
+    /// </summary>
+    /// <param name="distanceToPlayer"></param>
     private void FollowPlayer(float distanceToPlayer)
     {
         if (animator != null)
@@ -71,7 +78,9 @@ public class GenericEnemy : MonoBehaviour
             transform.localScale = new Vector3(-Mathf.Abs(originalScale.x), originalScale.y, originalScale.z);
         }
     }
-
+    /// <summary>
+    /// Attacking player when in range
+    /// </summary>
     private void AttackPlayer()
     {
         rb.velocity = Vector3.zero;
@@ -99,7 +108,9 @@ public class GenericEnemy : MonoBehaviour
     {
         isAttacking = false;
     }
-
+    /// <summary>
+    /// Gizmos to visualize the range and roaming range
+    /// </summary>
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;

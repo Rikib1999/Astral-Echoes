@@ -1,5 +1,8 @@
 using UnityEngine;
-
+/// <summary>
+/// Script for the shooting of the ships.
+/// Ships can shoot randomly in different shapes based on this script
+/// </summary>
 public class PatternShooter : MonoBehaviour
 {
     public GameObject bulletPrefab;
@@ -10,6 +13,9 @@ public class PatternShooter : MonoBehaviour
 
     private float shootTimer;
 
+    /// <summary>
+    /// Enum for different types of shooting so easily selectable by a drop down
+    /// </summary>
     public enum PatternType
     {
         Circle,
@@ -46,7 +52,9 @@ public class PatternShooter : MonoBehaviour
                 break;
         }
     }
-
+    /// <summary>
+    /// Shooting all around in 360
+    /// </summary>
     private void ShootInCircle()
     {
         float angleStep = 360f / numberOfBullets;
@@ -56,7 +64,10 @@ public class PatternShooter : MonoBehaviour
             SpawnBulletAtAngle(angle);
         }
     }
-
+    /// <summary>
+    /// Shooting in polygon using sides
+    /// </summary>
+    /// <param name="sides"></param>
     private void ShootInPolygon(int sides)
     {
         float angleStep = 360f / sides;
@@ -66,7 +77,9 @@ public class PatternShooter : MonoBehaviour
             SpawnBulletAtAngle(angle);
         }
     }
-
+    /// <summary>
+    /// Creating a star like shape
+    /// </summary>
     private void ShootInStar()
     {
         int points = numberOfBullets / 2;
@@ -79,7 +92,9 @@ public class PatternShooter : MonoBehaviour
             SpawnBulletAtAngle(outerAngle);
         }
     }
-
+    /// <summary>
+    /// Custom direction for a bit randamzied shooting
+    /// </summary>
     private void ShootCustom()
     {
         Vector2[] customOffsets = { new Vector2(1, 0), new Vector2(-1, 0), new Vector2(0, 1), new Vector2(0, -1) };
