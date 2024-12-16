@@ -2,6 +2,7 @@
 using Assets.Scripts.Resources;
 using Assets.Scripts.SpaceObjects;
 using Assets.Scripts.SpaceSystem;
+using Unity.Mathematics;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -9,71 +10,80 @@ using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts
 {
+    // Manages the system map scene and handles networked interactions
     public class SystemMapManager : NetworkSingleton<SystemMapManager>
     {
-        [SerializeField] private GameObject starPrefab;
-        [SerializeField] private GameObject blackHolePrefab;
-        [SerializeField] private GameObject planetPrefab;
-        [SerializeField] private GameObject gasGiantPrefab;
-        [SerializeField] private EnemySpawner enemySpawner;
-        [SerializeField] public NetworkVariable<SpaceObjectDataBag> CentralObject = new();
-        [field: SerializeField] public NetworkList<SpaceObjectDataBag> SatelliteObjects;
-        
-        public const float scaleUpConst = 10;
+        [SerializeField] private GameObject starPrefab; // Prefab for stars
+        [SerializeField] private GameObject blackHolePrefab; // Prefab for black holes
+        [SerializeField] private GameObject planetPrefab; // Prefab for planets
+        [SerializeField] private GameObject gasGiantPrefab; // Prefab for gas giants
+        [SerializeField] private EnemySpawner enemySpawner; // Enemy spawner reference
+        [SerializeField] public NetworkVariable<SpaceObjectDataBag> CentralObject = new(); // The central object (e.g., star or black hole) of the system
+        [field: SerializeField] public NetworkList<SpaceObjectDataBag> SatelliteObjects; // List of satellite objects (e.g., planets, gas giants)
 
-        public bool Death { get; set; }
+        public const float scaleUpConst = 10; // Scaling factor for system object positions and sizes
 
+        public bool Death { get; set; } // Tracks player death state
+
+        // Cleanup event handlers on destruction
         public override void OnDestroy()
         {
             if (Instance == this)
             {
-                NetworkManager.Singleton.SceneManager.OnSceneEvent -= OnSceneEvent;
-                NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnected;
+                NetworkManager.Singleton.SceneManager.OnSceneEvent -= OnSceneEvent; // Unsubscribe from scene events
+                NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnected; // Unsubscribe from client connection events
             }
 
             base.OnDestroy();
         }
 
+        // Initialize satellite objects as a network list
         public void Awake()
         {
             SatelliteObjects = new NetworkList<SpaceObjectDataBag>();
         }
 
+        // Set up network callbacks on start
         public override void Start()
         {
             base.Start();
             NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
         }
 
+        // Handles actions triggered by scene events
         private void OnSceneEvent(SceneEvent sceneEvent)
         {
-            if(sceneEvent.SceneEventType != SceneEventType.LoadEventCompleted)
+            if (sceneEvent.SceneEventType != SceneEventType.LoadEventCompleted)
             {
-                return;
+                return; // Only proceed for completed load events
             }
-            if (CentralObject == null || CentralObject.Value.Type == 0) return;
 
-            GenerateSystem();
+            if (CentralObject == null || CentralObject.Value.Type == 0) return; // Skip if no central object data
+
+            GenerateSystem(); // Generate the system map
         }
 
+        // Generates the system map when the scene is loaded
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            if (CentralObject == null || CentralObject.Value.Type == 0) return;
+            if (CentralObject == null || CentralObject.Value.Type == 0) return; // Skip if no central object data
             GenerateSystem();
         }
 
+        // Enters a system and synchronizes its data across the network
         public void EnterSystem(SystemDataBag systemDataBag)
         {
-            if (!systemDataBag.CanTravel) return;
+            if (!systemDataBag.CanTravel) return; // Ensure the system is travelable
 
-            CentralObject.Value = systemDataBag.CentralObject;
-            foreach(SpaceObjectDataBag satObject in systemDataBag.SatelliteObjects)
+            CentralObject.Value = systemDataBag.CentralObject; // Set the central object
+            foreach (SpaceObjectDataBag satObject in systemDataBag.SatelliteObjects)
             {
-                SatelliteObjects.Add(satObject);
+                SatelliteObjects.Add(satObject); // Add satellite objects
             }
-            
-            if(IsServer)
+
+            if (IsServer)
             {
+                // Sync fuel and position and load the system scene on the server
                 SyncFuelAndPosition(systemDataBag.Fuel - systemDataBag.Distance, systemDataBag.Position);
                 SyncFuelAndPositionClientRpc(systemDataBag.Fuel - systemDataBag.Distance, systemDataBag.Position);
                 LoadSystemScene();
@@ -81,64 +91,83 @@ namespace Assets.Scripts
             }
         }
 
+        // Client RPC to handle loading the system scene
         [ClientRpc]
         private void LoadSystemSceneClientRpc()
         {
             NetworkManager.Singleton.SceneManager.OnSceneEvent += OnSceneEvent;
         }
+
+        // Client RPC to synchronize fuel and position with the client
         [ClientRpc]
         private void SyncFuelAndPositionClientRpc(float fuel, Vector3 position, ClientRpcParams clientRpcParams = default)
         {
-            PlayerPrefs.SetFloat("fuel", fuel);
-            PlayerPrefs.SetFloat("currentSystemPositionX", position.x);
-            PlayerPrefs.SetFloat("currentSystemPositionY", position.y);
+            PlayerPrefs.SetFloat("fuel", fuel); // Update fuel in PlayerPrefs
+            PlayerPrefs.SetFloat("currentSystemPositionX", position.x); // Update X-coordinate
+            PlayerPrefs.SetFloat("currentSystemPositionY", position.y); // Update Y-coordinate
         }
+
+        // Callback for when a new client connects
         private void OnClientConnected(ulong clientId)
         {
-            if(!IsServer){return;}
+            if (!IsServer) return; // Only execute on the server
 
-            //send to connected client
+            // Send fuel and position data to the newly connected client
             ClientRpcParams clientRpcParams = new ClientRpcParams
             {
                 Send = new ClientRpcSendParams
                 {
-                    TargetClientIds = new ulong[]{clientId}
+                    TargetClientIds = new ulong[] { clientId }
                 }
             };
 
-            SyncFuelAndPositionClientRpc(PlayerPrefs.GetFloat("fuel", ResourceDefaultValues.Fuel), new Vector3(PlayerPrefs.GetFloat("currentSystemPositionX", 0), PlayerPrefs.GetFloat("currentSystemPositionY", 0), 0), clientRpcParams);
+            SyncFuelAndPositionClientRpc(
+                PlayerPrefs.GetFloat("fuel", ResourceDefaultValues.Fuel),
+                new Vector3(
+                    PlayerPrefs.GetFloat("currentSystemPositionX", 0),
+                    PlayerPrefs.GetFloat("currentSystemPositionY", 0),
+                    0
+                ),
+                clientRpcParams
+            );
         }
 
+        // Loads the system scene on the server
         private void LoadSystemScene()
         {
             NetworkManager.Singleton.SceneManager.OnSceneEvent += OnSceneEvent;
 
-            var status = NetworkManager.SceneManager.LoadScene("SystemMap" ,LoadSceneMode.Single);
+            var status = NetworkManager.SceneManager.LoadScene("SystemMap", LoadSceneMode.Single);
             if (status != SceneEventProgressStatus.Started)
             {
                 Debug.LogWarning($"Failed to load system map scene with a {nameof(SceneEventProgressStatus)}: {status}");
             }
         }
+
+        // Synchronizes fuel and position data locally
         private void SyncFuelAndPosition(float fuel, Vector3 position)
         {
-            PlayerPrefs.SetFloat("fuel", fuel);
-            PlayerPrefs.SetFloat("currentSystemPositionX", position.x);
-            PlayerPrefs.SetFloat("currentSystemPositionY", position.y);
+            PlayerPrefs.SetFloat("fuel", fuel); // Save fuel value
+            PlayerPrefs.SetFloat("currentSystemPositionX", position.x); // Save X-coordinate
+            PlayerPrefs.SetFloat("currentSystemPositionY", position.y); // Save Y-coordinate
         }
 
+        // Generates the system map, including the central object and its satellites
         private void GenerateSystem()
         {
-            if (SceneManager.GetActiveScene().name != "SystemMap") return;
+            if (SceneManager.GetActiveScene().name != "SystemMap") return; // Ensure the active scene is "SystemMap"
 
-            bool isStar = CentralObject.Value.Type == eSpaceObjectType.Star;
+            bool isStar = CentralObject.Value.Type == eSpaceObjectType.Star; // Check if the central object is a star
 
+            // Instantiate the central object (star or black hole)
             var centralObjectPrefab = isStar ? starPrefab : blackHolePrefab;
-            var centralObject = Instantiate(centralObjectPrefab,Vector3.zero, Quaternion.identity);
+            var centralObject = Instantiate(centralObjectPrefab, Vector3.zero, Quaternion.identity);
 
             if (isStar)
             {
-                var star = centralObject.GetComponent<Star>(); star.Randomize();
-
+                // Configure star properties
+                var star = centralObject.GetComponent<Star>();
+                star.Randomize();
                 star.SetSubType((eStarType)CentralObject.Value.SubType);
                 star.SetSize(CentralObject.Value.Size * scaleUpConst);
                 star.SetName(CentralObject.Value.Name.ToString());
@@ -148,8 +177,9 @@ namespace Assets.Scripts
             }
             else
             {
-                var blackHole = centralObject.GetComponent<BlackHole>(); blackHole.Randomize();
-
+                // Configure black hole properties
+                var blackHole = centralObject.GetComponent<BlackHole>();
+                blackHole.Randomize();
                 blackHole.SetSubType((eBlackHoleType)CentralObject.Value.SubType);
                 blackHole.SetSize(CentralObject.Value.Size * scaleUpConst);
                 blackHole.SetName(CentralObject.Value.Name.ToString());
@@ -158,17 +188,23 @@ namespace Assets.Scripts
                 blackHole.SetSprite();
             }
 
+            // Instantiate and configure all satellite objects (planets or gas giants)
             foreach (var satellite in SatelliteObjects)
             {
                 bool isPlanet = satellite.Type == eSpaceObjectType.Planet;
 
                 var satelliteObjectPrefab = isPlanet ? planetPrefab : gasGiantPrefab;
-                var satelliteObject = Instantiate(satelliteObjectPrefab, new Vector3(satellite.RelativePosition.x * scaleUpConst, satellite.RelativePosition.y * scaleUpConst, 0), Quaternion.identity);
+                var satelliteObject = Instantiate(
+                    satelliteObjectPrefab,
+                    new Vector3(satellite.RelativePosition.x * scaleUpConst, satellite.RelativePosition.y * scaleUpConst, 0),
+                    Quaternion.identity
+                );
 
                 if (isPlanet)
                 {
-                    var planet = satelliteObject.GetComponent<SpaceObjects.Planet>(); planet.Randomize();
-
+                    // Configure planet properties
+                    var planet = satelliteObject.GetComponent<SpaceObjects.Planet>();
+                    planet.Randomize();
                     planet.SetOrbit(Vector2.zero, satellite.OrbitRadius * scaleUpConst);
                     planet.SetSubType((ePlanetType)satellite.SubType);
                     planet.SetSize(satellite.Size * scaleUpConst);
@@ -185,8 +221,9 @@ namespace Assets.Scripts
                 }
                 else
                 {
-                    var gasGiant = satelliteObject.GetComponent<GasGiant>(); gasGiant.Randomize();
-
+                    // Configure gas giant properties
+                    var gasGiant = satelliteObject.GetComponent<GasGiant>();
+                    gasGiant.Randomize();
                     gasGiant.SetOrbit(Vector2.zero, satellite.OrbitRadius * scaleUpConst);
                     gasGiant.SetSubType((eGasGiantType)satellite.SubType);
                     gasGiant.SetSize(satellite.Size * scaleUpConst);
