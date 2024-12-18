@@ -3,7 +3,6 @@ using Assets.Scripts.Resources;
 using Assets.Scripts.SpaceObjects;
 using Assets.Scripts.SpaceSystem;
 using System.Collections.Generic;
-using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -20,6 +19,7 @@ public class MapGenerator : ChunkGenerator<MapChunk>
     private float maxSystemRadius; // Maximum radius of the objects in a system
 
     private Vector2 playerPos; // Player's current position
+    private int seed;
 
     // Chunk generator parameters
     protected override int ChunkSize { get; set; } = 2048; // Size of each map chunk
@@ -43,6 +43,8 @@ public class MapGenerator : ChunkGenerator<MapChunk>
         // Initialize player position from PlayerPrefs
         player.position = new(PlayerPrefs.GetFloat("currentSystemPositionX", 0), PlayerPrefs.GetFloat("currentSystemPositionY", 0), -10);
         playerPos = player.position;
+
+        seed = PlayerPrefs.GetInt("seed", 0);
 
         base.Start(); // Call base class Start method
 
@@ -70,8 +72,8 @@ public class MapGenerator : ChunkGenerator<MapChunk>
         // Reset satellite objects and central object when entering the SpaceMap scene
         if (current.name != "SpaceMap") return;
 
-        SystemMapManager.Instance.SatelliteObjects.Clear();
-        SystemMapManager.Instance.CentralObject.Value = default;
+        if (SystemMapManager.Instance != null && SystemMapManager.Instance.SatelliteObjects != null) SystemMapManager.Instance.SatelliteObjects.Clear();
+        if (SystemMapManager.Instance != null && SystemMapManager.Instance.CentralObject != null) SystemMapManager.Instance.CentralObject.Value = default;
     }
 
     protected override void DeleteChunk(MapChunk chunk)
@@ -92,6 +94,7 @@ public class MapGenerator : ChunkGenerator<MapChunk>
         // Initialize random seed based on chunk coordinates for consistent generation
         Random.InitState((int)((chunkDims.centre.x * chunkDims.centre.x + chunkDims.centre.y * chunkDims.centre.y) / Mathf.Max(chunkDims.centre.x, 1) + chunkDims.centre.y));
         Random.InitState(Random.Range(0, int.MaxValue)); // Additional shuffle for randomness
+        Random.InitState(Random.Range(seed, int.MaxValue));
 
         List<Vector2> points = new(); // List to store generated system positions
         int retries = 0; // Counter for retry attempts

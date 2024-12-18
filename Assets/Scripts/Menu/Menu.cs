@@ -1,3 +1,4 @@
+using Assets.Scripts;
 using TMPro;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
@@ -9,9 +10,18 @@ public class Menu : NetworkBehaviour
     [SerializeField] public TMP_InputField tmp_ip_address;
     [SerializeField] public TMP_InputField tmp_port;
 
+    private void Start()
+    {
+        if (PlanetMapManager.Instance != null) PlanetMapManager.Instance.DestroyInstance();
+        if (SystemMapManager.Instance != null) SystemMapManager.Instance.DestroyInstance();
+    }
+
     public override void OnNetworkSpawn()
     {
         if(!IsServer){return;}
+
+        SeedManager.Instance.StringToSeedSave();
+
         var status = NetworkManager.SceneManager.LoadScene("SpaceMap", LoadSceneMode.Single);
         if (status != SceneEventProgressStatus.Started)
         {

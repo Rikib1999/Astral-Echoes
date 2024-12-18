@@ -1,12 +1,11 @@
-using UnityEngine;
-using UnityEngine.SceneManagement;
 using Unity.Netcode;
+using UnityEngine.SceneManagement;
 
 public class GoToMenu : NetworkBehaviour
 {
     public void GoToMainMenu()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("Menu");
         NetworkManager.Singleton.Shutdown();
     }
 }

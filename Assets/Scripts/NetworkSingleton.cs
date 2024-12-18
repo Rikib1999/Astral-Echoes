@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-using Unity.Netcode;
+﻿using Unity.Netcode;
 
 namespace Assets.Scripts
 {
@@ -26,6 +25,12 @@ namespace Assets.Scripts
                 Destroy(gameObject);
             }
 
+        }
+
+        public void DestroyInstance()
+        {
+            Instance = null;
+            Destroy(gameObject);
         }
     }
 }

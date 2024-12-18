@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Unity.Netcode;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 
 // Abstract base class for generating chunks of type T (derived from Chunk)
 // T must inherit from Chunk
