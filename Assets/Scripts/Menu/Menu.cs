@@ -9,6 +9,7 @@ public class Menu : NetworkBehaviour
 {
     [SerializeField] public TMP_InputField tmp_ip_address;
     [SerializeField] public TMP_InputField tmp_port;
+    public TMP_Text highscores;
 
     private void Start()
     {
@@ -41,7 +42,28 @@ public class Menu : NetworkBehaviour
 
     public void OnResetButton()
     {
+        int hs_dist = PlayerPrefs.GetInt("hs_dist", 0);
+        int hs_enem = PlayerPrefs.GetInt("hs_enem", 0);
+        int hs_res = PlayerPrefs.GetInt("hs_res", 0);
+
         PlayerPrefs.DeleteAll();
+
+        PlayerPrefs.SetInt("hs_dist", hs_dist);
+        PlayerPrefs.SetInt("hs_enem", hs_enem);
+        PlayerPrefs.SetInt("hs_res", hs_res);
+    }
+
+    public void OnResetHighscoreButton()
+    {
+        int cs_dist = PlayerPrefs.GetInt("cs_dist", 0);
+        int cs_enem = PlayerPrefs.GetInt("cs_enem", 0);
+        int cs_res = PlayerPrefs.GetInt("cs_res", 0);
+
+        PlayerPrefs.SetInt("hs_dist", cs_dist);
+        PlayerPrefs.SetInt("hs_enem", cs_enem);
+        PlayerPrefs.SetInt("hs_res", cs_res);
+
+        highscores.text = "HIGHSCORE:\n\nMax distance traveled:\n" + cs_dist + "\n\nEnemies killed:\n" + cs_enem + "\n\nResources gathered:\n" + cs_res;
     }
 
     public void OnJoinButton()

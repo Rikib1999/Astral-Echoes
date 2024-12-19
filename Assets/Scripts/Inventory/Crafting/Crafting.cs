@@ -22,7 +22,7 @@ public class Crafting : MonoBehaviour
 
                 //add ammo
                 int ammo = PlayerPrefs.GetInt("ammo", ResourceDefaultValues.Ammo);
-                ammo += 20;
+                ammo += 50;
 
                 PlayerPrefs.SetInt("ammo", ammo);
                 inventoryManager.resourceTextUpdater.SetAmmo(ammo);
@@ -45,7 +45,7 @@ public class Crafting : MonoBehaviour
                 float fuel = PlayerPrefs.GetFloat("fuel", ResourceDefaultValues.Fuel);
                 float maxFuel = PlayerPrefs.GetFloat("maxFuel", ResourceDefaultValues.MaxFuel);
 
-                fuel = Mathf.Min(fuel + 50, maxFuel);
+                fuel = Mathf.Min(fuel + 300, maxFuel);
                 PlayerPrefs.SetFloat("fuel", fuel);
                 inventoryManager.resourceTextUpdater.SetFuel(fuel);
 

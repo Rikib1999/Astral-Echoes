@@ -105,6 +105,8 @@ namespace Assets.Scripts
             PlayerPrefs.SetFloat("fuel", fuel); // Update fuel in PlayerPrefs
             PlayerPrefs.SetFloat("currentSystemPositionX", position.x); // Update X-coordinate
             PlayerPrefs.SetFloat("currentSystemPositionY", position.y); // Update Y-coordinate
+
+            ScoreManager.UpdateMaxDistance((int)Vector2.Distance(position, Vector2.zero));
         }
 
         // Callback for when a new client connects
@@ -150,6 +152,8 @@ namespace Assets.Scripts
             PlayerPrefs.SetFloat("fuel", fuel); // Save fuel value
             PlayerPrefs.SetFloat("currentSystemPositionX", position.x); // Save X-coordinate
             PlayerPrefs.SetFloat("currentSystemPositionY", position.y); // Save Y-coordinate
+
+            ScoreManager.UpdateMaxDistance((int)Vector2.Distance(position, Vector2.zero));
         }
 
         // Generates the system map, including the central object and its satellites

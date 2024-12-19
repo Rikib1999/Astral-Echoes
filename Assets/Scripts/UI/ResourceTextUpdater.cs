@@ -56,9 +56,28 @@ public class ResourceTextUpdater : MonoBehaviour
     public void UpdateMaxFuel() => maxFuelText.text = PlayerPrefs.GetFloat("maxFuel", ResourceDefaultValues.MaxFuel).ToString();
     public void UpdateMetal() => metalText.text = PlayerPrefs.GetFloat("metal", ResourceDefaultValues.Metal).ToString();
 
-    public void SaveWater() => PlayerPrefs.SetFloat("water", float.TryParse(waterText.text, out float x) ? x : ResourceDefaultValues.Water);
-    public void SaveFood() => PlayerPrefs.SetFloat("food", float.TryParse(foodText.text, out float x) ? x : ResourceDefaultValues.Food);
-    public void SaveEnergy() => PlayerPrefs.SetFloat("energy", float.TryParse(energyText.text, out float x) ? x : ResourceDefaultValues.Energy);
-    public void SaveMetal() => PlayerPrefs.SetFloat("metal", float.TryParse(metalText.text, out float x) ? x : ResourceDefaultValues.Metal);
-    public void SaveAmmo() => PlayerPrefs.SetInt("ammo", int.TryParse(ammoText.text, out int x) ? x : ResourceDefaultValues.Ammo);
+    public void SaveWater()
+    {
+        PlayerPrefs.SetFloat("water", float.TryParse(waterText.text, out float x) ? x : ResourceDefaultValues.Water);
+    }
+
+    public void SaveFood()
+    {
+        PlayerPrefs.SetFloat("food", float.TryParse(foodText.text, out float x) ? x : ResourceDefaultValues.Food);
+    }
+
+    public void SaveEnergy()
+    {
+        PlayerPrefs.SetFloat("energy", float.TryParse(energyText.text, out float x) ? x : ResourceDefaultValues.Energy);
+    }
+
+    public void SaveMetal()
+    {
+        PlayerPrefs.SetFloat("metal", float.TryParse(metalText.text, out float x) ? x : ResourceDefaultValues.Metal);
+    }
+    
+    public void SaveAmmo()
+    {
+        PlayerPrefs.SetInt("ammo", int.TryParse(ammoText.text, out int x) ? x : ResourceDefaultValues.Ammo);
+    }
 }

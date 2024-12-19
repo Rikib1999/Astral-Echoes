@@ -1,3 +1,4 @@
+using Assets.Scripts;
 using Assets.Scripts.Resources;
 using System.Linq;
 using TMPro;
@@ -32,6 +33,8 @@ public class InventoryManager : MonoBehaviour
         float water = PlayerPrefs.GetFloat("water", ResourceDefaultValues.Water) + amount;
         resourceTextUpdater.SetWater(water);
         PlayerPrefs.SetFloat("water", water);
+
+        ScoreManager.AddResource((int)amount);
     }
 
     public void AddFood(float amount)
@@ -40,6 +43,8 @@ public class InventoryManager : MonoBehaviour
         float food = PlayerPrefs.GetFloat("food", ResourceDefaultValues.Food) + amount;
         resourceTextUpdater.SetFood(food);
         PlayerPrefs.SetFloat("food", food);
+
+        ScoreManager.AddResource((int)amount);
     }
 
     public void AddMetal(float amount)
@@ -48,6 +53,8 @@ public class InventoryManager : MonoBehaviour
         float metal = PlayerPrefs.GetFloat("metal", ResourceDefaultValues.Metal) + amount;
         resourceTextUpdater.SetMetal(metal);
         PlayerPrefs.SetFloat("metal", metal);
+
+        ScoreManager.AddResource((int)amount);
     }
 
     public void AddEnergy(float amount)
@@ -56,7 +63,10 @@ public class InventoryManager : MonoBehaviour
         float energy = PlayerPrefs.GetFloat("energy", ResourceDefaultValues.Energy) + amount;
         resourceTextUpdater.SetEnergy(energy);
         PlayerPrefs.SetFloat("energy", energy);
+
+        ScoreManager.AddResource((int)amount);
     }
+
     /// <summary>
     /// Add item to the inventory list
     /// </summary>

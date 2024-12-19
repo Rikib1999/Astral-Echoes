@@ -1,3 +1,4 @@
+using Assets.Scripts;
 using Assets.Scripts.Enums;
 using Assets.Scripts.PlanetResources;
 using Assets.Scripts.Player;
@@ -5,6 +6,7 @@ using Assets.Scripts.Resources;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.UI.Image;
 
 public class PlayerLogic : MonoBehaviour
 {
@@ -86,22 +88,46 @@ public class PlayerLogic : MonoBehaviour
             case eResourceType.Water:
                 water += particleValue;
                 resourceTextUpdater.SetWater(water);
-                if (save) PlayerPrefs.SetFloat("water", water);
+                if (save)
+                {
+                    int original = (int)PlayerPrefs.GetFloat("water", 0);
+                    PlayerPrefs.SetFloat("water", water);
+
+                    ScoreManager.AddResource((int)(water - original));
+                }
                 break;
             case eResourceType.Food:
                 food += particleValue;
                 resourceTextUpdater.SetFood(food);
-                if (save) PlayerPrefs.SetFloat("food", food);
+                if (save)
+                {
+                    int original = (int)PlayerPrefs.GetFloat("food", 0);
+                    PlayerPrefs.SetFloat("food", food);
+
+                    ScoreManager.AddResource((int)(food - original));
+                }
                 break;
             case eResourceType.Energy:
                 energy += particleValue;
                 resourceTextUpdater.SetEnergy(energy);
-                if (save) PlayerPrefs.SetFloat("energy", energy);
+                if (save)
+                {
+                    int original = (int)PlayerPrefs.GetFloat("energy", 0);
+                    PlayerPrefs.SetFloat("energy", energy);
+
+                    ScoreManager.AddResource((int)(energy - original));
+                }
                 break;
             case eResourceType.Metals:
                 metal += particleValue;
                 resourceTextUpdater.SetMetal(metal);
-                if (save) PlayerPrefs.SetFloat("metal", metal);
+                if (save)
+                {
+                    int original = (int)PlayerPrefs.GetFloat("metal", 0);
+                    PlayerPrefs.SetFloat("metal", metal);
+
+                    ScoreManager.AddResource((int)(metal - original));
+                }
                 break;
             default: break;
         }

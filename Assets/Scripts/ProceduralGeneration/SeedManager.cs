@@ -9,7 +9,7 @@ public class SeedManager : Singleton<SeedManager>
     public void StringToSeedSave()
     {
         string seed = seedText.text;
-        if (string.IsNullOrEmpty(seed)) seed = "12345";
+        if (string.IsNullOrEmpty(seed)) seed = "8";
 
         unchecked
         {

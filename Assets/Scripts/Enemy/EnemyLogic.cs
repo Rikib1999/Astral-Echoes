@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
+using Assets.Scripts;
 
 public class EnemyLogic : NetworkBehaviour
 {
@@ -33,6 +34,7 @@ public class EnemyLogic : NetworkBehaviour
 
         if (health <= 0)
         { 
+            ScoreManager.IncrementKillCount();
             InstantiateLoot(transform.position);
             InstantiateLootClientRpc(transform.position);
             Destroy(gameObject);
