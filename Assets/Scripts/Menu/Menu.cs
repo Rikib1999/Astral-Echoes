@@ -9,6 +9,7 @@ public class Menu : NetworkBehaviour
 {
     [SerializeField] public TMP_InputField tmp_ip_address;
     [SerializeField] public TMP_InputField tmp_port;
+    [SerializeField] public TMP_InputField tmp_port_host;
     public TMP_Text highscores;
 
     private void Start()
@@ -32,6 +33,16 @@ public class Menu : NetworkBehaviour
 
     public void OnPlayButton()
     {
+        ushort port_host = 7777;
+        if(tmp_port_host.text.Length > 0){
+            port_host = ushort.Parse(tmp_port_host.text);
+        }
+        NetworkManager.Singleton.GetComponent<UnityTransport>().SetConnectionData(
+            "127.0.0.1",  //IP
+            port_host,
+            "0.0.0.0" //Listen on all addresses
+        );
+
         NetworkManager.Singleton.StartHost();
     }
 
@@ -72,5 +83,7 @@ public class Menu : NetworkBehaviour
         NetworkManager.GetComponent<UnityTransport>().SetConnectionData(tmp_ip_address.text,ushort.Parse(tmp_port.text));
 
         NetworkManager.Singleton.StartClient();
+
+        NetworkManager.Singleton.IsConnectedClient;
     }
 }
