@@ -28,7 +28,7 @@ namespace Assets.Scripts
         // Cleanup event handlers on destruction
         public override void OnDestroy()
         {
-            if (Instance == this)
+            if (Instance == this && NetworkManager.Singleton)
             {
                 NetworkManager.Singleton.SceneManager.OnSceneEvent -= OnSceneEvent; // Unsubscribe from scene events
                 NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnected; // Unsubscribe from client connection events
@@ -112,7 +112,7 @@ namespace Assets.Scripts
         // Callback for when a new client connects
         private void OnClientConnected(ulong clientId)
         {
-            if (!IsServer) return; // Only execute on the server
+            if (IsClient) return; // Only execute on the server
 
             // Send fuel and position data to the newly connected client
             ClientRpcParams clientRpcParams = new ClientRpcParams
