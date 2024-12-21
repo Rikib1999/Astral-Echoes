@@ -14,8 +14,6 @@ public class Menu : NetworkBehaviour
 
     private void Start()
     {
-        if (PlanetMapManager.Instance != null) PlanetMapManager.Instance.DestroyInstance();
-        if (SystemMapManager.Instance != null) SystemMapManager.Instance.DestroyInstance();
         NetworkManager.Singleton.OnClientStopped += OnClientStopped;
     }
 

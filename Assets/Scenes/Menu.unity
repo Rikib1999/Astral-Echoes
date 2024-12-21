@@ -123,17 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &53302031 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1491467716037252210, guid: 359b8808cd0ae9ad998546afe8166f3b, type: 3}
-  m_PrefabInstance: {fileID: 5364381559817612701}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &592735561
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,7 +425,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec8a8e7f0deae34489b83a8e261652c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seedText: {fileID: 53302031}
 --- !u!4 &1077428353
 Transform:
   m_ObjectHideFlags: 0
@@ -601,6 +589,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 1491467716037252210, guid: 359b8808cd0ae9ad998546afe8166f3b, type: 3}
+      propertyPath: m_text
+      value: "122121\u200B"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1576968215404625177, guid: 359b8808cd0ae9ad998546afe8166f3b, type: 3}
+      propertyPath: m_TagString
+      value: SeedInput
+      objectReference: {fileID: 0}
     - target: {fileID: 5575282830059149407, guid: 359b8808cd0ae9ad998546afe8166f3b, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 3914311482
@@ -691,6 +687,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5749112724249860028, guid: 359b8808cd0ae9ad998546afe8166f3b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6265773097342462685, guid: 359b8808cd0ae9ad998546afe8166f3b, type: 3}
+      propertyPath: m_Text
+      value: 122121
+      objectReference: {fileID: 0}
+    - target: {fileID: 7997051247153407205, guid: 359b8808cd0ae9ad998546afe8166f3b, type: 3}
+      propertyPath: m_text
+      value: 122121
+      objectReference: {fileID: 0}
+    - target: {fileID: 7997051247153407205, guid: 359b8808cd0ae9ad998546afe8166f3b, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

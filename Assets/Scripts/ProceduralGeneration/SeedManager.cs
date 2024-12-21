@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class SeedManager : Singleton<SeedManager>
 {
-    public TMP_Text seedText;
-
     public void StringToSeedSave()
     {
-        string seed = seedText.text;
-        if (string.IsNullOrEmpty(seed)) seed = "8";
+        string seed = GameObject.FindGameObjectWithTag("SeedInput").GetComponent<TMP_InputField>().text;
+        if (string.IsNullOrEmpty(seed)) seed = "122121";
 
         unchecked
         {

@@ -29,7 +29,7 @@ namespace Assets.Scripts
 
         public void DestroyInstance()
         {
-            Instance = null;
+            //Instance = null;
             Destroy(gameObject);
         }
     }
