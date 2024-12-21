@@ -43,11 +43,15 @@ namespace Assets.Scripts
             SatelliteObjects = new NetworkList<SpaceObjectDataBag>();
         }
 
-        // Set up network callbacks on start
         public override void Start()
         {
             base.Start();
+        }
+        // Set up network callbacks
+        public override void OnNetworkSpawn()
+        {
             NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
+            base.OnNetworkSpawn();
         }
 
         // Handles actions triggered by scene events
@@ -85,7 +89,7 @@ namespace Assets.Scripts
             {
                 // Sync fuel and position and load the system scene on the server
                 SyncFuelAndPosition(systemDataBag.Fuel - systemDataBag.Distance, systemDataBag.Position);
-                SyncFuelAndPositionClientRpc(systemDataBag.Fuel - systemDataBag.Distance, systemDataBag.Position);
+                SyncFuelAndPositionClientRpc(systemDataBag.Fuel - systemDataBag.Distance, systemDataBag.Position, PlayerPrefs.GetInt("seed", 0));
                 LoadSystemScene();
                 LoadSystemSceneClientRpc();
             }
@@ -100,20 +104,23 @@ namespace Assets.Scripts
 
         // Client RPC to synchronize fuel and position with the client
         [ClientRpc]
-        private void SyncFuelAndPositionClientRpc(float fuel, Vector3 position, ClientRpcParams clientRpcParams = default)
+        private void SyncFuelAndPositionClientRpc(float fuel, Vector3 position, int seed, ClientRpcParams clientRpcParams = default)
         {
             PlayerPrefs.SetFloat("fuel", fuel); // Update fuel in PlayerPrefs
             PlayerPrefs.SetFloat("currentSystemPositionX", position.x); // Update X-coordinate
             PlayerPrefs.SetFloat("currentSystemPositionY", position.y); // Update Y-coordinate
+            PlayerPrefs.SetInt("seed", seed); // Update Seed
 
             ScoreManager.UpdateMaxDistance((int)Vector2.Distance(position, Vector2.zero));
+
+            Debug.Log("C"+PlayerPrefs.GetInt("seed", 0)+" "+seed);
+
         }
 
         // Callback for when a new client connects
         private void OnClientConnected(ulong clientId)
         {
-            if (IsClient) return; // Only execute on the server
-
+            if (!IsServer) return; // Only execute on the server
             // Send fuel and position data to the newly connected client
             ClientRpcParams clientRpcParams = new ClientRpcParams
             {
@@ -130,8 +137,11 @@ namespace Assets.Scripts
                     PlayerPrefs.GetFloat("currentSystemPositionY", 0),
                     0
                 ),
+                PlayerPrefs.GetInt("seed", 0),
                 clientRpcParams
             );
+
+            Debug.Log("S"+PlayerPrefs.GetInt("seed", 0));
         }
 
         // Loads the system scene on the server

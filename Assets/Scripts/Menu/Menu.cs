@@ -16,6 +16,7 @@ public class Menu : NetworkBehaviour
     {
         if (PlanetMapManager.Instance != null) PlanetMapManager.Instance.DestroyInstance();
         if (SystemMapManager.Instance != null) SystemMapManager.Instance.DestroyInstance();
+        NetworkManager.Singleton.OnClientStopped += OnClientStopped;
     }
 
     public override void OnNetworkSpawn()
@@ -84,6 +85,9 @@ public class Menu : NetworkBehaviour
 
         NetworkManager.Singleton.StartClient();
 
-        NetworkManager.Singleton.IsConnectedClient;
+    }
+    private void OnClientStopped(bool host)
+    {
+        SceneManager.LoadScene("Menu", LoadSceneMode.Single);
     }
 }

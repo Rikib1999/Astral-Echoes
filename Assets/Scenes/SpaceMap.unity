@@ -823,10 +823,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4852075721068237378, guid: 3cdc6bfab32ff0ee3b6324298f75e9a2, type: 3}
-      propertyPath: deathAlert
-      value: 
-      objectReference: {fileID: 343007458}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1518,7 +1514,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbd87c32f101fed4eaf3930cec15f3c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  planet_scene: {fileID: 102900000, guid: 2cda990e2423bbf4892e6590ba056729, type: 3}
   PlanetDataBag:
     m_InternalValue:
       Name:

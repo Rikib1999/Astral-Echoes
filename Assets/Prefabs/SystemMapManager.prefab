@@ -71,7 +71,6 @@ MonoBehaviour:
   planetPrefab: {fileID: 3354605895257267086, guid: 3582ae498819651419819290300db10a, type: 3}
   gasGiantPrefab: {fileID: 3354605895257267086, guid: 3dae1f29183cab345bd91838a713c680, type: 3}
   enemySpawner: {fileID: 0}
-  system_map_scene: {fileID: 102900000, guid: f93acfe06c1a0c841920e328a0faf82b, type: 3}
   CentralObject:
     m_InternalValue:
       Name:
