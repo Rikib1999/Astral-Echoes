@@ -2,7 +2,6 @@
 using Assets.Scripts.Resources;
 using Assets.Scripts.SpaceObjects;
 using Assets.Scripts.SpaceSystem;
-using Unity.Mathematics;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -106,6 +105,8 @@ namespace Assets.Scripts
         [ClientRpc]
         private void SyncFuelAndPositionClientRpc(float fuel, Vector3 position, int seed, ClientRpcParams clientRpcParams = default)
         {
+            var mySeed = PlayerPrefs.GetInt("seed", 0);
+
             PlayerPrefs.SetFloat("fuel", fuel); // Update fuel in PlayerPrefs
             PlayerPrefs.SetFloat("currentSystemPositionX", position.x); // Update X-coordinate
             PlayerPrefs.SetFloat("currentSystemPositionY", position.y); // Update Y-coordinate
@@ -113,8 +114,14 @@ namespace Assets.Scripts
 
             ScoreManager.UpdateMaxDistance((int)Vector2.Distance(position, Vector2.zero));
 
-            Debug.Log("C"+PlayerPrefs.GetInt("seed", 0)+" "+seed);
+            Debug.Log("C"+ mySeed + " "+seed);
 
+            MapGenerator mg = (MapGenerator)FindAnyObjectByType(typeof(MapGenerator));
+            if (mg != null)
+            {
+                mg.SetSeedAndPlayerPosition();
+                mg.RegenerateChunks();
+            }
         }
 
         // Callback for when a new client connects

@@ -98,6 +98,16 @@ public abstract class ChunkGenerator<T> : NetworkBehaviour where T : Chunk
         }
     }
 
+    //used by client on connect to update the seed
+    public void RegenerateChunks()
+    {
+        foreach (var chunk in chunkList) DeleteChunk(chunk);
+        chunkList.Clear();
+        chunksByCoords.Clear();
+
+        GenerateChunks();
+    }
+
     // Abstract method to define how to delete a chunk in derived classes
     protected abstract void DeleteChunk(T chunk);
 

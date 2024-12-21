@@ -67,6 +67,13 @@ public class MapGenerator : ChunkGenerator<MapChunk>
         }
     }
 
+    public void SetSeedAndPlayerPosition()
+    {
+        seed = PlayerPrefs.GetInt("seed", 0);
+        player.position = new(PlayerPrefs.GetFloat("currentSystemPositionX", 0), PlayerPrefs.GetFloat("currentSystemPositionY", 0), -10);
+        playerPos = player.position;
+    }
+
     private void OnSceneLoaded(Scene current, LoadSceneMode loadSceneMode)
     {
         // Reset satellite objects and central object when entering the SpaceMap scene
