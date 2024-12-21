@@ -856,6 +856,8 @@ MonoBehaviour:
   dashCooldown: 1.5
   maxHealth: 100
   dashBar: {fileID: 603415456703509948}
+  player_canvas: {fileID: 8379883192071800905}
+  facingRight: 1
   dashAudioSource: {fileID: 2592547594608714400}
 --- !u!95 &7935891670201596183
 Animator:
@@ -1552,7 +1554,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7171b7603ea6e98419317b87194e45a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  return_scene: {fileID: 102900000, guid: e21c60ef06f038244a2d2f175fe7302e, type: 3}
 --- !u!1 &3430418657061190114
 GameObject:
   m_ObjectHideFlags: 0

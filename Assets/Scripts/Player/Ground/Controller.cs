@@ -19,6 +19,7 @@ public class Controller : NetworkBehaviour
     [SerializeField] float dashCooldown = 2f;
     [SerializeField] int maxHealth = 100;
     [SerializeField] Slider dashBar;
+    [SerializeField] Canvas player_canvas;
     //Variables for the speed of player, dashing , swithcing guns
     private float dirX = 0;
     private float dirY = 0;
@@ -40,6 +41,10 @@ public class Controller : NetworkBehaviour
         {
             enabled = false;
             crosshair.SetActive(false);
+            if(player_canvas)
+            {
+                player_canvas.enabled = false;
+            }
         }
         else
         {
