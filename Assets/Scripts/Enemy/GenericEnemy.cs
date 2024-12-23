@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -6,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class GenericEnemy : MonoBehaviour
 {
-    public Transform player;
+    public Transform targetPlayer;
     public float moveSpeed = 2f;
     public float attackRange = 1.5f;
     public float detectionRange = 10f;
@@ -20,20 +21,16 @@ public class GenericEnemy : MonoBehaviour
 
     private void Start()
     {
-        if (player == null)
-        {
-            player = GameObject.FindGameObjectWithTag("Player").transform;
-        }
-
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
     {
-        if (player == null) return;
+        FindClosestPlayer();
+        if (targetPlayer == null) return;
 
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        float distanceToPlayer = Vector3.Distance(transform.position, targetPlayer.position);
 
         if (distanceToPlayer <= detectionRange && !isAttacking)
         {
@@ -50,6 +47,25 @@ public class GenericEnemy : MonoBehaviour
             attackTimer -= Time.deltaTime;
         }
     }
+
+    /// <summary>
+    /// Finds the closest player within detection range.
+    /// </summary>
+    private void FindClosestPlayer()
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        if (players.Length == 0)
+        {
+            targetPlayer = null;
+            return;
+        }
+
+        targetPlayer = players
+            .Select(player => player.transform)
+            .OrderBy(player => Vector3.Distance(transform.position, player.position))
+            .FirstOrDefault(player => Vector3.Distance(transform.position, player.position) <= detectionRange);
+    }
+
     /// <summary>
     /// Following player and facing its way
     /// </summary>
@@ -61,7 +77,7 @@ public class GenericEnemy : MonoBehaviour
             animator.SetBool("isWalking", true);
         }
 
-        Vector3 direction = (player.position - transform.position).normalized;
+        Vector3 direction = (targetPlayer.position - transform.position).normalized;
         rb.velocity = direction * moveSpeed;
         FacePlayer(direction);
     }
@@ -91,7 +107,7 @@ public class GenericEnemy : MonoBehaviour
             animator.SetTrigger("Attack");
         }
 
-        PlayerLogic playerLogic = player.GetComponent<PlayerLogic>();
+        PlayerLogic playerLogic = targetPlayer.GetComponent<PlayerLogic>();
 
         if (playerLogic != null)
         {

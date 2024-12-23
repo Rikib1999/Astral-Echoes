@@ -3,19 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 using Assets.Scripts;
+using System.Linq;
 
 public class EnemyLogic : NetworkBehaviour
 {
     [SerializeField] private int health;
     [SerializeField] int maxHealth;
-    [SerializeField] GameObject Player;
     public GameObject DropItem;
     public List<Item> lootTable;
     private SpriteRenderer spriteRenderer;
 
     private void Start()
     {
-        if (Player == null) Player = GameObject.FindWithTag("Player");
         health = maxHealth;
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }

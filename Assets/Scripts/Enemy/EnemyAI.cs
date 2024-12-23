@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 public enum Enemy { walking, attacking, dead }
@@ -9,7 +10,7 @@ public class EnemyAI : MonoBehaviour
     public float attackRange = 1f;
     public float roamRadius = 10f;
     public float attackCooldown = 1f;
-    public GameObject player;
+    public GameObject targetPlayer;
     public LayerMask playerLayer;
     public int playerDamage = 20;
 
@@ -26,24 +27,19 @@ public class EnemyAI : MonoBehaviour
     public Transform firePoint;
     public float shootrange = 5f;
 
-
     void Start()
     {
-
-        //Inicialization to get position, animation,
-        //set enemy state to walking as default,
-        //get player from the scene and set roam for the enemy
         startPosition = transform.position;
         animator = GetComponent<Animator>();
         enemyState = Enemy.walking;
-        player = GameObject.FindGameObjectWithTag("Player");
         SetNewRoamPosition();
     }
 
     void Update()
     {
+        FindClosestPlayer();
 
-        if (player && isChasing)
+        if (targetPlayer && isChasing)
         {
             ChasePlayer();
             StopAndShoot();
@@ -53,10 +49,28 @@ public class EnemyAI : MonoBehaviour
             Roam();
         }
 
-        if (player)
+        if (targetPlayer)
         {
             DetectPlayer();
         }
+    }
+
+    /// <summary>
+    /// Finds the closest player within detection range.
+    /// </summary>
+    private void FindClosestPlayer()
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        if (players.Length == 0)
+        {
+            targetPlayer = null;
+            return;
+        }
+
+        targetPlayer = players
+            .Select(player => player.transform)
+            .OrderBy(player => Vector3.Distance(transform.position, player.position))
+            .FirstOrDefault(player => Vector3.Distance(transform.position, player.position) <= detectionRange)?.gameObject;
     }
 
     private void FixedUpdate()
@@ -98,7 +112,7 @@ public class EnemyAI : MonoBehaviour
 
     void DetectPlayer()
     {
-        Vector2 direction = player.transform.position - transform.position;
+        Vector2 direction = targetPlayer.transform.position - transform.position;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, detectionRange, playerLayer);
 
         if (hit.collider != null && hit.collider.CompareTag("Player"))
@@ -109,7 +123,7 @@ public class EnemyAI : MonoBehaviour
 
     void ChasePlayer()
     {
-        if (Vector2.Distance(transform.position, player.transform.position) < attackRange && player!=null)
+        if (Vector2.Distance(transform.position, targetPlayer.transform.position) < attackRange && targetPlayer != null)
         {
             if (Time.time >= lastAttackTime + attackCooldown)
             {
@@ -121,7 +135,7 @@ public class EnemyAI : MonoBehaviour
         {
             enemyState = Enemy.walking;
             FlipTowardsPlayer();
-            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, targetPlayer.transform.position, moveSpeed * Time.deltaTime);
         }
     }
 
@@ -130,7 +144,7 @@ public class EnemyAI : MonoBehaviour
     /// </summary>
     void StopAndShoot()
     {
-        if (Vector2.Distance(transform.position, player.transform.position) < shootrange && player != null)
+        if (Vector2.Distance(transform.position, targetPlayer.transform.position) < shootrange && targetPlayer != null)
         {
             ShootPlayer();
         }
@@ -138,7 +152,7 @@ public class EnemyAI : MonoBehaviour
         {
             enemyState = Enemy.walking;
             FlipTowardsPlayer();
-            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, targetPlayer.transform.position, moveSpeed * Time.deltaTime);
         }
     }
     /// <summary>
@@ -174,7 +188,7 @@ public class EnemyAI : MonoBehaviour
     /// </summary>
     void FlipTowardsPlayer()
     {
-        Vector3 direction = player.transform.position - transform.position;
+        Vector3 direction = targetPlayer.transform.position - transform.position;
         if (direction.x > 0 && transform.localScale.x < 0 || direction.x < 0 && transform.localScale.x > 0)
         {
             Vector3 newScale = transform.localScale;
@@ -187,7 +201,7 @@ public class EnemyAI : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            player.GetComponent<PlayerLogic>().damage(playerDamage);
+            targetPlayer.GetComponent<PlayerLogic>().damage(playerDamage);
         }
     }
 

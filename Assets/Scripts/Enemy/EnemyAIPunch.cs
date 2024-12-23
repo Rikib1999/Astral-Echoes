@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 public class EnemyAIPunch : MonoBehaviour
@@ -7,7 +8,7 @@ public class EnemyAIPunch : MonoBehaviour
     public float attackRange = 1f;
     public float roamRadius = 10f;
     public float attackCooldown = 1f;
-    public GameObject player;
+    public GameObject targetPlayer;
     public LayerMask playerLayer;
     public int playerDamage = 20;
 
@@ -18,19 +19,37 @@ public class EnemyAIPunch : MonoBehaviour
     private Animator animator;
     private Enemy enemyState;
 
-
     void Start()
     {
         startPosition = transform.position;
         animator = GetComponent<Animator>();
         enemyState = Enemy.walking;
-        player = GameObject.FindGameObjectWithTag("Player");
         SetNewRoamPosition();
+    }
+
+    /// <summary>
+    /// Finds the closest player within detection range.
+    /// </summary>
+    private void FindClosestPlayer()
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        if (players.Length == 0)
+        {
+            targetPlayer = null;
+            return;
+        }
+
+        targetPlayer = players
+            .Select(player => player.transform)
+            .OrderBy(player => Vector3.Distance(transform.position, player.position))
+            .FirstOrDefault(player => Vector3.Distance(transform.position, player.position) <= detectionRange)?.gameObject;
     }
 
     void Update()
     {
-        if (player && isChasing)
+        FindClosestPlayer();
+
+        if (targetPlayer && isChasing)
         {
             ChasePlayer();
             //StopAndShoot();
@@ -40,7 +59,7 @@ public class EnemyAIPunch : MonoBehaviour
             Roam();
         }
 
-        if(player)
+        if (targetPlayer)
         {
             DetectPlayer();
         }
@@ -80,7 +99,7 @@ public class EnemyAIPunch : MonoBehaviour
 
     void DetectPlayer()
     {
-        Vector2 direction = player.transform.position - transform.position;
+        Vector2 direction = targetPlayer.transform.position - transform.position;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, detectionRange, playerLayer);
 
         if (hit.collider != null && hit.collider.CompareTag("Player"))
@@ -91,7 +110,7 @@ public class EnemyAIPunch : MonoBehaviour
 
     void ChasePlayer()
     {
-        if (Vector2.Distance(transform.position, player.transform.position) < attackRange && player!=null)
+        if (Vector2.Distance(transform.position, targetPlayer.transform.position) < attackRange && targetPlayer != null)
         {
             if (Time.time >= lastAttackTime + attackCooldown)
             {
@@ -104,7 +123,7 @@ public class EnemyAIPunch : MonoBehaviour
         {
             enemyState = Enemy.walking;
             FlipTowardsPlayer();
-            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, targetPlayer.transform.position, moveSpeed * Time.deltaTime);
         }
     }
     /// <summary>
@@ -114,7 +133,7 @@ public class EnemyAIPunch : MonoBehaviour
     {
         enemyState = Enemy.attacking;
         FlipTowardsPlayer();
-        PunchDamage(player);
+        PunchDamage(targetPlayer);
 
         Debug.Log("Attack!");
     }
@@ -139,7 +158,7 @@ public class EnemyAIPunch : MonoBehaviour
 
     void FlipTowardsPlayer()
     {
-        Vector3 direction = player.transform.position - transform.position;
+        Vector3 direction = targetPlayer.transform.position - transform.position;
         if (direction.x > 0 && transform.localScale.x < 0 || direction.x < 0 && transform.localScale.x > 0)
         {
             Vector3 newScale = transform.localScale;
@@ -152,7 +171,7 @@ public class EnemyAIPunch : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            player.GetComponent<PlayerLogic>().damage(playerDamage);
+            targetPlayer.GetComponent<PlayerLogic>().damage(playerDamage);
         }
     }
 

@@ -1,8 +1,9 @@
+using System.Linq;
 using UnityEngine;
 
 public class MotherEnemy : MonoBehaviour
 {
-    public GameObject player;
+    public GameObject targetPlayer;
     public float speed;
     public float StopToSpawnDistance = 10f; // Distance at which the enemy starts chasing the player
     public float roamRadius = 3f; // Radius around the roamPosition where the enemy can roam
@@ -18,7 +19,6 @@ public class MotherEnemy : MonoBehaviour
     
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
         chase = false;
         timer = 6;
         spawn = GetComponent<SpawnShooting>();
@@ -28,18 +28,37 @@ public class MotherEnemy : MonoBehaviour
         SetNewRoamTarget();
     }
 
+    /// <summary>
+    /// Finds the closest player within detection range.
+    /// </summary>
+    private void FindClosestPlayer()
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        if (players.Length == 0)
+        {
+            targetPlayer = null;
+            return;
+        }
+
+        targetPlayer = players
+            .Select(player => player.transform)
+            .OrderBy(player => Vector3.Distance(transform.position, player.position))
+            .FirstOrDefault(player => Vector3.Distance(transform.position, player.position) <= StopToSpawnDistance)?.gameObject;
+    }
+
     void Update()
     {
-        if (player)
+        FindClosestPlayer();
+        if (targetPlayer)
         {
-            distance = Vector2.Distance(transform.position, player.transform.position);
+            distance = Vector2.Distance(transform.position, targetPlayer.transform.position);
         }
 
         publicDistance = distance;
 
         timer -= Time.deltaTime;
         
-        if (player && (distance < StopToSpawnDistance))
+        if (targetPlayer && (distance < StopToSpawnDistance))
         {
             // Chase the player
             chase = true;
@@ -62,12 +81,12 @@ public class MotherEnemy : MonoBehaviour
 
     void ChasePlayer()
     {
-        Vector2 direction = player.transform.position - transform.position;
+        Vector2 direction = targetPlayer.transform.position - transform.position;
         direction.Normalize();
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-        transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, targetPlayer.transform.position, speed * Time.deltaTime);
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
     }
 

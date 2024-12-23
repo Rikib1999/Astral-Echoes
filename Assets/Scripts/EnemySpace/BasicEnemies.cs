@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using System.Linq;
 using Unity.Netcode;
+using UnityEngine;
 
 public class BasicEnemies : NetworkBehaviour
 {
-    public GameObject player;
+    public GameObject targetPlayer;
     public float speed;
     public float size;
     public float chaseDistance = 13f; // Distance at which the enemy starts chasing the player
@@ -18,8 +17,6 @@ public class BasicEnemies : NetworkBehaviour
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-
         size = Random.Range(0.5f, 2f);
         transform.localScale = new Vector3(size, size, 1);
 
@@ -30,14 +27,16 @@ public class BasicEnemies : NetworkBehaviour
 
     void Update()
     {
-        if(!IsServer){return;}
+        FindClosestPlayer();
 
-        if(player)
+        if (!IsServer){return;}
+
+        if (targetPlayer)
         {
-            distance = Vector2.Distance(transform.position, player.transform.position);
+            distance = Vector2.Distance(transform.position, targetPlayer.transform.position);
         }
 
-        if (player && (distance < chaseDistance))
+        if (targetPlayer && (distance < chaseDistance))
         {
             // Chase the player
             ChasePlayer();
@@ -49,14 +48,32 @@ public class BasicEnemies : NetworkBehaviour
         }
     }
 
+    /// <summary>
+    /// Finds the closest player within detection range.
+    /// </summary>
+    private void FindClosestPlayer()
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        if (players.Length == 0)
+        {
+            targetPlayer = null;
+            return;
+        }
+
+        targetPlayer = players
+            .Select(player => player.transform)
+            .OrderBy(player => Vector3.Distance(transform.position, player.position))
+            .FirstOrDefault(player => Vector3.Distance(transform.position, player.position) <= chaseDistance)?.gameObject;
+    }
+
     void ChasePlayer()
     {
-        Vector2 direction = player.transform.position - transform.position;
+        Vector2 direction = targetPlayer.transform.position - transform.position;
         direction.Normalize();
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-        transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, targetPlayer.transform.position, speed * Time.deltaTime);
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
     }
 

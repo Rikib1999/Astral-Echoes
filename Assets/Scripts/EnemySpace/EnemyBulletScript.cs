@@ -1,8 +1,10 @@
 using UnityEngine;
 using Unity.Netcode;
+using System.Linq;
+
 public class EnemyBulletScript : NetworkBehaviour
 {
-    private GameObject player;
+    private GameObject targetPlayer;
     private Rigidbody2D rb;
 
     public float force = 5;
@@ -10,10 +12,10 @@ public class EnemyBulletScript : NetworkBehaviour
 
     void Start()
     {
+        FindClosestPlayer();
         rb = GetComponent<Rigidbody2D>();
-        player = GameObject.FindGameObjectWithTag("Player");
 
-        Vector3 direction = player.transform.position - transform.position;
+        Vector3 direction = targetPlayer.transform.position - transform.position;
 
         //fly towards position
         rb.velocity = new Vector2(direction.x, direction.y).normalized * force;
@@ -26,7 +28,7 @@ public class EnemyBulletScript : NetworkBehaviour
 
     void Update()
     {
-        if(!IsServer){return;}
+        if (!IsServer){return;}
         
         timer += Time.deltaTime;
 
@@ -36,7 +38,25 @@ public class EnemyBulletScript : NetworkBehaviour
         }
     }
 
-   
+    /// <summary>
+    /// Finds the closest player within detection range.
+    /// </summary>
+    private void FindClosestPlayer()
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        if (players.Length == 0)
+        {
+            targetPlayer = null;
+            return;
+        }
+
+        targetPlayer = players
+            .Select(player => player.transform)
+            .OrderBy(player => Vector3.Distance(transform.position, player.position))
+            .FirstOrDefault()?.gameObject;
+    }
+
+
     void OnTriggerEnter2D(Collider2D other)
     {
         //if collide with player trigger damage and destroy itself

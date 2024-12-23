@@ -1,21 +1,22 @@
+using System.Linq;
 using UnityEngine;
 
 public class EnemyBoom : MonoBehaviour
 {
     private BombEnemy bombE;
-    private GameObject player;
+    private GameObject targetPlayer;
 
     public float timer;
 
     private void Start()
     {
         bombE = GetComponent<BombEnemy>();
-        player = GameObject.FindGameObjectWithTag("Player");
         timer = 5;
     }
 
     private void Update()
     {
+        FindClosestPlayer();
 
         //chase player
         if (bombE.chase == true)
@@ -29,7 +30,7 @@ public class EnemyBoom : MonoBehaviour
 
                 if (bombE.publicDistance < 40)
                 {
-                    player.GetComponent<ShipHealth>().damage(50);
+                    targetPlayer.GetComponent<ShipHealth>().damage(50);
                 }
             }
         }
@@ -37,5 +38,23 @@ public class EnemyBoom : MonoBehaviour
         {
             timer = 10;
         }
+    }
+
+    /// <summary>
+    /// Finds the closest player within detection range.
+    /// </summary>
+    private void FindClosestPlayer()
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        if (players.Length == 0)
+        {
+            targetPlayer = null;
+            return;
+        }
+
+        targetPlayer = players
+            .Select(player => player.transform)
+            .OrderBy(player => Vector3.Distance(transform.position, player.position))
+            .FirstOrDefault()?.gameObject;
     }
 }

@@ -1,5 +1,6 @@
 using UnityEngine;
 using Unity.Netcode;
+using System.Linq;
 
 public class ShootingEnemie : NetworkBehaviour
 {
@@ -8,21 +9,20 @@ public class ShootingEnemie : NetworkBehaviour
     public float shootingTime;
 
     private float timeBtwShots;
-    private GameObject player;
+    private GameObject targetPlayer;
     private BasicEnemies chaseEnemy;
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-
         chaseEnemy = GetComponent<BasicEnemies>();
     }
 
     void Update()
     {
-        if (!player || !IsServer) return;
+        FindClosestPlayer();
+        if (!targetPlayer || !IsServer) return;
  
-        float distance = Vector2.Distance(transform.position, player.transform.position);
+        float distance = Vector2.Distance(transform.position, targetPlayer.transform.position);
 
         if (distance < chaseEnemy.chaseDistance )
         {
@@ -44,6 +44,24 @@ public class ShootingEnemie : NetworkBehaviour
                 shoot();
             }
         }        
+    }
+
+    /// <summary>
+    /// Finds the closest player within detection range.
+    /// </summary>
+    private void FindClosestPlayer()
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        if (players.Length == 0)
+        {
+            targetPlayer = null;
+            return;
+        }
+
+        targetPlayer = players
+            .Select(player => player.transform)
+            .OrderBy(player => Vector3.Distance(transform.position, player.position))
+            .FirstOrDefault(player => Vector3.Distance(transform.position, player.position) <= chaseEnemy.chaseDistance)?.gameObject;
     }
 
     void shoot()
