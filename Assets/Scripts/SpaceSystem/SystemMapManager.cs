@@ -69,6 +69,19 @@ namespace Assets.Scripts
         // Generates the system map when the scene is loaded
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
+            if (IsServer)
+            {
+                SyncFuelAndPositionClientRpc(
+                PlayerPrefs.GetFloat("fuel", ResourceDefaultValues.Fuel),
+                new Vector3(
+                    PlayerPrefs.GetFloat("currentSystemPositionX", 0),
+                    PlayerPrefs.GetFloat("currentSystemPositionY", 0),
+                    0
+                ),
+                PlayerPrefs.GetInt("seed", 0)
+            );
+            }
+
             if (CentralObject == null || CentralObject.Value.Type == 0) return; // Skip if no central object data
             GenerateSystem();
         }
@@ -119,7 +132,7 @@ namespace Assets.Scripts
             MapGenerator mg = (MapGenerator)FindAnyObjectByType(typeof(MapGenerator));
             if (mg != null)
             {
-                mg.SetSeedAndPlayerPosition();
+                mg.SetSeedAndPlayerPosition(seed, position);
                 mg.RegenerateChunks();
             }
         }
