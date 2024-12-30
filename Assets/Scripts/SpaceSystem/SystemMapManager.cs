@@ -148,6 +148,10 @@ namespace Assets.Scripts
                 clientRpcParams
             );
 
+
+            // Force NetworkVariable to synchronize
+            CentralObject.Value = CentralObject.Value;
+
             Debug.Log("S"+PlayerPrefs.GetInt("seed", 0));
         }
 

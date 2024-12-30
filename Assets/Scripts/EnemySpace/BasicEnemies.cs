@@ -1,6 +1,7 @@
 using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BasicEnemies : NetworkBehaviour
 {
@@ -30,6 +31,9 @@ public class BasicEnemies : NetworkBehaviour
         FindClosestPlayer();
 
         if (!IsServer){return;}
+
+        // Destroy ship if scene is not SystemMap
+        if (SceneManager.GetActiveScene().name != "SystemMap") Destroy(gameObject);
 
         if (targetPlayer)
         {
