@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class MapGenerator : ChunkGenerator<MapChunk>
 {
@@ -67,10 +68,10 @@ public class MapGenerator : ChunkGenerator<MapChunk>
         }
     }
 
-    public void SetSeedAndPlayerPosition()
+    public void SetSeedAndPlayerPosition(int s, Vector2 pos)
     {
-        seed = PlayerPrefs.GetInt("seed", 0);
-        player.position = new(PlayerPrefs.GetFloat("currentSystemPositionX", 0), PlayerPrefs.GetFloat("currentSystemPositionY", 0), -10);
+        seed = s;
+        player.position = new(pos.x, pos.y, -10);
         playerPos = player.position;
     }
 
